@@ -6,7 +6,7 @@ SITE Course Year: **2022**
 
 Cohort: **Add Company Sponsor Name**
 
-Team Member Names:**Amber Lewis | James Bosch | Angelo Alvarado **
+Team Member Names:**Amber Lewis James Bosch  Angelo Alvarado **
 
 Mentors Names: **Insert Professional Mentor Names**
 
