@@ -21,3 +21,8 @@ What similar apps and websites? How will your project stand out from these other
 ## Open Questions
 
 What questions do you still have? What topics do you need to research more for your project?
+
+What application can I apply to help?
+Productive video games?
+What do we want to build?
+
