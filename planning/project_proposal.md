@@ -1,10 +1,10 @@
 # Project Proposal
 
-Pod Members: **Add Pod Members Names**
+Pod Members: **Amber Lewis James Bosch Angelo Alvarado**
 
 ## Problem Statement
 
-Insert your groups problem statement and target audience.
+*Throughout the pandemic people in the gaming world have secluded themselves from attending events due to stress and lack of communication*
 
 ## Description
 
