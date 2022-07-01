@@ -1,6 +1,6 @@
 # Project Plan
 
-Pod Members: **Add Pod Members Names**
+Pod Members: **Amber Lewis James Bosch Angelo Alvarado**
 
 ## Problem Statement and Description
 
