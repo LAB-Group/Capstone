@@ -8,7 +8,7 @@ Cohort: **Add Company Sponsor Name**
 
 Team Member Names: **Amber Lewis, James Bosch, Angelo Alvarado**
 
-Mentors Names: **Nicole Theokari, Tim Kindberg, Robert**
+Mentors Names: **Nicole Theokari, Tim Kindberg, Robert Stosick**
 
 Project Code Repository Links
 
