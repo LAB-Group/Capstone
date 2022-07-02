@@ -4,7 +4,7 @@ Pod Members: **Amber Lewis James Bosch Angelo Alvarado**
 
 ## Problem Statement
 
-*Throughout the pandemic people in the gaming world have secluded themselves from attending events due to stress and lack of communication*
+*Video games are a huge market across the globe, where anyone in your family could be a gamer, young or old. Because of this, gaming can be used to bring people together and there is a need to facilitate that growth and also allow others to find like-minded individuals.*
 
 ## Description
 
@@ -33,12 +33,10 @@ Add a list of your groups's brainstormed features list
 
 - <a href="https://myanimelist.net/">My Anime List</a> 
 - <a href="https://myvideogamelist.com/">My Video Game List</a>
-- <a href="https://www.grouvee.com/">Grouvee</a>
-- <a href="https://www.backloggery.com/">Backloggery</a>
 - <a href="https://boardgamegeek.com/">BoardGameGeek</a>
 - <a href="https://gamefaqs.gamespot.com/">GameFAQs</a>
 
-
+Our project will stand out by providing an inclusive place for all people and act as a hub that may lead to other sites for those interested.
 
 ## Open Questions
 
