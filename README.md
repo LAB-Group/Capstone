@@ -4,9 +4,10 @@ SITE Course Year: **2022**
 
 Cohort: **Workday**
 
-Team Member Names: **Amber Lewis, James Bosch, Angelo Alvarado**
+Team Member Names: **Amber Lewis, James Bosch, Angelo Alvarado, Charidi Stevens**
 
-Mentors Names: **Nicole Theokari, Tim Kindberg, Robert Stosick**
+Mentors Names: **Nicole Theokari, Tim Kindberg, Robert Stosick, 
+Reign Nelson**
 
 Project Code Repository Links
 
