@@ -1,6 +1,6 @@
 # Project Proposal
 
-Pod Members: **Amber Lewis James Bosch Angelo Alvarado**
+Pod Members: **Amber Lewis, James Bosch, Angelo Alvarado, Charidi Stevens**
 
 ## Problem Statement
 
