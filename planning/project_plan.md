@@ -6,11 +6,11 @@ Pod Members: **Amber Lewis, James Bosch, Angelo Alvarado, Charidi Stevens**
 
 Video games are a huge market across the globe, where anyone in your family could be a gamer, young or old. Because of this, gaming can be used to bring people together and there is a need to facilitate that growth and also allow others to find like-minded individuals.
 
-Description:
+#### ***Description***:
 
 This project will be a hub for gamers looking to attend meetups and events (competitive or casual). This site will include user profiles, event management, and event specific comments to communicate with others attending or interested.
 
-Key Features:
+#### ***Key Features***:
 
 User Profiles
 Create/Host Events
