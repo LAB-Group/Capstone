@@ -1,6 +1,6 @@
 # Project Plan
 
-Pod Members: **Amber Lewis James Bosch Angelo Alvarado**
+Pod Members: **Amber Lewis James Bosch Angelo Alvarado Charidi Stevens**
 
 ## Problem Statement and Description
 
@@ -16,7 +16,8 @@ List the current user stories you will implement.
 
 ## Pages/Screens
 
-List all the pages and screens in the app. Include wireframes for at least 3 of them.
+[![Wireframe 1](wireframe1.png)](https://www.figma.com/file/Inw5UAiiBk40iedDuQ2FVR/Capstone-Prototype?node-id=0%3A1)
+[![Wireframe 2](wireframe2.png)](https://www.figma.com/file/Inw5UAiiBk40iedDuQ2FVR/Capstone-Prototype?node-id=0%3A1)
 
 ## Data Model
 
