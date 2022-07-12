@@ -4,7 +4,19 @@ Pod Members: **Amber Lewis, James Bosch, Angelo Alvarado, Charidi Stevens**
 
 ## Problem Statement and Description
 
-Insert the latest summary of your problem statement and app description.
+Video games are a huge market across the globe, where anyone in your family could be a gamer, young or old. Because of this, gaming can be used to bring people together and there is a need to facilitate that growth and also allow others to find like-minded individuals.
+
+Description:
+
+This project will be a hub for gamers looking to attend meetups and events (competitive or casual). This site will include user profiles, event management, and event specific comments to communicate with others attending or interested.
+
+Key Features:
+
+User Profiles
+Create/Host Events
+Specify if casual or competitive event, with specific games
+List and Filter upcoming events
+Comments section within events, allowing users to ask questions/communicate
 
 ## User Roles and Personas
 
