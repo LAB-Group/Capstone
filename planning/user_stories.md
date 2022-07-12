@@ -37,4 +37,5 @@ Insert your groups problem statement and target audience.
 
 ## Wireframe (Bonus)
 
-Insert link or image to your group's wireframe. 
+[![Wireframe 1](wireframe1.png)](https://www.figma.com/file/Inw5UAiiBk40iedDuQ2FVR/Capstone-Prototype?node-id=0%3A1)
+[![Wireframe 2](wireframe2.png)](https://www.figma.com/file/Inw5UAiiBk40iedDuQ2FVR/Capstone-Prototype?node-id=0%3A1)
