@@ -4,7 +4,7 @@ Pod Members: **Amber Lewis, James Bosch, Angelo Alvarado, Charidi Stevens**
 
 ## Problem Statement
 
-Insert your groups problem statement and target audience.
+Video games are a huge market across the globe, where anyone in your family could be a gamer, young or old. Because of this, gaming can be used to bring people together and there is a need to facilitate that growth and also allow others to find like-minded individuals.
 
 ## User Roles
 
