@@ -86,8 +86,8 @@ In general, the components directory should resemble:
     |   |   ├── LoginPage
     |   |   │   └── LoginForm
     |   |   |
-    |   |   ├── RegistrationPage
-    |   |   │   └── RegistrationForm
+    |   |   └── RegistrationPage
+    |           └── RegistrationForm
     │
     ├── HomePage
     |   ├── Hero
@@ -103,15 +103,9 @@ In general, the components directory should resemble:
     |   |   |
     |   |   |
     │   |   |
-    |   |   ├── CreateEvent
-    |   |   |   └── CreateEventForm
-    |   |   |
-    |   |   |
-    │   |   ├── EventDetail
-    |   |   |   ├── EventRegistration
-    |   │   │   └── EventCard
-    |   │   │   └── NotFound
-    │   │
+    |   |   └── CreateEvent
+    |   |       └── CreateEventForm
+    |   |
     │   └── NotFound (all other routes that don't match any of the nested routes)
     │
     └── NotFound (all other routes that don't match)
