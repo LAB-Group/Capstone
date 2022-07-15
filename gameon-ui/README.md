@@ -66,3 +66,55 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+# Capstone Poject
+
+### Frontend
+
+### React UI
+
+In general, the components directory should resemble:
+
+```text
+│
+└── App
+    │
+    ├── Navbar (all routes)
+    │   ├── Logo
+    │   └── NavLinks
+    |   |   ├── LoginPage
+    |   |   │   └── LoginForm
+    |   |   |
+    |   |   ├── RegistrationPage
+    |   |   │   └── RegistrationForm
+    │
+    ├── HomePage
+    |   ├── Hero
+    |   |
+    |   ├── EventPage
+    |   │   ├── EventFeed
+    |   │   |   └── EventCard(Loop over grid)
+    |   |   │       └── EventOverview
+    |   |   |           ├── EventDetails
+    |   |   |           ├── EventRegistration
+    |   |   |           ├── CommentsSection
+    |   |   |           └── NotFound
+    |   |   |
+    |   |   |
+    │   |   |
+    |   |   ├── CreateEvent
+    |   |   |   └── CreateEventForm
+    |   |   |
+    |   |   |
+    │   |   ├── EventDetail
+    |   |   |   ├── EventRegistration
+    |   │   │   └── EventCard
+    |   │   │   └── NotFound
+    │   │
+    │   └── NotFound (all other routes that don't match any of the nested routes)
+    │
+    └── NotFound (all other routes that don't match)
+```
+
+**App.jsx**
