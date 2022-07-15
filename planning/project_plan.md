@@ -49,8 +49,7 @@ Comments section within events, allowing users to ask questions/communicate
 
 ## Pages/Screens
 
-[![Wireframe 1](wireframe1.png)](https://www.figma.com/file/Inw5UAiiBk40iedDuQ2FVR/Capstone-Prototype?node-id=0%3A1)
-[![Wireframe 2](wireframe2.png)](https://www.figma.com/file/Inw5UAiiBk40iedDuQ2FVR/Capstone-Prototype?node-id=0%3A1)
+[![Wireframe](wireframe.png)](https://www.figma.com/file/8uXhSB47Oy7EX8DMHTb21J/LABS-Capstone-Wireframe?node-id=0%3A1)
 
 ## Data Model
 
