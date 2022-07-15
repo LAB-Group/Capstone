@@ -54,10 +54,83 @@ Comments section within events, allowing users to ask questions/communicate
 
 ## Data Model
 
-Describe your app's data model using diagrams or tables
+| **Column Name**        | **Type**  | **Description**                                                                      |
+|------------------------|-----------|--------------------------------------------------------------------------------------|
+| **Users**              |           |                                                                                      |
+| id                     | integer   | primary key                                                                          |
+| username               | text      | preferred name of user                                                               |
+| password               | text      | user's password                                                                      |
+| first_name             | text      | user's first name                                                                    |
+| last_name              | text      | user's last name                                                                     |
+| email                  | text      | user's email                                                                         |
+| created_at             | date      | date where the user was created                                                      |
+| image_url              | text      | user profile image                                                                   |
+|                        |           |                                                                                      |
+| **Events**             |           |                                                                                      |
+| id                     | integer   | primary key                                                                          |
+| event_name             | text      | the event's name                                                                     |
+| event_type             | text      | the event's type (tournament or general gaming)                                      |
+| location               | text      | online, offline (if offline, select a location)                                      |
+| event_game             | integer[] | the game that will be played at the event (array of ints, using id from game api?)   |
+| event_details          | text      | details/rules of the event provided by the event coordinator                         |
+| event_image_url        | text      | image for event                                                                      |
+| user_id                | integer   | foreign key references users(id)                                                     |
+|                        |           |                                                                                      |
+| **RegisteredEvent**    |           |                                                                                      |
+| id                     | integer   | primary key                                                                          |
+| preferred_name         | text      | preffered name/handle of attendee (Might be better on users table?)                  |
+| registered_at          | date      | date the user registered for the event (is this needed?)                             |
+| user_id                | integer   | foreign key references users(id)                                                     |
+| event_id               | integer   | foreign key references Event(id)                                                     |
+| registered_game        | integer[] | May need field for games registered to                                               |
+|                        |           |                                                                                      |
+| **Posts**              |           |                                                                                      |
+| id                     | integer   | primary key                                                                          |
+| post                   | text      | content of post                                                                      |
+| created_at             | date      | date/time post created                                                               |
+| user_id                | integer   | foreign key references users(id)                                                     |
+| event_id               | integer   | foreign key references Event(id)                                                     |
+|                        |           |                                                                                      |
+| **PostReplies**        |           |                                                                                      |
+| id                     | integer   | primary key                                                                          |
+| reply                  | text      | content of reply                                                                     |
+| created_at             | date      | date/time reply created                                                              |
+| user_id                | integer   | foreign key references Users(id)                                                     |
+| post_id                | integer   | foreign key references posts(id)                                                     |
+|                        |           |                                                                                      |
+| **Stretch**            |           |                                                                                      |
+| EventTournaments?      |           | Intended for if Bracket API is implemented                                           |
+| RegisteredTournaments? |           | Intended for if Bracket API is implemented                                           |
+| Resources?             |           | May need table for extra game resources intended for learning or finding communities |
 
 ## Endpoints
 
-List the API endpoints you will need to implement.
+| **URL**                    | **CRUD** | **HTTP Verb** | **Description**                                                 | **User Stories**         | **Stretch?** |
+|----------------------------|----------|---------------|-----------------------------------------------------------------|--------------------------|--------------|
+| **events**                 |          |               |                                                                 |                          |              |
+| \events                    | Read     | GET           | Fetch all events from events table                              |         1, 5, 6, 7, 8, 9 |              |
+| \events                    | Create   | POST          | Add an event to the website                                     |        1, 2, 3, 4, 7, 10 |              |
+| \events\:id                | Read     | GET           | Fetch specific event                                            |               2, 5, 6, 9 |              |
+| \events\:id\users          | Read     | GET           | Fetch all users for a specific event from the registered events |                    2, 10 |              |
+| \events\:id                | Delete   | DELETE        | Remove an event from the events table                           |                       11 | **Stretch**  |
+| \events\:event_id\register | Create   | POST          | Register user to the event                                      |         1, 5, 6, 7, 8, 9 |              |
+| \events\:event_id\withdraw | Delete   | DELETE        | Remove/withdraw a user from the registered events table         |         1, 5, 6, 7, 8, 9 | **Stretch**  |
+| \events\:id                | Update   | PUT           | Update event information                                        |                 2, 3, 10 | **Stretch**  |
+|                            |          |               |                                                                 |                          |              |
+| **users**                  |          |               |                                                                 |                          |              |
+| \users\:id                 | Read     | GET           | Fetch specific user                                             |                   12, 13 |              |
+| \users\:id\events          | Read     | GET           | Fetch all events in a user's collection                         |                       12 |              |
+| \users                     | Create   | POST          | Create a new user account                                       | 1, 5, 6, 7, 8, 9, 12, 13 |              |
+| \users\:id                 | Update   | PUT           | Update user's profile data                                      |                       13 |              |
+|                            |          |               |                                                                 |                          |              |
+| **posts**                  |          |               |                                                                 |                          |              |
+| \posts                     | Create   | POST          | Create a new post for an event (event id in the body)           | 1, 5, 6, 7, 8, 9, 10, 11 |              |
+| \posts\:post_id            | Delete   | DELETE        | Delete a post                                                   | 1, 5, 6, 7, 8, 9, 10, 11 |              |
+| \posts                     | Update   | PUT           | Update a post                                                   | 1, 5, 6, 7, 8, 9, 10, 11 | **Stretch**  |
+|                            |          |               |                                                                 |                          |              |
+| **postreplies**            |          |               |                                                                 |                          |              |
+| \reply                     | Create   | POST          | Create a new post reply (post id in the body)                   |         1, 5, 6, 7, 8, 9 |              |
+| \reply\:reply_id           | Delete   | DELETE        | Delete a post reply                                             |         1, 5, 6, 7, 8, 9 |              |
+| \reply\:reply_id           | Update   | PUT           | Update a post reply                                             |         1, 5, 6, 7, 8, 9 | **Stretch**  |
 
 ***Don't forget to set up your Issues, Milestones, and Project Board!***
