@@ -9,8 +9,9 @@ import NavBar from './components/NavBar/NavBar';
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <NavBar />
-      <Hero />
+        <NavBar />
+        <Hero />
+
 
     </ChakraProvider>
   );

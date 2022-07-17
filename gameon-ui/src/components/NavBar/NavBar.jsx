@@ -1,11 +1,6 @@
 import * as React from "react"
-import { Box, Input, ControlBox, Text, Heading, Container, Stack, VStack, HStack, Spacer, Button, ButtonGroup, Flex, Drawer,
-    DrawerBody,
-    DrawerFooter,
-    DrawerHeader,
-    DrawerOverlay,
-    DrawerContent,
-    DrawerCloseButton, useDisclosure } from "@chakra-ui/react"
+import { Box, Heading, Container, Spacer, Button, ButtonGroup, Flex, Drawer,
+    DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure } from "@chakra-ui/react"
 import { ColorModeSwitcher } from "../../ColorModeSwitcher"
 import LoginPage from "../LoginPage/LoginPage"
 
@@ -14,13 +9,7 @@ export default function NavBar() {
     const btnRef = React.useRef()
 
     return (
-        <Container height="50px" width="100%" maxW={'9000px'} position='absolute' >
-            {/* <HStack>
-                <Box >
-                    <Heading as='h1' size='xl' >Game On!</Heading>
-                </Box>
-
-            </HStack> */}
+         <Container minHeight="50px" width="100%" maxW={'9000px'} position='relative' >
             <Flex minWidth='max-content' alignItems='center' gap='2' paddingTop={'2'}>
                 <Box p='2'>
                     <Heading size='md'>Game On!</Heading>
@@ -44,8 +33,6 @@ export default function NavBar() {
                     </DrawerContent>
                 </Drawer>
             </Flex>
-
         </Container>
-
     )
 }
