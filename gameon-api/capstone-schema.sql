@@ -27,7 +27,7 @@ CREATE TABLE events (
 
 CREATE TABLE registered_events (
     id          SERIAL PRIMARY KEY,
-    event_game  INTEGER[] NOT NULL,,
+    event_game  INTEGER[] NOT NULL,
     user_id     INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     event_id     INTEGER NOT NULL,
