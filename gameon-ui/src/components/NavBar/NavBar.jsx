@@ -13,6 +13,7 @@ export default function NavBar() {
          <Container minHeight="50px" width="100%" maxW={'9000px'} position='relative' >
             <Flex minWidth='max-content' alignItems='center' gap='2' paddingTop={'2'}>
                 <Box p='2'>
+                    <Link to="/">
                     <Heading size='md'>Game On!</Heading>
                     </Link>
                 </Box>

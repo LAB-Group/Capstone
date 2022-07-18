@@ -1,14 +1,44 @@
 import * as React from "react"
-import { Box, Heading } from "@chakra-ui/react"
+import { Heading } from "@chakra-ui/react"
+import { Slide } from "react-slideshow-image"
 import pic from "../../media/evo.jpg"
-
-import { Container } from '@chakra-ui/react'
+import { Container, Box, Image } from '@chakra-ui/react'
+import "react-slideshow-image/dist/styles.css"
 
 export default function Hero() {
+    return(
+        <Container>
+            <Slideshow/>
+        </Container>
+    )
 
+
+}
+function Slideshow () {
+    const blazBlue = 'https://cdn.akamai.steamstatic.com/steam/apps/702890/capsule_616x353.jpg?t=1589346849'
+    const tekken = 'https://image.api.playstation.com/vulcan/img/cfn/11307IKss2-L1ZsygmUb7abhTx6LCzjhXXgmYVEoToXezKywuFs5YyNfonN1rSwKBPZhRvQEOB6aBTyDHKLeHqRVEXcyA1Vz.png'
+    const slideImages = [
+        pic,blazBlue,tekken
+    ]
     return (
-        <Container centerContent maxW="1200px" height="360px" bgImage={pic} bgPosition="center" objectFit={'cover'} bgSize="100%" bgRepeat="no-repeat">
-                <Heading as='h1' size='2xl' textColor='white' position="absolute" textAlign="center" top="4em">Lorem Ipsum</Heading>
+        <Container>
+            <Slide>
+                {slideImages.map((slideImage, idx) => (
+                <Box 
+                    centerContent 
+                    maxW="1200px" 
+                    height="360px"  
+                    bgPosition="center" 
+                    objectFit={'cover'} 
+                    bgSize="100%" 
+                    bgRepeat="no-repeat"
+                >
+                    <Image src={slideImage} boxSize='500px'/>
+
+                </Box>
+                ) 
+                )}
+            </Slide>
         </Container>
 
     )
