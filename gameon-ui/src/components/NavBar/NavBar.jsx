@@ -3,10 +3,16 @@ import { Box, Heading, Container, Spacer, Button, ButtonGroup, Flex, Drawer,
     DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure } from "@chakra-ui/react"
 import { ColorModeSwitcher } from "../../ColorModeSwitcher"
 import LoginPage from "../LoginPage/LoginPage"
+import RegisterPage from "../RegisterPage/RegisterPage"
+import CreateEventForm from "../Events/CreateEventForm"
+import { useRef } from "react"
 
 export default function NavBar() {
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const btnRef = React.useRef()
+    const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure()
+    const { isOpen: isRegisterOpen, onOpen: onRegisterOpen, onClose: onRegisterClose } = useDisclosure()
+    const { isOpen: isCreateOpen, onOpen: onCreateOpen, onClose: onCreateClose } = useDisclosure()
+
+    const btnRef = useRef()
 
     return (
          <Container minHeight="50px" width="100%" maxW={'9000px'} position='relative' >
@@ -16,23 +22,76 @@ export default function NavBar() {
                 </Box>
                 <Spacer />
                 <ButtonGroup gap='2'>
-                    <Button colorScheme='purple' onClick={onOpen}>Log in</Button>
-                    <Button colorScheme='purple' onClick={onOpen}>Sign Up</Button>
+                    {/* below button should only display if user is logged in */}
+                    <Button colorScheme='purple' onClick={onCreateOpen}>Create Event</Button>
+                    <Button colorScheme='purple' onClick={onLoginOpen}>Log in</Button>
+                    <Button colorScheme='purple' onClick={onRegisterOpen}>Sign Up</Button>
                     <ColorModeSwitcher justifySelf="flex-end" />
                 </ButtonGroup>
                 <Drawer
-                    isOpen={isOpen}
+                    isOpen={isLoginOpen}
                     placement='top'
-                    onClose={onClose}
+                    onClose={onLoginClose}
                     finalFocusRef={btnRef}
                 >
                     <DrawerOverlay />
                     <DrawerContent>
                         <DrawerCloseButton />
-                        <LoginPage onClose={onClose} />
+                        <LoginPage onClose={onLoginClose} />
+                    </DrawerContent>
+                </Drawer>
+                <Drawer
+                    isOpen={isRegisterOpen}
+                    placement='top'
+                    onClose={onRegisterClose}
+                    finalFocusRef={btnRef}
+                >
+                    <DrawerOverlay />
+                    <DrawerContent>
+                        <DrawerCloseButton />
+                        <RegisterPage onClose={onRegisterClose} />
+                    </DrawerContent>
+                </Drawer>
+                <Drawer
+                    isOpen={isCreateOpen}
+                    placement='top'
+                    onClose={onCreateClose}
+                    finalFocusRef={btnRef}
+                >
+                    <DrawerOverlay />
+                    <DrawerContent>
+                        <DrawerCloseButton />
+                        <CreateEventForm onClose={onCreateClose} />
                     </DrawerContent>
                 </Drawer>
             </Flex>
         </Container>
     )
 }
+
+// function LoginButton({ isLoginOpen, onLoginClose, btnRef }) {
+//     return (
+//         <Drawer
+//         isOpen={isLoginOpen}
+//         placement='top'
+//         onClose={onLoginClose}
+//         finalFocusRef={btnRef}
+//     >
+//         <DrawerOverlay />
+//         <DrawerContent>
+//             <DrawerCloseButton />
+//             <LoginPage onClose={onLoginClose} />
+//             <RegisterPage onClose={onLoginClose} />
+//         </DrawerContent>
+//     </Drawer>
+//     )
+
+// }
+
+// function RegisterButton() {
+
+// }
+
+// function CreateEventButton() {
+
+// }

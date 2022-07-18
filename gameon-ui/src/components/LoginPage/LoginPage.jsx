@@ -6,6 +6,11 @@ import { Box, ControlBox, Text, Heading, Container, DrawerHeader, DrawerBody, In
     FormHelperText } from "@chakra-ui/react"
 
 export default function LoginPage({onClose}) {
+  const [errors, setErrors] = useState({})
+  const [loginForm, setLoginForm] = useState({
+      email: "",
+      password: "",
+    })
 
     return (
         <Container centerContent maxWidth='4xl' width='4xl' >
@@ -13,24 +18,19 @@ export default function LoginPage({onClose}) {
 
             <DrawerBody>
                 {/* <Input placeholder='Type here...' /> */}
-                <LoginForm />
+                <LoginForm loginForm={loginForm} setLoginForm={setLoginForm} setErrors={setErrors} />
             </DrawerBody>
 
             <DrawerFooter>
-                <Button colorScheme='blue'>Save</Button>
-                <Button variant='outline' mr={3} onClick={onClose}>Cancel</Button>
+                <Button colorScheme='blue' mr={3} onClick={console.log("LOGIN FORM", loginForm)} >Save</Button>
+                <Button variant='outline' onClick={onClose}>Cancel</Button>
             </DrawerFooter>
         </Container>
 
     )
 }
 
-function LoginForm() {
-    const [errors, setErrors] = useState({})
-    const [form, setForm] = useState({
-        email: "",
-        password: "",
-      })
+function LoginForm({ loginForm, setLoginForm, setErrors }) {
 
     const handleOnInputChange = (event) => {
         if (event.target.name === "email") {
@@ -40,7 +40,7 @@ function LoginForm() {
               setErrors((error) => ({ ...error, email: null }))
             }
           }
-        setForm((form) => ({ ...form, [event.target.name]: event.target.value }))
+        setLoginForm((form) => ({ ...form, [event.target.name]: event.target.value }))
       }
   
     // const isError = form === ''
@@ -48,9 +48,8 @@ function LoginForm() {
         <FormControl isRequired >
         <FormLabel htmlFor='email'>Email</FormLabel>
         <Input
-          id='email'
-          type='email'
-          value={form.email.value}
+          id='email' name="email" type='email'
+          value={loginForm.email}
           onChange={handleOnInputChange}
         />
         {/* {!form.email ? (
@@ -63,9 +62,8 @@ function LoginForm() {
 
         <FormLabel htmlFor='password'>Password</FormLabel>
         <Input
-          id='password'
-          type='password'
-          value={form.password.value}
+          id='password' name="password" type='password'
+          value={loginForm.password}
           onChange={handleOnInputChange}
         />
         {/* {!form.password ? (
