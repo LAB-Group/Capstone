@@ -20,7 +20,7 @@ export default function App(){
                 <Home/>
             }/>
             {/* ProfilePage */}
-            <Route path="/profile" element={
+            <Route path="/profile/*" element={
                 <ProfilePage/>
             }/>
         </Routes>
