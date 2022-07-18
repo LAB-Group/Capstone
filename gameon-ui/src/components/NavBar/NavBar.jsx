@@ -68,30 +68,3 @@ export default function NavBar() {
         </Container>
     )
 }
-
-// function LoginButton({ isLoginOpen, onLoginClose, btnRef }) {
-//     return (
-//         <Drawer
-//         isOpen={isLoginOpen}
-//         placement='top'
-//         onClose={onLoginClose}
-//         finalFocusRef={btnRef}
-//     >
-//         <DrawerOverlay />
-//         <DrawerContent>
-//             <DrawerCloseButton />
-//             <LoginPage onClose={onLoginClose} />
-//             <RegisterPage onClose={onLoginClose} />
-//         </DrawerContent>
-//     </Drawer>
-//     )
-
-// }
-
-// function RegisterButton() {
-
-// }
-
-// function CreateEventButton() {
-
-// }
