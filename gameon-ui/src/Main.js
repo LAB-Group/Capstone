@@ -5,13 +5,13 @@ import {
 } from '@chakra-ui/react';
 // import Hero from "./components/Hero/Hero"
 // import NavBar from './components/NavBar/NavBar';
-import Apps from './components/Apps/Apps';
-function App() {
+import App from './components/App/App';
+function Main() {
   return (
     <ChakraProvider theme={theme}>
-      <Apps />
+      <App />
     </ChakraProvider>
   );
 }
 
-export default App;
+export default Main;

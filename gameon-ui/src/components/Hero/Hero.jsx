@@ -24,8 +24,7 @@ function Slideshow () {
         <Container>
             <Slide>
                 {slideImages.map((slideImage, idx) => (
-                <Box 
-                    centerContent 
+                <Box  
                     maxW="1200px" 
                     height="360px"  
                     bgPosition="center" 
@@ -33,7 +32,7 @@ function Slideshow () {
                     bgSize="100%" 
                     bgRepeat="no-repeat"
                 >
-                    <Image src={slideImage} boxSize='500px'/>
+                    <Image src={slideImage} key={idx} boxSize='500px'/>
 
                 </Box>
                 ) 
