@@ -86,52 +86,45 @@ function RegisterForm({ user, registerForm, setRegisterForm, setErrors }) {
   
     // const isError = form === ''
     return (
-        <FormControl>
+        <FormControl isRequired>
         <FormLabel htmlFor='email'>Email</FormLabel>
-        <Input isRequired
-          id='email' name="email" type='email'
+        <Input id='email' name="email" type='email'
           value={registerForm.email}
           onChange={handleOnInputChange}
         />
 
         <FormLabel htmlFor='password'>Password</FormLabel>
-        <Input isRequired
-          id='password' name="password" type='password'
+        <Input id='password' name="password" type='password'
           value={registerForm.password}
           onChange={handleOnInputChange}
         />
 
-        <FormLabel htmlFor='passwordConfirm'>Password</FormLabel>
-        <Input isRequired
-          id='passwordConfirm' name="passwordConfirm" type='password'
+        <FormLabel htmlFor='passwordConfirm'>Confirm Password</FormLabel>
+        <Input id='passwordConfirm' name="passwordConfirm" type='password'
           value={registerForm.passwordConfirm}
           onChange={handleOnInputChange}
         />
 
         <FormLabel htmlFor='username'>Username</FormLabel>
-        <Input isRequired
-          id='username' name="username" type='text'
+        <Input id='username' name="username" type='text'
           value={registerForm.username}
           onChange={handleOnInputChange}
         />
 
         <FormLabel htmlFor='firstName'>First Name</FormLabel>
-        <Input isRequired
-          id='firstName' name="firstName" type='text'
-N         value={registerForm.firstName}
+        <Input id='firstName' name="firstName" type='text'
+          value={registerForm.firstName}
           onChange={handleOnInputChange}
         />
 
         <FormLabel htmlFor='lastName'>Last Name</FormLabel>
-        <Input isRequired
-          id='lastName' name="lastName" type='text'
+        <Input id='lastName' name="lastName" type='text'
           value={registerForm.lastName}
           onChange={handleOnInputChange}
         />
 
         <FormLabel htmlFor='imageUrl'>Image URL</FormLabel>
-        <Input
-          id='imageUrl' name="imageUrl" type='text'
+        <Input id='imageUrl' name="imageUrl" type='text'
           value={registerForm.imageUrl}
           onChange={handleOnInputChange}
         />
