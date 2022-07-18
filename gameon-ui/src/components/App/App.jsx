@@ -26,10 +26,13 @@ function App(){
         <BrowserRouter>
         <NavBar/>
         <Routes>
+        
             {/* Home */}
             <Route path="/" element={<Home/>}/>
+            
             {/* ProfilePage */}
-            <Route path="/profile" element={user?.email?<ProfilePage/>:<></>}/>
+            <Route path="/profile/*" element={user?.email?<ProfilePage/>:<></>}/>
+
         </Routes>
         </BrowserRouter> 
         </VStack>

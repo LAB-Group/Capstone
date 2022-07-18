@@ -25,7 +25,7 @@ function Slideshow () {
                 {slideImages.map((slideImage, idx) => (
                 <Box  
                     maxW="1200px" 
-                    height="360px"  
+                    height="480px"  
                     bgPosition="center" 
                     objectFit={'cover'} 
                     bgSize="100%" 
