@@ -1,21 +1,49 @@
 import * as React from "react"
-import {useState} from "react"
+import {useState, useEffect} from "react"
+import { useNavigate, Link } from "react-router-dom"
+import apiClient from "../../services/apiClient"
+import  { useAuthContext } from "../../contexts/auth"
 import { Box, ControlBox, Text, Heading, Container, DrawerHeader, DrawerBody, Input, DrawerFooter, Button, FormControl,
     FormLabel,
     FormErrorMessage,
     FormHelperText } from "@chakra-ui/react"
 
 export default function RegisterPage({onClose}) {
+  const { user, setUser } = useAuthContext()
   const [errors, setErrors] = useState({})
+  const [isLoading, setIsLoading] = useState(false)
   const [registerForm, setRegisterForm] = useState({
       email: "",
       password: "",
+      passwordConfirm: "",
       username: "",
-      handle: "",
-      firstname: "",
-      lastname: "",
-      imageurl: ""
+      firstName: "",
+      lastName: "",
+      imageUrl: ""
     })
+
+    const handleOnSubmit = async () => {
+      setIsLoading(true)
+      setErrors((error) => ({ ...error, form: null }))
+  
+      if (registerForm.passwordConfirm !== registerForm.password) {
+        setErrors((error) => ({ ...error, passwordConfirm: "Passwords do not match." }))
+        setIsLoading(false)
+        return
+      } else {
+        setErrors((error) => ({ ...error, passwordConfirm: null }))
+      }
+      console.log("USER: ",registerForm.username)
+      const {data, error} = await apiClient.signupUser({ email: registerForm.email, password: registerForm.password, username: registerForm.username, 
+                                                          firstName: registerForm.firstName, lastName: registerForm.lastName, imageUrl: registerForm.imageUrl})
+      if(error) setErrors((e) => ({ ...e, form: error}))
+      if(data?.user) {
+        
+        setUser(data.user)
+        apiClient.setToken(data.token)
+      }
+      setIsLoading(false)
+    }
 
     return (
         <Container centerContent maxWidth='4xl' width='4xl' >
@@ -23,11 +51,11 @@ export default function RegisterPage({onClose}) {
 
             <DrawerBody>
                 {/* <Input placeholder='Type here...' /> */}
-                <RegisterForm registerForm={registerForm} setRegisterForm={setRegisterForm} setErrors={setErrors} />
+                <RegisterForm user={user} registerForm={registerForm} setRegisterForm={setRegisterForm} setErrors={setErrors} />
             </DrawerBody>
 
             <DrawerFooter>
-                <Button colorScheme='blue' mr={3} onClick={console.log("LOGIN FORM", registerForm)} >Save</Button>
+                <Button colorScheme='blue' mr={3} onClick={handleOnSubmit} >Submit</Button>
                 <Button variant='outline' onClick={onClose}>Cancel</Button>
             </DrawerFooter>
         </Container>
@@ -35,7 +63,15 @@ export default function RegisterPage({onClose}) {
     )
 }
 
-function RegisterForm({ registerForm, setRegisterForm, setErrors }) {
+function RegisterForm({ user, registerForm, setRegisterForm, setErrors }) {
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    // redirect if user is logged in
+    if (user?.email) {
+      navigate("/")
+    }
+  }, [user, navigate])
 
     const handleOnInputChange = (event) => {
         if (event.target.name === "email") {
@@ -57,13 +93,6 @@ function RegisterForm({ registerForm, setRegisterForm, setErrors }) {
           value={registerForm.email}
           onChange={handleOnInputChange}
         />
-        {/* {!form.email ? (
-          <FormHelperText>
-            Enter your email.
-          </FormHelperText>
-        ) : (
-          <FormErrorMessage>Email is required.</FormErrorMessage>
-        )} */}
 
         <FormLabel htmlFor='password'>Password</FormLabel>
         <Input isRequired
@@ -71,13 +100,13 @@ function RegisterForm({ registerForm, setRegisterForm, setErrors }) {
           value={registerForm.password}
           onChange={handleOnInputChange}
         />
-        {/* {!form.password ? (
-          <FormHelperText>
-            Enter your password
-          </FormHelperText>
-        ) : (
-          <FormErrorMessage>Password is required.</FormErrorMessage>
-        )} */}
+
+        <FormLabel htmlFor='passwordConfirm'>Password</FormLabel>
+        <Input isRequired
+          id='passwordConfirm' name="passwordConfirm" type='password'
+          value={registerForm.passwordConfirm}
+          onChange={handleOnInputChange}
+        />
 
         <FormLabel htmlFor='username'>Username</FormLabel>
         <Input isRequired
@@ -86,31 +115,24 @@ function RegisterForm({ registerForm, setRegisterForm, setErrors }) {
           onChange={handleOnInputChange}
         />
 
-        <FormLabel htmlFor='handle'>Handle</FormLabel>
-        <Input
-          id='handle' name="handle" type='text'
-          value={registerForm.handle}
+        <FormLabel htmlFor='firstName'>First Name</FormLabel>
+        <Input isRequired
+          id='firstName' name="firstName" type='text'
+N         value={registerForm.firstName}
           onChange={handleOnInputChange}
         />
 
-        <FormLabel htmlFor='firstname'>First Name</FormLabel>
+        <FormLabel htmlFor='lastName'>Last Name</FormLabel>
         <Input isRequired
-          id='firstname' name="firstname" type='text'
-          value={registerForm.firstname}
-          onChange={handleOnInputChange}
-        />
-
-        <FormLabel htmlFor='lastname'>Last Name</FormLabel>
-        <Input isRequired
-          id='lastname' name="lastname" type='text'
+          id='lastName' name="lastName" type='text'
           value={registerForm.lastName}
           onChange={handleOnInputChange}
         />
 
-        <FormLabel htmlFor='imageurl'>Image URL</FormLabel>
+        <FormLabel htmlFor='imageUrl'>Image URL</FormLabel>
         <Input
-          id='imageurl' name="imageurl" type='text'
-          value={registerForm.imageurl}
+          id='imageUrl' name="imageUrl" type='text'
+          value={registerForm.imageUrl}
           onChange={handleOnInputChange}
         />
 
