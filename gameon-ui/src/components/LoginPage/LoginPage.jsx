@@ -1,16 +1,36 @@
 import * as React from "react"
-import {useState} from "react"
+import {useState, useEffect} from "react"
+import { Link, useNavigate } from "react-router-dom"
+import apiClient from "../../services/apiClient"
+import  { useAuthContext } from "../../contexts/auth"
 import { Box, ControlBox, Text, Heading, Container, DrawerHeader, DrawerBody, Input, DrawerFooter, Button, FormControl,
     FormLabel,
     FormErrorMessage,
     FormHelperText } from "@chakra-ui/react"
 
 export default function LoginPage({onClose}) {
+  const { user, setUser } = useAuthContext()
   const [errors, setErrors] = useState({})
+  const [isLoading, setIsLoading] = useState(false)
   const [loginForm, setLoginForm] = useState({
       email: "",
       password: "",
     })
+
+    const handleOnSubmit = async (event) => {
+      event.preventDefault()
+      setIsLoading(true)
+      setErrors((error) => ({ ...error, form: null }))
+
+      const {data, error} = await apiClient.loginUser({ email: loginForm.email, password:loginForm.password})
+      if(error) setErrors((e) => ({ ...e, form: error}))
+      if(data?.user) {
+        setUser(data.user)
+        apiClient.setToken(data.token)
+      }
+      setIsLoading(false)
+      
+    }
 
     return (
         <Container centerContent maxWidth='4xl' width='4xl' >
@@ -18,11 +38,11 @@ export default function LoginPage({onClose}) {
 
             <DrawerBody>
                 {/* <Input placeholder='Type here...' /> */}
-                <LoginForm loginForm={loginForm} setLoginForm={setLoginForm} setErrors={setErrors} />
+                <LoginForm user={user} loginForm={loginForm} setLoginForm={setLoginForm} setErrors={setErrors} />
             </DrawerBody>
 
             <DrawerFooter>
-                <Button colorScheme='blue' mr={3} onClick={console.log("LOGIN FORM", loginForm)} >Save</Button>
+                <Button colorScheme='blue' mr={3} onClick={handleOnSubmit} >Submit</Button>
                 <Button variant='outline' onClick={onClose}>Cancel</Button>
             </DrawerFooter>
         </Container>
@@ -30,7 +50,15 @@ export default function LoginPage({onClose}) {
     )
 }
 
-function LoginForm({ loginForm, setLoginForm, setErrors }) {
+function LoginForm({ user, loginForm, setLoginForm, setErrors }) {
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    // redirect if user is logged in
+    if (user?.email) {
+      navigate("/")
+    }
+  }, [user, navigate])
 
     const handleOnInputChange = (event) => {
         if (event.target.name === "email") {
@@ -42,7 +70,7 @@ function LoginForm({ loginForm, setLoginForm, setErrors }) {
           }
         setLoginForm((form) => ({ ...form, [event.target.name]: event.target.value }))
       }
-  
+
     // const isError = form === ''
     return (
         <FormControl isRequired >

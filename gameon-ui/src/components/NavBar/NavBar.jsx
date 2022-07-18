@@ -25,11 +25,12 @@ export default function NavBar() {
                 </Box>
                 <Spacer />
                 {/* Created this button so I can see how the profile looks :) */}
-                <Link to ="/profile">
-                <Button colorScheme='purple'>Profile</Button>
-                </Link>
+                
                 <ButtonGroup gap='2'>
                     {/* below button should only display if user is logged in */}
+                    <Link to ="/profile">
+                        <Button colorScheme='purple'>Profile</Button>
+                    </Link>
                     <Button colorScheme='purple' onClick={onCreateOpen}>Create Event</Button>
                     <Button colorScheme='purple' onClick={onLoginOpen}>Log in</Button>
                     <Button colorScheme='purple' onClick={onRegisterOpen}>Sign Up</Button>
