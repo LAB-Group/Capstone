@@ -1,9 +1,16 @@
 import * as React from "react"
 import Hero from "../Hero/Hero"
-import { Flex } from "@chakra-ui/react"
+import EventPage from "../Events/EventPage"
+import { Container, Flex, Box } from "@chakra-ui/react"
 
-export default function Home(props){
+export default function Home(){
     return (
-    <Hero/>
+        // Need to fix container in Hero
+        <Container>
+            <Hero/>
+            <Box>
+                <EventPage/>
+            </Box>
+        </Container>
     )
 }
