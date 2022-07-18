@@ -6,6 +6,7 @@ import {
 import { BrowserRouter, Routes, Route} from "react-router-dom"
 import Home from "../Home/Home"
 import NavBar from "../NavBar/NavBar"
+import ProfilePage from "../ProfilePage/ProfilePage"
 
 export default function Apps(){
     return( 
@@ -14,8 +15,13 @@ export default function Apps(){
        <BrowserRouter>
        <NavBar/>
         <Routes>
+            {/* Home */}
             <Route path="/" element={
                 <Home/>
+            }/>
+            {/* ProfilePage */}
+            <Route path="/profile" element={
+                <ProfilePage/>
             }/>
         </Routes>
        </BrowserRouter> 

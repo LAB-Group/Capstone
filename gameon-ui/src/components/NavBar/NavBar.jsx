@@ -1,4 +1,5 @@
 import * as React from "react"
+import {Link} from "react-router-dom"
 import { Box, Heading, Container, Spacer, Button, ButtonGroup, Flex, Drawer,
     DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure } from "@chakra-ui/react"
 import { ColorModeSwitcher } from "../../ColorModeSwitcher"
@@ -13,8 +14,13 @@ export default function NavBar() {
             <Flex minWidth='max-content' alignItems='center' gap='2' paddingTop={'2'}>
                 <Box p='2'>
                     <Heading size='md'>Game On!</Heading>
+                    </Link>
                 </Box>
                 <Spacer />
+                {/* Created this button so I can see how the profile looks :) */}
+                <Link to ="/profile">
+                <Button colorScheme='purple'>Profile</Button>
+                </Link>
                 <ButtonGroup gap='2'>
                     <Button colorScheme='purple' onClick={onOpen}>Log in</Button>
                     <Button colorScheme='purple' onClick={onOpen}>Sign Up</Button>
