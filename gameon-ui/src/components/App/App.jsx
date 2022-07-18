@@ -8,12 +8,12 @@ import Home from "../Home/Home"
 import NavBar from "../NavBar/NavBar"
 import ProfilePage from "../ProfilePage/ProfilePage"
 
-export default function Apps(){
+export default function App(){
     return( 
         <ChakraProvider>
         <VStack >     
-       <BrowserRouter>
-       <NavBar/>
+        <BrowserRouter>
+        <NavBar/>
         <Routes>
             {/* Home */}
             <Route path="/" element={
@@ -24,7 +24,7 @@ export default function Apps(){
                 <ProfilePage/>
             }/>
         </Routes>
-       </BrowserRouter> 
+        </BrowserRouter> 
         </VStack>
         </ChakraProvider>
         

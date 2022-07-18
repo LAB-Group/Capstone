@@ -11,9 +11,8 @@ export default function Hero() {
             <Slideshow/>
         </Container>
     )
-
-
 }
+
 function Slideshow () {
     const blazBlue = 'https://cdn.akamai.steamstatic.com/steam/apps/702890/capsule_616x353.jpg?t=1589346849'
     const tekken = 'https://image.api.playstation.com/vulcan/img/cfn/11307IKss2-L1ZsygmUb7abhTx6LCzjhXXgmYVEoToXezKywuFs5YyNfonN1rSwKBPZhRvQEOB6aBTyDHKLeHqRVEXcyA1Vz.png'
