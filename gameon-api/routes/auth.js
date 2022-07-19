@@ -35,4 +35,15 @@ router.get("/me", security.requireAuthenticatedUser, async (req, res, next) => {
   }
 })
 
+router.put("/profile", security.requireAuthenticatedUser, async (req, res, next) => {
+  try {
+    const userUpdate = req.body
+    const editedUser = await User.editUser({ userUpdate })
+
+    return res.status(200).json({user: editedUser})
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router

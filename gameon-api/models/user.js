@@ -79,6 +79,28 @@ class User {
 
     return user
   }
+
+  static async editUser({ userUpdate }) {
+    const requiredFields = ["username", "firstName", "lastName", "imageUrl", "email"]
+    requiredFields.forEach((property) => {
+      if (!userUpdate.hasOwnProperty(property)) {
+        throw new BadRequestError(`Missing ${property} in request body.`)
+      }
+    })
+
+    const userResult = await db.query(
+      `UPDATE users
+       SET username = $1, first_name = $2, last_name = $3, image_url = $4
+       WHERE email = $5
+       RETURNING username, first_name AS "firstName", last_name AS "lastName", image_url AS "imageUrl", email;
+      `,
+      [userUpdate.username, userUpdate.firstName, userUpdate.lastName, userUpdate.imageUrl, userUpdate.email]
+    )
+    const editedUser = userResult.rows[0]
+
+    return editedUser
+  }
+
 }
 
 module.exports = User
