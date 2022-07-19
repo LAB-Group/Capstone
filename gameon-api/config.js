@@ -11,8 +11,8 @@ function getDatabaseUri() {
   const dbPass = process.env.DATABASE_PASS ? encodeURI(process.env.DATABASE_PASS) : "postgres"
   const dbHost = process.env.DATABASE_HOST || "localhost"
   const dbPort = process.env.DATABASE_PORT || 5432
-  const dbTestName = process.env.DATABASE_TEST_NAME || "capstone"
-  const dbProdName = process.env.DATABASE_NAME || "capstone"
+  const dbTestName = process.env.DATABASE_TEST_NAME || "gameon"
+  const dbProdName = process.env.DATABASE_NAME || "gameon"
   const dbName = process.env.NODE_ENV === "test" ? dbTestName : dbProdName
 
   return process.env.DATABASE_URL || `postgresql://${dbUser}:${dbPass}@${dbHost}:${dbPort}/${dbName}`
@@ -20,7 +20,7 @@ function getDatabaseUri() {
 
 const BCRYPT_WORK_FACTOR = IS_TESTING ? 1 : 13
 
-console.log("Advanced Rate My Setup Config:".red)
+console.log("Game On Config:".red)
 console.log("PORT:".blue, PORT)
 console.log("SECRET_KEY:".blue, SECRET_KEY)
 console.log("IS_TESTING:".blue, IS_TESTING)
