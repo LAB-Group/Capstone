@@ -1,3 +1,4 @@
+const { disable } = require("colors")
 const db = require("../db")
 const { BadRequestError, NotFoundError } = require("../utils/errors")
 
@@ -94,7 +95,89 @@ class Events {
          return results.rows[0]
     }
 
+    static async registerForEvent({registration, user, eventId}) {
+        const existingRegisteredUser = await Events.fetchRegisteredForEventByUser({ user, eventId})
+        if (existingRegisteredUser) {
+            throw new BadRequestError(`Users aren't allowed to register more than once for an event.`)
+        }
 
+        const requiredFields = ["eventGame"]
+         requiredFields.forEach((field) => {
+            if (!registration.hasOwnProperty(field) || !registration[field]) {
+                throw new BadRequestError(`Required field - ${field} - missing from request body.`)
+            }
+         })
+
+        const results = await db.query(
+            `
+                INSERT INTO registered_events (event_game, user_id, event_id)
+                VALUES ($1, (SELECT id FROM users WHERE email = $2), $3)
+                RETURNING id,
+                          event_game AS "eventGame",
+                          user_id AS "userId",
+                          event_id AS "eventId";
+            `,
+            [registration.eventGame, user.email, eventId]
+        )
+
+        return results.rows[0]
+    }
+
+    static async withdrawUserFromEvent({user, eventId}) {
+        const existingRegisteredUser = await Events.fetchRegisteredForEventByUser({ user, eventId})
+        if (!existingRegisteredUser) {
+            throw new BadRequestError(`Users aren't allowed to withdraw from an event they are not registered for.`)
+        }
+        const results = await db.query(
+            `
+                DELETE FROM registered_events
+                WHERE user_id = (SELECT id FROM users WHERE username = $1) AND event_id = $2
+            `,
+            [user.username, eventId]
+        )
+
+        return `Withdrew user ${user.username} from event successfully!` 
+    }
+
+    static async fetchRegisteredForEventByUser({ user, eventId}) {
+        const results = await db.query(
+            `
+                SELECT user_id, event_id, registered_at
+                FROM registered_events
+                WHERE user_id = (SELECT id FROM users WHERE username = $1) AND event_id = $2
+            `,
+            [user.username, eventId]
+        )
+
+        return results.rows[0]
+    }
+
+    static async fetchUsersRegisteredForEvent(eventId) {
+        const numOfUsers = await db.query(
+            `
+                SELECT COUNT(user_id)
+                FROM registered_events
+                WHERE event_id = $1
+            `,
+            [eventId]
+        )
+        console.log("numOfUsers: ", numOfUsers.rows[0])
+
+        const results = await db.query(
+            `
+                SELECT user_id
+                FROM registered_events
+                WHERE event_id = $1
+            `,
+            [eventId]
+        )
+        
+        console.log("Users: ", results.rows)
+        return {
+            numOfUsers: numOfUsers.rows[0],
+            UsersRegistered: results.rows
+        }
+    }
 
 }
 
