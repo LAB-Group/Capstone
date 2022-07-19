@@ -1,12 +1,12 @@
 import * as React from "react"
 import {useState, useEffect} from "react"
-import { Link, useNavigate } from "react-router-dom"
 import apiClient from "../../services/apiClient"
 import  { useAuthContext } from "../../contexts/auth"
 import { Box, ControlBox, Text, Heading, Container, DrawerHeader, DrawerBody, Input, DrawerFooter, Button, FormControl,
     FormLabel,
     FormErrorMessage,
-    FormHelperText } from "@chakra-ui/react"
+    FormHelperText, 
+    useDisclosure} from "@chakra-ui/react"
 
 export default function LoginPage({onClose}) {
   const { user, setUser } = useAuthContext()
@@ -27,9 +27,10 @@ export default function LoginPage({onClose}) {
       if(data?.user) {
         setUser(data.user)
         apiClient.setToken(data.token)
+        onClose()
       }
       setIsLoading(false)
-      
+
     }
 
     return (
@@ -51,14 +52,6 @@ export default function LoginPage({onClose}) {
 }
 
 function LoginForm({ user, loginForm, setLoginForm, setErrors }) {
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    // redirect if user is logged in
-    if (user?.email) {
-      navigate("/")
-    }
-  }, [user, navigate])
 
     const handleOnInputChange = (event) => {
         if (event.target.name === "email") {
@@ -80,13 +73,13 @@ function LoginForm({ user, loginForm, setLoginForm, setErrors }) {
           value={loginForm.email}
           onChange={handleOnInputChange}
         />
-        {/* {!form.email ? (
+        {!loginForm.email ? (
           <FormHelperText>
             Enter your email.
           </FormHelperText>
         ) : (
           <FormErrorMessage>Email is required.</FormErrorMessage>
-        )} */}
+        )}
 
         <FormLabel htmlFor='password'>Password</FormLabel>
         <Input
@@ -94,13 +87,13 @@ function LoginForm({ user, loginForm, setLoginForm, setErrors }) {
           value={loginForm.password}
           onChange={handleOnInputChange}
         />
-        {/* {!form.password ? (
+        {!loginForm.password ? (
           <FormHelperText>
             Enter your password
           </FormHelperText>
         ) : (
           <FormErrorMessage>Password is required.</FormErrorMessage>
-        )} */}
+        )}
 
       </FormControl>
       

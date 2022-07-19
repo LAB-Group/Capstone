@@ -1,6 +1,5 @@
 import * as React from "react"
 import {useState, useEffect} from "react"
-import { useNavigate, Link } from "react-router-dom"
 import apiClient from "../../services/apiClient"
 import  { useAuthContext } from "../../contexts/auth"
 import { Box, ControlBox, Text, Heading, Container, DrawerHeader, DrawerBody, Input, DrawerFooter, Button, FormControl,
@@ -41,8 +40,10 @@ export default function RegisterPage({onClose}) {
         
         setUser(data.user)
         apiClient.setToken(data.token)
+        onClose()
       }
       setIsLoading(false)
+
     }
 
     return (
@@ -64,14 +65,6 @@ export default function RegisterPage({onClose}) {
 }
 
 function RegisterForm({ user, registerForm, setRegisterForm, setErrors }) {
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    // redirect if user is logged in
-    if (user?.email) {
-      navigate("/")
-    }
-  }, [user, navigate])
 
     const handleOnInputChange = (event) => {
         if (event.target.name === "email") {

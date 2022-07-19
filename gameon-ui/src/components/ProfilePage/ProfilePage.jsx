@@ -13,11 +13,11 @@ export default function ProfilePage(){
   <Container centerContent>
         
 
-<Routes>
-           <Route path="/profile/edit-profile" element={
-                <EditProfile/>
-            }/>
-        </Routes> 
+    <Routes>
+        <Route path="/profile/edit-profile" element={
+            <EditProfile/>
+        }/>
+    </Routes> 
 
      <Stack direction = 'column'  spacing={7} align='stretch'>
        <Box w="1200px" h='300px'  p={4} borderRadius='sm'>
