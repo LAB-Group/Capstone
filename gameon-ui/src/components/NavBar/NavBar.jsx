@@ -1,5 +1,5 @@
 import * as React from "react"
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import { Box, Heading, Container, Spacer, Button, ButtonGroup, Flex, Drawer,
     DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure } from "@chakra-ui/react"
 import { ColorModeSwitcher } from "../../ColorModeSwitcher"
@@ -7,13 +7,23 @@ import LoginPage from "../LoginPage/LoginPage"
 import RegisterPage from "../RegisterPage/RegisterPage"
 import CreateEventForm from "../Events/CreateEventForm"
 import { useRef } from "react"
+import apiClient from "../../services/apiClient"
+import { useAuthContext } from "../../contexts/auth"
 
 export default function NavBar() {
+    const { user, setUser, setError } = useAuthContext()
     const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure()
     const { isOpen: isRegisterOpen, onOpen: onRegisterOpen, onClose: onRegisterClose } = useDisclosure()
     const { isOpen: isCreateOpen, onOpen: onCreateOpen, onClose: onCreateClose } = useDisclosure()
 
     const btnRef = useRef()
+
+    const handleLogout = async () => {
+        await apiClient.logoutUser()
+        setUser({})
+        setError(null)
+        
+    }
 
     return (
          <Container minHeight="50px" width="100%" maxW={'9000px'} position='relative' >
@@ -26,16 +36,20 @@ export default function NavBar() {
                 <Spacer />
                 {/* Created this button so I can see how the profile looks :) */}
                 
-                <ButtonGroup gap='2'>
-                    {/* below button should only display if user is logged in */}
-                    <Link to ="/profile">
-                        <Button colorScheme='purple'>Profile</Button>
-                    </Link>
-                    <Button colorScheme='purple' onClick={onCreateOpen}>Create Event</Button>
-                    <Button colorScheme='purple' onClick={onLoginOpen}>Log in</Button>
-                    <Button colorScheme='purple' onClick={onRegisterOpen}>Sign Up</Button>
-                    <ColorModeSwitcher justifySelf="flex-end" />
-                </ButtonGroup>
+                {user?.email? 
+                    <ButtonGroup gap='2'>
+                        <Button colorScheme='purple' onClick={onCreateOpen}>Create Event</Button>
+                        <Link to ="/profile"><Button colorScheme='purple'>Profile</Button></Link>
+                        <Button colorScheme='purple' onClick={handleLogout}>Logout</Button>
+                        <ColorModeSwitcher justifySelf="flex-end" />
+                    </ButtonGroup>
+                    :
+                    <ButtonGroup gap='2'>
+                        <Button colorScheme='purple' onClick={onLoginOpen}>Log in</Button>
+                        <Button colorScheme='purple' onClick={onRegisterOpen}>Sign Up</Button>
+                        <ColorModeSwitcher justifySelf="flex-end" />
+                    </ButtonGroup>
+                }
                 <Drawer
                     isOpen={isLoginOpen}
                     placement='top'

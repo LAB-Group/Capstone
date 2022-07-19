@@ -9,8 +9,10 @@ class User {
       id: user.id,
       email: user.email,
       username: user.username,
+      firstName: user.first_name,
+      lastName: user.last_name,
       imageUrl: user.image_url,
-      createdAt: user.created_at,
+      createdAt: user.created_at
     }
   }
 
@@ -56,12 +58,11 @@ class User {
     const userResult = await db.query(
       `INSERT INTO users (email, password, username, first_name, last_name, image_url)
        VALUES ($1, $2, $3, $4, $5, $6)
-       RETURNING id, email, username, image_url, created_at;
+       RETURNING id, email, username, first_name, last_name image_url, created_at;
       `,
       [normalizedEmail, hashedPassword, credentials.username, credentials.firstName, credentials.lastName, credentials.imageUrl]
     )
     const user = userResult.rows[0]
-
     return User.makePublicUser(user)
   }
 

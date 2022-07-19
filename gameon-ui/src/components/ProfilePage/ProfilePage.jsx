@@ -3,9 +3,11 @@ import { Box,Image, Center, Text, VStack, Divider, HStack, Stack, Badge, Heading
 import { Routes, Route, Link } from "react-router-dom"
 import profile from "../../media/elmo-burning.gif"
 import EditProfile from "../EditProfile/EditProfile"
+import { useAuthContext } from "../../contexts/auth"
  
+// FIXME: Need to refactor below code and turn into different components
 export default function ProfilePage(){
-  
+    const { user } = useAuthContext()
         return(
 
   <Container centerContent>
@@ -21,11 +23,11 @@ export default function ProfilePage(){
        <Box w="1200px" h='300px'  p={4} borderRadius='sm'>
          <HStack spacing='24px'>
            <Box >
-             <Image w='260px'h='260px' borderRadius='sm' borderWidth='9px' src={profile}/>
+             <Image w='260px'h='260px' borderRadius='sm' borderWidth='9px' src={user.imageUrl}/>
            </Box>
            <Box w='1000px' h='200px'>
              <VStack p={5} spacing={4} >
-                  <Box w= '810px' h='30px' ><Text>Name of user</Text></Box>
+                  <Box w= '810px' h='30px' ><Text>{user.firstName} {user.lastName}</Text></Box>
                    <Divider orientation='horizontal' />
                    <Box w= '810px'h='30px'  >Location</Box>
                    <Divider orientation='horizontal' />
