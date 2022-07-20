@@ -14,19 +14,20 @@ export default function EditProfile({onClose}){
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const [profileForm, setProfileForm] = useState({
-      username: "",
-      firstName: "",
-      lastName: "",
-      imageUrl: "",
-      email: ""
+      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      imageUrl: user.imageUrl,
+      email: user.email
     })
 
     const handleOnSubmit = async () => {
       setIsLoading(true)
       setErrors((error) => ({ ...error, form: null }))
   
-      console.log("NAME: ",profileForm.firstName)
-      const {data, error} = await apiClient.editUserProfile({ username: profileForm.username? profileForm.userName : user.username, firstName: profileForm.firstName? profileForm.firstName : user.firstName, 
+      console.log("USERNAME: ",user.username)
+      console.log("NAME: ",profileForm.username)
+      const {data, error} = await apiClient.editUserProfile({ username: profileForm.username, firstName: profileForm.firstName, 
                                                             lastName: profileForm.lastName, imageUrl: profileForm.imageUrl, email: user.email})
       if(error) setErrors((e) => ({ ...e, form: error}))
       if(data?.user) {

@@ -23,15 +23,14 @@ function Slideshow () {
         <Container>
             <Slide>
                 {slideImages.map((slideImage, idx) => (
-                <Box  
-                    maxW="1200px" 
+                <Box   
                     height="480px"  
                     bgPosition="center" 
                     objectFit={'cover'} 
                     bgSize="100%" 
                     bgRepeat="no-repeat"
                 >
-                    <Image src={slideImage} key={idx} boxSize='500px'/>
+                    <Image src={slideImage} key={idx} objectFit='cover' height={"480px"} />
 
                 </Box>
                 ) 
