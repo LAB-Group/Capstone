@@ -39,14 +39,14 @@ export default function NavBar() {
                 {user?.email? 
                     <ButtonGroup gap='2'>
                         <Button colorScheme='purple' onClick={onCreateOpen}>Create Event</Button>
-                        <Link to ="/profile"><Button colorScheme='purple'>Profile</Button></Link>
-                        <Button colorScheme='purple' onClick={handleLogout}>Logout</Button>
+                        <Link to ="/profile"><Button variant="outline" colorScheme='purple'>Profile</Button></Link>
+                        <Button variant="link" colorScheme='purple' onClick={handleLogout}>Logout</Button>
                         <ColorModeSwitcher justifySelf="flex-end" />
                     </ButtonGroup>
                     :
                     <ButtonGroup gap='2'>
                         <Button colorScheme='purple' onClick={onLoginOpen}>Log in</Button>
-                        <Button colorScheme='purple' onClick={onRegisterOpen}>Sign Up</Button>
+                        <Button variant="outline" colorScheme='purple' onClick={onRegisterOpen}>Sign Up</Button>
                         <ColorModeSwitcher justifySelf="flex-end" />
                     </ButtonGroup>
                 }
