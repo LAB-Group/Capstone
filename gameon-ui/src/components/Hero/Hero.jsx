@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Heading } from "@chakra-ui/react"
+import { Heading, Text } from "@chakra-ui/react"
 import { Slide } from "react-slideshow-image"
 import pic from "../../media/evo.jpg"
 import { Container, Box, Image } from '@chakra-ui/react'
@@ -7,7 +7,8 @@ import "react-slideshow-image/dist/styles.css"
 
 export default function Hero() {
     return(
-        <Container>
+        // Shrinks container to 480px currently
+        <Container maxW="3600px" minW="480px">
             <Slideshow/>
         </Container>
     )
@@ -20,18 +21,20 @@ function Slideshow () {
         pic,blazBlue,tekken
     ]
     return (
-        <Container>
-            <Slide>
+
+
+        // Widen container's width 
+        <Container maxW="3600px" minW="480px">
+            <Slide width="100%">
                 {slideImages.map((slideImage, idx) => (
                 <Box   
                     height="480px"  
                     bgPosition="center" 
-                    objectFit={'cover'} 
-                    bgSize="100%" 
+                    objectFit={'cover'}  
                     bgRepeat="no-repeat"
                 >
-                    <Image src={slideImage} key={idx} objectFit='cover' height={"480px"} />
 
+                    <Image src={slideImage} key={idx} objectFit='cover' width={"100%"} height={"100%"}/>
                 </Box>
                 ) 
                 )}
