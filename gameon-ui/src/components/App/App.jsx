@@ -5,6 +5,7 @@ import {
   } from '@chakra-ui/react';
 import { BrowserRouter, Routes, Route} from "react-router-dom"
 import { AuthContextProvider, useAuthContext } from "../../contexts/auth"
+import { EventContextProvider } from "../../contexts/event"
 import Home from "../Home/Home"
 import NavBar from "../NavBar/NavBar"
 import ProfilePage from "../ProfilePage/ProfilePage"
@@ -12,7 +13,9 @@ import ProfilePage from "../ProfilePage/ProfilePage"
 export default function AppContainer() {
     return (
       <AuthContextProvider>
-        <App />
+        <EventContextProvider>
+          <App />
+        </EventContextProvider>
       </AuthContextProvider>
     )
 }

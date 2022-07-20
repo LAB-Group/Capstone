@@ -58,6 +58,10 @@ class ApiClient {
         return await this.request({ endpoint: `events`, method: `POST`, data: event })
     }
 
+    async fetchEvents() {
+        return await this.request({ endpoint: `events`, method: `GET` })
+    }
+
 }
 
 export default new ApiClient("http://localhost:3001")

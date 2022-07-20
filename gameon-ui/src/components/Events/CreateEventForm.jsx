@@ -8,6 +8,7 @@ export default function CreateEventForm({onClose}) {
     const [errors, setErrors] = useState({})
     const [createEventForm, setCreateEventForm] = useState({
         eventName: "",
+        eventDate: "",
         eventType: "",
         eventLocation: "",
         eventGame: [],
@@ -22,7 +23,7 @@ export default function CreateEventForm({onClose}) {
       const handleOnSubmit = async () => {
         setErrors((error) => ({ ...error, form: null }))
     
-        const {data, error} = await apiClient.createEvent({ eventName: createEventForm.eventName, eventType: createEventForm.eventType, 
+        const {data, error} = await apiClient.createEvent({ eventName: createEventForm.eventName, eventDate: createEventForm.eventDate, eventType: createEventForm.eventType,
                                                                 eventLocation: createEventForm.eventLocation, eventGame: [1], //createEventForm.eventGame, 
                                                                 eventDetails: createEventForm.eventDetails, eventImageUrl: createEventForm.eventImageUrl })
         if(error) setErrors((e) => ({ ...e, form: error}))
@@ -40,6 +41,12 @@ export default function CreateEventForm({onClose}) {
                 defaultValue={createEventForm.eventName}
                 onChange={handleOnInputChange}
                 />
+{/* 
+                <FormLabel htmlFor='eventDate'>Event Date</FormLabel>
+                <Input id='eventDate' name="eventDate" placeholder='Select Event Date'
+                value={createEventForm.eventDate}
+                onChange={handleOnInputChange}>
+                </Input> */}
 
                 <FormLabel htmlFor='eventType'>Event Type</FormLabel>
                 <Select id='eventType' name="eventType" placeholder='Select Event Type'
