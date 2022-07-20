@@ -54,6 +54,10 @@ class ApiClient {
         return await this.request({ endpoint: `auth/profile`, method: `PUT`, data: editedUser })
     }
 
+    async createEvent(event) {
+        return await this.request({ endpoint: `events`, method: `POST`, data: event })
+    }
+
 }
 
 export default new ApiClient("http://localhost:3001")

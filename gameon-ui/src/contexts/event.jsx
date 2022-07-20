@@ -16,12 +16,8 @@ export const EventContextProvider = ({ children }) => {
           if(data) setEvent(data.event)
           if (error) setError(error)
         }
-        const token = localStorage.getItem("gameon_token")
-        if(token) {
           setIsLoading(false)
-          apiClient.setToken(token)
           fetchEvent()
-        }
       },[])
 
     const eventValue = { 
