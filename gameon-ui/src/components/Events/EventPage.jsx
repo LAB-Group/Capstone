@@ -7,8 +7,8 @@ export default function EventPage(){
 
     return(
         <Container maxW="1200px" maxH="960px" position="relative">
-            <Divider orientation='horizontal' />
-            <Text fontSize='3xl'>Events</Text>
+            <Divider orientation='horizontal' backgroundColor={'purple.100'} marginTop={6} marginBottom={6} />
+            <Text marginBottom={6} fontSize='3xl'>Events</Text>
             <EventFeed events={events} />
         </Container>
     )
