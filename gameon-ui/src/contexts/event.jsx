@@ -4,36 +4,34 @@ import apiClient from "../services/apiClient"
 const EventContext = createContext(null)
 
 export const EventContextProvider = ({ children }) => {
-    const [event, setEvent] = useState([])
+    const [events, setEvents] = useState([])
     const [initialized, setInitialized] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(null)
 
+    const eventValue = { 
+      events, 
+      setEvents,
+      initialized,
+      setInitialized, 
+      error, 
+      setError, 
+      isLoading, 
+      setIsLoading 
+    }
+
     useEffect(() => {
         const fetchEvent = async () => {
           setIsLoading(true)
-          const { data, error } = await apiClient.listEvents()
-          if(data) setEvent(data.event)
+          const { data, error } = await apiClient.fetchEvents()
+          if(data) {
+            setEvents(data.events)
+          }
           if (error) setError(error)
         }
-        const token = localStorage.getItem("gameon_token")
-        if(token) {
           setIsLoading(false)
-          apiClient.setToken(token)
           fetchEvent()
-        }
       },[])
-
-    const eventValue = { 
-        event, 
-        setEvent,
-        initialized,
-        setInitialized, 
-        error, 
-        setError, 
-        isLoading, 
-        setIsLoading 
-    }
 
     return (
         <EventContext.Provider value={eventValue}>

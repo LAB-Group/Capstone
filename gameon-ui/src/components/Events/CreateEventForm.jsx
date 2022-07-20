@@ -1,17 +1,19 @@
 import * as React from "react"
 import {useState} from "react"
+import apiClient from "../../services/apiClient"
 import { Heading, Container, Button, FormControl, Select,
     FormLabel, FormErrorMessage, FormHelperText, Input } from "@chakra-ui/react"
 
-export default function CreateEventForm() {
+export default function CreateEventForm({onClose}) {
     const [errors, setErrors] = useState({})
     const [createEventForm, setCreateEventForm] = useState({
-        eventname: "",
-        eventtype: "",
-        location: "",
-        eventgame: "",
-        eventdetails: "",
-        eventimage: "",
+        eventName: "",
+        eventDate: "",
+        eventType: "",
+        eventLocation: "",
+        eventGame: [],
+        eventDetails: "",
+        eventImageUrl: ""
       })
 
       const handleOnInputChange = (event) => {
@@ -19,64 +21,76 @@ export default function CreateEventForm() {
       }
       
       const handleOnSubmit = async () => {
-        console.log("CREATE EVENT FORM: ",createEventForm)
+        setErrors((error) => ({ ...error, form: null }))
+    
+        const {data, error} = await apiClient.createEvent({ eventName: createEventForm.eventName, eventDate: createEventForm.eventDate, eventType: createEventForm.eventType,
+                                                                eventLocation: createEventForm.eventLocation, eventGame: [1], //createEventForm.eventGame, 
+                                                                eventDetails: createEventForm.eventDetails, eventImageUrl: createEventForm.eventImageUrl })
+        if(error) setErrors((e) => ({ ...e, form: error}))
+          
+        onClose()
       }
-
 
     //   add stream/video link so we can embed player?
 
     return (
         <Container>
             <FormControl isRequired >
-                <FormLabel htmlFor='eventname'>Event Name</FormLabel>
-                <Input
-                id='eventname' type='text' name="eventname"
-                value={createEventForm.eventname}
+                <FormLabel htmlFor='eventName'>Event Name</FormLabel>
+                <Input id='eventName' type='text' name="eventName"
+                defaultValue={createEventForm.eventName}
                 onChange={handleOnInputChange}
                 />
+{/* 
+                <FormLabel htmlFor='eventDate'>Event Date</FormLabel>
+                <Input id='eventDate' name="eventDate" placeholder='Select Event Date'
+                value={createEventForm.eventDate}
+                onChange={handleOnInputChange}>
+                </Input> */}
 
-                <FormLabel htmlFor='eventtype'>Event Type</FormLabel>
-                <Select id='eventtype' name="eventtype" placeholder='Select Event Type'
-                value={createEventForm.eventtype}
+                <FormLabel htmlFor='eventType'>Event Type</FormLabel>
+                <Select id='eventType' name="eventType" placeholder='Select Event Type'
+                value={createEventForm.eventType}
                 onChange={handleOnInputChange}>
                     <option>Meet-up</option>
                     <option>Tournament</option>
+                    <option>Speedrun</option>
                 </Select>
 
-                <FormLabel htmlFor='location'>Location</FormLabel>
+                <FormLabel htmlFor='eventLocation'>Event Location</FormLabel>
                 {/* Need to cycle if online or offline, if offline, enter address? */}
                 <Input
-                id='location' name="location" type='text'
-                value={createEventForm.location}
+                id='eventLocation' name="eventLocation" type='text'
+                defaultValue={createEventForm.eventLocation}
                 onChange={handleOnInputChange}
                 />
 
-                <FormLabel htmlFor='eventgame'>Event Game</FormLabel>
+                <FormLabel htmlFor='eventGame'>Event Game</FormLabel>
                 {/* need to search from game DB and add to an array of games for event */}
                 <Input
-                id='eventgame' name="eventgame" type='text'
-                value={createEventForm.eventgame}
+                id='eventGame' name="eventGame" type='text'
+                defaultValue={createEventForm.eventGame}
                 onChange={handleOnInputChange}
                 />
 
-                <FormLabel htmlFor='eventdetails'>Event Details</FormLabel>
+                <FormLabel htmlFor='eventDetails'>Event Details</FormLabel>
                 {/* Should be a body of text with more event info. Might need to break down into other form elements? */}
                 <Input
-                id='eventdetails' name="eventdetails" type='text'
-                value={createEventForm.eventdetails}
+                id='eventDetails' name="eventDetails" type='text'
+                defaultValue={createEventForm.eventDetails}
                 onChange={handleOnInputChange}
                 />
 
-                <FormLabel htmlFor='eventimage'>Event Image</FormLabel>
+                <FormLabel htmlFor='eventImageUrl'>Event Image</FormLabel>
                 {/* Possibility to add uploaded images? */}
                 <Input
-                id='eventimage' name="eventimage" type='url'
-                value={createEventForm.eventimage}
+                id='eventImageUrl' name="eventImageUrl" type='url'
+                defaultValue={createEventForm.eventImageUrl}
                 onChange={handleOnInputChange}
                 />
 
-                <Button colorScheme='blue' mr={3} onClick={handleOnSubmit} >Create</Button>
-                <Button variant='outline' >Cancel</Button>
+                <Button colorScheme='purple' mr={3} onClick={handleOnSubmit} >Create</Button>
+                <Button colorScheme='purple' variant='outline'>Cancel</Button>
 
             </FormControl>
         </Container>

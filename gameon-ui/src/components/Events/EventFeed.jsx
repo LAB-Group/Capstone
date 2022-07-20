@@ -5,21 +5,19 @@ import { useAuthContext } from "../../contexts/auth"
 
 export default function EventFeed({events, isFetching}){
     const { user } = useAuthContext()
+    
     return(
         <Grid gridTemplateColumns='auto' columnGap='20px' rowGap='20px'>
             <GridItem>
                 {events?.map((event) => (
-                <EventCard key = {event.id}
-                event={event}/>
+                <EventCard key={event.id} event={event}/>
                 ))}
                 {!events?.length ? (
                     <Box><Text>No Events available</Text></Box>
-                ):
-                null}
+                ):null}
+                {/* <EventCard /> */}
             </GridItem>
         </Grid>
-                // <Flex flexWrap='wrap' flexDirection='row'>
-                // </Flex>
 
     )
 }
