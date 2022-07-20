@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Box,Image, Center, Text, VStack, Divider, HStack, Stack, Badge, Heading, Button,  Container} from "@chakra-ui/react"
+import { Box,Image, Center, Text, VStack, Divider, HStack, Stack, Badge, Heading, Button, Container, useDisclosure, Modal} from "@chakra-ui/react"
 import { Routes, Route, Link } from "react-router-dom"
 import profile from "../../media/elmo-burning.gif"
 import EditProfile from "../EditProfile/EditProfile"
@@ -8,9 +8,11 @@ import { useAuthContext } from "../../contexts/auth"
 // FIXME: Need to refactor below code and turn into different components
 export default function ProfilePage(){
     const { user } = useAuthContext()
-        return(
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    
+    return(
 
-  <Container centerContent>
+   <Container centerContent width={'100%'}>
         
 
     <Routes>
@@ -29,12 +31,15 @@ export default function ProfilePage(){
              <VStack p={5} spacing={4} >
                   <Box w= '810px' h='30px' ><Text>{user.firstName} {user.lastName}</Text></Box>
                    <Divider orientation='horizontal' />
-                   <Box w= '810px'h='30px'  >Location</Box>
+                   <Box w= '810px' h='30px'  >Location</Box>
                    <Divider orientation='horizontal' />
-                   <Box w= '810px'h='50px'  >Games played</Box>
+                   <Box w= '810px' h='50px'  >Games played</Box>
                 <Link to ="/profile/edit-profile">
-                   <Button w= '810px'h='30px' borderRadius='sm' colorScheme='purple' variant='outline' >Edit Profile</Button>
+                   <Button w= '810px' h='30px' borderRadius='sm' colorScheme='purple' variant='outline' onClick={onOpen} >Edit Profile</Button>
                 </Link>
+
+                <Modal isOpen={isOpen} onClose={onClose}><EditProfile onClose={onClose} /></Modal>
+
                </VStack>
            </Box>
         </HStack>

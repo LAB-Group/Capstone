@@ -50,6 +50,10 @@ class ApiClient {
         return await this.request({ endpoint: `auth/me`, method: `GET` })
     }
 
+    async editUserProfile(editedUser) {
+        return await this.request({ endpoint: `auth/profile`, method: `PUT`, data: editedUser })
+    }
+
 }
 
 export default new ApiClient("http://localhost:3001")
