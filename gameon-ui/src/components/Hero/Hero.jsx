@@ -24,7 +24,7 @@ function Slideshow () {
 
 
         // Widen container's width 
-        <Container maxW="3600px" minW="480px">
+        <Container maxW="3600px" minW="480px" >
             <Slide width="100%">
                 {slideImages.map((slideImage, idx) => (
                 <Box   

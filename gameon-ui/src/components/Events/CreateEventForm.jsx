@@ -29,6 +29,7 @@ export default function CreateEventForm({onClose}) {
         if(error) setErrors((e) => ({ ...e, form: error}))
           
         onClose()
+        window.location.reload()
       }
 
     //   add stream/video link so we can embed player?

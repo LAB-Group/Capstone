@@ -56,8 +56,8 @@ export default function RegisterPage({onClose}) {
             </DrawerBody>
 
             <DrawerFooter>
-                <Button colorScheme='blue' mr={3} onClick={handleOnSubmit} >Submit</Button>
-                <Button variant='outline' onClick={onClose}>Cancel</Button>
+                <Button colorScheme='purple' mr={3} onClick={handleOnSubmit} >Submit</Button>
+                <Button colorScheme='purple' variant='outline' onClick={onClose}>Cancel</Button>
             </DrawerFooter>
         </Container>
 

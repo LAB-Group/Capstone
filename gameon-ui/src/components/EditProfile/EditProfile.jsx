@@ -47,8 +47,8 @@ export default function EditProfile({onClose}){
             </ModalBody>
   
             <ModalFooter>
-            <Button variant='ghost' onClick={handleOnSubmit}>Submit</Button>
-              <Button colorScheme='blue' mr={3} onClick={onClose}>Cancel</Button>
+            <Button colorScheme='purple' variant='ghost' onClick={handleOnSubmit}>Submit</Button>
+              <Button colorScheme='purple' mr={3} onClick={onClose}>Cancel</Button>
               
             </ModalFooter>
           </ModalContent>
