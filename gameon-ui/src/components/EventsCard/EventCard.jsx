@@ -1,7 +1,9 @@
-import { Image } from "@chakra-ui/react"
-import elmo from "../../media/elmo-burning.gif"
-export default function EventCard(){
+import { Image, Box } from "@chakra-ui/react"
+
+export default function EventCard({event}){
     return (
-        <Image src={elmo}/>
+        <Box>
+            {event.image ? <Image src={event.image}/>:null}
+        </Box>
     )
 }
