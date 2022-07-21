@@ -62,6 +62,10 @@ class ApiClient {
         return await this.request({ endpoint: `events`, method: `GET` })
     }
 
+    async registerForEvent(registration) {
+        return await this.request({ endpoint: `events/${registration.eventId}`, method: `POST`, data: registration })
+    }
+
 }
 
 export default new ApiClient("http://localhost:3001")

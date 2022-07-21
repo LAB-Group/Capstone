@@ -9,6 +9,7 @@ import { EventContextProvider } from "../../contexts/event"
 import Home from "../Home/Home"
 import NavBar from "../NavBar/NavBar"
 import ProfilePage from "../ProfilePage/ProfilePage"
+import EventPage from "../Events/EventPage";
 
 export default function AppContainer() {
     return (
@@ -35,6 +36,9 @@ function App(){
             
             {/* ProfilePage */}
             <Route path="/profile/*" element={user?.email?<ProfilePage/>:<></>}/>
+
+            {/* EventFeed */}
+            <Route path={"/events/:eventId"} element={<EventPage />}/>
 
         </Routes>
         </BrowserRouter> 
