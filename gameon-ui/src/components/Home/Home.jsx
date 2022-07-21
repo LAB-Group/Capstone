@@ -1,7 +1,7 @@
 import * as React from "react"
 import Hero from "../Hero/Hero"
 import EventPage from "../Events/EventPage"
-import { Box, Container, Spacer } from "@chakra-ui/react"
+import { Image, Container, Spacer } from "@chakra-ui/react"
 
 export default function Home(){
     return (
@@ -15,3 +15,26 @@ export default function Home(){
         
     )
 }
+
+// function Swipershow() {
+//   return (
+//     <>
+//       <Swiper
+//         spaceBetween={30}
+//         effect={"fade"}
+//         navigation={true}
+//         pagination={{
+//           clickable: true,
+//         }}
+//         modules={[EffectFade, Navigation, Pagination]}
+//       >
+//         <SwiperSlide>
+//           <Image src={pic}/>
+//         </SwiperSlide>
+//         <SwiperSlide>
+//           <Image src={elmo}/>
+//         </SwiperSlide>
+//       </Swiper>
+//     </>
+//   );
+// }

@@ -25,7 +25,7 @@ function App(){
 
     return( 
         <ChakraProvider>
-        <VStack >     
+        <VStack>     
         <BrowserRouter>
         <NavBar/>
         <Routes>
