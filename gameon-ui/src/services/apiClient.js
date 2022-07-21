@@ -62,6 +62,10 @@ class ApiClient {
         return await this.request({ endpoint: `events`, method: `GET` })
     }
 
+    async searchForGame(gameName) {
+        return await this.request({ endpoint: 'games', method: `GET`, data: gameName})
+    }
+
 }
 
 export default new ApiClient("http://localhost:3001")
