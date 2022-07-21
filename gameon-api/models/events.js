@@ -67,6 +67,7 @@ class Events {
     static async createNewEvent({event, user}) {
 
         // ensures all required fields are present
+        // NEED EVENT DATE
          const requiredFields = ["eventName", "eventType", "eventLocation", "eventGame", "eventDetails", "eventImageUrl"]
          requiredFields.forEach((field) => {
             if (!event.hasOwnProperty(field) || !event[field]) {

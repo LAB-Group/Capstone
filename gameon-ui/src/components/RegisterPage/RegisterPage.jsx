@@ -56,8 +56,8 @@ export default function RegisterPage({onClose}) {
             </DrawerBody>
 
             <DrawerFooter>
-                <Button colorScheme='blue' mr={3} onClick={handleOnSubmit} >Submit</Button>
-                <Button variant='outline' onClick={onClose}>Cancel</Button>
+                <Button colorScheme='purple' mr={3} onClick={handleOnSubmit} >Submit</Button>
+                <Button colorScheme='purple' variant='outline' onClick={onClose}>Cancel</Button>
             </DrawerFooter>
         </Container>
 
@@ -82,43 +82,43 @@ function RegisterForm({ user, registerForm, setRegisterForm, setErrors }) {
         <FormControl isRequired>
         <FormLabel htmlFor='email'>Email</FormLabel>
         <Input id='email' name="email" type='email'
-          value={registerForm.email}
+          defaultValue={registerForm.email}
           onChange={handleOnInputChange}
         />
 
         <FormLabel htmlFor='password'>Password</FormLabel>
         <Input id='password' name="password" type='password'
-          value={registerForm.password}
+          defaultValue={registerForm.password}
           onChange={handleOnInputChange}
         />
 
         <FormLabel htmlFor='passwordConfirm'>Confirm Password</FormLabel>
         <Input id='passwordConfirm' name="passwordConfirm" type='password'
-          value={registerForm.passwordConfirm}
+          defaultValue={registerForm.passwordConfirm}
           onChange={handleOnInputChange}
         />
 
         <FormLabel htmlFor='username'>Username</FormLabel>
         <Input id='username' name="username" type='text'
-          value={registerForm.username}
+          defaultValue={registerForm.username}
           onChange={handleOnInputChange}
         />
 
         <FormLabel htmlFor='firstName'>First Name</FormLabel>
         <Input id='firstName' name="firstName" type='text'
-          value={registerForm.firstName}
+          defaultValue={registerForm.firstName}
           onChange={handleOnInputChange}
         />
 
         <FormLabel htmlFor='lastName'>Last Name</FormLabel>
         <Input id='lastName' name="lastName" type='text'
-          value={registerForm.lastName}
+          defaultValue={registerForm.lastName}
           onChange={handleOnInputChange}
         />
 
         <FormLabel htmlFor='imageUrl'>Image URL</FormLabel>
         <Input id='imageUrl' name="imageUrl" type='text'
-          value={registerForm.imageUrl}
+          defaultValue={registerForm.imageUrl}
           onChange={handleOnInputChange}
         />
 

@@ -43,8 +43,8 @@ export default function LoginPage({onClose}) {
             </DrawerBody>
 
             <DrawerFooter>
-                <Button colorScheme='blue' mr={3} onClick={handleOnSubmit} >Submit</Button>
-                <Button variant='outline' onClick={onClose}>Cancel</Button>
+                <Button colorScheme='purple' mr={3} onClick={handleOnSubmit} >Submit</Button>
+                <Button colorScheme='purple' variant='outline' onClick={onClose}>Cancel</Button>
             </DrawerFooter>
         </Container>
 
@@ -70,7 +70,7 @@ function LoginForm({ user, loginForm, setLoginForm, setErrors }) {
         <FormLabel htmlFor='email'>Email</FormLabel>
         <Input
           id='email' name="email" type='email'
-          value={loginForm.email}
+          defaultValue={loginForm.email}
           onChange={handleOnInputChange}
         />
         {!loginForm.email ? (
@@ -84,7 +84,7 @@ function LoginForm({ user, loginForm, setLoginForm, setErrors }) {
         <FormLabel htmlFor='password'>Password</FormLabel>
         <Input
           id='password' name="password" type='password'
-          value={loginForm.password}
+          defaultValue={loginForm.password}
           onChange={handleOnInputChange}
         />
         {!loginForm.password ? (
