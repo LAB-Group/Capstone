@@ -1,6 +1,7 @@
 import * as React from "react"
-import {Link, useNavigate} from "react-router-dom"
-import { Box, Heading, Container, Spacer, Button, ButtonGroup, Flex, Drawer,
+// import {Link, useNavigate} from "react-router-dom"
+import {HashLink as Link } from 'react-router-hash-link'
+import { Box, Heading, Container, Text, Spacer, Button, ButtonGroup, Flex, Drawer,
     DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure } from "@chakra-ui/react"
 import { ColorModeSwitcher } from "../../ColorModeSwitcher"
 import LoginPage from "../LoginPage/LoginPage"
@@ -26,6 +27,9 @@ export default function NavBar() {
     }
 
     return (
+        // This makes the navbar scrollable
+        // Need to figure out how to position navbar in front of hero
+        //  <Container minHeight="50px" width="100%" maxW={'9000px'} position='sticky' top='0'>
          <Container minHeight="50px" width="100%" maxW={'9000px'} position='relative' >
             <Flex minWidth='max-content' alignItems='center' gap='2' paddingTop={'2'}>
                 <Box p='2'>
@@ -34,7 +38,12 @@ export default function NavBar() {
                     </Link>
                 </Box>
                 <Spacer />
-                {/* Created this button so I can see how the profile looks :) */}
+
+                {/* Created a footer transition link */}
+                <Link smooth to="#about">
+                <Text>About</Text>
+                </Link>
+                {/* <Text>Contact Us</Text> */}
                 
                 {user?.email? 
                     <ButtonGroup gap='2'>
