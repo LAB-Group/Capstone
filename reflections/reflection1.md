@@ -20,7 +20,7 @@ Pod Members: **Add Pod Members Names**
 
 #### Did the resources provided to you help prepare you in planning and executing your capstone project sprint this week? Be specific, what resources did you find particularly helpful or which tasks did you need more support on?
 
- - <a href="https://chakra-ui.com/getting-started">Chakra UI</a>
+Yes. Especially projects 2 and 3 definitely prepared our team for the Capstone Project. We always go back to the backend of Project 3 and the frontend of project 2 and 3. Searching and requesting API's for our backend. Routes, models, and middleware.
 
 #### Which features and user stories would you consider “at risk”? How will you change your plan if those items remain “at risk”?
 
