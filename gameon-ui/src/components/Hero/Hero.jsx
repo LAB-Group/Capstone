@@ -27,7 +27,8 @@ function Slideshow () {
         <Container maxW="3600px" minW="480px" >
             <Slide width="100%">
                 {slideImages.map((slideImage, idx) => (
-                <Box   
+                <Box 
+                    key={idx}
                     height="480px"  
                     bgPosition="center" 
                     objectFit={'cover'}  

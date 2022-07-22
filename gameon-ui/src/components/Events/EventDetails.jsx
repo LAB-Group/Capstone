@@ -1,39 +1,10 @@
 import * as React from "react"
-import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+
 import { Container, Text, Divider, Image } from "@chakra-ui/react"
 import { useEventContext } from "../../contexts/event"
-import axios from "axios";
 
-export default function EventDetails() {
-    const { events } = useEventContext()
-    const [loading, setLoading] = useState(true)
-    const [event, setEvent] = useState([])
 
-    let { eventId } = useParams()
-
-    useEffect(() => {
-        const getEvent = async () => {
-        
-            try {
-              console.log('mounted')
-              setTimeout(() => {
-                setLoading(false)
-              }, 100)
-              const response = await axios.get(`http://localhost:3001/events/${eventId}`)
-
-              console.log('responded')
-              const eventData = response.data
-              console.log(eventData)
-              setEvent(eventData.event)
-
-            } catch(error) {
-              console.log("ERROR")
-            //   return <NotFound />
-            }
-          }
-          getEvent()  
-    },[])
+export default function EventDetails({event}) {
 
     return(
         <Container maxW="1200px" maxH="960px" position="relative">
@@ -43,6 +14,7 @@ export default function EventDetails() {
             <Text marginBottom={6} fontSize='3xl'>{event.eventType}</Text>
             <Text marginBottom={6} fontSize='3xl'>{event.eventLocation}</Text>
             <Text marginBottom={6} fontSize='3xl'>{event.eventDetails}</Text>
+            <Text marginBottom={6} fontSize='3xl'>{event.eventGame}</Text>
 
         </Container>
     )

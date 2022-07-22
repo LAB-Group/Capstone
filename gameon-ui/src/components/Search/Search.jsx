@@ -1,15 +1,22 @@
-import { Box, Heading, Input, Button, Container, Wrap } from '@chakra-ui/react';
+import { Box, Heading, Input, Button, Container, Wrap, Badge, CheckboxGroup, Checkbox, useCheckbox, HStack } from '@chakra-ui/react';
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import apiClient from '../../services/apiClient';
 
-export default function Search() {
+export default function Search({games, setGames}) {
   const [errors, setErrors] = useState({})
-  const [searchInput, setSearchInput] = useState({searched:""})
-  const [games, setGames] = useState({
-    eventGame: [],
-  })
+  const [searchInput, setSearchInput] = useState("")
+  // const [games, setGames] = useState([])
   const [listGames, setListGames] = useState([])
+
+  const handleIsSelected = event => {
+
+    // NEED TO ERROR CHECK AND NOT ADD DUPLICATE
+      setGames(curGames => ([...curGames, event.target.value]))
+      setListGames([])
+      setSearchInput("")
+
+  }
 
   const handleOnInputChange = event => {
     setSearchInput(event.target.value)
@@ -19,25 +26,23 @@ export default function Search() {
     setErrors(error => ({ ...error, form: null }))
 
     const { data, error } = await apiClient.searchGame({searched:searchInput})
-    // const { data, error } = await apiClient.searchForGame("guilty")
-    // const data = await apiClient.searchForGame({searchInput:"guilty"})
 
-    // if (error) setErrors(e => ({ ...e, form: error }))
     console.log("SEARCHINPUT",searchInput)
     setListGames([...data.games])
     console.log("LIST GAMES",data.games)
   }
+  console.log("REGISTERED LIST",games)
   return (
     <Box>
-      <Heading>Game Search Bar</Heading>
-      <SearchBar searchInput={searchInput} value={searchInput} handleOnInputChange={handleOnInputChange} />
-      <Button colorScheme='purple' mr={3} onClick={handleOnSubmit} >Submit</Button>
+      <HStack marginBottom={2}>
+        <SearchBar searchInput={searchInput} value={searchInput} handleOnInputChange={handleOnInputChange} />
+        <Button colorScheme='purple' mr={3} onClick={handleOnSubmit} >Search</Button>
+      </HStack>
+      
       <Wrap>
         {listGames?.map((game, index) => (
-          <Box key={index}>{game.cover.url}</Box>
-          // <Box key={index}>{Object.keys(game.cover).map}</Box>
+            <Button onClick={handleIsSelected} value={game.id} key={index}>{game.name}</Button>
         ))}
-
       </Wrap>
     </Box>
   );
@@ -46,7 +51,7 @@ export default function Search() {
 function SearchBar({searchInput, handleOnInputChange}) {
   return (
     <Box>
-      <Input name='searchInput' type='text' onChange={handleOnInputChange} />
+      <Input name='searchInput' type='text' value={searchInput} onChange={handleOnInputChange}/>
     </Box>
   );
 }

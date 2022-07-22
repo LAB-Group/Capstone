@@ -10,23 +10,26 @@ import {
   FormLabel,
   FormErrorMessage,
   FormHelperText,
+  Badge,
   Input
 } from '@chakra-ui/react';
+import Search from '../Search/Search';
 
 // import { Calendar } from '@natscale/react-calendar';
 
 export default function CreateEventForm({ onClose }) {
   const [errors, setErrors] = useState({});
+  const [games, setGames] = useState([])
   const [createEventForm, setCreateEventForm] = useState({
     eventName: '',
     eventDate: '',
     eventType: '',
     eventLocation: '',
-    eventGame: [],
+    eventGame: [...games],
     eventDetails: '',
     eventImageUrl: '',
   });
-
+  console.log("GAMES FORM", games)
   const handleOnInputChange = event => {
     setCreateEventForm(createEventForm => ({
       ...createEventForm,
@@ -42,7 +45,7 @@ export default function CreateEventForm({ onClose }) {
       eventDate: createEventForm.eventDate,
       eventType: createEventForm.eventType,
       eventLocation: createEventForm.eventLocation,
-      eventGame: [1], //createEventForm.eventGame,
+      eventGame: games, //createEventForm.eventGame,
       eventDetails: createEventForm.eventDetails,
       eventImageUrl: createEventForm.eventImageUrl,
     });
@@ -101,13 +104,14 @@ export default function CreateEventForm({ onClose }) {
 
         <FormLabel htmlFor="eventGame">Event Game</FormLabel>
         {/* need to search from game DB and add to an array of games for event */}
-        <Input
+        {/* <Input
           id="eventGame"
           name="eventGame"
           type="text"
           defaultValue={createEventForm.eventGame}
           onChange={handleOnInputChange}
-        />
+        /> */}
+        <Search games={games} setGames={setGames} />
 
         <FormLabel htmlFor="eventDetails">Event Details</FormLabel>
         {/* Should be a body of text with more event info. Might need to break down into other form elements? */}

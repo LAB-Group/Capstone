@@ -26,18 +26,10 @@ router.post("/", async (req, res, next) => {
         .catch((err) => {
             console.error(err);
         });
-    // try{
-
-    //     const games = await Games.searchGame(req.body)
-    //     console.log("ROUTE",games)
-    //     res.status(200).json({ games })
-    // } catch(err) {
-    //     next(err)
-    // }
 });
 
-router.get("/:gameId", async (req, res, next) => {
-    const gameId = req.params
+router.post("/", async (req, res, next) => {
+    const gameId = req.body
     console.log("gameId: ", gameId)
     axios({
         url: "https://api.igdb.com/v4/games",
