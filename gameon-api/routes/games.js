@@ -1,13 +1,14 @@
 const express = require("express")
 const router = express.Router()
 const axios = require("axios")
-const { TWITCH_CLIENT_ID, TWITCH_APP_ACCESS_TOKEN } = require("../config")
+const { TWITCH_CLIENT_ID, TWITCH_APP_ACCESS_TOKEN } = require("../config");
+const Games = require("../models/games");
 
-router.get("/", (req, res, next) => {
+router.post("/", async (req, res, next) => {
     const searched = req.body
-    console.log("searched: ", searched)
-    console.log("value of searched: ", searched.searchValue)
-    axios({
+    console.log("searched: ", searched.searched)
+    // console.log("SEARCH MODEL", Games.searchGame())
+    await axios({
         url: "https://api.igdb.com/v4/games",
         method: "POST",
         headers: {
@@ -15,16 +16,24 @@ router.get("/", (req, res, next) => {
             'Client-ID': `${TWITCH_CLIENT_ID}`,
             'Authorization': `Bearer ${TWITCH_APP_ACCESS_TOKEN}`,
         },
-        data: `search "${searched.searchValue}"; fields id, name, cover.url; limit 500;`,
+        data: `search "${searched.searched}"; fields id, name, cover.url; limit 500;`,
     })
         .then((response) => {
-            console.log(response.data);
+            // console.log("RES>DATA",response.data);
             const games = response.data
             res.status(200).json({ games })
         })
         .catch((err) => {
             console.error(err);
         });
+    // try{
+
+    //     const games = await Games.searchGame(req.body)
+    //     console.log("ROUTE",games)
+    //     res.status(200).json({ games })
+    // } catch(err) {
+    //     next(err)
+    // }
 });
 
 router.get("/:gameId", async (req, res, next) => {

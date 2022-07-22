@@ -5,6 +5,7 @@ import apiClient from "../../services/apiClient"
 import  { useAuthContext } from "../../contexts/auth"
 import { Box, ControlBox, Text, Heading, Container, DrawerHeader, DrawerBody, Input, DrawerFooter, Button, FormControl,
     FormLabel, FormErrorMessage, FormHelperText } from "@chakra-ui/react"
+import Search from "../Search/Search"
 
 export default function EventPage(){
   const { user, setUser } = useAuthContext()
@@ -44,7 +45,10 @@ export default function EventPage(){
           onChange={handleOnInputChange}
         />
             </FormControl>
-            <Button colorScheme="purple" mr={3} onClick={handleOnSubmit}>
+
+            <Search/>
+
+            <Button margin={2} colorScheme="purple" mr={3} onClick={handleOnSubmit}>
           Register
         </Button>
         </Container>

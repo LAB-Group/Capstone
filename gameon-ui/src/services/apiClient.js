@@ -66,8 +66,8 @@ class ApiClient {
         return await this.request({ endpoint: `events/${registration.eventId}`, method: `POST`, data: registration })
     }
 
-    async searchForGame(gameName) {
-        return await this.request({ endpoint: 'games', method: `GET`, data: gameName})
+    async searchGame(searchInput) {
+        return await this.request({ endpoint: `games`, method: `POST`, data: searchInput})
     }
 
 }
