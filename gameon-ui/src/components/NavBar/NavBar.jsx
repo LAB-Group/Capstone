@@ -43,7 +43,10 @@ export default function NavBar() {
                 <Link smooth to="#about">
                 <Text>About</Text>
                 </Link>
-                {/* <Text>Contact Us</Text> */}
+
+                {/* <Link smooth to="#contact">
+                <Text>Contact Us</Text>
+                </Link> */}
                 
                 {user?.email? 
                     <ButtonGroup gap='2'>
