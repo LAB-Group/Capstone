@@ -10,6 +10,7 @@ import Home from "../Home/Home"
 import NavBar from "../NavBar/NavBar"
 import ProfilePage from "../ProfilePage/ProfilePage"
 import EventPage from "../Events/EventPage";
+import Footer from "../Footer/Footer"
 
 export default function AppContainer() {
     return (
@@ -26,7 +27,7 @@ function App(){
 
     return( 
         <ChakraProvider>
-        <VStack >     
+        <VStack>     
         <BrowserRouter>
         <NavBar/>
         <Routes>
@@ -36,11 +37,18 @@ function App(){
             
             {/* ProfilePage */}
             <Route path="/profile/*" element={user?.email?<ProfilePage/>:<></>}/>
+<<<<<<< HEAD
 
             {/* EventFeed */}
             <Route path={"/events/:eventId"} element={<EventPage />}/>
 
+=======
+    
+>>>>>>> main-test
         </Routes>
+
+        {/* Footer */}
+        <Footer/>
         </BrowserRouter> 
         </VStack>
         </ChakraProvider>
