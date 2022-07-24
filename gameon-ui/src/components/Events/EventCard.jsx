@@ -6,7 +6,7 @@ export default function EventCard({event}){
 
     return (
 
-        <Box w='300px' borderWidth='1px' borderRadius='lg' overflow='hidden' boxShadow={'md'}>
+        <Box w='300px' borderWidth='1px' borderRadius='lg' overflow='hidden' boxShadow={'md'} >
             <Link to={`/events/${event.id}`} >
             <Image src={event.eventImageUrl} objectFit={"cover"} height="200px" />
             <Box p='6'>
