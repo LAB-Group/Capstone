@@ -37,14 +37,10 @@ function App(){
             
             {/* ProfilePage */}
             <Route path="/profile/*" element={user?.email?<ProfilePage/>:<></>}/>
-<<<<<<< HEAD
 
             {/* EventFeed */}
             <Route path={"/events/:eventId"} element={<EventPage />}/>
 
-=======
-    
->>>>>>> main-test
         </Routes>
 
         {/* Footer */}
