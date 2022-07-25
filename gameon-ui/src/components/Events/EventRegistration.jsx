@@ -26,7 +26,6 @@ export default function EventRegistration({ event }) {
   const { user, setUser } = useAuthContext();
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [eventGames, setEventGames] = useState([])
 
   const [eventRegistrationForm, setEventRegistrationForm] = useState({
     eventGame: [],
@@ -49,29 +48,6 @@ export default function EventRegistration({ event }) {
     });
     if (error) setErrors(e => ({ ...e, form: error }));
   };
-
-// FIXME: BELOW NOT RENDERING PROPERLY. MAY WANT TO HANDLE IN BACKEND OR EVENTCONTEXT. 
-// DOES NOT APPEAR TO BE RELIABLE ON PAGE LOAD
-  // useEffect(() => {
-  //   const getGameDetails = async () => {
-  //     // const { data, error } = await apiClient.getGameDetails({gameId:event.eventGame[0]})
-  //     // console.log("DATA",data)
-  //     // if(data) setEventGames([data])
-
-  //       for (let i=0;i<event?.eventGame.length;i++) {
-  //         const { data, error } = await apiClient.getGameDetails({gameId:event.eventGame[i]})
-  //         // if(data) setEventGames(games => ([...games,data]))
-  //         if(data) setEventGames(data)
-
-  //         console.log("DATA",data)
-  //         if (error) setErrors(error)
-  //       }
-  //   }
-  //   getGameDetails()
-  // },[])
-
-  // const test = async () => {return (await apiClient.getGameDetails({gameId:125764}))}
-
   return (
     <Container>
 
@@ -79,6 +55,7 @@ export default function EventRegistration({ event }) {
 
       <CheckboxGroup>
         {event.eventGame?.map((game, index) => (
+          
           <Checkbox margin={2} key={index}>{game}</Checkbox>
         ))}
       </CheckboxGroup>

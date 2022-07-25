@@ -6,11 +6,13 @@ import EventDetails from "./EventDetails"
 import EventRegistration from "./EventRegistration"
 import { useEventContext } from "../../contexts/event"
 import axios from "axios";
+import apiClient from '../../services/apiClient';
 
 export default function EventPage(){
     const { events } = useEventContext()
     const [loading, setLoading] = useState(true)
     const [event, setEvent] = useState([])
+    const [eventGames, setEventGames] = useState([])
 
     let { eventId } = useParams()
 
@@ -18,17 +20,13 @@ export default function EventPage(){
         const getEvent = async () => {
         
             try {
-              console.log('mounted')
               setTimeout(() => {
                 setLoading(false)
               }, 100)
               const response = await axios.get(`http://localhost:3001/events/${eventId}`)
-
-              console.log('responded')
               const eventData = response.data
-              // console.log(eventData)
               setEvent(eventData.event)
-
+              setEventGames(event.eventGame)
             } catch(error) {
               console.log("ERROR")
             //   return <NotFound />

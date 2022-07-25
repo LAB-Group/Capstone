@@ -74,6 +74,14 @@ class ApiClient {
         return await this.request({ endpoint: `games/id`, method: `POST`, data: gameId })
     }
 
+    async addGameToLocalDB(gameInfo) {
+        return await this.request({ endpoint: `games/db`, method: `POST`, data: gameInfo })
+    }
+
+    async getGameInfoById(gameId) {
+        return await this.request({ endpoint: `games/id`, method: `GET`, data: gameId })
+    }
+
 }
 
 export default new ApiClient("http://localhost:3001")
