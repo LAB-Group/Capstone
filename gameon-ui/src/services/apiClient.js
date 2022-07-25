@@ -62,6 +62,18 @@ class ApiClient {
         return await this.request({ endpoint: `events`, method: `GET` })
     }
 
+    async registerForEvent(registration) {
+        return await this.request({ endpoint: `events/${registration.eventId}`, method: `POST`, data: registration })
+    }
+
+    async searchGame(searchInput) {
+        return await this.request({ endpoint: `games`, method: `POST`, data: searchInput })
+    }
+
+    async getGameDetails(gameId) {
+        return await this.request({ endpoint: `games/id`, method: `POST`, data: gameId })
+    }
+
 }
 
 export default new ApiClient("http://localhost:3001")

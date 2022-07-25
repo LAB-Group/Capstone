@@ -15,6 +15,7 @@ class Events {
             `
                 SELECT e.id,
                        e.event_name AS "eventName",
+                       e.event_date AS "eventDate",
                        e.event_type AS "eventType",
                        e.location AS "eventLocation",
                        e.event_game AS "eventGame",
@@ -40,6 +41,7 @@ class Events {
             `
                 SELECT e.id,
                        e.event_name AS "eventName",
+                       e.event_date AS "eventDate",
                        e.event_type AS "eventType",
                        e.location AS "eventLocation",
                        e.event_game AS "eventGame",
@@ -68,7 +70,7 @@ class Events {
 
         // ensures all required fields are present
         // NEED EVENT DATE
-         const requiredFields = ["eventName", "eventType", "eventLocation", "eventGame", "eventDetails", "eventImageUrl"]
+         const requiredFields = ["eventName", "eventDate", "eventType", "eventLocation", "eventGame", "eventDetails", "eventImageUrl"]
          requiredFields.forEach((field) => {
             if (!event.hasOwnProperty(field) || !event[field]) {
                 throw new BadRequestError(`Required field - ${field} - missing from request body.`)
@@ -78,10 +80,11 @@ class Events {
          // insert event into database
          const results = await db.query(
             `
-            INSERT INTO events (event_name, event_type, location, event_game, details, event_image_url, user_id)
-            VALUES ($1, $2, $3, $4, $5, $6, (SELECT id FROM users WHERE email = $7))
+            INSERT INTO events (event_name, event_date, event_type, location, event_game, details, event_image_url, user_id)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, (SELECT id FROM users WHERE email = $8))
             RETURNING id,
                       event_name AS "eventName",
+                      event_date AS "eventDate",
                       event_type AS "eventType",
                       location,
                       event_game AS "eventGame",
@@ -90,7 +93,7 @@ class Events {
                       created_at AS "createdAt",
                       updated_at AS "updatedAt"
             `,
-                [event.eventName, event.eventType, event.eventLocation, event.eventGame, event.eventDetails, event.eventImageUrl, user.email]
+                [event.eventName, event.eventDate, event.eventType, event.eventLocation, event.eventGame, event.eventDetails, event.eventImageUrl, user.email]
          )
 
          return results.rows[0]

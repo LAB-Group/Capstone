@@ -35,7 +35,7 @@ router.get("/:eventId", async (req, res, next) => {
     }
 })
 
-router.post("/:eventId/register", security.requireAuthenticatedUser, async (req, res, next) => {
+router.post("/:eventId", security.requireAuthenticatedUser, async (req, res, next) => {
     try {
         // register to a specific event
         const { eventId } = req.params

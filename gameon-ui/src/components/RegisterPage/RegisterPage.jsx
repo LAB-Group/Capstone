@@ -81,7 +81,7 @@ export default function RegisterPage({onClose}) {
       } else {
         setErrors((error) => ({ ...error, passwordConfirm: null }))
       }
-      console.log("USER: ",registerForm.username)
+
       const {data, error} = await apiClient.signupUser({ email: registerForm.email, password: registerForm.password, username: registerForm.username, 
                                                           firstName: registerForm.firstName, lastName: registerForm.lastName, imageUrl: registerForm.imageUrl})
       if(error) setErrors((e) => ({ ...e, form: error}))
