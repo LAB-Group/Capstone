@@ -29,8 +29,8 @@ export default function NavBar() {
     return (
         // This makes the navbar scrollable
         // Need to figure out how to position navbar in front of hero
-        //  <Container minHeight="50px" width="100%" maxW={'9000px'} position='sticky' top='0'>
-         <Container minHeight="50px" width="100%" maxW={'9000px'} position='relative' >
+        //  <Container bg="blackAlpha.700" minHeight="50px" width="100%" maxW={'9000px'} position='sticky' top='0'>
+        <Container minHeight="50px" width="100%" maxW={'9000px'} position='relative' >
             <Flex minWidth='max-content' alignItems='center' gap='2' paddingTop={'2'}>
                 <Box p='2'>
                     <Link to="/">
