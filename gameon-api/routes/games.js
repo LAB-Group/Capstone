@@ -7,7 +7,6 @@ const Games = require("../models/games");
 router.post("/", async (req, res, next) => {
     const searched = req.body
     console.log("searched: ", searched.searched)
-    // console.log("SEARCH MODEL", Games.searchGame())
     await axios({
         url: "https://api.igdb.com/v4/games",
         method: "POST",
@@ -19,7 +18,6 @@ router.post("/", async (req, res, next) => {
         data: `search "${searched.searched}"; fields id, name, cover.url; limit 500;`,
     })
         .then((response) => {
-            // console.log("RES>DATA",response.data);
             const games = response.data
             res.status(200).json({ games })
         })
@@ -30,6 +28,7 @@ router.post("/", async (req, res, next) => {
 
 router.post("/id", async (req, res, next) => {
     const gameId = req.body
+    let game
     console.log("gameId: ", gameId)
     axios({
         url: "https://api.igdb.com/v4/games",
@@ -42,13 +41,25 @@ router.post("/id", async (req, res, next) => {
         data: `fields id, name, cover.url; where id = ${gameId.gameId};`,
     })
         .then((response) => {
-            const games = response.data
-            res.status(200).json({ games })
-            console.log("games: ", games)
+            game = response.data
+            const gameInfo = Games.getGameInfo(response.data)
         })
         .catch((err) => {
             console.error("Error: ", err);
         });
+        
+        res.status(200).json({ game })
+})
+
+router.get("/id", async (req, res, next) => {
+    try {
+        const gameId = req.body.gameId
+        const game = await Games.getGameInfoById(gameId)
+        res.status(200).json(game)
+    } catch(err) {
+        next(err)
+    }
+
 })
 
 module.exports = router

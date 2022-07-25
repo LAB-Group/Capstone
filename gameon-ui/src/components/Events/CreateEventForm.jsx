@@ -50,7 +50,6 @@ export default function CreateEventForm({ onClose }) {
       eventImageUrl: createEventForm.eventImageUrl,
     });
     if (error) setErrors(e => ({ ...e, form: error }));
-
     onClose();
     window.location.reload();
   };
