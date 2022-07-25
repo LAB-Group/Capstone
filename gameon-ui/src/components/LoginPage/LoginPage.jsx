@@ -127,6 +127,7 @@ function LoginForm({ user, loginForm, setLoginForm, setErrors,isEmail, isPasswor
     return (
       <ChakraProvider theme={theme}> 
       <VStack spacing={5}>
+        
         <FormControl variant="floating" isInvalid={isEmail}>
         {loginForm.email.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Email</FormLabel>
