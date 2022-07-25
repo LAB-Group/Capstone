@@ -67,9 +67,7 @@ export default function RegisterPage({onClose}) {
       lastName: "",
       imageUrl: ""
     })
-    console.log(errors)
     
-
     const handleOnSubmit = async () => {
       setIsLoading(true)
       setErrors((error) => ({ ...error, form: null }))

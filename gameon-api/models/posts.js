@@ -10,7 +10,7 @@ class Posts {
                 throw new BadRequestError(`Required field - ${field} - missing from request body.`)
             }
         })
-        console.log("user: ", user)
+
         const eventExists = await Events.fetchEventById(eventId)
         if(!eventExists) {
             throw new NotFoundError("Event not found")

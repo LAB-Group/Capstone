@@ -6,7 +6,6 @@ const Games = require("../models/games");
 
 router.post("/", async (req, res, next) => {
     const searched = req.body
-    console.log("searched: ", searched.searched)
     await axios({
         url: "https://api.igdb.com/v4/games",
         method: "POST",
@@ -29,7 +28,6 @@ router.post("/", async (req, res, next) => {
 router.post("/id", async (req, res, next) => {
     const gameId = req.body
     let game
-    console.log("gameId: ", gameId)
     axios({
         url: "https://api.igdb.com/v4/games",
         method: "POST",
