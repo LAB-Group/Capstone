@@ -9,6 +9,7 @@ import { EventContextProvider } from "../../contexts/event"
 import Home from "../Home/Home"
 import NavBar from "../NavBar/NavBar"
 import ProfilePage from "../ProfilePage/ProfilePage"
+import Footer from "../Footer/Footer"
 
 export default function AppContainer() {
     return (
@@ -35,8 +36,11 @@ function App(){
             
             {/* ProfilePage */}
             <Route path="/profile/*" element={user?.email?<ProfilePage/>:<></>}/>
-
+    
         </Routes>
+
+        {/* Footer */}
+        <Footer/>
         </BrowserRouter> 
         </VStack>
         </ChakraProvider>
