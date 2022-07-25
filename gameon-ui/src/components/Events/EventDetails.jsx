@@ -27,19 +27,10 @@ export default function EventDetails({event}) {
                         <Text marginBottom={6} fontSize="3xl">{event.eventDetails}</Text>
                     {/* Game */}
                         <Text marginBottom={6} fontSize="3xl">{event.eventGame}</Text>
-                    </Box>
-                    <Box backgroundColor="purple.100">
-                        <FormControl isRequired>
-                            <Heading>Event Registration</Heading>
-                            <FormLabel>First Name</FormLabel>
-                            <Input placeholder="First name" />
-                            <FormLabel>Last Name</FormLabel>
-                            <Input placeholder="Last name" />
-                        </FormControl>
-                            <EventRegistration event={event} />
+                    {/* Event Registration */}
+                        <EventRegistration event={event} />
                     </Box>
             </Flex>
-               
 
         </Container>
     )
