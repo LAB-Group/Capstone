@@ -9,8 +9,8 @@ export default function EventFeed({ isFetching }){
     const { events } = useEventContext()
     
     return(
-        <Flex flexDirection='column' justifyContent='center' alignItems='center' minWidth="100vw" position="relative">
-            <Divider orientation='horizontal' backgroundColor={'purple.100'} marginTop={6} marginBottom={6} />
+        <Flex flexDirection='column' justifyContent='center' alignItems='center' minWidth="95vw" position="relative">
+            <Divider orientation='horizontal' backgroundColor={'purple.100'} marginTop={6} minWidth="95vw" marginBottom={6} />
             <Text marginBottom={6} fontSize='3xl'>Events</Text>
             <SimpleGrid minWidth="80vw" justifyContent={"center"} alignItems={"center"} minChildWidth={'320px'} rowGap='20px' className="WRAP">
                 
