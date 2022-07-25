@@ -34,18 +34,24 @@ class Posts {
         return results.rows[0]
     }
 
-    static async listPostByEventId(eventId) {
+    static async listAllPostsByEventId(eventId) {
+
+        const eventExists = await Events.fetchEventById(eventId)
+        if(!eventExists) {
+            throw new NotFoundError("Event not found")
+        }
 
         const results = await db.query(
             `
                 SELECT p.id AS "postId",
                        p.title AS "postTitle",
-                       p.content "postContent",
+                       p.content AS "postContent",
                        p.created_at AS "postCreatedAt",
                        u.id AS "creatorId",
-                       e.id AS "eventId"
+                       e.id AS "eventId",
+                       e.user_id AS "eventCreatorId"
                 FROM posts AS p
-                       LEFT JOIN users AS u ON u.id = p.user_id,
+                       LEFT JOIN users AS u ON u.id = p.user_id
                        LEFT JOIN events AS e ON e.id = p.event_id
                 WHERE e.id = $1
             `,
@@ -58,6 +64,38 @@ class Posts {
         }
 
         return posts
+    }
+
+    static async listSpecificPostByEventId({eventId, postId}) {
+        const eventExists = await Events.fetchEventById(eventId)
+        if(!eventExists) {
+            throw new NotFoundError("Event not found.")
+        }
+
+        const results = await db.query(
+            `
+                SELECT 
+                    p.id AS "postId", 
+                    p.title AS "postTitle", 
+                    p.content AS "postContent", 
+                    p.created_at AS "postCreatedAt", 
+                    u.id AS "creatorId", 
+                    e.id AS "eventId",
+                    e.user_id AS "eventCreatorId"
+                FROM posts AS p 
+                LEFT JOIN events AS e ON e.id = p.event_id 
+                LEFT JOIN users AS u ON u.id = p.user_id 
+                WHERE p.id = $1 AND e.id = $2;
+            `,
+                [postId, eventId]
+        )
+
+        const post = results.rows
+        if (!post) {
+            throw new NotFoundError("No posts found.")
+        }
+
+        return post
     }
 }
 

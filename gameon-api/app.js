@@ -4,7 +4,7 @@ const morgan = require("morgan")
 const security = require("./middleware/security")
 const authRoutes = require("./routes/auth")
 const eventsRoutes = require("./routes/events")
-const postsRoutes = require("./routes/posts")
+//const postsRoutes = require("./routes/posts")
 
 const { BadRequestError, NotFoundError } = require("./utils/errors")
 
@@ -27,7 +27,7 @@ app.use(security.extractUserFromJwt)
 
 app.use("/auth", authRoutes)
 app.use("/events", eventsRoutes)
-app.use("/posts", postsRoutes)
+//app.use("/posts", postsRoutes)
 
 app.use((req, res, next) => {
     return next(new NotFoundError())
