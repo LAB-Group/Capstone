@@ -3,6 +3,8 @@ require("colors")
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3001
 const SECRET_KEY = process.env.SECRET_KEY || "secret_dev"
+const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID
+const TWITCH_APP_ACCESS_TOKEN = process.env.TWITCH_APP_ACCESS_TOKEN
 
 const IS_TESTING = process.env.NODE_ENV === "test"
 
@@ -30,6 +32,8 @@ console.log("---")
 
 module.exports = {
   PORT,
+  TWITCH_CLIENT_ID,
+  TWITCH_APP_ACCESS_TOKEN,
   SECRET_KEY,
   IS_TESTING,
   BCRYPT_WORK_FACTOR,

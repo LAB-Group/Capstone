@@ -1,13 +1,18 @@
 import * as React from "react"
-import { Grid, GridItem, Box, Text, SimpleGrid, Container, Wrap } from "@chakra-ui/react"
-import EventCard from "../EventsCard/EventCard"
+import { Grid, GridItem, Box, Text, SimpleGrid, Container, Wrap, Divider, Flex  } from "@chakra-ui/react"
+import EventCard from "./EventCard"
 import { useAuthContext } from "../../contexts/auth"
+import { useEventContext } from "../../contexts/event"
 
-export default function EventFeed({events, isFetching}){
+export default function EventFeed({ isFetching }){
     const { user } = useAuthContext()
+    const { events } = useEventContext()
     
     return(
-            <SimpleGrid justifyContent={"center"} alignItems={"center"} minChildWidth={'320px'} rowGap='20px' className="WRAP">
+        <Flex flexDirection='column' justifyContent='center' alignItems='center' minWidth="100vw" position="relative">
+            <Divider orientation='horizontal' backgroundColor={'purple.100'} marginTop={6} marginBottom={6} />
+            <Text marginBottom={6} fontSize='3xl'>Events</Text>
+            <SimpleGrid minWidth="80vw" justifyContent={"center"} alignItems={"center"} minChildWidth={'320px'} rowGap='20px' className="WRAP">
                 
                 {events?.map((event) => (
                         <EventCard key={event.id} event={event}/>
@@ -16,7 +21,7 @@ export default function EventFeed({events, isFetching}){
                     <Box><Text>No Events available</Text></Box>
                 ):null}
             </SimpleGrid>
-
+        </Flex>
     )
 }
 

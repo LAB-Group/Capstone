@@ -38,20 +38,12 @@ export default function NavBar() {
                     </Link>
                 </Box>
                 <Spacer />
-
-                {/* Created a footer transition link */}
-                <Link smooth to="#about">
-                <Text>About</Text>
-                </Link>
-
-                {/* <Link smooth to="#contact">
-                <Text>Contact Us</Text>
-                </Link> */}
                 
                 {user?.email? 
                     <ButtonGroup gap='2'>
                         <Button colorScheme='purple' onClick={onCreateOpen}>Create Event</Button>
                         <Link to ="/profile"><Button variant="outline" colorScheme='purple'>Profile</Button></Link>
+                        <Link smooth to="#about"><Button variant="ghost" colorScheme='purple'>About</Button></Link>
                         <Button variant="link" colorScheme='purple' onClick={handleLogout}>Logout</Button>
                         <ColorModeSwitcher justifySelf="flex-end" />
                     </ButtonGroup>
@@ -59,6 +51,7 @@ export default function NavBar() {
                     <ButtonGroup gap='2'>
                         <Button colorScheme='purple' onClick={onLoginOpen}>Log in</Button>
                         <Button variant="outline" colorScheme='purple' onClick={onRegisterOpen}>Sign Up</Button>
+                        <Link smooth to="#about"><Button variant="ghost" colorScheme='purple'>About</Button></Link>
                         <ColorModeSwitcher justifySelf="flex-end" />
                     </ButtonGroup>
                 }
