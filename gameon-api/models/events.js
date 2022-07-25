@@ -1,4 +1,3 @@
-const { disable } = require("colors")
 const db = require("../db")
 const { BadRequestError, NotFoundError } = require("../utils/errors")
 

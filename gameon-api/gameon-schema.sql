@@ -46,7 +46,8 @@ CREATE TABLE igdb_local (
 
 CREATE TABLE posts (
     id          SERIAL PRIMARY KEY,
-    post       TEXT NOT NULL,
+    title       TEXT NOT NULL,
+    content     TEXT NOT NULL,
     user_id     INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     event_id     INTEGER NOT NULL,
