@@ -22,7 +22,7 @@ import {
   CheckboxGroup,
 } from '@chakra-ui/react';
 
-export default function EventPage({ event }) {
+export default function EventRegistration({ event }) {
   const { user, setUser } = useAuthContext();
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);

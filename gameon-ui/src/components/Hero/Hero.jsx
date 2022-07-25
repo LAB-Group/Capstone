@@ -1,6 +1,7 @@
 import * as React from "react"
 import { Slide } from "react-slideshow-image"
 // import { Swiper, SwiperSlide } from "swiper/react"
+import "swiper/css"
 import pic from "../../media/evo.jpg"
 import { Container, Box, Image, Text, Flex } from '@chakra-ui/react'
 import "react-slideshow-image/dist/styles.css"
@@ -30,29 +31,42 @@ function Slideshow () {
         <Container maxW="3600px" minW="480px" >
             <Slide width="100%">
                 {slideImages.map((slideImage, idx) => (
-                <Box 
-                    key={idx}
-                    height="480px"  
-                    bgPosition="center" 
-                    objectFit={'cover'}  
-                    bgRepeat="no-repeat"
-                >
-
-                    <Image src={slideImage} key={idx} width={"100%"} height={"100%"} borderRadius="lg"/>
-                </Box>
-                ) 
-                )}
-            </Slide>
-        </Container>
-
-        //Learning Swiper 
-    //     <>
-    //     <Swiper className="mySwiper">
-    //             <SwiperSlide><Image src={slideImages[0]}/></SwiperSlide>
-    //             <SwiperSlide><Image src={slideImages[1]}/></SwiperSlide>
-    //             <SwiperSlide><Image src={slideImages[2]}/></SwiperSlide>
-    //     </Swiper>
-    //   </>
+                    <Box 
+                        key={idx}
+                        height="480px"  
+                        bgPosition="center" 
+                        objectFit={'cover'}  
+                        bgRepeat="no-repeat"
+                    >
+            
+                        <Image src={slideImage} key={idx} width={"100%"} height={"100%"} borderRadius="lg"/>
+                    </Box>
+                    ) 
+                    )}
+                </Slide>
+            </Container>
+            
+            //Learning Swiper 
+            // <>
+            //     <Swiper className="mySwiper">
+            //         {slideImages.map((slideImage, idx) => (
+            //         <SwiperSlide> 
+            //         <Box 
+            //             key={idx}
+            //             height="480px"  
+            //             bgPosition="center" 
+            //             objectFit={'cover'}  
+            //             bgRepeat="no-repeat"
+            //         >
+    
+            //             <Image src={slideImage} key={idx} width={"100%"} height={"100%"} borderRadius="lg"/>
+            //             </Box>
+            //             </SwiperSlide>
+            //         ) 
+            //             )}
+                    
+            // </Swiper>
+            // </>
 
 
     )

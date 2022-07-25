@@ -56,7 +56,7 @@ export default function RegisterPage({onClose}) {
   const [isPasswordConfirm,setIsPasswordConfirm]=useState(false)
   const [isUsername,setIsUsername]=useState(false)
   const [isLastName,setIsLastName]=useState(false)
-  const [isFristName,setIsFristName]=useState(false)
+  const [isFirstName,setIsFirstName]=useState(false)
   const [isImageUrl,setIsImageUrl]=useState(false)
   const [registerForm, setRegisterForm] = useState({
       email: "",
@@ -112,9 +112,9 @@ export default function RegisterPage({onClose}) {
 
         }
       if(!registerForm.firstName>0){
-      setIsFristName(true)
+      setIsFirstName(true)
       }else{
-      setIsFristName(false)
+      setIsFirstName(false)
       }
       if(!registerForm.lastName>0){
         setIsLastName(true)
@@ -137,7 +137,7 @@ export default function RegisterPage({onClose}) {
 
             <DrawerBody >
                 {/* <Input placeholder='Type here...' /> */}
-                <RegisterForm user={user} registerForm={registerForm} setRegisterForm={setRegisterForm} setErrors={setErrors} isEmail={isEmail} isFristName={isFristName} isLastName={isLastName} isPassword={isPassword} isPasswordConfirm={isPasswordConfirm} isUsername={isUsername}
+                <RegisterForm user={user} registerForm={registerForm} setRegisterForm={setRegisterForm} setErrors={setErrors} isEmail={isEmail} isFristName={isFirstName} isLastName={isLastName} isPassword={isPassword} isPasswordConfirm={isPasswordConfirm} isUsername={isUsername}
               />
             </DrawerBody>
 

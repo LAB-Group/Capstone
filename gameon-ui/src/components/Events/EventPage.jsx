@@ -38,10 +38,11 @@ export default function EventPage(){
     },[])
 
     return(
-        <Container>
+        <Container maxW="1200px">
             <EventDetails event={event} />
             <Divider orientation='horizontal' />
-            <EventRegistration event={event} />
+            {/* Moved this to EventDetails file */}
+            {/* <EventRegistration event={event} /> */}
         </Container>
     )
 }
