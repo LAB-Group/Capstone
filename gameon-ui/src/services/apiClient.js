@@ -71,7 +71,7 @@ class ApiClient {
     }
 
     async getGameDetails(gameId) {
-        return await this.request({ endpoint: `games`, method: `POST`, data: gameId })
+        return await this.request({ endpoint: `games/id`, method: `POST`, data: gameId })
     }
 
 }

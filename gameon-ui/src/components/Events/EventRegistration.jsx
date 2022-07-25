@@ -21,7 +21,6 @@ import {
   Checkbox,
   CheckboxGroup,
 } from '@chakra-ui/react';
-import Search from '../Search/Search';
 
 export default function EventPage({ event }) {
   const { user, setUser } = useAuthContext();
@@ -42,16 +41,6 @@ export default function EventPage({ event }) {
     }));
   };
 
-  // const getEventGames = async () => {
-  //   setErrors(error => ({ ...error, form: null }))
-
-  //   const { data, error } = await apiClient.searchGame({searched:searchInput})
-
-  //   console.log("SEARCHINPUT",searchInput)
-  //   setEventGames([...data.games])
-  //   console.log("LIST GAMES",data.games)
-  // }
-
   const handleOnSubmit = async () => {
     setErrors(error => ({ ...error, form: null }));
     const { data, error } = await apiClient.registerForEvent({
@@ -61,23 +50,36 @@ export default function EventPage({ event }) {
     if (error) setErrors(e => ({ ...e, form: error }));
   };
 
+// FIXME: BELOW NOT RENDERING PROPERLY. MAY WANT TO HANDLE IN BACKEND OR EVENTCONTEXT. 
+// DOES NOT APPEAR TO BE RELIABLE ON PAGE LOAD
+  // useEffect(() => {
+  //   const getGameDetails = async () => {
+  //     // const { data, error } = await apiClient.getGameDetails({gameId:event.eventGame[0]})
+  //     // console.log("DATA",data)
+  //     // if(data) setEventGames([data])
+
+  //       for (let i=0;i<event?.eventGame.length;i++) {
+  //         const { data, error } = await apiClient.getGameDetails({gameId:event.eventGame[i]})
+  //         // if(data) setEventGames(games => ([...games,data]))
+  //         if(data) setEventGames(data)
+
+  //         console.log("DATA",data)
+  //         if (error) setErrors(error)
+  //       }
+  //   }
+  //   getGameDetails()
+  // },[])
+
+  // const test = async () => {return (await apiClient.getGameDetails({gameId:125764}))}
+
   return (
     <Container>
-      {/* <FormControl isRequired> */}
-        <FormLabel htmlFor="eventGame">Event Registration</FormLabel>
-        {/* need to search from game DB and add to an array of games for event */}
-        {/* <Input
-          id="eventGame"
-          name="eventGame"
-          type="text"
-          defaultValue={eventRegistrationForm.eventGame}
-          onChange={handleOnInputChange}
-        />
-      </FormControl> */}
+
+      <FormLabel htmlFor="eventGame">Event Registration</FormLabel>
 
       <CheckboxGroup>
         {event.eventGame?.map((game, index) => (
-          <Checkbox key={index}>{game}</Checkbox>
+          <Checkbox margin={2} key={index}>{game}</Checkbox>
         ))}
       </CheckboxGroup>
 

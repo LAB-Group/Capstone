@@ -28,7 +28,7 @@ router.post("/", async (req, res, next) => {
         });
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/id", async (req, res, next) => {
     const gameId = req.body
     console.log("gameId: ", gameId)
     axios({
