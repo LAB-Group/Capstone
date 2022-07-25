@@ -1,6 +1,7 @@
 const express = require("express")
 const Events = require("../models/events")
 const Posts = require("../models/posts")
+const Replies = require("../models/replies")
 const security = require("../middleware/security")
 const router = express.Router()
 
@@ -111,7 +112,7 @@ router.get("/:eventId/posts/:postId", async (req, res, next) => {
     }
 })
 
-router.post("/:eventId/posts/:postId/post_replies", async (req, res, next) => {
+router.post("/:eventId/posts/:postId/post_replies", security.requireAuthenticatedUser, async (req, res, next) => {
     try {
         // create a reply to a post on an event
         const eventId = req.params.eventId
@@ -120,8 +121,20 @@ router.post("/:eventId/posts/:postId/post_replies", async (req, res, next) => {
         console.log("postId: ", postId)
         
         const { user } = res.locals
-        const reply = await Replies
-        return res.status(200).json({ post })
+        const reply = await Replies.createReplyForPost({eventId, postId, user, reply: req.body})
+        return res.status(201).json({ reply })
+    } catch (err) {
+        next(err)
+    }
+})
+
+router.get("/:eventid/posts/:postId/post_replies", async (req, res, next) => {
+    try {
+        // get all replies for a specified post
+        const postId = req.params.postId
+
+        const replies = await Replies.listRepliesByPostId(postId)
+        return res.status(200).json({ replies })
     } catch (err) {
         next(err)
     }

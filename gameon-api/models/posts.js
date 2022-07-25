@@ -21,17 +21,43 @@ class Posts {
             `
             INSERT INTO posts (title, content, event_id, user_id)
             VALUES ($1, $2, $3, (SELECT id FROM users WHERE email = $4))
-            RETURNING id,
-                      title,
-                      content,
+            RETURNING id AS "postId",
+                      title AS "postTitle",
+                      content AS "postContent",
                       user_id AS "creatorId",
                       event_id AS "eventId",
-                      created_at AS "createdAt"
+                      created_at AS "postCreatedAt"
             `,
                 [post.postTitle, post.postContent, eventId, user.email]
         )
 
         return results.rows[0]
+    }
+
+    static async fetchPostById(postId) {
+        // fetches an event by its id
+        const results = await db.query(
+            `
+                SELECT 
+                    p.id AS "postId",
+                    p.title AS "postTitle",
+                    p.content AS "postContent",
+                    u.id AS "creatorId",
+                    p.createdAt AS "postCreatedAt"
+                FROM posts AS p
+                    LEFT JOIN users AS u ON u.id = e.user_id
+                WHERE p.id = $1
+            `,
+                [postId]
+        )
+
+        const post = results.rows[0]
+
+        if (!post) {
+            throw new NotFoundError("Error not found.")
+        }
+
+        return post
     }
 
     static async listAllPostsByEventId(eventId) {
