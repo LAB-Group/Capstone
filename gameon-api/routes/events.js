@@ -110,7 +110,7 @@ router.post("/:eventId/posts/:postId/post_replies", security.requireAuthenticate
     try {
         // create a reply to a post on an event
         const eventId = req.params.eventId
-        const postId = req.params.postId)
+        const postId = req.params.postId
         
         const { user } = res.locals
         const reply = await Replies.createReplyForPost({eventId, postId, user, reply: req.body})
