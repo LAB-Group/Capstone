@@ -115,13 +115,7 @@ export default function EventDetails({event}) {
                 {/* Registration Button */}
                 <EventRegistration event={event} />
                 </Box>
-                    {/* Game */}
-                    {/* Event Registration */}
                     
-                    {/* Comments/Posts */}
-                    <Box>
-                        <Text>Comments and Posts</Text>
-                    </Box>
         </Container>
     )
 }
