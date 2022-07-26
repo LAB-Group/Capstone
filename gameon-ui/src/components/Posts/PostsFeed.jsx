@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import apiClient from '../../services/apiClient';
 import {
   Input,
@@ -11,24 +11,26 @@ import {
   FormLabel,
   Button,
   extendTheme,
-  HStack,
+  VStack,
   Text, Box
 } from '@chakra-ui/react';
 import Posts from './Posts';
 
-export default function PostsFeed({event}) {
+export default function PostsFeed({ eventId, posts }) {
+
+
   return (
-    <Container centerContent minWidth="95vw">
-      <HStack>
-        {events?.map(event => (
-          <Posts/>
+    <Container centerContent minWidth="85vw">
+      <VStack>
+        {posts?.map(post => (
+          <Posts post={post} />
         ))}
-        {!events?.length ? (
+        {/* {posts?.length ? (
           <Box>
-            <Text>No Events available</Text>
+            <Text>No Posts available</Text>
           </Box>
-        ) : null}
-      </HStack>
+        ) : null} */}
+      </VStack>
     </Container>
   );
 }

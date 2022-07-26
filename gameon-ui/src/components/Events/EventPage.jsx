@@ -8,12 +8,15 @@ import { useEventContext } from "../../contexts/event"
 import axios from "axios";
 import apiClient from '../../services/apiClient';
 import PostsForm from "../Posts/PostsForm"
+import PostsFeed from "../Posts/PostsFeed"
 
 export default function EventPage(){
     const { events } = useEventContext()
     const [loading, setLoading] = useState(true)
     const [event, setEvent] = useState([])
     const [eventGames, setEventGames] = useState([])
+    const [posts, setPosts] = useState([])
+    const [error, setError] = useState(null)
 
     let { eventId } = useParams()
 
@@ -36,12 +39,26 @@ export default function EventPage(){
           getEvent()  
     },[])
 
+    useEffect(() => {
+        const fetchPosts = async () => {
+          const { data, error } = await apiClient.listAllPostsByEventId(eventId)
+          if(data) {
+            console.log("EVENTID: ",eventId)
+            console.log("POSTS DATA: ", data.posts)
+            setPosts(data.posts)
+          }
+          if (error) setError(error)
+        }
+          fetchPosts()
+      },[])
+
     return(
         <Container maxW="1200px">
             <EventDetails event={event} />
             <Divider orientation='horizontal' />
             {/* Moved this to EventDetails file */}
             {/* <EventRegistration event={event} /> */}
+            <PostsFeed eventId={eventId} posts={posts} />
             <PostsForm event={event} eventId={eventId} />
         </Container>
     )
