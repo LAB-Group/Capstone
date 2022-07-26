@@ -61,7 +61,7 @@ class Posts {
     }
 
     static async listAllPostsByEventId(eventId) {
-        console.log("POST MODEL: ", eventId)
+        // fetches all posts tied to specific eventId
         const eventExists = await Events.fetchEventById(eventId)
         if(!eventExists) {
             throw new NotFoundError("Event not found")
@@ -90,11 +90,11 @@ class Posts {
         if (!posts) {
             throw new NotFoundError("No posts found.")
         }
-        console.log("POSTS MODEL OBJ: ",posts)
         return posts
     }
 
     static async listSpecificPostByEventId({eventId, postId}) {
+        // fetches specific post by eventId and postId
         const eventExists = await Events.fetchEventById(eventId)
         if(!eventExists) {
             throw new NotFoundError("Event not found.")
