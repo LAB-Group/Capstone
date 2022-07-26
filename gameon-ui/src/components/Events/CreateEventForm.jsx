@@ -110,7 +110,7 @@ export default function CreateEventForm({ onClose }) {
   })
   
  
-
+console.log(createEventForm.eventType.length)
 
   // const handleClick = () => setShowPassword(!showPassword)
   //   add stream/video link so we can embed player?
@@ -191,7 +191,7 @@ export default function CreateEventForm({ onClose }) {
         />
         </FormControl>
         <FormControl variant="floating">
-        <FormLabel htmlFor="eventGame">Event Game</FormLabel>
+        
         {/* need to search from game DB and add to an array of games for event */}
         {/* <Input
           id="eventGame"

@@ -1,7 +1,46 @@
-import { Box, Heading, Input, Button, Container, Wrap, Badge, CheckboxGroup, Checkbox, useCheckbox, HStack } from '@chakra-ui/react';
+import { Box, Heading, Input, Button, FormLabel, Container, Wrap, Badge, CheckboxGroup, Checkbox, useCheckbox, HStack,  extendTheme } from '@chakra-ui/react';
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import apiClient from '../../services/apiClient';
+
+
+const activeLabelStyles = {
+  transform: "scale(0.85) translateY(-24px)"
+  
+};
+export const theme = extendTheme({
+  components: {
+    Form: {
+      variants: {
+        floating: {
+          container: {
+            _focusWithin: {
+              label: {
+                ...activeLabelStyles
+              }
+            },
+            "input:not(:placeholder-shown) + label, .chakra-select__wrapper + label": {
+              ...activeLabelStyles
+            },
+            label: {
+              top: 0,
+              left: 0,
+              zIndex: 2,
+              position: "absolute",
+              backgroundColor: "white",
+              pointerEvents: "none",
+              mx: 3,
+              px: 1,
+              my: 2,
+              transformOrigin: "left top"
+            }
+          }
+        }
+      }
+    }
+  }
+});
+
 
 export default function Search({games, setGames}) {
   const [errors, setErrors] = useState({})
@@ -21,6 +60,7 @@ export default function Search({games, setGames}) {
   const handleOnInputChange = event => {
     setSearchInput(event.target.value)
   }
+ 
 
   const handleOnSubmit = async () => {
     setErrors(error => ({ ...error, form: null }))
@@ -36,7 +76,7 @@ export default function Search({games, setGames}) {
 
   // console.log(games[0]["cover"]["url"])
   //game["cover"].url
-
+ console.log(searchInput)
   return (
     <Box>
       <HStack marginBottom={2}>
@@ -56,7 +96,11 @@ export default function Search({games, setGames}) {
 function SearchBar({searchInput, handleOnInputChange}) {
   return (
     <Box>
-      <Input name='searchInput' type='text' value={searchInput} onChange={handleOnInputChange}/>
+      {searchInput.length>0?
+        <FormLabel transform="scale(0.85) translateY(-21px)">Event Game</FormLabel>
+         : 
+        <FormLabel>Event Game</FormLabel>}
+      <Input name='searchInput' type='text' w="610px" focusBorderColor='purple.400' value={searchInput} onChange={handleOnInputChange}/>
     </Box>
   );
 }
