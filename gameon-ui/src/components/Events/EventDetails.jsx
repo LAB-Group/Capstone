@@ -10,7 +10,8 @@ import { useEventContext } from "../../contexts/event"
 
 
 export default function EventDetails({event}) {
-
+    console.log("event: ", event)
+    console.log("eventGame: ", event.eventGame)
     return(
         <Container position="relative" >
             <Flex direction="column">
