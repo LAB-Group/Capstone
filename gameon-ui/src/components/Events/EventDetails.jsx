@@ -107,7 +107,7 @@ export default function EventDetails({event}) {
                     <SimpleGrid columns={{base:1, md:2}} spacing={10}>
                         <List spacing={2}>
                             <ListItem>
-                                <Text as={"span"} fontWeight={"bold"}>{event.eventGame.name}</Text>
+                                <Text as={"span"} fontWeight={"bold"}>{event.eventGame}</Text>
                             </ListItem>
                         </List>
                     </SimpleGrid>
