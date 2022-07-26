@@ -72,7 +72,6 @@ export default function CreateEventForm({ onClose }) {
     eventDetails: '',
     eventImageUrl: '',
   });
-  console.log("GAMES FORM", games)
   const handleOnInputChange = event => {
     setCreateEventForm(createEventForm => ({
       ...createEventForm,

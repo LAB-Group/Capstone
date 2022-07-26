@@ -74,9 +74,7 @@ router.post("/:eventId/posts", security.requireAuthenticatedUser, async (req, re
     try {
         // create a new post for an event
         const { user } = res.locals
-        console.log("user (routes): ", user)
         const { eventId } = req.params
-        console.log("req.body: ", req.body)
         const post = await Posts.createNewPost({user, post: req.body, eventId})
         return res.status(201).json({ post })
     } catch (err) {
@@ -98,12 +96,8 @@ router.get("/:eventId/posts", async (req, res, next) => {
 router.get("/:eventId/posts/:postId", async (req, res, next) => {
     try {
         // list a specified post for an event
-        console.log(req.params.eventId)
-        console.log(req.params.postId)
         const eventId = req.params.eventId
-        console.log("eventId: ", eventId)
         const postId = req.params.postId
-        console.log("postId: ", postId)
         
         const post = await Posts.listSpecificPostByEventId({eventId, postId})
         return res.status(200).json({ post })
@@ -116,9 +110,7 @@ router.post("/:eventId/posts/:postId/post_replies", security.requireAuthenticate
     try {
         // create a reply to a post on an event
         const eventId = req.params.eventId
-        console.log("eventId: ", eventId)
         const postId = req.params.postId
-        console.log("postId: ", postId)
         
         const { user } = res.locals
         const reply = await Replies.createReplyForPost({eventId, postId, user, reply: req.body})

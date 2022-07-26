@@ -164,7 +164,6 @@ class Events {
             `,
             [eventId]
         )
-        console.log("numOfUsers: ", numOfUsers.rows[0])
 
         const results = await db.query(
             `
@@ -175,7 +174,6 @@ class Events {
             [eventId]
         )
         
-        console.log("Users: ", results.rows)
         return {
             numOfUsers: numOfUsers.rows[0],
             UsersRegistered: results.rows
