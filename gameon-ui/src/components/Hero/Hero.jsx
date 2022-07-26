@@ -1,7 +1,9 @@
 import * as React from "react"
 import { Slide } from "react-slideshow-image"
-// import { Swiper, SwiperSlide } from "swiper/react"
-import "swiper/css"
+//import { Swiper, SwiperSlide } from "swiper/react"
+// import "swiper/css"
+// import "swiper/css/pagination"
+// import { Pagination } from "swiper"
 import pic from "../../media/evo.jpg"
 import { Container, Box, Image, Text, Flex } from '@chakra-ui/react'
 import "react-slideshow-image/dist/styles.css"
@@ -24,7 +26,6 @@ function Slideshow () {
         pic,guiltyGear,blazBlue
     ]
     return (
-
         
         //   Old Slideshow code
         // Widen container's width 
@@ -46,21 +47,20 @@ function Slideshow () {
                 </Slide>
             </Container>
             
-            //Learning Swiper 
+        //Learning Swiper 
+        
             // <>
-            //     <Swiper className="mySwiper">
+            //     <Swiper 
+            //      pagination={{
+            //         dynamicBullets: true,
+            //       }}
+            //       modules={[Pagination]}
+            //       className="mySwiper"
+            //     >
             //         {slideImages.map((slideImage, idx) => (
             //         <SwiperSlide> 
-            //         <Box 
-            //             key={idx}
-            //             height="480px"  
-            //             bgPosition="center" 
-            //             objectFit={'cover'}  
-            //             bgRepeat="no-repeat"
-            //         >
-    
+                   
             //             <Image src={slideImage} key={idx} width={"100%"} height={"100%"} borderRadius="lg"/>
-            //             </Box>
             //             </SwiperSlide>
             //         ) 
             //             )}
