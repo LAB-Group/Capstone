@@ -189,18 +189,11 @@ console.log(createEventForm.eventType.length)
           onChange={handleOnInputChange}
         />
         </FormControl>
-        <FormControl variant="floating">
         
-        {/* need to search from game DB and add to an array of games for event */}
-        {/* <Input
-          id="eventGame"
-          name="eventGame"
-          type="text"
-          defaultValue={createEventForm.eventGame}
-          onChange={handleOnInputChange}
-        /> */}
-        <Search focusBorderColor='purple.400' games={games} setGames={setGames} />
-        </FormControl>
+        
+      
+        <Search games={games} setGames={setGames} />
+    
         <FormControl variant="floating">
         {createEventForm.eventDetails.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Event Details</FormLabel>

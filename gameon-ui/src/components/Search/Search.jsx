@@ -1,4 +1,4 @@
-import { Box, Heading, Input, Button, FormLabel, Container, Wrap, Badge, CheckboxGroup, Checkbox, useCheckbox, HStack,  extendTheme } from '@chakra-ui/react';
+import { Box, Heading, Input, Button, FormLabel, Container, Wrap, Badge, CheckboxGroup, Checkbox, useCheckbox, HStack,  extendTheme, Tag, FormControl, TagLabel, TagCloseButton, VStack } from '@chakra-ui/react';
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import apiClient from '../../services/apiClient';
@@ -47,20 +47,24 @@ export default function Search({games, setGames}) {
   const [searchInput, setSearchInput] = useState("")
   // const [games, setGames] = useState([])
   const [listGames, setListGames] = useState([])
+  const [selectedGames, setSelectedGames] = useState([])
+  
 
-  const handleIsSelected = event => {
+  // const handleIsSelected = event => {
 
-    // NEED TO ERROR CHECK AND NOT ADD DUPLICATE
-      setGames(curGames => ([...curGames, event.target.value]))
-      setListGames([])
-      setSearchInput("")
+  //   // NEED TO ERROR CHECK AND NOT ADD DUPLICATE
+  //     setGames(curGames => ([...curGames, event.target.value]))
+  //     setListGames([])
+  //     setSearchInput("")
+      
 
-  }
+  // }
 
   const handleOnInputChange = event => {
     setSearchInput(event.target.value)
   }
- 
+  console.log(selectedGames)
+  
 
   const handleOnSubmit = async () => {
     setErrors(error => ({ ...error, form: null }))
@@ -69,35 +73,71 @@ export default function Search({games, setGames}) {
 
     setListGames([...data.games])
   }
-  console.log("REGISTERED LIST",games)
+  
+   
+   
 
-  // console.log(games[0]["cover"]["url"])
-  //game["cover"].url
- console.log(searchInput)
   return (
-    <Box>
-      <HStack marginBottom={2}>
-        <SearchBar searchInput={searchInput} value={searchInput} handleOnInputChange={handleOnInputChange} />
-        <Button colorScheme='purple' mr={3} onClick={handleOnSubmit} >Search</Button>
-      </HStack>
+    <Container centerContent>
       
-      <Wrap>
+        <SearchBar searchInput={searchInput} value={searchInput} handleOnInputChange={handleOnInputChange} handleOnSubmit={handleOnSubmit} selectedGames={selectedGames} setSelectedGames={setSelectedGames}/>
+        
+      <Wrap w="700px">
         {listGames?.map((game, index) => (
-            <Button onClick={handleIsSelected} value={game.id} key={index}>{game.name}</Button>
+            <Button onClick={() =>{setSelectedGames( arr => [...arr, game.name])}} value={game.id} key={index}>{game.name}</Button>
+            
         ))}
       </Wrap>
-    </Box>
+    </Container>
   );
-}
+} 
 
-function SearchBar({searchInput, handleOnInputChange}) {
+
+ 
+
+function SearchBar({searchInput, handleOnInputChange,handleOnSubmit, selectedGames, setSelectedGames}) {
+  const [selectedGames1, setSelectedGames1] = useState([])
+  
+  function removeGame (id) {
+    const index = selectedGames.indexOf(id);
+
+   selectedGames.splice(index, 1);
+   setSelectedGames1([...selectedGames])
+  
+  
+  }
+  
   return (
-    <Box>
+   
+      
+   <VStack spacing={2}>
+     <Wrap w="700px">
+       
+     {selectedGames?.map((id, index) => (
+          <Tag
+            size="md"
+            variant='subtle'
+            key={index}
+            borderRadius='full'
+            colorScheme='purple'
+          >
+            <TagLabel>{id}</TagLabel>
+            <TagCloseButton onClick={() => removeGame(id)}/>
+          </Tag>
+         ))}</Wrap>
+    
+    
+      <Box>
+     
+       <FormControl variant="floating"mt={2}>
       {searchInput.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Event Game</FormLabel>
          : 
         <FormLabel>Event Game</FormLabel>}
-      <Input name='searchInput' type='text' w="610px" focusBorderColor='purple.400' value={searchInput} onChange={handleOnInputChange}/>
-    </Box>
+         <HStack marginBottom={2}>
+      <Input name='searchInput' type='text' w="608px" focusBorderColor='purple.400' value={searchInput} onChange={handleOnInputChange}/>
+      <Button colorScheme='purple' onClick={handleOnSubmit} >Search</Button>
+  </HStack></FormControl></Box>
+ </VStack>
   );
 }
