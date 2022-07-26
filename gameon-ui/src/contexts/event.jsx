@@ -38,15 +38,13 @@ export const EventContextProvider = ({ children }) => {
       // useEffect(() => {
       //   const getGameDetails = async () => {
       //     // const { data, error } = await apiClient.getGameDetails({gameId:event.eventGame[0]})
-      //     // console.log("DATA",data)
       //     // if(data) setEventGames([data])
     
       //       for (let i=0;i<event?.eventGame.length;i++) {
       //         const { data, error } = await apiClient.getGameDetails({gameId:event.eventGame[i]})
       //         // if(data) setEventGames(games => ([...games,data]))
       //         if(data) setEventGames(data)
-    
-      //         console.log("DATA",data)
+  
       //         if (error) setErrors(error)
       //       }
       //   }

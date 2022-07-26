@@ -107,9 +107,6 @@ export default function CreateEventForm({ onClose }) {
     
     
   })
-  
- 
-console.log(createEventForm.eventType.length)
 
   // const handleClick = () => setShowPassword(!showPassword)
   //   add stream/video link so we can embed player?

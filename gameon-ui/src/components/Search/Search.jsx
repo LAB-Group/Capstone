@@ -62,9 +62,7 @@ export default function Search({games, setGames}) {
 
   const handleOnInputChange = event => {
     setSearchInput(event.target.value)
-  }
-  console.log(selectedGames)
-  
+  }  
 
   const handleOnSubmit = async () => {
     setErrors(error => ({ ...error, form: null }))
