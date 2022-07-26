@@ -84,7 +84,7 @@ export default function Search({games, setGames}) {
         
       <Wrap w="700px">
         {listGames?.map((game, index) => (
-            <Button onClick={() =>{setSelectedGames( arr => [...arr, game.name])}} value={game.id} key={index}>{game.name}</Button>
+            <Button onClick={() =>{setSelectedGames( arr => [...arr, game.id])}} value={game.id} key={index}>{game.name}</Button>
             
         ))}
       </Wrap>
