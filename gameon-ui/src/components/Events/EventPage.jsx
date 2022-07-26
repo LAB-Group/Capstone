@@ -7,6 +7,7 @@ import EventRegistration from "./EventRegistration"
 import { useEventContext } from "../../contexts/event"
 import axios from "axios";
 import apiClient from '../../services/apiClient';
+import PostsForm from "../Posts/PostsForm"
 
 export default function EventPage(){
     const { events } = useEventContext()
@@ -41,6 +42,7 @@ export default function EventPage(){
             <Divider orientation='horizontal' />
             {/* Moved this to EventDetails file */}
             {/* <EventRegistration event={event} /> */}
+            <PostsForm event={event} eventId={eventId} />
         </Container>
     )
 }
