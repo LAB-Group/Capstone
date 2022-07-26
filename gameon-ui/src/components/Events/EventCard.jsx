@@ -5,7 +5,7 @@ export default function EventCard({event}){
 
     const timestamp = Date.parse(event.eventDate)
     const date = new Date(timestamp).toLocaleDateString('en-US')
-    // const time = new Date(timestamp).toLocaleTimeString('en-US')
+    const time = new Date(timestamp).toLocaleTimeString('en-US')
 
     return (
 
@@ -19,7 +19,7 @@ export default function EventCard({event}){
                         <VStack maxW={'130px'}>
                             <Badge borderRadius='full' px='2' colorScheme='purple'>{event.eventType}</Badge>
                             <Badge borderRadius='full' px='2' colorScheme='purple'>{date}</Badge>
-                            {/* <Badge borderRadius='full' px='2' colorScheme='teal'>{time}</Badge> */}
+                            <Badge borderRadius='full' px='2' colorScheme='purple'>{time}</Badge>
                         </VStack>   
                     </HStack>
                 </Box>

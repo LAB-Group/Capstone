@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.post("/:eventId", async (req, res, next) => {
     try {
-        // create a new event
+        // create a new post
         const { user } = res.locals
         const { eventId } = req.params
         const post = await Posts.createNewPost({user, post: req.body, eventId})
