@@ -4,7 +4,7 @@ import EventRegistration from "../Events/EventRegistration"
 import { 
     Container, Box, Text,SimpleGrid, Flex, 
     Image, List, VStack,Heading, Stack, 
-    StackDivider, ListItem, Icon, HStack, Badge, useColorModeValue 
+    StackDivider, ListItem, Icon, Grid, GridItem, HStack, Badge, useColorModeValue 
 } from "@chakra-ui/react"
 
 import {HiLocationMarker} from "react-icons/hi"
@@ -20,42 +20,48 @@ export default function EventDetails({event}) {
     let time = newDate.toLocaleTimeString("en-US")
     return(
         <Container maxW={"7xl"}>
+            {/* Need to resize image */}
+            {/* Image */}
+            <Image 
+            rounded= {"md"} 
+            src={event.eventImageUrl} 
+            alt={noImage}
+            fit={"cover"}
+            align={"center"}
+            width={"100%"}
+            height={{base:"100%", sm:"400px", lg:"500px"}}/>
             <SimpleGrid 
             column={{base:1, lg:2}}
             spacing={{base:8, md: 10}}
             py={{base:18, md:24}}
             >
-            <Flex>
-                {/* Image */}
-                <Image 
-                rounded= {"md"} 
-                src={event.eventImageUrl} 
-                alt={noImage}
-                fit={"cover"}
-                align={"center"}
-                width={"100%"}
-                height={{base:"100%", sm:"400px", lg:"500px"}}/>
-            </Flex>
+            
+            
             <Stack spacing={{base:6, md:10}}>
-                <Box as={"header"}>
+                <Flex minW={0} alignItems={"flex-start"} flexGrow={1} flexDirection={"row"}>
+                    <Image 
+                    src={event.eventImageUrl} 
+                    width={"54px"} height={"54px"} 
+                    alignItems={"center"} 
+                    flexGrow={0} flexShrink={0} flexBasis={"auto"}/>
+                <Box flexGrow={1} flexShrink={1} flexBasis={"auto"}>
                     {/* Type */}
                     <Text
                         color={useColorModeValue("gray.900", "gray.400")}
                         fontWeight={300}
-                        fontSize={"2xl"}
+                        fontSize={"md"}
+                        textTransform={"uppercase"}
                     >{
                         event.eventType
                     }</Text>
-
                     {/* Event Name */}
                     <Heading
                         lineHeight={1.1}
                         fontWeight={600}
-                        fontSize={{base:"2xl", sm:"4xl", lg:"5xl"}}
+                        fontSize={{base:"lg", sm:"md", lg:"xl"}}
                         textTransform={"uppercase"}
                     >{event.eventName}
                     </Heading>
-
                     {/* Date */}
                     <Text
                         color={useColorModeValue("gray.900", "gray.400")}
@@ -72,6 +78,10 @@ export default function EventDetails({event}) {
                     >{
                         time
                     }</Text>
+                </Box>
+                </Flex>
+                    <Box>
+
 
                     {/* Location */}
                     <Text
