@@ -90,6 +90,14 @@ class ApiClient {
         return await this.request({ endpoint: `events/${eventId}/posts`, method: `GET`})
     }
 
+    async createPostReply(reply) {
+        return await this.request({ endpoint: `events/${reply.eventId}/posts/${reply.postId}/post_replies`, method: `POST`, data: reply })
+    }
+
+    async listAllRepliesByEventId(eventId, postId) {
+        return await this.request({ endpoint: `events/${eventId}/posts/${postId}/post_replies`, method: `GET`})
+    }
+
 }
 
 export default new ApiClient("http://localhost:3001")
