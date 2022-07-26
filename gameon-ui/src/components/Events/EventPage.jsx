@@ -43,8 +43,6 @@ export default function EventPage(){
         const fetchPosts = async () => {
           const { data, error } = await apiClient.listAllPostsByEventId(eventId)
           if(data) {
-            console.log("EVENTID: ",eventId)
-            console.log("POSTS DATA: ", data.posts)
             setPosts(data.posts)
           }
           if (error) setError(error)

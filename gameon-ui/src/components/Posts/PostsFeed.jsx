@@ -22,8 +22,8 @@ export default function PostsFeed({ eventId, posts }) {
   return (
     <Container centerContent minWidth="85vw">
       <VStack>
-        {posts?.map(post => (
-          <Posts post={post} />
+        {posts?.map((post, index) => (
+          <Posts key={index} post={post} />
         ))}
         {/* {posts?.length ? (
           <Box>
