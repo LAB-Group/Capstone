@@ -1,17 +1,17 @@
 import { createContext, useState, useContext, useEffect } from "react"
 import apiClient from "../services/apiClient"
 
-const EventContext = createContext(null)
+const PostContext = createContext(null)
 
-export const EventContextProvider = ({ children }) => {
-    const [events, setEvents] = useState([])
+export const PostContextProvider = ({ children }) => {
+    const [posts, setPosts] = useState([])
     const [initialized, setInitialized] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(null)
 
-    const eventValue = { 
-      events, 
-      setEvents,
+    const postValue = { 
+      posts, 
+      setPosts,
       initialized,
       setInitialized, 
       error, 
@@ -21,23 +21,23 @@ export const EventContextProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        const fetchEvent = async () => {
+        const fetchPosts = async () => {
           setIsLoading(true)
-          const { data, error } = await apiClient.fetchEvents()
+          const { data, error } = await apiClient.listAllPostsByEventId()
           if(data) {
-            setEvents(data.events)
+            setPosts(data.events)
           }
           if (error) setError(error)
         }
           setIsLoading(false)
-          fetchEvent()
+          fetchPosts()
       },[])
 
     return (
-        <EventContext.Provider value={eventValue}>
+        <PostContext.Provider value={postValue}>
             <>{children}</>
-        </EventContext.Provider>
+        </PostContext.Provider>
     )
 }
 
-export const useEventContext = () => useContext(EventContext)
+export const usePostContext = () => useContext(PostContext)

@@ -19,7 +19,6 @@ static async getGameInfoById(gameId) {
 }
 
 //   static getGameInfo(game) {
-//     console.log("LOCAL DB GAME", game);
 //     // const requiredFields = ["gameId", "gameName", "gameImageUrl"]
 //     const results = db.query(
 //       `
