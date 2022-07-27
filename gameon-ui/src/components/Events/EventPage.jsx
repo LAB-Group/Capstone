@@ -33,7 +33,6 @@ export default function EventPage(){
               setEventGames(event.eventGame)
             } catch(error) {
               console.log("ERROR")
-            //   return <NotFound />
             }
           }
           getEvent()  

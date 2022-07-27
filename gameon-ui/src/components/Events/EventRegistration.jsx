@@ -41,7 +41,6 @@ export default function EventRegistration({ event, games }) {
     let registeredArray = []
     for(let i = 0; i < gameArray.length; i++) {
       if(gameArray[i]) {
-        console.log(gameArray[i])
         registeredArray.push(games.game[i].id)
       }   
     }
@@ -56,7 +55,6 @@ export default function EventRegistration({ event, games }) {
       eventId: eventId,
       eventGame: getGamesRegistered(checkedItems),
     })
-    if(data) console.log("registered data! ", data)
     if(error) setErrors((e) => ({ ...e, form: error}))
   }
 

@@ -166,7 +166,7 @@ export default function EventDetails({event}) {
                     </SimpleGrid>
 
                 {/* Registration Button */}
-                <EventRegistration event={event} />
+                <EventRegistration event={event} games={games}/>
                 </Box>
 
                 {/* Used for later */}
