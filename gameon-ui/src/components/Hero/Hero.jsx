@@ -1,6 +1,9 @@
 import * as React from "react"
 import { Slide } from "react-slideshow-image"
-// import { Swiper, SwiperSlide } from "swiper/react"
+//import { Swiper, SwiperSlide } from "swiper/react"
+// import "swiper/css"
+// import "swiper/css/pagination"
+// import { Pagination } from "swiper"
 import pic from "../../media/evo.jpg"
 import { Container, Box, Image, Text, Flex } from '@chakra-ui/react'
 import "react-slideshow-image/dist/styles.css"
@@ -23,35 +26,47 @@ function Slideshow () {
         pic,guiltyGear,blazBlue
     ]
     return (
-
         
         //   Old Slideshow code
         // Widen container's width 
         <Container maxW="3600px" minW="480px" >
             <Slide width="100%">
                 {slideImages.map((slideImage, idx) => (
-                <Box   
-                    height="480px"  
-                    bgPosition="center" 
-                    objectFit={'cover'}  
-                    bgRepeat="no-repeat"
-                >
-
-                    <Image src={slideImage} key={idx} width={"100%"} height={"100%"} borderRadius="lg"/>
-                </Box>
-                ) 
-                )}
-            </Slide>
-        </Container>
-
+                    <Box 
+                        key={idx}
+                        height="480px"  
+                        bgPosition="center" 
+                        objectFit={'cover'}  
+                        bgRepeat="no-repeat"
+                    >
+            
+                        <Image src={slideImage} key={idx} width={"100%"} height={"100%"} borderRadius="lg"/>
+                    </Box>
+                    ) 
+                    )}
+                </Slide>
+            </Container>
+            
         //Learning Swiper 
-    //     <>
-    //     <Swiper className="mySwiper">
-    //             <SwiperSlide><Image src={slideImages[0]}/></SwiperSlide>
-    //             <SwiperSlide><Image src={slideImages[1]}/></SwiperSlide>
-    //             <SwiperSlide><Image src={slideImages[2]}/></SwiperSlide>
-    //     </Swiper>
-    //   </>
+        
+            // <>
+            //     <Swiper 
+            //      pagination={{
+            //         dynamicBullets: true,
+            //       }}
+            //       modules={[Pagination]}
+            //       className="mySwiper"
+            //     >
+            //         {slideImages.map((slideImage, idx) => (
+            //         <SwiperSlide> 
+                   
+            //             <Image src={slideImage} key={idx} width={"100%"} height={"100%"} borderRadius="lg"/>
+            //             </SwiperSlide>
+            //         ) 
+            //             )}
+                    
+            // </Swiper>
+            // </>
 
 
     )

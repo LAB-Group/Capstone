@@ -7,7 +7,7 @@ CREATE TABLE users (
     last_name   TEXT NOT NULL,
     email       TEXT NOT NULL UNIQUE CHECK (POSITION('@' IN email) > 1),
     image_url   TEXT,
-    game_list  INTEGER[],
+    game_list   INTEGER[],
     created_at  TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at  TIMESTAMP NOT NULL DEFAULT CURRENT_DATE
 );
@@ -15,7 +15,7 @@ CREATE TABLE users (
 CREATE TABLE events (
     id          SERIAL PRIMARY KEY,
     event_name  TEXT NOT NULL,
-    event_date  DATE NOT NULL DEFAULT NOW(),
+    event_date  TIMESTAMP NOT NULL DEFAULT NOW(),
     event_type  TEXT NOT NULL,
     location    TEXT NOT NULL,
     event_game  INTEGER[] NOT NULL,
@@ -37,9 +37,17 @@ CREATE TABLE registered_events (
     registered_at  TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
+CREATE TABLE igdb_local (
+    id                  SERIAL PRIMARY KEY,
+    game_id             INTEGER NOT NULL,
+    game_name           TEXT NOT NULL,
+    game_image_url      TEXT NOT NULL
+);
+
 CREATE TABLE posts (
     id          SERIAL PRIMARY KEY,
-    post       TEXT NOT NULL,
+    title       TEXT NOT NULL,
+    content     TEXT NOT NULL,
     user_id     INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     event_id     INTEGER NOT NULL,
