@@ -58,7 +58,8 @@ export default function EventDetails({event}) {
             {/* Need to resize image */}
             {/* Image */}
             <Box width={"100%"} height={"400px"} backgroundImage={event.eventImageUrl}
-            backgroundSize={"cover"}
+            backgroundPosition={"center"}
+            backgroundSize={"contain"}
             backgroundRepeat={"no-repeat"}>
             {/* <Center>
             <Image 
@@ -175,6 +176,7 @@ export default function EventDetails({event}) {
                     <SimpleGrid columns={{base:1, md:2}} spacing={10}>
                         <List spacing={2}>
                         {games.game?.map((game, index) => (
+                            <HStack spacing>
                             <ListItem>
                                 <Box width={"300px"} borderWidth='1px' borderRadius='lg' overflow='hidden' boxShadow={'md'}>
                                     <Image position={"relative"} left={"70px"} objectFit={"cover"} height={"200px"} src={game.cover.url.replace("thumb", "cover_small_2x")} alt={noImage}/>
@@ -185,6 +187,7 @@ export default function EventDetails({event}) {
                                 </Box>
                             </Box>
                             </ListItem>
+                            </HStack>
                         ))}
                         </List>
                     </SimpleGrid>
