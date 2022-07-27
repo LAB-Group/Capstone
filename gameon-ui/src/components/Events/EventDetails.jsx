@@ -4,7 +4,7 @@ import EventRegistration from "../Events/EventRegistration"
 import { 
     Container, Box, Text,SimpleGrid, Flex, 
     Image, List, VStack,Heading, Stack, 
-    StackDivider, ListItem, Icon, Grid, GridItem, HStack, Badge, useColorModeValue, Spacer 
+    StackDivider, ListItem, Icon, Center, HStack, Badge, useColorModeValue, Spacer 
 } from "@chakra-ui/react"
 import { CalendarIcon } from "@chakra-ui/icons"
 import { HiLocationMarker } from "react-icons/hi"
@@ -22,24 +22,26 @@ export default function EventDetails({event}) {
         <Container maxW={"7xl"}>
             {/* Need to resize image */}
             {/* Image */}
-            <Box className="header" position={"relative"} width={"100%"}>
+            <Box width={"100%"} height={"400px"} backgroundImage={event.eventImageUrl}
+            backgroundSize={"cover"}
+            backgroundRepeat={"no-repeat"}>
+            {/* <Center>
             <Image 
-            position={"relative"}
-            zIndex={1}
-            fit={"cover"}
             src={event.eventImageUrl} 
             alt={noImage}
             maxWidth={"100%"}
             height={"auto"}/>
+            </Center> */}
             </Box>
             
+            <>
             <SimpleGrid 
             column={{base:1, lg:2}}
             spacing={{base:8, md: 10}}
             py={{base:18, md:24}}
             >
             
-            <Stack spacing={{base:6, md:10}}>
+            <Stack spacing={{base:6, md:10}} justifyContent={"center"}>
                 <Flex minW={0} alignItems={"flex-start"} flexGrow={1} flexDirection={"row"}>
                     <Image 
                     src={event.eventImageUrl} 
@@ -67,12 +69,12 @@ export default function EventDetails({event}) {
                     </Heading>
                     <HStack spacing={"10px"} >
                     {/* Date */}
+                    <Icon as={CalendarIcon}/>    
                     <Text
                         color={useColorModeValue("gray.900", "gray.400")}
                         fontWeight={300}
                         fontSize={"md"}
                     >
-                    <Icon as={CalendarIcon}/>    
                     {
                         myDate
                     }</Text>
@@ -86,22 +88,26 @@ export default function EventDetails({event}) {
                     }</Text>
                     </HStack>
                     {/* Location */}
+                    <HStack>
+                    <Icon as={HiLocationMarker}/>
                     <Text
                         color={useColorModeValue("gray.900", "gray.400")}
                         fontWeight={300}
                         fontSize={"md"}
                     > 
-                    <Icon as={HiLocationMarker}/>
                         {
-                        event.eventLocation
+                            event.eventLocation
                         }
                     </Text>
+
+                    </HStack>
                 </Box>
                 </Flex>
 
 
             </Stack>
             </SimpleGrid>
+            </>
                 {/* Event */}
                 <Box borderColor={"purple.400"} borderStyle={"solid"}>
                     {/* Divides/Spaces */}
