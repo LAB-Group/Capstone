@@ -1,16 +1,18 @@
 import * as React from "react"
 import EventFeed from "../Events/EventFeed"
 import EventRegistration from "../Events/EventRegistration"
+import { useState, useEffect } from "react"
 import { 
-    Container, Box, Text,SimpleGrid, Flex, 
+    Container, Box, Text, SimpleGrid, Flex, 
     Image, List, VStack,Heading, Stack, 
     StackDivider, ListItem, Icon, Center, HStack, Badge, useColorModeValue, Spacer 
 } from "@chakra-ui/react"
 import { CalendarIcon } from "@chakra-ui/icons"
 import { HiLocationMarker } from "react-icons/hi"
+import axios from "axios";
+
 
 import { useEventContext } from "../../contexts/event"
-
 
 export default function EventDetails({event}) {
     const noImage = "https://image.shutterstock.com/shutterstock/photos/571752970/display_1500/stock-photo-no-game-sign-on-white-background-571752970.jpg"
@@ -18,6 +20,39 @@ export default function EventDetails({event}) {
     let newDate = new Date(date)
     let myDate = newDate.toDateString()
     let time = newDate.toLocaleTimeString("en-US")
+
+    const [games, setGames] = useState([])
+    const [loading, setLoading] = useState(true)
+
+    let string = ""
+    if(event.eventGame !== undefined) {
+        for(let i = 0; i < event.eventGame.length; i++) {
+            if(i === event.eventGame.length - 1) {
+                string += event.eventGame[i]
+                break
+            }
+            string += event.eventGame[i] + ", "
+        }
+    }
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false)
+          }, 100)
+        const getGames = async () => {      
+            try {
+              const response = await axios.post(`http://localhost:3001/games/id`, {
+                gameId: string
+              })
+              const gameData = response.data
+              setGames(gameData)
+            } catch(error) {
+              console.log(error)
+            }
+          }
+          getGames()  
+    },[string])
+
     return(
         <Container maxW={"7xl"}>
             {/* Need to resize image */}
@@ -136,58 +171,26 @@ export default function EventDetails({event}) {
                     mb={'4'}>
                         Games:
                     </Text>
-                    {/* Created placeholders */}
+
                     <SimpleGrid columns={{base:1, md:2}} spacing={10}>
                         <List spacing={2}>
-                        <ListItem>
-                            <Box width={"300px"} borderWidth='1px' borderRadius='lg' overflow='hidden' boxShadow={'md'}>
-                                    <Image position={"relative"} left={"70px"} objectFit={"cover"} height={"200px"} src={"https://images.igdb.com/igdb/image/upload/t_720p/co2lby.jpg"} alt={noImage}/>
+                        {games.game?.map((game, index) => (
+                            <ListItem>
+                                <Box width={"300px"} borderWidth='1px' borderRadius='lg' overflow='hidden' boxShadow={'md'}>
+                                    <Image position={"relative"} left={"70px"} objectFit={"cover"} height={"200px"} src={game.cover.url.replace("thumb", "cover_small_2x")} alt={noImage}/>
                                 <Box p='6'>
                                     <Box display='flex' alignItems='baseline'>
-                                        <Heading textAlign={"center"} size='md'>Game 1</Heading>
+                                        <Heading textAlign={"center"} size='md'>{game.name}</Heading>
                                     </Box>
                                 </Box>
                             </Box>
-                        </ListItem>
-                        <ListItem>
-                            <Box width={"300px"} borderWidth='1px' borderRadius='lg' overflow='hidden' boxShadow={'md'}>
-                                    <Image position={"relative"} left={"70px"} objectFit={"cover"} height={"200px"} src={"https://images.igdb.com/igdb/image/upload/t_720p/co2lby.jpg"} alt={noImage}/>
-                                <Box p='6'>
-                                    <Box display='flex' alignItems='baseline'>
-                                        <Heading textAlign={"center"} size='md'>Game 2</Heading>
-                                    </Box>
-                                </Box>
-                            </Box>
-                        </ListItem>
-                        </List>
-
-                        <List spacing={2}>
-                        <ListItem>
-                            <Box width={"300px"} borderWidth='1px' borderRadius='lg' overflow='hidden' boxShadow={'md'}>
-                                    <Image position={"relative"} left={"70px"} objectFit={"cover"} height={"200px"} src={"https://images.igdb.com/igdb/image/upload/t_720p/co2lby.jpg"} alt={noImage}/>
-                                <Box p='6'>
-                                    <Box display='flex' alignItems='baseline'>
-                                        <Heading textAlign={"center"} size='md'>Game 3</Heading>
-                                    </Box>
-                                </Box>
-                            </Box>
-                        </ListItem>
-                        <ListItem>
-                            <Box width={"300px"} borderWidth='1px' borderRadius='lg' overflow='hidden' boxShadow={'md'}>
-                                    <Image position={"relative"} left={"70px"} objectFit={"cover"} height={"200px"} src={"https://images.igdb.com/igdb/image/upload/t_720p/co2lby.jpg"} alt={noImage}/>
-                                <Box p='6'>
-                                    <Box display='flex' alignItems='baseline'>
-                                        <Heading textAlign={"center"} size='md'>Game 4</Heading>
-                                    </Box>
-                                </Box>
-                            </Box>
-                        </ListItem>
-
+                            </ListItem>
+                        ))}
                         </List>
                     </SimpleGrid>
 
                 {/* Registration Button */}
-                <EventRegistration event={event} />
+                <EventRegistration event={event} games={games}/>
                 </Box>
 
                 {/* Used for later */}

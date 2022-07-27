@@ -27,7 +27,8 @@ router.post("/", async (req, res, next) => {
 
 router.post("/id", async (req, res, next) => {
     const gameId = req.body
-    let game
+    console.log("gameId: ", gameId)
+    console.log(gameId.gameId)
     axios({
         url: "https://api.igdb.com/v4/games",
         method: "POST",
@@ -36,17 +37,19 @@ router.post("/id", async (req, res, next) => {
             'Client-ID': `${TWITCH_CLIENT_ID}`,
             'Authorization': `Bearer ${TWITCH_APP_ACCESS_TOKEN}`,
         },
-        data: `fields id, name, cover.url; where id = ${gameId.gameId};`,
+        //data: `fields id, name, cover.url; where id = ${gameId.gameId};`,
+        data: `fields id, name, cover.url; where id = (${gameId.gameId});`,
     })
         .then((response) => {
-            game = response.data
-            const gameInfo = Games.getGameInfo(response.data)
+            const game = response.data
+            //const gameInfo = Games.getGameInfo(response.data)
+            res.status(200).json({ game })
         })
         .catch((err) => {
             console.error("Error: ", err);
         });
         
-        res.status(200).json({ game })
+        
 })
 
 router.get("/id", async (req, res, next) => {
