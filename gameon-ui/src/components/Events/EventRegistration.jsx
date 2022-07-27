@@ -4,65 +4,72 @@ import { useParams } from 'react-router-dom';
 import apiClient from '../../services/apiClient';
 import { useAuthContext } from '../../contexts/auth';
 import {
-  Box,
-  ControlBox,
-  Text,
-  Heading,
   Container,
-  DrawerHeader,
-  DrawerBody,
-  Input,
-  DrawerFooter,
   Button,
-  FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Checkbox,
   CheckboxGroup,
 } from '@chakra-ui/react';
 
-export default function EventRegistration({ event }) {
-  const { user, setUser } = useAuthContext();
-  const [errors, setErrors] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+export default function EventRegistration({ event, games }) {
 
-  const [eventRegistrationForm, setEventRegistrationForm] = useState({
-    eventGame: [],
-  });
+  const { user } = useAuthContext()
 
-  let { eventId } = useParams();
+  const { eventId } = useParams()
 
-  const handleOnInputChange = event => {
-    setEventRegistrationForm(form => ({
-      ...form,
-      [event.target.name]: event.target.value,
-    }));
-  };
+  const [checkedItems, setCheckedItems] = useState([])
+  const [errors, setErrors] = useState(null)
+
+  useEffect(() => {
+    
+    const setItems = async() => {
+      if(games.game) {
+        setCheckedItems(new Array(games.game.length).fill(false))
+      }
+    }
+    setItems()
+    
+  }, [games.game]);
+
+  function replaceAt(array, index, value) {
+    const newArray = array.slice(0)
+    newArray[index] = value
+    return newArray
+  }
+
+  function getGamesRegistered(gameArray) {
+    let registeredArray = []
+    for(let i = 0; i < gameArray.length; i++) {
+      if(gameArray[i]) {
+        registeredArray.push(games.game[i].id)
+      }   
+    }
+    console.log(registeredArray)
+    return registeredArray
+  }
+
 
   const handleOnSubmit = async () => {
-    setErrors(error => ({ ...error, form: null }));
+    setErrors(error => ({...error, form: null}))
     const { data, error } = await apiClient.registerForEvent({
       eventId: eventId,
-      eventGame: [1, 2, 3], //  eventGame: eventRegistrationForm.eventGame
-    });
-    if (error) setErrors(e => ({ ...e, form: error }));
-  };
+      eventGame: getGamesRegistered(checkedItems),
+    })
+    if(error) setErrors((e) => ({ ...e, form: error}))
+  }
+
   return (
     <Container>
-
       <FormLabel htmlFor="eventGame">Event Registration</FormLabel>
-
-      <CheckboxGroup>
-        {event.eventGame?.map((game, index) => (
-          
-          <Checkbox margin={2} key={index}>{game}</Checkbox>
+      <CheckboxGroup size="lg">
+        {games.game?.map((game, index) => (
+          <Checkbox margin={2} key={game.id} value={game.name}  isChecked={checkedItems[index]} 
+          onChange={e => setCheckedItems(replaceAt(checkedItems, index, e.target.checked))}>
+            {game.name}
+          </Checkbox>
         ))}
       </CheckboxGroup>
-
-      <Button margin={2} colorScheme="purple" mr={3} onClick={handleOnSubmit}>
-        Register
-      </Button>
+      <Button margin={2} colorScheme="purple" mr={3} onClick={handleOnSubmit}>Register</Button>
     </Container>
   );
 }
