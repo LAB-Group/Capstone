@@ -15,11 +15,11 @@ import {
   Text,
   Box,
   Heading,
-  VStack, Modal, ModalOverlay, ModalFooter, ModalBody, ModalContent, ModalHeader, ModalCloseButton, useDisclosure, ButtonGroup,Stack, Skeleton, Divider, Badge
+  VStack, Modal, ModalOverlay, ModalFooter, ModalBody, ModalContent, ModalHeader, ModalCloseButton, useDisclosure, ButtonGroup,Stack, Skeleton, Divider, Badge,Flex
 } from '@chakra-ui/react';
 import PostReply from './PostReply';
 
-export default function Posts({ post, eventId }) {
+export default function Posts({ post, eventId, key }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [postReplies, setPostReplies] = useState([]);
   const [errors, setErrors] = useState(null);
@@ -69,8 +69,7 @@ export default function Posts({ post, eventId }) {
   return (
     <Container centerContent minWidth="65vw">
       <Box
-              key="1"
-              cursor="pointer"
+              key={key}
               borderWidth="1px"
               shadow="md"
               bg="#fbfdff"
@@ -78,20 +77,36 @@ export default function Posts({ post, eventId }) {
               rounded="md"
               borderRadius="5px"
               w='1000px'
-              mt={2}
-              mb={2}
+              mt={8}
+              mb={3}
             >
          
-              <Stack isInline justifyContent="space-between" mt={2} p={5}>
+              <Stack isInline justifyContent="space-between" mt={2} pl={5} pr={5}>
                 <Box minW="100%">
-                  <HStack spacing="640px">
+                  
                   <Stack isInline align="center" marginBottom="5px">
-                    <Box>
-                      <Image size="sm" width="2em" height="2em" borderRadius="50%" src={post.creatorImageUrl} />
-                    </Box>
+                    <HStack>
+                    <Flex
+                      justifyContent={{
+                        base: "center",
+                        md: "end",
+                      }}
+                      mt={-16}>
+                      <Image  w={20} mt={8} borderRadius="50%" src={post.creatorImageUrl}/>
+                    </Flex>
                     <Text fontWeight={'bold'} >@{post.creatorUsername}</Text>
+
+                      {/* // <Image size="sm" width="2em" height="2em" borderRadius="50%" src={post.creatorImageUrl} /> */}
+                    </HStack>
+                    
                   </Stack>
-                  <HStack>
+          
+                  
+                  
+                  <Box pl="10px">
+                    <Stack direction="row">
+                    <Heading height="16px" pb={10} width="100%">{post.postTitle}</Heading>
+                    <HStack>
                    <Badge variant='subtle' colorScheme='purple'>
                    {postDate}
                     </Badge>
@@ -99,16 +114,17 @@ export default function Posts({ post, eventId }) {
                     {time}
                     </Badge>
                     </HStack>
-                  </HStack>
-                  <Divider ml={8} w="900px"/>
-                  <Box pl="2.5em">
-                    <Heading height="16px" pb={10} width="100%">{post.postTitle}</Heading>
+                    </Stack>
+                    <Divider w="950px"/>
                     <Stack spacing={2} mt={1} isInline alignItems="center">
                       <Text height="14px" width="80%">{post.postContent}</Text>
                     </Stack>
                   </Box>
                 </Box>
               </Stack>
+             
+              
+              <Button  ml="870px" mt={4} mb={4} onClick={onOpen}>Reply</Button>
             </Box>
       {/* <Box>
         <HStack>
@@ -141,19 +157,30 @@ export default function Posts({ post, eventId }) {
                 <Text>No Posts available</Text>
             </Box>
             ) : null} */}
-        <Button onClick={onOpen}>Reply to this thread</Button>
+        
         <Modal onClose={onClose} isOpen={isOpen} isCentered>
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>Reply</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <Textarea name="replyContent" defaultValue={createReplyForm.replyContent} onChange={handleOnInputChange} />
+              <FormControl >
+                <FormLabel htmlFor="postContent">Comment</FormLabel>
+                  <Textarea
+                    id="postContent"
+                    name="postContent"
+                    type="text"
+                    focusBorderColor="purple.400"
+                    defaultValue={createReplyForm.replyContent}
+                    onChange={handleOnInputChange}
+                  />
+            </FormControl>
+              {/* <Textarea name="replyContent" defaultValue={createReplyForm.replyContent} onChange={handleOnInputChange} /> */}
             </ModalBody>
             <ModalFooter>
                 <ButtonGroup margin={2} >
-                    <Button onClick={handleOnSubmit}>Submit</Button>
-                    <Button onClick={onClose}>Cancel</Button>
+                    <Button colorScheme='purple' variant='ghost' onClick={handleOnSubmit}>Post</Button>
+                    <Button  colorScheme='purple' variant='outline'onClick={onClose}>Cancel</Button>
                 </ButtonGroup>
 
             </ModalFooter>
