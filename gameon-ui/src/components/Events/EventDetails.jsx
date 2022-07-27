@@ -161,9 +161,7 @@ export default function EventDetails({event}) {
                 </Stack>
 
                 </Box>
-
-                <Box>
-                    {/* Game */}
+                <Stack>
                     <Text
                     fontSize={{ base: "16px", lg: "18px" }}
                     color={useColorModeValue("yellow.500", "yellow.300")}
@@ -172,12 +170,11 @@ export default function EventDetails({event}) {
                     mb={'4'}>
                         Games:
                     </Text>
-
-                    <SimpleGrid columns={{base:1, md:2}} spacing={10}>
-                        <List spacing={2}>
+                    <HStack spacing="24px">
+                    {/* Game */}
+                    <SimpleGrid columns={{base:2, md:3}} spacing={10}>  
                         {games.game?.map((game, index) => (
-                            <HStack spacing>
-                            <ListItem>
+                            <HStack spacing={"20px"} position={"static"}>
                                 <Box width={"300px"} borderWidth='1px' borderRadius='lg' overflow='hidden' boxShadow={'md'}>
                                     <Image position={"relative"} left={"70px"} objectFit={"cover"} height={"200px"} src={game.cover.url.replace("thumb", "cover_small_2x")} alt={noImage}/>
                                 <Box p='6'>
@@ -186,14 +183,22 @@ export default function EventDetails({event}) {
                                     </Box>
                                 </Box>
                             </Box>
-                            </ListItem>
+                            
                             </HStack>
                         ))}
-                        </List>
+                        
                     </SimpleGrid>
 
+                    </HStack>
+                </Stack>
+                
+                <Box>
+                <Stack>
+                    <VStack>
                 {/* Registration Button */}
                 <EventRegistration event={event} games={games}/>
+                    </VStack>
+                </Stack>
                 </Box>
 
                 {/* Used for later */}
