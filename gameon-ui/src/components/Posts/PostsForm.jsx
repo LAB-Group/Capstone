@@ -11,7 +11,46 @@ import {
   FormLabel,
   Button,
   extendTheme,
+  ChakraProvider,
+  VStack,Box,Stack,HStack,Skeleton, Divider
 } from '@chakra-ui/react';
+
+const activeLabelStyles = {
+  transform: "scale(0.85) translateY(-24px)"
+  
+};
+export const theme = extendTheme({
+  components: {
+    Form: {
+      variants: {
+        floating: {
+          container: {
+            _focusWithin: {
+              label: {
+                ...activeLabelStyles
+              }
+            },
+            "input:not(:placeholder-shown) + label, .chakra-select__wrapper + label": {
+              ...activeLabelStyles
+            },
+            label: {
+              top: 0,
+              left: 0,
+              zIndex: 2,
+              position: "absolute",
+              backgroundColor: "white",
+              pointerEvents: "none",
+              mx: 3,
+              px: 1,
+              my: 2,
+              transformOrigin: "left top"
+            }
+          }
+        }
+      }
+    }
+  }
+});
 
 export default function PostsForm({event, eventId}) {
   const [errors, setErrors] = useState({});
@@ -40,82 +79,70 @@ export default function PostsForm({event, eventId}) {
   };
 
   return (
-    <Container centerContent minWidth="50vw">
+    <ChakraProvider theme={theme}>
+      <Divider/>
+    
+    <Container mt={3} centerContent minWidth="50vw" w="75px">
+      <Box
+              key="1"
+              borderWidth="1px"
+              shadow="md"
+              bg="#fbfdff"
+              position="relative"
+              align="center"
+              rounded="md"
+              borderRadius="5px"
+              maxW='800px'
+              mt={8}
+              mb={2}
+              pt={10}
+              pb={2}
+              border='1px' 
+              borderColor='gray.200'
+              
+              w="75vw"
+            >
+      <VStack spacing={5} w='700px'>
+  
       <FormControl variant="floating">
-        {createPostForm.postTitle.length > 0 ? (
-          <FormLabel transform="scale(0.85) translateY(-21px)">
-            Post Title
-          </FormLabel>
-        ) : (
-          <FormLabel>Post Title</FormLabel>
-        )}
-
+      
         <Input
           id="postTitle"
           type="text"
+          w='900px'
+          placeholder='Title'
+          variant='unstyled'
           focusBorderColor="purple.400"
           name="postTitle"
           defaultValue={createPostForm.postTitle}
           onChange={handleOnInputChange}
         />
       </FormControl>
-      <FormControl variant="floating">
-        {createPostForm.postContent.length > 0 ? (
-          <FormLabel transform="scale(0.85) translateY(-21px)">
-            Post Content
-          </FormLabel>
-        ) : (
-          <FormLabel htmlFor="postContent">Post Content</FormLabel>
-        )}
+      <Divider/>
+      <FormControl >
+    
         <Textarea
           id="postContent"
           name="postContent"
           type="text"
+          variant='unstyled'
+          placeholder='Comment'
+          
           focusBorderColor="purple.400"
           defaultValue={createPostForm.postContent}
           onChange={handleOnInputChange}
         />
       </FormControl>
-      <Button colorScheme="purple" mt={1} w="350px" onClick={handleOnSubmit}>
-        Submit
+      
+       <Button colorScheme="purple" mt={1} w="350px"  variant='ghost' onClick={handleOnSubmit}>
+        Post
       </Button>
-    </Container>
+      </VStack></Box></Container>
+    
+    
+     
+   
+    </ChakraProvider>
   );
 }
 
-const activeLabelStyles = {
-    transform: "scale(0.85) translateY(-24px)"
-    
-  };
-  export const theme = extendTheme({
-    components: {
-      Form: {
-        variants: {
-          floating: {
-            container: {
-              _focusWithin: {
-                label: {
-                  ...activeLabelStyles
-                }
-              },
-              "input:not(:placeholder-shown) + label, .chakra-select__wrapper + label": {
-                ...activeLabelStyles
-              },
-              label: {
-                top: 0,
-                left: 0,
-                zIndex: 2,
-                position: "absolute",
-                backgroundColor: "white",
-                pointerEvents: "none",
-                mx: 3,
-                px: 1,
-                my: 2,
-                transformOrigin: "left top"
-              }
-            }
-          }
-        }
-      }
-    }
-  });
