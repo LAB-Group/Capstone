@@ -15,7 +15,7 @@ import {
   Text,
   Box,
   Heading,
-  VStack, Modal, ModalOverlay, ModalFooter, ModalBody, ModalContent, ModalHeader, ModalCloseButton, useDisclosure, ButtonGroup
+  VStack, Modal, ModalOverlay, ModalFooter, ModalBody, ModalContent, ModalHeader, ModalCloseButton, useDisclosure, ButtonGroup,Stack, Skeleton, Divider, Badge
 } from '@chakra-ui/react';
 import PostReply from './PostReply';
 
@@ -68,7 +68,49 @@ export default function Posts({ post, eventId }) {
 
   return (
     <Container centerContent minWidth="65vw">
-      <Box>
+      <Box
+              key="1"
+              cursor="pointer"
+              borderWidth="1px"
+              shadow="md"
+              bg="#fbfdff"
+              position="relative"
+              rounded="md"
+              borderRadius="5px"
+              w='1000px'
+              mt={2}
+              mb={2}
+            >
+         
+              <Stack isInline justifyContent="space-between" mt={2} p={5}>
+                <Box minW="100%">
+                  <HStack spacing="640px">
+                  <Stack isInline align="center" marginBottom="5px">
+                    <Box>
+                      <Image size="sm" width="2em" height="2em" borderRadius="50%" src={post.creatorImageUrl} />
+                    </Box>
+                    <Text fontWeight={'bold'} >@{post.creatorUsername}</Text>
+                  </Stack>
+                  <HStack>
+                   <Badge variant='subtle' colorScheme='purple'>
+                   {postDate}
+                    </Badge>
+                    <Badge variant='subtle' colorScheme='purple'>
+                    {time}
+                    </Badge>
+                    </HStack>
+                  </HStack>
+                  <Divider ml={8} w="900px"/>
+                  <Box pl="2.5em">
+                    <Heading height="16px" pb={10} width="100%">{post.postTitle}</Heading>
+                    <Stack spacing={2} mt={1} isInline alignItems="center">
+                      <Text height="14px" width="80%">{post.postContent}</Text>
+                    </Stack>
+                  </Box>
+                </Box>
+              </Stack>
+            </Box>
+      {/* <Box>
         <HStack>
           <VStack>
             <Text fontWeight={'bold'}>{post.creatorUsername}</Text>
@@ -89,7 +131,7 @@ export default function Posts({ post, eventId }) {
             <Text>{post.postContent}</Text>
           </VStack>
         </HStack>
-      </Box>
+      </Box> */}
       <VStack>
         {postReplies?.map((postReply, index) => (
           <PostReply key={index} postReply={postReply} eventId={eventId} />

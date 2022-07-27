@@ -11,7 +11,46 @@ import {
   FormLabel,
   Button,
   extendTheme,
+  ChakraProvider,
+  VStack,Box,Stack,HStack,Skeleton
 } from '@chakra-ui/react';
+
+const activeLabelStyles = {
+  transform: "scale(0.85) translateY(-24px)"
+  
+};
+export const theme = extendTheme({
+  components: {
+    Form: {
+      variants: {
+        floating: {
+          container: {
+            _focusWithin: {
+              label: {
+                ...activeLabelStyles
+              }
+            },
+            "input:not(:placeholder-shown) + label, .chakra-select__wrapper + label": {
+              ...activeLabelStyles
+            },
+            label: {
+              top: 0,
+              left: 0,
+              zIndex: 2,
+              position: "absolute",
+              backgroundColor: "white",
+              pointerEvents: "none",
+              mx: 3,
+              px: 1,
+              my: 2,
+              transformOrigin: "left top"
+            }
+          }
+        }
+      }
+    }
+  }
+});
 
 export default function PostsForm({event, eventId}) {
   const [errors, setErrors] = useState({});
@@ -40,16 +79,18 @@ export default function PostsForm({event, eventId}) {
   };
 
   return (
-    <Container centerContent minWidth="50vw">
+    <ChakraProvider theme={theme}>
+    <Container mt={3} centerContent minWidth="50vw">
+      <VStack spacing={5} w='500px'>
+  
       <FormControl variant="floating">
-        {createPostForm.postTitle.length > 0 ? (
+      {createPostForm.postTitle.length > 0 ? (
           <FormLabel transform="scale(0.85) translateY(-21px)">
             Post Title
           </FormLabel>
         ) : (
           <FormLabel>Post Title</FormLabel>
         )}
-
         <Input
           id="postTitle"
           type="text"
@@ -79,43 +120,13 @@ export default function PostsForm({event, eventId}) {
       <Button colorScheme="purple" mt={1} w="350px" onClick={handleOnSubmit}>
         Submit
       </Button>
-    </Container>
+       
+      </VStack></Container>
+    
+    
+     
+   
+    </ChakraProvider>
   );
 }
 
-const activeLabelStyles = {
-    transform: "scale(0.85) translateY(-24px)"
-    
-  };
-  export const theme = extendTheme({
-    components: {
-      Form: {
-        variants: {
-          floating: {
-            container: {
-              _focusWithin: {
-                label: {
-                  ...activeLabelStyles
-                }
-              },
-              "input:not(:placeholder-shown) + label, .chakra-select__wrapper + label": {
-                ...activeLabelStyles
-              },
-              label: {
-                top: 0,
-                left: 0,
-                zIndex: 2,
-                position: "absolute",
-                backgroundColor: "white",
-                pointerEvents: "none",
-                mx: 3,
-                px: 1,
-                my: 2,
-                transformOrigin: "left top"
-              }
-            }
-          }
-        }
-      }
-    }
-  });
