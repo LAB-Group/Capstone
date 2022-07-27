@@ -202,7 +202,8 @@ export default function CreateEventForm({ onClose }) {
           id="eventDetails"
           name="eventDetails"
           type="text"
-          focusBorderColor='purple.400' 
+          focusBorderColor='purple.400'
+          overflowY={'auto'}
           defaultValue={createEventForm.eventDetails}
           onChange={handleOnInputChange}
         />
