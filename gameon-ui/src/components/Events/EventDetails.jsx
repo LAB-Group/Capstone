@@ -147,7 +147,7 @@ export default function EventDetails({event}) {
 
             
                 {/* Event */}
-                <Box pt={"25px"} pb={"25px"} pl={"0"} pr={0}>
+                <Box position={"relative"} pt={"25px"} pb={"25px"} pl={"0"} pr={0} backgroundColor={"purple.500"} borderRadius={"3xl"}>
                     {/* Divides/Spaces */}
                 <Stack spacing={{ base: 4, sm: 6 }} direction={"column"} divider={
                     <StackDivider borderColor={useColorModeValue("gray.200", "gray.600")}/>
@@ -155,16 +155,16 @@ export default function EventDetails({event}) {
                     
                     {/* Details */}
                     <VStack spacing={{ base: 4, sm: 6 }}>
-                        <Text color={useColorModeValue("gray.500", "gray.400")} fontSize={"3xl"} fontWeight={300}>
-                            Description:
+                        <Text position={"relative"} color={useColorModeValue("whiteAlpha.600", "whiteAlpha.700")} fontSize={"3xl"} fontWeight={300}>
+                            Description
                         </Text>
-                        <Text fontSize={"md"}>{event.eventDetails}</Text>
+                        <Box backgroundColor={"whiteAlpha.900"} width={"75%"} borderRadius={"3xl"}>
+                        <Text fontSize={"lg"} padding={"4px"}>{event.eventDetails}</Text>
+                        </Box>
                     </VStack>
                 </Stack>
 
                 </Box>
-
-            
                 <Stack>
                     <Text
                     fontSize={{ base: "16px", lg: "18px" }}
@@ -179,7 +179,7 @@ export default function EventDetails({event}) {
                     <SimpleGrid columns={{base:2, md:3}} spacing={10}>  
                         {games.game?.map((game, index) => (
                             <HStack spacing={"20px"} position={"relative"}>
-                                <Box width={"300px"} borderWidth='1px' borderRadius='lg' overflow='hidden' boxShadow={'md'}>
+                                <Box width={"300px"} borderWidth='1px' borderRadius='lg' padding={"5px"}overflow='hidden' boxShadow={'md'} padding={"10px"}>
                                     <Image position={"relative"} left={"70px"} objectFit={"cover"} height={"200px"} src={game.cover.url.replace("thumb", "cover_small_2x")} alt={noImage}/>
                                     <Box p='6'>
                                         <Box display='flex' alignItems='baseline'>
@@ -194,6 +194,8 @@ export default function EventDetails({event}) {
 
                     </HStack>
                 </Stack>
+
+            
                 
                 <Box>
                 <Stack>
