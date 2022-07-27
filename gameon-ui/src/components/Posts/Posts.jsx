@@ -86,7 +86,7 @@ export default function Posts({ post, eventId, key }) {
                 <Box minW="100%">
                   
                   <Stack isInline align="center" marginBottom="5px">
-                    <HStack>
+                    <HStack spacing={3}>
                     <Flex
                       justifyContent={{
                         base: "center",
@@ -106,7 +106,7 @@ export default function Posts({ post, eventId, key }) {
                   
                   <Box pl="10px">
                     <Stack direction="row">
-                    <Heading height="16px" pb={10} width="100%">{post.postTitle}</Heading>
+                    <Heading height="16px"  pb={10} width="100%">{post.postTitle}</Heading>
                     <HStack>
                    <Badge variant='subtle' colorScheme='purple'>
                    {postDate}

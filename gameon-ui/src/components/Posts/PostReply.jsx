@@ -56,7 +56,7 @@ export default function PostReply({postReply}) {
                     <HStack spacing={400}>
                     <Text fontWeight={'bold'} >@{postReply.creatorUsername}</Text>
                     
-                       <HStack>
+                       <HStack> 
                      <Badge variant='subtle' colorScheme='purple'>
                    {replyDate}
                     </Badge>
