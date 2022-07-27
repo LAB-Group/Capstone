@@ -21,6 +21,7 @@ class Events {
                        e.details AS "eventDetails",
                        e.event_image_url AS "eventImageUrl",
                        u.id AS "creatorId",
+                       u.username AS "creatorUsername",
                        e.created_at AS "eventCreatedAt",
                        e.updated_at AS "eventUpdatedAt"
                 FROM events AS e
@@ -164,7 +165,6 @@ class Events {
             `,
             [eventId]
         )
-        console.log("numOfUsers: ", numOfUsers.rows[0])
 
         const results = await db.query(
             `
@@ -175,7 +175,6 @@ class Events {
             [eventId]
         )
         
-        console.log("Users: ", results.rows)
         return {
             numOfUsers: numOfUsers.rows[0],
             UsersRegistered: results.rows

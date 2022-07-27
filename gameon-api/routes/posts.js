@@ -5,11 +5,9 @@ const router = express.Router()
 
 router.post("/:eventId", async (req, res, next) => {
     try {
-        // create a new event
+        // create a new post
         const { user } = res.locals
-        console.log("user (routes): ", user)
         const { eventId } = req.params
-        console.log("req.body: ", req.body)
         const post = await Posts.createNewPost({user, post: req.body, eventId})
         return res.status(201).json({ post })
     } catch (err) {

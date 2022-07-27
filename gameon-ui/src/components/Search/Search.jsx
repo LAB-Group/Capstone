@@ -27,15 +27,9 @@ export default function Search({games, setGames}) {
 
     const { data, error } = await apiClient.searchGame({searched:searchInput})
 
-    console.log("SEARCHINPUT",searchInput)
     setListGames([...data.games])
-    console.log("LIST GAMES",data.games)
-    console.log(data.games[0]["cover"].url)
   }
   console.log("REGISTERED LIST",games)
-
-  // console.log(games[0]["cover"]["url"])
-  //game["cover"].url
 
   return (
     <Box>

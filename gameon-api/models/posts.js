@@ -10,7 +10,7 @@ class Posts {
                 throw new BadRequestError(`Required field - ${field} - missing from request body.`)
             }
         })
-        console.log("user: ", user)
+
         const eventExists = await Events.fetchEventById(eventId)
         if(!eventExists) {
             throw new NotFoundError("Event not found")
@@ -61,7 +61,7 @@ class Posts {
     }
 
     static async listAllPostsByEventId(eventId) {
-
+        // fetches all posts tied to specific eventId
         const eventExists = await Events.fetchEventById(eventId)
         if(!eventExists) {
             throw new NotFoundError("Event not found")
@@ -74,6 +74,8 @@ class Posts {
                        p.content AS "postContent",
                        p.created_at AS "postCreatedAt",
                        u.id AS "creatorId",
+                       u.username AS "creatorUsername",
+                       u.image_url AS "creatorImageUrl",
                        e.id AS "eventId",
                        e.user_id AS "eventCreatorId"
                 FROM posts AS p
@@ -88,11 +90,11 @@ class Posts {
         if (!posts) {
             throw new NotFoundError("No posts found.")
         }
-
         return posts
     }
 
     static async listSpecificPostByEventId({eventId, postId}) {
+        // fetches specific post by eventId and postId
         const eventExists = await Events.fetchEventById(eventId)
         if(!eventExists) {
             throw new NotFoundError("Event not found.")

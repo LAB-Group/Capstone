@@ -38,12 +38,15 @@ class Replies {
                     r.id AS "replyId",
                     r.reply AS "replyContent",
                     u.id AS "creatorId",
+                    u.username AS "creatorUsername",
+                    u.image_url AS "creatorImageUrl",
                     p.id AS "postId",
                     r.created_at AS "replyCreatedAt"
                 FROM post_replies AS r
                     LEFT JOIN users AS u ON u.id = r.user_id
                     LEFT JOIN posts AS p ON p.id = r.post_id
                 WHERE p.id = $1
+                ORDER BY r.created_at ASC
             `,
                 [postId]
         )
