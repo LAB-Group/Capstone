@@ -67,7 +67,7 @@ export default function Posts({ post, eventId, key }) {
   };
 
   return (
-    <Container centerContent minWidth="65vw">
+    <Container centerContent>
       <Box
               key={key}
               borderWidth="1px"
@@ -76,9 +76,10 @@ export default function Posts({ post, eventId, key }) {
               position="relative"
               rounded="md"
               borderRadius="5px"
-              w='1000px'
-              mt={8}
-              mb={3}
+              minW='1000px'
+              pb={2}
+              m={8}
+             
             >
          
               <Stack isInline justifyContent="space-between" mt={2} pl={5} pr={5}>
@@ -116,15 +117,15 @@ export default function Posts({ post, eventId, key }) {
                     </HStack>
                     </Stack>
                     <Divider w="950px"/>
-                    <Stack spacing={2} mt={1} isInline alignItems="center">
-                      <Text height="14px" width="80%">{post.postContent}</Text>
-                    </Stack>
+                    
+                      <Box ma>
+                      <Text  mt={2} minH="14px" width="80%">{post.postContent}</Text>
+                    </Box>
                   </Box>
                 </Box>
               </Stack>
-             
-              
-              <Button  ml="870px" mt={4} mb={4} onClick={onOpen}>Reply</Button>
+              <Box ml="55em" >
+              <Button variant='ghost' onClick={onOpen}>Reply</Button></Box>
             </Box>
       {/* <Box>
         <HStack>
@@ -148,15 +149,19 @@ export default function Posts({ post, eventId, key }) {
           </VStack>
         </HStack>
       </Box> */}
-      <VStack>
-        {postReplies?.map((postReply, index) => (
+       {postReplies?.map((postReply, index) => (
           <PostReply key={index} postReply={postReply} eventId={eventId} />
         ))}
+        <Divider w='1200px'/>
+        <VStack>
+        
+       
         {/* {posts?.length ? (
             <Box>
                 <Text>No Posts available</Text>
             </Box>
             ) : null} */}
+        
         
         <Modal onClose={onClose} isOpen={isOpen} isCentered>
           <ModalOverlay />
@@ -164,23 +169,12 @@ export default function Posts({ post, eventId, key }) {
             <ModalHeader>Reply</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <FormControl >
-                <FormLabel htmlFor="postContent">Comment</FormLabel>
-                  <Textarea
-                    id="postContent"
-                    name="postContent"
-                    type="text"
-                    focusBorderColor="purple.400"
-                    defaultValue={createReplyForm.replyContent}
-                    onChange={handleOnInputChange}
-                  />
-            </FormControl>
-              {/* <Textarea name="replyContent" defaultValue={createReplyForm.replyContent} onChange={handleOnInputChange} /> */}
+              <Textarea name="replyContent" defaultValue={createReplyForm.replyContent} onChange={handleOnInputChange} />
             </ModalBody>
             <ModalFooter>
                 <ButtonGroup margin={2} >
-                    <Button colorScheme='purple' variant='ghost' onClick={handleOnSubmit}>Post</Button>
-                    <Button  colorScheme='purple' variant='outline'onClick={onClose}>Cancel</Button>
+                    <Button onClick={handleOnSubmit}>Submit</Button>
+                    <Button onClick={onClose}>Cancel</Button>
                 </ButtonGroup>
 
             </ModalFooter>
