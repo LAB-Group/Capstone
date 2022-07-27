@@ -42,23 +42,11 @@ export const theme = extendTheme({
 });
 
 
-export default function Search({games, setGames}) {
+export default function Search({selectedGames, setSelectedGames}) {
   const [errors, setErrors] = useState({})
   const [searchInput, setSearchInput] = useState("")
-  // const [games, setGames] = useState([])
   const [listGames, setListGames] = useState([])
-  const [selectedGames, setSelectedGames] = useState([])
-  
-
-  // const handleIsSelected = event => {
-
-  //   // NEED TO ERROR CHECK AND NOT ADD DUPLICATE
-  //     setGames(curGames => ([...curGames, event.target.value]))
-  //     setListGames([])
-  //     setSearchInput("")
-      
-
-  // }
+  const [selectedGamesNames, setSelectedGamesNames] = useState([])
 
   const handleOnInputChange = event => {
     setSearchInput(event.target.value)
@@ -71,18 +59,15 @@ export default function Search({games, setGames}) {
 
     setListGames([...data.games])
   }
-  
-   
-   
 
   return (
     <Container centerContent>
       
-        <SearchBar searchInput={searchInput} value={searchInput} handleOnInputChange={handleOnInputChange} handleOnSubmit={handleOnSubmit} selectedGames={selectedGames} setSelectedGames={setSelectedGames}/>
+        <SearchBar searchInput={searchInput} value={searchInput} handleOnInputChange={handleOnInputChange} handleOnSubmit={handleOnSubmit} selectedGames={selectedGames} setSelectedGames={setSelectedGames} selectedGamesNames={selectedGamesNames} setSelectedGamesNames={setSelectedGamesNames}/>
         
       <Wrap w="700px">
         {listGames?.map((game, index) => (
-            <Button onClick={() =>{setSelectedGames( arr => [...arr, game.id])}} value={game.id} key={index}>{game.name}</Button>
+            <Button onClick={() =>{setSelectedGames( arr => [...arr, game.id]);setSelectedGamesNames( arr => [...arr, game.name])}} value={game.id} key={index}>{game.name}</Button>
             
         ))}
       </Wrap>
@@ -93,18 +78,18 @@ export default function Search({games, setGames}) {
 
  
 
-function SearchBar({searchInput, handleOnInputChange,handleOnSubmit, selectedGames, setSelectedGames}) {
-  const [selectedGames1, setSelectedGames1] = useState([])
+function SearchBar({searchInput, handleOnInputChange,handleOnSubmit, selectedGames, setSelectedGames, selectedGamesNames, setSelectedGamesNames}) {
   
   function removeGame (id) {
-    const index = selectedGames.indexOf(id);
-
-   selectedGames.splice(index, 1);
-   setSelectedGames1([...selectedGames])
-  
-  
+    const copyArr = [...selectedGames]
+    const copyNameArr = [...selectedGamesNames]
+    const index = copyArr.indexOf(id);
+   copyArr.splice(index, 1)
+   copyNameArr.splice(index, 1)
+   setSelectedGames([...copyArr])
+  setSelectedGamesNames([...copyNameArr])
   }
-  
+
   return (
    
       
@@ -119,7 +104,7 @@ function SearchBar({searchInput, handleOnInputChange,handleOnSubmit, selectedGam
             borderRadius='full'
             colorScheme='purple'
           >
-            <TagLabel>{id}</TagLabel>
+            <TagLabel>{selectedGamesNames[selectedGames.indexOf(id)]}</TagLabel>
             <TagCloseButton onClick={() => removeGame(id)}/>
           </Tag>
          ))}</Wrap>

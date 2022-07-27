@@ -62,13 +62,13 @@ export const theme = extendTheme({
 
 export default function CreateEventForm({ onClose }) {
   const [errors, setErrors] = useState({});
-  const [games, setGames] = useState([])
+  const [selectedGames, setSelectedGames] = useState([])
   const [createEventForm, setCreateEventForm] = useState({
     eventName: '',
     eventDate: '',
     eventType: '',
     eventLocation: '',
-    eventGame: [...games],
+    eventGame: [...selectedGames],
     eventDetails: '',
     eventImageUrl: '',
   });
@@ -87,7 +87,7 @@ export default function CreateEventForm({ onClose }) {
       eventDate: createEventForm.eventDate,
       eventType: createEventForm.eventType,
       eventLocation: createEventForm.eventLocation,
-      eventGame: games, //createEventForm.eventGame,
+      eventGame: selectedGames, //createEventForm.eventGame,
       eventDetails: createEventForm.eventDetails,
       eventImageUrl: createEventForm.eventImageUrl,
     });
@@ -189,7 +189,7 @@ export default function CreateEventForm({ onClose }) {
         
         
       
-        <Search games={games} setGames={setGames} />
+        <Search selectedGames={selectedGames} setSelectedGames={setSelectedGames} />
     
         <FormControl variant="floating">
         {createEventForm.eventDetails.length>0?

@@ -33,24 +33,6 @@ export const EventContextProvider = ({ children }) => {
           fetchEvent()
       },[])
 
-      // FIXME: BELOW NOT RENDERING PROPERLY. MAY WANT TO HANDLE IN BACKEND OR EVENTCONTEXT. 
-      // DOES NOT APPEAR TO BE RELIABLE ON PAGE LOAD
-      // useEffect(() => {
-      //   const getGameDetails = async () => {
-      //     // const { data, error } = await apiClient.getGameDetails({gameId:event.eventGame[0]})
-      //     // if(data) setEventGames([data])
-    
-      //       for (let i=0;i<event?.eventGame.length;i++) {
-      //         const { data, error } = await apiClient.getGameDetails({gameId:event.eventGame[i]})
-      //         // if(data) setEventGames(games => ([...games,data]))
-      //         if(data) setEventGames(data)
-  
-      //         if (error) setErrors(error)
-      //       }
-      //   }
-      //   getGameDetails()
-      // },[])
-
     return (
         <EventContext.Provider value={eventValue}>
             <>{children}</>
