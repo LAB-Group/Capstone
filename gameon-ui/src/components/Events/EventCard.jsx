@@ -5,7 +5,6 @@ export default function EventCard({event}){
 
     const timestamp = Date.parse(event.eventDate)
     const date = new Date(timestamp).toLocaleDateString('en-US')
-    // const time = new Date(timestamp).toLocaleTimeString('en-US')
 
     return (
 

@@ -34,7 +34,6 @@ export default function EventPage(){
           }
           getEvent()  
     },[])
-
     return(
         <Container maxW="1200px">
             <EventDetails event={event} />
