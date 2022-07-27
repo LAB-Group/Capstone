@@ -31,17 +31,20 @@ export default function PostReply({postReply}) {
               position="relative"
               rounded="md"
               borderRadius="5px"
-              maxW='800px'
+              maxW='900px'
+              
+              ml='175px'
+              mb={30}
               mt={2}
-              mb={2}
-              ml="150px"
+              minH='150px'
             >
          
-              <Stack isInline justifyContent="space-between" mt={2} p={5}>
+              <Stack isInline justifyContent="space-between"mt={2} pl={5} pr={5}>
                 <Box minW="100%">
-                  <HStack spacing="440px">
+                  
                   <Stack isInline align="center" marginBottom="5px">
-                    <Box>
+                  
+                      <HStack>
                     <Flex
                       justifyContent={{
                         base: "center",
@@ -50,24 +53,28 @@ export default function PostReply({postReply}) {
                       mt={-16}>
                       <Image  w={20} mt={8} borderRadius="50%" src={postReply.creatorImageUrl}/>
                     </Flex>
+                    <HStack spacing={400}>
                     <Text fontWeight={'bold'} >@{postReply.creatorUsername}</Text>
-                    </Box>
-                    <Text fontWeight={'bold'} >@{postReply.creatorUsername}</Text>
-                  </Stack>
-                  <HStack>
-                   <Badge variant='subtle' colorScheme='purple'>
+                    
+                       <HStack> 
+                     <Badge variant='subtle' colorScheme='purple'>
                    {replyDate}
                     </Badge>
                     <Badge variant='subtle' colorScheme='purple'>
                     {time}
                     </Badge>
-                    </HStack>
-                  </HStack>
-                  <Divider ml={8} w="700px"/>
-                  <Box pl="2.5em">
-                    <Heading height="16px" pb={10} width="100%">{postReply.postTitle}</Heading>
+                    </HStack></HStack></HStack>
+                  </Stack>
+                  
+                  
+                 
+               
+                  
+                  <Divider  w="750px"/>
+                  <Box pl={1.5}>
+                    
                     <Stack spacing={2} mt={1} isInline alignItems="center">
-                      <Text height="14px" width="80%">{postReply.replyContent}</Text>
+                      <Text  m={2} height="14px" width="80%">{postReply.replyContent}</Text>
                     </Stack>
                   </Box>
                 </Box>

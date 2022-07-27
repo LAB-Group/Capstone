@@ -82,7 +82,7 @@ export default function PostsForm({event, eventId}) {
     <ChakraProvider theme={theme}>
       <Divider/>
     
-    <Container mt={3} centerContent minWidth="50vw" w="100vw">
+    <Container mt={3} centerContent minWidth="50vw" w="75px">
       <Box
               key="1"
               borderWidth="1px"
@@ -92,10 +92,13 @@ export default function PostsForm({event, eventId}) {
               align="center"
               rounded="md"
               borderRadius="5px"
-              maxW='1500px'
+              maxW='800px'
               mt={8}
               mb={2}
-              p={10}
+              pt={10}
+              pb={2}
+              border='1px' 
+              borderColor='gray.200'
               
               w="75vw"
             >
@@ -107,6 +110,7 @@ export default function PostsForm({event, eventId}) {
           id="postTitle"
           type="text"
           w='900px'
+          placeholder='Title'
           variant='unstyled'
           focusBorderColor="purple.400"
           name="postTitle"
@@ -114,6 +118,7 @@ export default function PostsForm({event, eventId}) {
           onChange={handleOnInputChange}
         />
       </FormControl>
+      <Divider/>
       <FormControl >
     
         <Textarea
@@ -121,6 +126,7 @@ export default function PostsForm({event, eventId}) {
           name="postContent"
           type="text"
           variant='unstyled'
+          placeholder='Comment'
           
           focusBorderColor="purple.400"
           defaultValue={createPostForm.postContent}
@@ -128,10 +134,10 @@ export default function PostsForm({event, eventId}) {
         />
       </FormControl>
       
-       
-      </VStack></Box><Button colorScheme="purple" mt={1} w="350px" onClick={handleOnSubmit}>
-        Submit
-      </Button></Container>
+       <Button colorScheme="purple" mt={1} w="350px"  variant='ghost' onClick={handleOnSubmit}>
+        Post
+      </Button>
+      </VStack></Box></Container>
     
     
      
