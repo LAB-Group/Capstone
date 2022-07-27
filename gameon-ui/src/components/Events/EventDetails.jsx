@@ -144,8 +144,10 @@ export default function EventDetails({event}) {
             </Stack>
             </SimpleGrid>
             </>
+
+            
                 {/* Event */}
-                <Box borderColor={"purple.400"} borderStyle={"solid"}>
+                <Box pt={"25px"} pb={"25px"} pl={"0"} pr={0}>
                     {/* Divides/Spaces */}
                 <Stack spacing={{ base: 4, sm: 6 }} direction={"column"} divider={
                     <StackDivider borderColor={useColorModeValue("gray.200", "gray.600")}/>
@@ -153,14 +155,16 @@ export default function EventDetails({event}) {
                     
                     {/* Details */}
                     <VStack spacing={{ base: 4, sm: 6 }}>
-                        <Text color={useColorModeValue("gray.500", "gray.400")} fontSize={"2xl"} fontWeight={300}>
+                        <Text color={useColorModeValue("gray.500", "gray.400")} fontSize={"3xl"} fontWeight={300}>
                             Description:
                         </Text>
-                        <Text fontSize={"lg"}>{event.eventDetails}</Text>
+                        <Text fontSize={"md"}>{event.eventDetails}</Text>
                     </VStack>
                 </Stack>
 
                 </Box>
+
+            
                 <Stack>
                     <Text
                     fontSize={{ base: "16px", lg: "18px" }}
@@ -177,13 +181,12 @@ export default function EventDetails({event}) {
                             <HStack spacing={"20px"} position={"relative"}>
                                 <Box width={"300px"} borderWidth='1px' borderRadius='lg' overflow='hidden' boxShadow={'md'}>
                                     <Image position={"relative"} left={"70px"} objectFit={"cover"} height={"200px"} src={game.cover.url.replace("thumb", "cover_small_2x")} alt={noImage}/>
-                                <Box p='6'>
-                                    <Box display='flex' alignItems='baseline'>
-                                        <Heading textAlign={"center"} size='md'>{game.name}</Heading>
+                                    <Box p='6'>
+                                        <Box display='flex' alignItems='baseline'>
+                                            <Heading textAlign={"center"} size='md'>{game.name}</Heading>
+                                        </Box>
                                     </Box>
                                 </Box>
-                            </Box>
-                            
                             </HStack>
                         ))}
                         
@@ -194,9 +197,9 @@ export default function EventDetails({event}) {
                 
                 <Box>
                 <Stack>
-                    <VStack>
-                {/* Registration Button */}
-                <EventRegistration event={event} games={games}/>
+                    <VStack position={"relative"} p={"20px"}>
+                        {/* Registration Button */}
+                        <EventRegistration event={event} games={games}/>
                     </VStack>
                 </Stack>
                 </Box>
