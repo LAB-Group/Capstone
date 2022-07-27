@@ -4,10 +4,10 @@ import EventRegistration from "../Events/EventRegistration"
 import { 
     Container, Box, Text,SimpleGrid, Flex, 
     Image, List, VStack,Heading, Stack, 
-    StackDivider, ListItem, Icon, Grid, GridItem, HStack, Badge, useColorModeValue 
+    StackDivider, ListItem, Icon, Grid, GridItem, HStack, Badge, useColorModeValue, Spacer 
 } from "@chakra-ui/react"
-
-import {HiLocationMarker} from "react-icons/hi"
+import { CalendarIcon } from "@chakra-ui/icons"
+import { HiLocationMarker } from "react-icons/hi"
 
 import { useEventContext } from "../../contexts/event"
 
@@ -22,20 +22,22 @@ export default function EventDetails({event}) {
         <Container maxW={"7xl"}>
             {/* Need to resize image */}
             {/* Image */}
+            <Box className="header" position={"relative"} width={"100%"}>
             <Image 
-            rounded= {"md"} 
+            position={"relative"}
+            zIndex={1}
+            fit={"cover"}
             src={event.eventImageUrl} 
             alt={noImage}
-            fit={"cover"}
-            align={"center"}
-            width={"100%"}
-            height={{base:"100%", sm:"400px", lg:"500px"}}/>
+            maxWidth={"100%"}
+            height={"auto"}/>
+            </Box>
+            
             <SimpleGrid 
             column={{base:1, lg:2}}
             spacing={{base:8, md: 10}}
             py={{base:18, md:24}}
             >
-            
             
             <Stack spacing={{base:6, md:10}}>
                 <Flex minW={0} alignItems={"flex-start"} flexGrow={1} flexDirection={"row"}>
@@ -43,13 +45,14 @@ export default function EventDetails({event}) {
                     src={event.eventImageUrl} 
                     width={"54px"} height={"54px"} 
                     alignItems={"center"} 
-                    flexGrow={0} flexShrink={0} flexBasis={"auto"}/>
+                    flexGrow={0} flexShrink={0} flexBasis={"auto"}
+                    />
                 <Box flexGrow={1} flexShrink={1} flexBasis={"auto"}>
                     {/* Type */}
                     <Text
                         color={useColorModeValue("gray.900", "gray.400")}
                         fontWeight={300}
-                        fontSize={"md"}
+                        fontSize={{base:"lg", sm:"md", lg:"xl"}}
                         textTransform={"uppercase"}
                     >{
                         event.eventType
@@ -58,36 +61,35 @@ export default function EventDetails({event}) {
                     <Heading
                         lineHeight={1.1}
                         fontWeight={600}
-                        fontSize={{base:"lg", sm:"md", lg:"xl"}}
+                        fontSize={{base:"lg", sm:"md", lg:"2xl"}}
                         textTransform={"uppercase"}
                     >{event.eventName}
                     </Heading>
+                    <HStack spacing={"10px"} >
                     {/* Date */}
                     <Text
                         color={useColorModeValue("gray.900", "gray.400")}
                         fontWeight={300}
-                        fontSize={"2xl"}
-                    >{
+                        fontSize={"md"}
+                    >
+                    <Icon as={CalendarIcon}/>    
+                    {
                         myDate
                     }</Text>
                     {/* Time */}
                     <Text
                         color={useColorModeValue("gray.900", "gray.400")}
                         fontWeight={300}
-                        fontSize={"2xl"}
+                        fontSize={"md"}
                     >{
                         time
                     }</Text>
-                </Box>
-                </Flex>
-                    <Box>
-
-
+                    </HStack>
                     {/* Location */}
                     <Text
                         color={useColorModeValue("gray.900", "gray.400")}
                         fontWeight={300}
-                        fontSize={"2xl"}
+                        fontSize={"md"}
                     > 
                     <Icon as={HiLocationMarker}/>
                         {
@@ -95,11 +97,14 @@ export default function EventDetails({event}) {
                         }
                     </Text>
                 </Box>
+                </Flex>
+
+
             </Stack>
             </SimpleGrid>
                 {/* Event */}
-
-                {/* Divides/Spaces */}
+                <Box borderColor={"purple.400"} borderStyle={"solid"}>
+                    {/* Divides/Spaces */}
                 <Stack spacing={{ base: 4, sm: 6 }} direction={"column"} divider={
                     <StackDivider borderColor={useColorModeValue("gray.200", "gray.600")}/>
                 }>
@@ -112,6 +117,8 @@ export default function EventDetails({event}) {
                         <Text fontSize={"lg"}>{event.eventDetails}</Text>
                     </VStack>
                 </Stack>
+
+                </Box>
 
                 <Box>
                     {/* Game */}
