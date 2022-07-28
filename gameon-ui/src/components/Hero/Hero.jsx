@@ -10,7 +10,7 @@ import "react-slideshow-image/dist/styles.css"
 export default function Hero() {
     return(
         // Shrinks container to 480px currently
-        <Container maxW="1200px">
+        <Container maxW="1200px" backgroundColor={"whiteAlpha.700"}>
             <Flex flexDirection="column" alignItems="center">
                 <Slideshow/> 
             </Flex> 
@@ -28,7 +28,7 @@ function Slideshow () {
     return (
         //Learning Swiper 
         
-            <>
+            
             <Box maxW={"900px"} minW={"405px"}>
                 <Swiper 
                 spaceBetween={30}
@@ -49,7 +49,7 @@ function Slideshow () {
                     
                 </Swiper>
             </Box>
-            </>
+            
         
         //   Old Slideshow code
         // Widen container's width 

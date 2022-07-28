@@ -1,11 +1,10 @@
 import * as React from "react"
-import EventFeed from "../Events/EventFeed"
 import EventRegistration from "../Events/EventRegistration"
 import { useState, useEffect } from "react"
 import { 
     Container, Box, Text, SimpleGrid, Flex, 
-    Image, List, VStack,Heading, Stack, 
-    StackDivider, ListItem, Icon, Center, HStack, Badge, useColorModeValue, Spacer 
+    Image, VStack,Heading, Stack, 
+    StackDivider, Icon, HStack, useColorModeValue 
 } from "@chakra-ui/react"
 import { CalendarIcon } from "@chakra-ui/icons"
 import { HiLocationMarker } from "react-icons/hi"
@@ -61,13 +60,6 @@ export default function EventDetails({event}) {
             backgroundPosition={"center"}
             backgroundSize={"contain"}
             backgroundRepeat={"no-repeat"}>
-            {/* <Center>
-            <Image 
-            src={event.eventImageUrl} 
-            alt={noImage}
-            maxWidth={"100%"}
-            height={"auto"}/>
-            </Center> */}
             </Box>
             
             <>
@@ -178,7 +170,7 @@ export default function EventDetails({event}) {
                     {/* Game */}
                     <SimpleGrid columns={{base:2, md:3}} spacing={10}>  
                         {games.game?.map((game, index) => (
-                            <HStack spacing={"20px"} position={"relative"}>
+                            <HStack key={index} spacing={"20px"} position={"relative"}>
                                 <Box width={"300px"} borderWidth='1px' borderRadius='lg' padding={"5px"} overflow='hidden' boxShadow={'md'}>
                                     <Image position={"relative"} left={"70px"} objectFit={"cover"} height={"200px"} src={game.cover.url.replace("thumb", "cover_small_2x")} alt={noImage}/>
                                     <Box p='6'>

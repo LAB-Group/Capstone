@@ -3,11 +3,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import apiClient from '../../services/apiClient';
 import { useAuthContext } from '../../contexts/auth';
-import {
-  Container,
-  Button,
-  FormLabel,
-  Checkbox,
+import { Container, Button, FormLabel, Checkbox, 
   CheckboxGroup, Text, Box, Stack, HStack
 } from '@chakra-ui/react';
 
