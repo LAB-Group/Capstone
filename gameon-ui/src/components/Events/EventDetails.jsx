@@ -57,7 +57,7 @@ export default function EventDetails({event}) {
         <Container maxW={"7xl"}>
             {/* Need to resize image */}
             {/* Image */}
-            <Box width={"100%"} height={"400px"} backgroundImage={event.eventImageUrl}
+            <Box width={"100%"} height={"400px"} backgroundImage={event?.eventImageUrl}
             backgroundPosition={"center"}
             backgroundSize={"contain"}
             backgroundRepeat={"no-repeat"}>
@@ -80,7 +80,7 @@ export default function EventDetails({event}) {
             <Stack spacing={{base:6, md:10}} justifyContent={"center"}>
                 <Flex minW={0} alignItems={"flex-start"} flexGrow={1} flexDirection={"row"}>
                     <Image 
-                    src={event.eventImageUrl} 
+                    src={event?.eventImageUrl} 
                     width={"54px"} height={"54px"} 
                     alignItems={"center"} 
                     flexGrow={0} flexShrink={0} flexBasis={"auto"}
@@ -180,7 +180,7 @@ export default function EventDetails({event}) {
                         {games.game?.map((game, index) => (
                             <HStack spacing={"20px"} position={"relative"}>
                                 <Box width={"300px"} borderWidth='1px' borderRadius='lg' padding={"5px"}overflow='hidden' boxShadow={'md'}>
-                                    <Image position={"relative"} left={"70px"} objectFit={"cover"} height={"200px"} src={game.cover.url.replace("thumb", "cover_small_2x")} alt={noImage}/>
+                                    <Image position={"relative"} left={"70px"} objectFit={"cover"} height={"200px"} src={game.cover?.url.replace("thumb", "cover_small_2x")} alt={noImage}/>
                                     <Box p='6'>
                                         <Box display='flex' alignItems='baseline'>
                                             <Heading textAlign={"center"} size='md'>{game.name}</Heading>
