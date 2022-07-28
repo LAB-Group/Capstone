@@ -1,5 +1,6 @@
 import * as React from "react"
 import {
+  Box,
     ChakraProvider,
     VStack,
   } from '@chakra-ui/react';
@@ -27,7 +28,7 @@ function App(){
 
     return( 
         <ChakraProvider>
-        <VStack>     
+        <Box>     
         <BrowserRouter>
         <NavBar/>
         <Routes>
@@ -45,8 +46,8 @@ function App(){
 
         {/* Footer */}
         <Footer/>
-        </BrowserRouter> 
-        </VStack>
+        </BrowserRouter>
+        </Box> 
         </ChakraProvider>
         
     )

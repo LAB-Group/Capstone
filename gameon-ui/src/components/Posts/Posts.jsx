@@ -2,24 +2,18 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import apiClient from '../../services/apiClient';
 import {
-  Input,
-  Textarea,
-  Image,
-  Container,
-  Spacer,
-  FormControl,
-  FormLabel,
-  Button,
-  extendTheme,
-  HStack,
-  Text,
-  Box,
-  Heading,
-  VStack, Modal, ModalOverlay, ModalFooter, ModalBody, ModalContent, ModalHeader, ModalCloseButton, useDisclosure, ButtonGroup,Stack, Skeleton, Divider, Badge,Flex
+  Textarea, Image, Container, Button,
+  HStack, Text, Box, Heading, VStack, 
+  Modal, ModalOverlay, ModalFooter, 
+  ModalBody, ModalContent, ModalHeader, 
+  ModalCloseButton, useDisclosure, ButtonGroup, 
+  Stack, Skeleton, Divider, Badge, Flex
 } from '@chakra-ui/react';
 import PostReply from './PostReply';
 
-export default function Posts({ post, eventId, key }) {
+// Located in EventPage file
+
+export default function Posts({ post, eventId }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [postReplies, setPostReplies] = useState([]);
   const [errors, setErrors] = useState(null);
@@ -68,35 +62,25 @@ export default function Posts({ post, eventId, key }) {
 
   return (
     <Container centerContent>
-      <Box
-              key={key}
-              borderWidth="1px"
-              shadow="md"
-              bg="#fbfdff"
-              position="relative"
-              rounded="md"
-              borderRadius="5px"
-              minW='1000px'
-              pb={2}
-              m={8}
-             
-            >
-         
-              <Stack isInline justifyContent="space-between" mt={2} pl={5} pr={5}>
-                <Box minW="100%">
-                  
-                  <Stack isInline align="center" marginBottom="5px">
-                    <HStack spacing={3}>
-                    <Flex
-                      justifyContent={{
-                        base: "center",
-                        md: "end",
-                      }}
-                      mt={-16}>
+      <Box 
+        borderWidth="1px" 
+        shadow="md" 
+        bg="#fbfdff"
+        position="relative"
+        rounded="md"
+        borderRadius="5px"
+        minW='1000px'
+        pb={2}
+        m={8}
+      >         
+        <Stack isInline justifyContent="space-between" mt={2} pl={5} pr={5}>
+            <Box minW="100%">      
+                <Stack isInline align="center" marginBottom="5px">
+                  <HStack spacing={3}>
+                    <Flex justifyContent={{base: "center", md: "end",}} mt={-16}>
                       <Image  w={20} mt={8} borderRadius="50%" src={post.creatorImageUrl}/>
                     </Flex>
                     <Text fontWeight={'bold'} >@{post.creatorUsername}</Text>
-
                       {/* // <Image size="sm" width="2em" height="2em" borderRadius="50%" src={post.creatorImageUrl} /> */}
                     </HStack>
                     
@@ -118,7 +102,7 @@ export default function Posts({ post, eventId, key }) {
                     </Stack>
                     <Divider w="950px"/>
                     
-                      <Box ma>
+                      <Box>
                       <Text  mt={2} minH="14px" width="80%">{post.postContent}</Text>
                     </Box>
                   </Box>

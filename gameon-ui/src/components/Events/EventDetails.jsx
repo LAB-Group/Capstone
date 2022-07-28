@@ -1,11 +1,10 @@
 import * as React from "react"
-import EventFeed from "../Events/EventFeed"
 import EventRegistration from "../Events/EventRegistration"
 import { useState, useEffect } from "react"
 import { 
     Container, Box, Text, SimpleGrid, Flex, 
-    Image, List, VStack,Heading, Stack, 
-    StackDivider, ListItem, Icon, Center, HStack, Badge, useColorModeValue, Spacer 
+    Image, VStack,Heading, Stack, 
+    StackDivider, Icon, HStack, useColorModeValue 
 } from "@chakra-ui/react"
 import { CalendarIcon } from "@chakra-ui/icons"
 import { HiLocationMarker } from "react-icons/hi"
@@ -54,20 +53,13 @@ export default function EventDetails({event}) {
     },[string])
 
     return(
-        <Container maxW={"7xl"}>
+        <Container maxWidth={"7xl"}>
             {/* Need to resize image */}
             {/* Image */}
             <Box width={"100%"} height={"400px"} backgroundImage={event?.eventImageUrl}
             backgroundPosition={"center"}
             backgroundSize={"contain"}
             backgroundRepeat={"no-repeat"}>
-            {/* <Center>
-            <Image 
-            src={event.eventImageUrl} 
-            alt={noImage}
-            maxWidth={"100%"}
-            height={"auto"}/>
-            </Center> */}
             </Box>
             
             <>
@@ -90,7 +82,7 @@ export default function EventDetails({event}) {
                     <Text
                         color={useColorModeValue("gray.900", "gray.400")}
                         fontWeight={300}
-                        fontSize={{base:"lg", sm:"md", lg:"xl"}}
+                        fontSize={{base:"xl", sm:"lg", lg:"2xl"}}
                         textTransform={"uppercase"}
                     >{
                         event.eventType
@@ -99,10 +91,11 @@ export default function EventDetails({event}) {
                     <Heading
                         lineHeight={1.1}
                         fontWeight={600}
-                        fontSize={{base:"lg", sm:"md", lg:"2xl"}}
+                        fontSize={{base:"2xl", sm:"lg", lg:"4xl"}}
                         textTransform={"uppercase"}
                     >{event.eventName}
                     </Heading>
+                    
                     <HStack spacing={"10px"} >
                     {/* Date */}
                     <Icon as={CalendarIcon}/>    
@@ -152,7 +145,9 @@ export default function EventDetails({event}) {
                 <Stack spacing={{ base: 4, sm: 6 }} direction={"column"} divider={
                     <StackDivider borderColor={useColorModeValue("gray.200", "gray.600")}/>
                 }>
-                    
+                <Box>
+                
+                    <HStack>
                     {/* Details */}
                     <VStack spacing={{ base: 4, sm: 6 }}>
                         <Text position={"relative"} color={useColorModeValue("whiteAlpha.600", "whiteAlpha.700")} fontSize={"3xl"} fontWeight={300}>
@@ -162,6 +157,8 @@ export default function EventDetails({event}) {
                         <Text fontSize={"lg"} padding={"4px"}>{event.eventDetails}</Text>
                         </Box>
                     </VStack>
+                    </HStack>
+                </Box>
                 </Stack>
 
                 </Box>
@@ -178,9 +175,9 @@ export default function EventDetails({event}) {
                     {/* Game */}
                     <SimpleGrid columns={{base:2, md:3}} spacing={10}>  
                         {games.game?.map((game, index) => (
-                            <HStack spacing={"20px"} position={"relative"}>
-                                <Box width={"300px"} borderWidth='1px' borderRadius='lg' padding={"5px"}overflow='hidden' boxShadow={'md'}>
-                                    <Image position={"relative"} left={"70px"} objectFit={"cover"} height={"200px"} src={game.cover?.url.replace("thumb", "cover_small_2x")} alt={noImage}/>
+                            <HStack key={index} spacing={"20px"} position={"relative"}>
+                                <Box width={"400px"} borderWidth='1px' borderRadius='lg' pl={"10px"} overflow='hidden' boxShadow={'md'}>
+                                    <Image boxSize={"300px"} position={"relative"} alignContent={"center"} fit={"contain"} borderTopRadius={"lg"} src={game.cover?.url.replace("thumb", "cover_small_2x")} alt={noImage}/>
                                     <Box p='6'>
                                         <Box display='flex' alignItems='baseline'>
                                             <Heading textAlign={"center"} size='md'>{game.name}</Heading>
@@ -197,14 +194,13 @@ export default function EventDetails({event}) {
 
             
                 
-                <Box>
                 <Stack>
-                    <VStack position={"relative"} p={"20px"}>
+
+                <VStack position={"relative"} p={"20px"}>
                         {/* Registration Button */}
-                        <EventRegistration event={event} games={games}/>
-                    </VStack>
+                    <EventRegistration event={event} games={games}/>
+                </VStack>
                 </Stack>
-                </Box>
 
                 {/* Used for later */}
                 {/* Other events */}
