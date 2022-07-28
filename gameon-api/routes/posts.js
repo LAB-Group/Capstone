@@ -15,12 +15,11 @@ router.post("/:eventId", async (req, res, next) => {
     }
 })
 
-router.get("/:eventId", async (req, res, next) => {
+router.get("/:userId", async (req, res, next) => {
     try {
-        // get all posts for this event
-        
+        // get all posts by user id
     } catch (err) {
-
+        next(err)
     }
 })
 
