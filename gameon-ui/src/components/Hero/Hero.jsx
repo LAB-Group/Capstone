@@ -29,16 +29,20 @@ function Slideshow () {
         //Learning Swiper 
         
             
-            <Box maxW={"900px"} minW={"405px"}>
+            <Box maxW={"900px"} minW={"405px"} css={{
+                ".swiper-pagination-bullet-active": {
+                    "background-color": "#B794F4"
+                  }
+            }}>
                 <Swiper 
                 spaceBetween={30}
                 effect={"fade"}
                 pagination={{
-                    clickable: true
+                    clickable: true,
+                    color:"purple.400"
                   }}
                   modules={[EffectFade, Pagination]}
                   className="mySwiper"
-                  color={"purple.400"}
                 >
                     {slideImages.map((slideImage, idx) => (
                         <SwiperSlide key={idx}> 

@@ -25,9 +25,13 @@ export default function EventFeed({ isFetching }){
                 <Heading mb={"10"} textAlign={"center"}>Events</Heading>
                 
                 <SimpleGrid minWidth="80vw" justifyContent={"center"} alignItems={"center"} minChildWidth={'320px'} rowGap='20px' className="WRAP">
-                <VStack>
+                <VStack css={{
+                ".swiper-pagination-bullet-active": {
+                    "background-color": "#B794F4"
+                  }
+            }}>
 
-                <Box maxW={"1000px"}>
+                <Box maxW={"1000px"} >
                     <Heading>Tournaments</Heading>
                 {tournamentEvents?.length ? 
                     <Swiper
