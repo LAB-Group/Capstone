@@ -5,11 +5,12 @@ import { useState, useEffect } from "react"
 import { 
     Container, Box, Text, SimpleGrid, Flex, 
     Image, List, VStack,Heading, Stack, 
-    StackDivider, ListItem, Icon, HStack, Badge, useColorModeValue 
+    StackDivider, ListItem, Icon, Center, HStack, Badge, useColorModeValue, Spacer 
 } from "@chakra-ui/react"
+import { CalendarIcon } from "@chakra-ui/icons"
+import { HiLocationMarker } from "react-icons/hi"
 import axios from "axios";
 
-import {HiLocationMarker} from "react-icons/hi"
 
 import { useEventContext } from "../../contexts/event"
 
@@ -54,91 +55,117 @@ export default function EventDetails({event}) {
 
     return(
         <Container maxW={"7xl"}>
+            {/* Need to resize image */}
+            {/* Image */}
+            <Box width={"100%"} height={"400px"} backgroundImage={event?.eventImageUrl}
+            backgroundPosition={"center"}
+            backgroundSize={"contain"}
+            backgroundRepeat={"no-repeat"}>
+            {/* <Center>
+            <Image 
+            src={event.eventImageUrl} 
+            alt={noImage}
+            maxWidth={"100%"}
+            height={"auto"}/>
+            </Center> */}
+            </Box>
+            
+            <>
             <SimpleGrid 
             column={{base:1, lg:2}}
             spacing={{base:8, md: 10}}
             py={{base:18, md:24}}
             >
-            <Flex>
-                {/* Image */}
-                <Image 
-                rounded= {"md"} 
-                src={event.eventImageUrl} 
-                alt={noImage}
-                fit={"cover"}
-                align={"center"}
-                width={"100%"}
-                height={{base:"100%", sm:"400px", lg:"500px"}}/>
-            </Flex>
-            <Stack spacing={{base:6, md:10}}>
-                <Box as={"header"}>
+            
+            <Stack spacing={{base:6, md:10}} justifyContent={"center"}>
+                <Flex minW={0} alignItems={"flex-start"} flexGrow={1} flexDirection={"row"}>
+                    <Image 
+                    src={event?.eventImageUrl} 
+                    width={"54px"} height={"54px"} 
+                    alignItems={"center"} 
+                    flexGrow={0} flexShrink={0} flexBasis={"auto"}
+                    />
+                <Box flexGrow={1} flexShrink={1} flexBasis={"auto"}>
                     {/* Type */}
                     <Text
                         color={useColorModeValue("gray.900", "gray.400")}
                         fontWeight={300}
-                        fontSize={"2xl"}
+                        fontSize={{base:"lg", sm:"md", lg:"xl"}}
+                        textTransform={"uppercase"}
                     >{
                         event.eventType
                     }</Text>
-
                     {/* Event Name */}
                     <Heading
                         lineHeight={1.1}
                         fontWeight={600}
-                        fontSize={{base:"2xl", sm:"4xl", lg:"5xl"}}
+                        fontSize={{base:"lg", sm:"md", lg:"2xl"}}
                         textTransform={"uppercase"}
                     >{event.eventName}
                     </Heading>
-
+                    <HStack spacing={"10px"} >
                     {/* Date */}
+                    <Icon as={CalendarIcon}/>    
                     <Text
                         color={useColorModeValue("gray.900", "gray.400")}
                         fontWeight={300}
-                        fontSize={"2xl"}
-                    >{
+                        fontSize={"md"}
+                    >
+                    {
                         myDate
                     }</Text>
                     {/* Time */}
                     <Text
                         color={useColorModeValue("gray.900", "gray.400")}
                         fontWeight={300}
-                        fontSize={"2xl"}
+                        fontSize={"md"}
                     >{
                         time
                     }</Text>
-
+                    </HStack>
                     {/* Location */}
+                    <HStack>
+                    <Icon as={HiLocationMarker}/>
                     <Text
                         color={useColorModeValue("gray.900", "gray.400")}
                         fontWeight={300}
-                        fontSize={"2xl"}
+                        fontSize={"md"}
                     > 
-                    <Icon as={HiLocationMarker}/>
                         {
-                        event.eventLocation
+                            event.eventLocation
                         }
                     </Text>
+
+                    </HStack>
                 </Box>
+                </Flex>
+
+
             </Stack>
             </SimpleGrid>
-                {/* Event */}
+            </>
 
-                {/* Divides/Spaces */}
+            
+                {/* Event */}
+                <Box position={"relative"} pt={"25px"} pb={"25px"} pl={"0"} pr={0} backgroundColor={"purple.500"} borderRadius={"3xl"}>
+                    {/* Divides/Spaces */}
                 <Stack spacing={{ base: 4, sm: 6 }} direction={"column"} divider={
                     <StackDivider borderColor={useColorModeValue("gray.200", "gray.600")}/>
                 }>
                     
                     {/* Details */}
                     <VStack spacing={{ base: 4, sm: 6 }}>
-                        <Text color={useColorModeValue("gray.500", "gray.400")} fontSize={"2xl"} fontWeight={300}>
-                            Description:
+                        <Text position={"relative"} color={useColorModeValue("whiteAlpha.600", "whiteAlpha.700")} fontSize={"3xl"} fontWeight={300}>
+                            Description
                         </Text>
-                        <Text fontSize={"lg"}>{event.eventDetails}</Text>
+                        <Box backgroundColor={"whiteAlpha.900"} width={"75%"} borderRadius={"3xl"}>
+                        <Text fontSize={"lg"} padding={"4px"}>{event.eventDetails}</Text>
+                        </Box>
                     </VStack>
                 </Stack>
 
-                <Box>
-                    {/* Game */}
+                </Box>
+                <Stack>
                     <Text
                     fontSize={{ base: "16px", lg: "18px" }}
                     color={useColorModeValue("yellow.500", "yellow.300")}
@@ -147,26 +174,36 @@ export default function EventDetails({event}) {
                     mb={'4'}>
                         Games:
                     </Text>
-
-                    <SimpleGrid columns={{base:1, md:2}} spacing={10}>
-                        <List spacing={2}>
+                    <HStack spacing="24px">
+                    {/* Game */}
+                    <SimpleGrid columns={{base:2, md:3}} spacing={10}>  
                         {games.game?.map((game, index) => (
-                            <ListItem>
-                                <Box width={"300px"} borderWidth='1px' borderRadius='lg' overflow='hidden' boxShadow={'md'}>
-                                    <Image position={"relative"} left={"70px"} objectFit={"cover"} height={"200px"} src={game.cover?.url?.replace("thumb", "cover_small_2x")} alt={noImage}/>
-                                <Box p='6'>
-                                    <Box display='flex' alignItems='baseline'>
-                                        <Heading textAlign={"center"} size='md'>{game.name}</Heading>
+                            <HStack spacing={"20px"} position={"relative"}>
+                                <Box width={"300px"} borderWidth='1px' borderRadius='lg' padding={"5px"}overflow='hidden' boxShadow={'md'}>
+                                    <Image position={"relative"} left={"70px"} objectFit={"cover"} height={"200px"} src={game.cover?.url.replace("thumb", "cover_small_2x")} alt={noImage}/>
+                                    <Box p='6'>
+                                        <Box display='flex' alignItems='baseline'>
+                                            <Heading textAlign={"center"} size='md'>{game.name}</Heading>
+                                        </Box>
                                     </Box>
                                 </Box>
-                            </Box>
-                            </ListItem>
+                            </HStack>
                         ))}
-                        </List>
+                        
                     </SimpleGrid>
 
-                {/* Registration Button */}
-                <EventRegistration event={event} games={games}/>
+                    </HStack>
+                </Stack>
+
+            
+                
+                <Box>
+                <Stack>
+                    <VStack position={"relative"} p={"20px"}>
+                        {/* Registration Button */}
+                        <EventRegistration event={event} games={games}/>
+                    </VStack>
+                </Stack>
                 </Box>
 
                 {/* Used for later */}
