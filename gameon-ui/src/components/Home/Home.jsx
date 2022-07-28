@@ -6,7 +6,7 @@ import { Image, Container, Spacer, Box } from "@chakra-ui/react"
 export default function Home(){
     return (
     
-            <Container centerContent minWidth="100vw">
+            <Container centerContent minWidth="98vw">
                 <Hero />
                 <Spacer/>
                 <EventFeed />
@@ -15,26 +15,3 @@ export default function Home(){
         
     )
 }
-
-// function Swipershow() {
-//   return (
-//     <>
-//       <Swiper
-//         spaceBetween={30}
-//         effect={"fade"}
-//         navigation={true}
-//         pagination={{
-//           clickable: true,
-//         }}
-//         modules={[EffectFade, Navigation, Pagination]}
-//       >
-//         <SwiperSlide>
-//           <Image src={pic}/>
-//         </SwiperSlide>
-//         <SwiperSlide>
-//           <Image src={elmo}/>
-//         </SwiperSlide>
-//       </Swiper>
-//     </>
-//   );
-// }

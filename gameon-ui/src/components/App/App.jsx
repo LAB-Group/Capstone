@@ -1,7 +1,7 @@
 import * as React from "react"
 import {
+  Box,
     ChakraProvider,
-    Container,
     VStack,
   } from '@chakra-ui/react';
 import { BrowserRouter, Routes, Route} from "react-router-dom"
@@ -28,7 +28,7 @@ function App(){
 
     return( 
         <ChakraProvider>
-        <>     
+        <Box>     
         <BrowserRouter>
         <NavBar/>
         <Routes>
@@ -47,7 +47,7 @@ function App(){
         {/* Footer */}
         <Footer/>
         </BrowserRouter>
-        </> 
+        </Box> 
         </ChakraProvider>
         
     )

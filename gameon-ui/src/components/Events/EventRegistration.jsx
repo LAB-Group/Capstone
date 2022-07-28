@@ -40,7 +40,7 @@ export default function EventRegistration({ event, games }) {
         registeredArray.push(games.game[i].id)
       }   
     }
-    console.log(registeredArray)
+
     return registeredArray
   }
 
@@ -73,7 +73,7 @@ export default function EventRegistration({ event, games }) {
               </HStack>
           </Stack>
       </Box>
-      <Box>
+      <Box position={"relative"} paddingLeft={"20px"}>
           <Button margin={2} colorScheme="purple" mr={3} onClick={handleOnSubmit}>Register</Button>
       </Box>
     </Container>

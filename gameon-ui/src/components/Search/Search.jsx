@@ -125,14 +125,14 @@ function SearchBar({
               Event Game
             </FormLabel>
           ) : (
-            <FormLabel>Event Game</FormLabel>
+            <FormLabel>Games</FormLabel>
           )}
           <HStack marginBottom={2}>
             <Input
               name="searchInput"
               type="text"
-              minW="525px"
-              
+              w="539px"
+              maxW={'50em'}
               focusBorderColor="purple.400"
               value={searchInput}
               onChange={handleOnInputChange}
