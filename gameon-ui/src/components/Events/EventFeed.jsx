@@ -9,7 +9,7 @@ import "swiper/css/scrollbar"
 import EventCard from "./EventCard"
 import { useAuthContext } from "../../contexts/auth"
 import { useEventContext } from "../../contexts/event"
-import {  Scrollbar } from "swiper"
+import { Pagination, Scrollbar } from "swiper"
 export default function EventFeed({ isFetching }){
     const { user } = useAuthContext()
     const { events } = useEventContext()
