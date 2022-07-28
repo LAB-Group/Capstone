@@ -145,7 +145,7 @@ export default function EventDetails({event}) {
                 <Stack spacing={{ base: 4, sm: 6 }} direction={"column"} divider={
                     <StackDivider borderColor={useColorModeValue("gray.200", "gray.600")}/>
                 }>
-                <Box>
+                <Box textAlign={"center"}>
                 
                     <HStack>
                     {/* Details */}
