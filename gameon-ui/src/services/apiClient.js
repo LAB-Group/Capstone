@@ -98,6 +98,10 @@ class ApiClient {
         return await this.request({ endpoint: `events/${eventId}/posts/${postId}/post_replies`, method: `GET`})
     }
 
+    async fetchUsersEvents(userId) {
+        return await this.request({ endpoint: `events/user/${userId}`, method: `GET` })
+    }
+
 }
 
 export default new ApiClient("http://localhost:3001")

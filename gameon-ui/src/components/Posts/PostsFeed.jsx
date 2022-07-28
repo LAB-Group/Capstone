@@ -11,8 +11,8 @@ import {
   FormLabel,
   Button,
   extendTheme,
-  VStack,
-  Text, Box
+  VStack,Stack,
+  Text, Box, Heading
 } from '@chakra-ui/react';
 import Posts from './Posts';
 
@@ -20,6 +20,11 @@ export default function PostsFeed({ eventId, posts }) {
 
 
   return (
+    <VStack>
+    <Stack alignContent=''>
+      <Heading p={3}>Event Comments</Heading>
+    </Stack>
+  
     <Container centerContent minWidth="85vw">
       <VStack>
         {posts?.map((post, index) => (
@@ -32,5 +37,6 @@ export default function PostsFeed({ eventId, posts }) {
         ) : null} */}
       </VStack>
     </Container>
+    </VStack>
   );
 }

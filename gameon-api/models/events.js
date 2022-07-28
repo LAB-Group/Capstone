@@ -156,6 +156,32 @@ class Events {
         return results.rows[0]
     }
 
+    static async fetchUsersEvents(id) {
+        const results = await db.query(
+            `
+                SELECT r.user_id, 
+                    r.registered_at,
+                    e.id,
+                    e.event_name AS "eventName",
+                    e.event_date AS "eventDate",
+                    e.event_type AS "eventType",
+                    e.location AS "eventLocation",
+                    e.event_game AS "eventGame",
+                    e.details AS "eventDetails",
+                    e.event_image_url AS "eventImageUrl",
+                    e.created_at AS "eventCreatedAt",
+                    e.updated_at AS "eventUpdatedAt"
+                FROM registered_events AS r
+                    LEFT JOIN events AS e ON e.id = r.event_id
+                WHERE r.user_id = (SELECT id FROM users WHERE id = $1)
+            `,
+            [id]
+        )
+
+        return results.rows
+    }
+
+
     static async fetchUsersRegisteredForEvent(eventId) {
         const numOfUsers = await db.query(
             `

@@ -12,6 +12,7 @@ class User {
       firstName: user.first_name,
       lastName: user.last_name,
       imageUrl: user.image_url,
+      gameList: user.game_list,
       createdAt: user.created_at
     }
   }
@@ -81,20 +82,20 @@ class User {
   }
 
   static async editUser({ userUpdate }) {
-    const requiredFields = ["username", "firstName", "lastName", "imageUrl", "email"]
+    const requiredFields = ["username", "firstName", "lastName", "imageUrl", "email", "gameList"]
     requiredFields.forEach((property) => {
       if (!userUpdate.hasOwnProperty(property)) {
         throw new BadRequestError(`Missing ${property} in request body.`)
       }
     })
-
+    console.log("GAME LIST: ", typeof userUpdate.gameList[0])
     const userResult = await db.query(
       `UPDATE users
-       SET username = $1, first_name = $2, last_name = $3, image_url = $4
+       SET username = $1, first_name = $2, last_name = $3, image_url = $4, game_list = $6
        WHERE email = $5
-       RETURNING username, first_name AS "firstName", last_name AS "lastName", image_url AS "imageUrl", email;
+       RETURNING username, first_name AS "firstName", last_name AS "lastName", image_url AS "imageUrl", email, game_list AS "gameList";
       `,
-      [userUpdate.username, userUpdate.firstName, userUpdate.lastName, userUpdate.imageUrl, userUpdate.email]
+      [userUpdate.username, userUpdate.firstName, userUpdate.lastName, userUpdate.imageUrl, userUpdate.email, userUpdate.gameList]
     )
     const editedUser = userResult.rows[0]
 

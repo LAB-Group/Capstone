@@ -1,22 +1,25 @@
 import * as React from "react"
-import { Box, Image, Center, Text, VStack, Divider, HStack, Stack, Badge, Heading, Button, Container, useDisclosure, Modal } from "@chakra-ui/react"
-import { Routes, Route, Link } from "react-router-dom"
-import profile from "../../media/elmo-burning.gif"
-import evo from "../../media/evo.jpg"
-import EditProfile from "../EditProfile/EditProfile"
+import { useState, useEffect } from "react"
+import { Box, Center, Text, Divider, Stack, Container, useDisclosure} from "@chakra-ui/react"
 import { useAuthContext } from "../../contexts/auth"
 import ProfileDetails from "./ProfileDetails"
-import { useState, useEffect } from "react"
 import apiClient from "../../services/apiClient"
+import UserUpcomingEvents from "./UserUpcomingEvents"
+import UserPreviousEvents from "./UserPreviousEvents"
 
-// FIXME: Need to refactor below code and turn into different components
+// FIXME: NEED TO FIX INTERMITTENT RENDER ISSUES FOR FILTERED EVENTS FEED
 export default function ProfilePage() {
     const { user } = useAuthContext()
-    console.log("user: ", user)
-    console.log("userId: ", user.id)
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [posts, setPosts] = useState([])
     const [error, setError] = useState(null)
+    const [events, setEvents] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [prevEvents, setPrevEvents] = useState([])
+    const [futureEvents, setFutureEvents] = useState([])
+
+    const curDate = new Date()
+    curDate.setHours(0,0,0,0)
 
     useEffect(() => {
         const fetchUsersPosts = async () => {
@@ -29,6 +32,38 @@ export default function ProfilePage() {
 
         fetchUsersPosts()
     }, [user.id])
+    
+
+    useEffect(() => {
+        const getEvents = async () => {
+        
+            try {
+              setTimeout(() => {
+                
+              }, 100)
+              const response = await apiClient.fetchUsersEvents(user.id)
+              const eventData = response.data
+              setEvents(eventData)
+              setLoading(false)
+            } catch(error) {
+              console.log("ERROR")
+            }
+          }
+          getEvents()  
+    },[])
+
+    useEffect(() => {
+        const filterEvents = () => {
+            for (let i=0;i<events?.length;i++) {
+                if (Date.parse(events[i].eventDate) < curDate.getTime()) {
+                    setPrevEvents(current => [...current,events[i]]) 
+                } else {
+                    setFutureEvents(current => [...current,events[i]]) 
+                }
+                }
+        }
+        filterEvents()
+    },[loading===false])
 
     return (
 
@@ -38,43 +73,11 @@ export default function ProfilePage() {
                 <ProfileDetails user={user} isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
                 
                 <Divider orientation='horizontal' />
-
-                <Text fontSize='3xl'>Upcoming Events</Text>
-
-                    <Box w='300px' borderWidth='1px' borderRadius='lg' overflow='hidden' boxShadow={'md'}>
-                        <Image src={evo} objectFit={"cover"} height="200px" />
-                        <Box p='6'>
-                            <Box display='flex' alignItems='baseline'>
-                                <HStack spacing='56px'>
-                                    <Heading size='md'>Event Title</Heading>
-                                    <Badge borderRadius='full' px='2' colorScheme='teal'>
-                                        event date
-                                    </Badge>
-                                </HStack>
-                            </Box>
-                        </Box>
-                    </Box>
-
-
+                    <UserUpcomingEvents futureEvents={futureEvents} />
 
                 <Divider orientation='horizontal' />
-                <Text fontSize='3xl'>Previous Events</Text>
+                    <UserPreviousEvents prevEvents={prevEvents} />
 
-                    <Box w='300px' borderWidth='1px' borderRadius='lg' overflow='hidden' boxShadow={'md'}>
-                        <Image src={profile} />
-                        <Box p='6'>
-                            <Box display='flex' alignItems='baseline'>
-                                <HStack spacing='56px'>
-                                    <Heading size='md'>Event Title</Heading>
-                                    <Badge borderRadius='full' px='2' colorScheme='red'>
-                                        event date
-                                    </Badge>
-                                </HStack>
-                            </Box>
-
-
-                        </Box>
-                    </Box>
                 
                 <Divider orientation='horizontal' />
                 <Text fontSize='3xl'>Post</Text>

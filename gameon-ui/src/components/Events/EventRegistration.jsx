@@ -8,7 +8,7 @@ import {
   Button,
   FormLabel,
   Checkbox,
-  CheckboxGroup,
+  CheckboxGroup, Text, Box, Stack, HStack
 } from '@chakra-ui/react';
 
 export default function EventRegistration({ event, games }) {
@@ -44,7 +44,7 @@ export default function EventRegistration({ event, games }) {
         registeredArray.push(games.game[i].id)
       }   
     }
-    console.log(registeredArray)
+
     return registeredArray
   }
 
@@ -59,17 +59,27 @@ export default function EventRegistration({ event, games }) {
   }
 
   return (
-    <Container>
-      <FormLabel htmlFor="eventGame">Event Registration</FormLabel>
-      <CheckboxGroup size="lg">
-        {games.game?.map((game, index) => (
-          <Checkbox margin={2} key={game.id} value={game.name}  isChecked={checkedItems[index]} 
-          onChange={e => setCheckedItems(replaceAt(checkedItems, index, e.target.checked))}>
-            {game.name}
-          </Checkbox>
-        ))}
-      </CheckboxGroup>
-      <Button margin={2} colorScheme="purple" mr={3} onClick={handleOnSubmit}>Register</Button>
+    <Container position={"relative"}>
+      <FormLabel htmlFor="eventGame">
+        <Text fontSize={"lg"} textAlign={"center"}>Event Registration</Text>
+      </FormLabel>
+      <Box>
+          <Stack>
+              <HStack spacing={4}>
+                  <CheckboxGroup size="lg">
+                      {games.game?.map((game, index) => (
+                        <Checkbox margin={2} key={game.id} value={game.name}  isChecked={checkedItems[index]} 
+                        onChange={e => setCheckedItems(replaceAt(checkedItems, index, e.target.checked))}>
+                        {game.name}
+                        </Checkbox>
+                      ))}
+                  </CheckboxGroup>
+              </HStack>
+          </Stack>
+      </Box>
+      <Box>
+          <Button margin={2} colorScheme="purple" mr={3} onClick={handleOnSubmit}>Register</Button>
+      </Box>
     </Container>
   );
 }
