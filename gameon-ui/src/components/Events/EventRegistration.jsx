@@ -44,7 +44,7 @@ export default function EventRegistration({ event, games }) {
         registeredArray.push(games.game[i].id)
       }   
     }
-    console.log(registeredArray)
+
     return registeredArray
   }
 

@@ -59,6 +59,16 @@ router.get("/:eventId/users", async (req, res, next) => {
     }
 })
 
+router.get("/user/:userId", async (req, res, next) => {
+    try {
+        const { userId } = req.params
+        const eventData = await Events.fetchUsersEvents(userId)
+        return res.status(200).json( eventData )
+    } catch (err) {
+        next(err)
+    }
+})
+
 router.delete("/:eventId/withdraw", security.requireAuthenticatedUser, async (req, res, next) => {
     try {
         const { eventId } = req.params
