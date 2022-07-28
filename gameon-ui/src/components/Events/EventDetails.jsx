@@ -154,7 +154,7 @@ export default function EventDetails({event}) {
                             Description
                         </Text>
                         <Box backgroundColor={"whiteAlpha.900"} width={"75%"} borderRadius={"3xl"}>
-                        <Text fontSize={"lg"} padding={"4px"}>{event.eventDetails}</Text>
+                        <Text sx={{"whiteSpace": "pre"}} fontSize={"lg"} padding={"4px"}>{event.eventDetails}</Text>
                         </Box>
                     </VStack>
                     </HStack>
