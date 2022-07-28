@@ -6,11 +6,29 @@ import evo from "../../media/evo.jpg"
 import EditProfile from "../EditProfile/EditProfile"
 import { useAuthContext } from "../../contexts/auth"
 import ProfileDetails from "./ProfileDetails"
+import { useState, useEffect } from "react"
+import apiClient from "../../services/apiClient"
 
 // FIXME: Need to refactor below code and turn into different components
 export default function ProfilePage() {
     const { user } = useAuthContext()
+    console.log("user: ", user)
+    console.log("userId: ", user.id)
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const [posts, setPosts] = useState([])
+    const [error, setError] = useState(null)
+
+    useEffect(() => {
+        const fetchUsersPosts = async () => {
+            const { data, error } = await apiClient.listAllPostsByUserId(user.id)
+            if (data) {
+                console.log("data: ", data)
+            }
+            if (error) setError(error)
+        }
+
+        fetchUsersPosts()
+    }, [user.id])
 
     return (
 
