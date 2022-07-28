@@ -85,7 +85,7 @@ export default function Posts({ post, eventId }) {
                             md: "end",
                           }}
                           mt={[-16]}>
-                          <Image  w={10,20} h={10,20} mt={8} borderRadius="50%" src={post.creatorImageUrl}/>
+                          <Image  w={[10,20]} h={[10,20]} mt={8} borderRadius="50%" src={post.creatorImageUrl}/>
                         </Flex>
                         <Text fontWeight={'bold'} >@{post.creatorUsername}</Text>
                       </HStack>
