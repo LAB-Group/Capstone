@@ -15,11 +15,11 @@ export default function ProfilePage() {
     const [error, setError] = useState(null)
     const [events, setEvents] = useState([])
     const [loading, setLoading] = useState(true)
-    const [prevEvents, setPrevEvents] = useState([])
-    const [futureEvents, setFutureEvents] = useState([])
 
     const curDate = new Date()
     curDate.setHours(0,0,0,0)
+    let prevEvents = events?.filter(event => {return Date.parse(event.eventDate) < curDate.getTime()})
+    let futureEvents = events?.filter(event => {return Date.parse(event.eventDate) >= curDate.getTime()})
 
     useEffect(() => {
         const fetchUsersPosts = async () => {
@@ -51,19 +51,6 @@ export default function ProfilePage() {
           }
           getEvents()  
     },[])
-
-    useEffect(() => {
-        const filterEvents = () => {
-            for (let i=0;i<events?.length;i++) {
-                if (Date.parse(events[i].eventDate) < curDate.getTime()) {
-                    setPrevEvents(current => [...current,events[i]]) 
-                } else {
-                    setFutureEvents(current => [...current,events[i]]) 
-                }
-                }
-        }
-        filterEvents()
-    },[loading===false])
 
     return (
 

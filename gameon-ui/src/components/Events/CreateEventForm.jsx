@@ -93,7 +93,7 @@ export default function CreateEventForm({ onClose }) {
     });
     if (error) setErrors(e => ({ ...e, form: error }));
     onClose();
-    window.location.reload();
+    // window.location.reload();
   };
   const ref = React.useRef()
   const [showTimeDate, setShowTimeDate] = useState(false)
