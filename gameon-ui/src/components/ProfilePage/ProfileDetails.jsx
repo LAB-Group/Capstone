@@ -1,6 +1,6 @@
 import * as React from "react"
 import EditProfile from "../EditProfile/EditProfile"
-import { Box, Image, Center, Text, VStack, Divider, HStack, Stack, Badge, Heading, Button, Container, useDisclosure, Modal } from "@chakra-ui/react"
+import { Box, Image, Center, Text, VStack, Divider, HStack, Stack, Badge, Heading, Button, Container, useDisclosure, Modal, SimpleGrid, Wrap } from "@chakra-ui/react"
 import { Routes, Route, Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 import axios from "axios";
@@ -59,12 +59,14 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen }) {
                             <Divider orientation='horizontal' />
                             {/* <Box w='810px' h='30px' >Location</Box>
                             <Divider orientation='horizontal' /> */}
-                            <Box w='810px' h='50px' >
+                            <Box w='810px' h='70px'  >
                                 <Text>Games played:</Text>
+                                <Wrap display={'flex'} maxH={'50px'} overflowY={'auto'}>
                                 {games.game?.map((game, index) => (
-                                    <Text key={index}>{game.name}</Text>
+                                    <Text display={'flex'} maxWidth={'1000px'} key={index}>{game.name},</Text>
 
                                 ))}
+                                </Wrap>
                              </Box>
                             <Link to="/profile/edit-profile">
                                 <Button w='810px' h='30px' borderRadius='sm' colorScheme='purple' variant='outline' onClick={onOpen} >Edit Profile</Button>
