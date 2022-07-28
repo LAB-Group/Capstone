@@ -1,10 +1,30 @@
-import * as React from "react"
-import { useAuthContext } from "../../contexts/auth"
-import { useState, useEffect } from "react"
-import apiClient from "../../services/apiClient"
+import * as React from 'react';
+import {
+  Container,
+  VStack,Stack,
+  Heading
+} from '@chakra-ui/react';
+import UserPosts from './UserPosts';
 
-export default function UserPosts() {
+export default function UserPostsFeed({ posts }) {
     return (
-        <div></div>
-    )
+        <VStack>
+        <Stack alignContent=''>
+          <Heading p={3}>Posts</Heading>
+        </Stack>
+      
+        <Container centerContent minWidth="85vw">
+          <VStack>
+            {posts?.map((post, index) => (
+              <UserPosts key={index} post={post} />
+            ))}
+            {/* {posts?.length ? (
+              <Box>
+                <Text>No Posts available</Text>
+              </Box>
+            ) : null} */}
+          </VStack>
+        </Container>
+        </VStack>
+      );
 }

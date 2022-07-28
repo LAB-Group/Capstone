@@ -93,6 +93,35 @@ class Posts {
         return posts
     }
 
+    static async listAllPostsByUserId(userId) {
+        // fetches all posts tied to specific eventId
+        
+        const results = await db.query(
+            `
+                SELECT p.id AS "postId",
+                       p.title AS "postTitle",
+                       p.content AS "postContent",
+                       p.created_at AS "postCreatedAt",
+                       u.id AS "creatorId",
+                       u.username AS "creatorUsername",
+                       u.image_url AS "creatorImageUrl",
+                       e.id AS "eventId",
+                       e.user_id AS "eventCreatorId"
+                FROM posts AS p
+                       LEFT JOIN users AS u ON u.id = p.user_id
+                       LEFT JOIN events AS e ON e.id = p.event_id
+                WHERE u.id = $1
+            `,
+                [userId]
+        )
+
+        const posts = results.rows
+        if (!posts) {
+            throw new NotFoundError("No posts found.")
+        }
+        return posts
+    }
+
     static async listSpecificPostByEventId({eventId, postId}) {
         // fetches specific post by eventId and postId
         const eventExists = await Events.fetchEventById(eventId)

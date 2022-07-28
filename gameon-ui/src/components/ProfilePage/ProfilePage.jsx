@@ -6,6 +6,7 @@ import ProfileDetails from "./ProfileDetails"
 import apiClient from "../../services/apiClient"
 import UserUpcomingEvents from "./UserUpcomingEvents"
 import UserPreviousEvents from "./UserPreviousEvents"
+import UserPostsFeed from "./UserPostsFeed"
 
 // FIXME: NEED TO FIX INTERMITTENT RENDER ISSUES FOR FILTERED EVENTS FEED
 export default function ProfilePage() {
@@ -25,7 +26,10 @@ export default function ProfilePage() {
         const fetchUsersPosts = async () => {
             const { data, error } = await apiClient.listAllPostsByUserId(user.id)
             if (data) {
-                console.log("data: ", data)
+                const newPosts = data.posts
+                console.log("newPosts: ", newPosts)
+                setPosts(data.posts)
+                console.log(posts)
             }
             if (error) setError(error)
         }
@@ -69,10 +73,15 @@ export default function ProfilePage() {
                 <Divider orientation='horizontal' />
                 <Text fontSize='3xl'>Post</Text>
                 <Box h='700px' borderRadius='sm'>
-
-                    <Center h='100px'>
-                        <Text fontSize='3xl'>No Post Found</Text>
-                    </Center>
+                    {
+                        posts.length === 0 ? 
+                        
+                        <Center h='100px'>
+                            <Text fontSize='3xl'>No Post Found</Text>
+                         </Center>
+                        : 
+                        <UserPostsFeed posts={posts} />
+                    }
                 </Box>
 
             </Stack>

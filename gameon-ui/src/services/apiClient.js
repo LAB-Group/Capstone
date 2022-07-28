@@ -90,6 +90,10 @@ class ApiClient {
         return await this.request({ endpoint: `events/${eventId}/posts`, method: `GET`})
     }
 
+    async listAllPostsByUserId(userId) {
+        return await this.request({ endpoint: `posts/user/${userId}`, method: `GET`})
+    }
+
     async createPostReply(reply) {
         return await this.request({ endpoint: `events/${reply.eventId}/posts/${reply.postId}/post_replies`, method: `POST`, data: reply })
     }
