@@ -11,6 +11,8 @@ import UserPreviousEvents from "./UserPreviousEvents"
 export default function ProfilePage() {
     const { user } = useAuthContext()
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const [posts, setPosts] = useState([])
+    const [error, setError] = useState(null)
     const [events, setEvents] = useState([])
     const [loading, setLoading] = useState(true)
     const [prevEvents, setPrevEvents] = useState([])
@@ -18,6 +20,19 @@ export default function ProfilePage() {
 
     const curDate = new Date()
     curDate.setHours(0,0,0,0)
+
+    useEffect(() => {
+        const fetchUsersPosts = async () => {
+            const { data, error } = await apiClient.listAllPostsByUserId(user.id)
+            if (data) {
+                console.log("data: ", data)
+            }
+            if (error) setError(error)
+        }
+
+        fetchUsersPosts()
+    }, [user.id])
+    
 
     useEffect(() => {
         const getEvents = async () => {
