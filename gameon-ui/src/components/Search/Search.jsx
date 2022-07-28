@@ -125,7 +125,7 @@ function SearchBar({
               Event Game
             </FormLabel>
           ) : (
-            <FormLabel>Event Game</FormLabel>
+            <FormLabel>Games</FormLabel>
           )}
           <HStack marginBottom={2}>
             <Input
