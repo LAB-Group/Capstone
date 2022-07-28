@@ -52,7 +52,7 @@ export default function EventFeed({ isFetching }){
                             ))}
                     </Swiper>
                     :<Box><Text>No Events available</Text></Box>}
-                </Box>
+                </Box> 
 
                 <Box maxW={"1000px"}>
                 <Heading>Speedrunning</Heading>
