@@ -9,7 +9,7 @@ export default function PostsFeed({ eventId, posts }) {
 
   return (
     <VStack>
-    <Stack alignContent=''>
+    <Stack display={'flex'} justifyContent='flex-start'>
       <Heading p={3}>Event Comments</Heading>
     </Stack>
   

@@ -131,7 +131,8 @@ function SearchBar({
             <Input
               name="searchInput"
               type="text"
-              w="539px"
+              minW="525px"
+              
               focusBorderColor="purple.400"
               value={searchInput}
               onChange={handleOnInputChange}

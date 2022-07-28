@@ -32,8 +32,8 @@ export default function PostReply({postReply}) {
               rounded="md"
               borderRadius="5px"
               maxW='900px'
-              
-              ml='175px'
+              w={['325px','500px','650px','800px']}
+              ml={['0px','175px']}
               mb={30}
               mt={2}
               minH='150px'
@@ -41,36 +41,30 @@ export default function PostReply({postReply}) {
          
               <Stack isInline justifyContent="space-between"mt={2} pl={5} pr={5}>
                 <Box minW="100%">
-                  
-                  <Stack isInline align="center" marginBottom="5px">
-                  
+                  <Stack isInline display="flex" justifyContent='space-between 'mb={6}>
+                    <HStack spacing={4}>
+                        <Flex
+                          justifyContent={{
+                            base: "center",
+                            md: "end",
+                          }}
+                          mt={-16}>
+                          <Image  w={20} h={20} mt={8} borderRadius="50%" src={postReply.creatorImageUrl}/>
+                        </Flex>
+                        <Text fontWeight={'bold'} >@{postReply.creatorUsername}</Text>
+                      </HStack>
                       <HStack>
-                    <Flex
-                      justifyContent={{
-                        base: "center",
-                        md: "end",
-                      }}
-                      mt={-16}>
-                      <Image  w={20} mt={8} borderRadius="50%" src={postReply.creatorImageUrl}/>
-                    </Flex>
-                    <HStack spacing={400}>
-                    <Text fontWeight={'bold'} >@{postReply.creatorUsername}</Text>
-                    
-                       <HStack> 
-                     <Badge variant='subtle' colorScheme='purple'>
-                   {replyDate}
-                    </Badge>
-                    <Badge variant='subtle' colorScheme='purple'>
-                    {time}
-                    </Badge>
-                    </HStack></HStack></HStack>
-                  </Stack>
+                        <Badge variant='subtle'  colorScheme='purple'>{replyDate}</Badge>
+                        <Badge variant='subtle'  colorScheme='purple'>{time}</Badge>
+                      </HStack>
+                    </Stack>
+               
                   
                   
                  
                
                   
-                  <Divider  w="750px"/>
+                  <Divider   w={['125px','250px','450px','600px','750px']}/>
                   <Box pl={1.5}>
                     
                     <Stack spacing={2} mt={1} isInline alignItems="center">
