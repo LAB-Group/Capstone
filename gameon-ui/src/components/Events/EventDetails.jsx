@@ -153,8 +153,8 @@ export default function EventDetails({event}) {
                         <Text position={"relative"} color={useColorModeValue("whiteAlpha.600", "whiteAlpha.700")} fontSize={"3xl"} fontWeight={300}>
                             Description
                         </Text>
-                        <Box backgroundColor={"whiteAlpha.900"} width={"75%"} borderRadius={"3xl"}>
-                        <Text sx={{"whiteSpace": "pre"}} fontSize={"lg"} padding={"4px"}>{event.eventDetails}</Text>
+                        <Box alignContent={"center"} backgroundColor={"whiteAlpha.900"} width={"98%"} borderRadius={"3xl"}>
+                        <Text whiteSpace= "pre-wrap" fontSize={"lg"} padding={"4px"}>{event.eventDetails}</Text>
                         </Box>
                     </VStack>
                     </HStack>
