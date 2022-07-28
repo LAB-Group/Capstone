@@ -88,7 +88,7 @@ class User {
         throw new BadRequestError(`Missing ${property} in request body.`)
       }
     })
-    console.log("GAME LIST: ", typeof userUpdate.gameList[0])
+
     const userResult = await db.query(
       `UPDATE users
        SET username = $1, first_name = $2, last_name = $3, image_url = $4, game_list = $6

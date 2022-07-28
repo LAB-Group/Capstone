@@ -1,47 +1,43 @@
 import * as React from 'react';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Scrollbar } from "swiper"
 import {
   Box,
-  Image,
-  Center,
   Text,
-  VStack,
-  Divider,
-  HStack,
-  Stack,
-  Badge,
-  Heading,
-  Button,
-  Container,
-  useDisclosure,
-  Modal,
-  SimpleGrid,
+  Heading
 } from '@chakra-ui/react';
-import { Routes, Route, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import EventCard from '../Events/EventCard';
 
 export default function UserUpcomingEvents({ user, futureEvents }) {
 
   return (
     <>
-      <Text fontSize="3xl">Upcoming Events</Text>
-      <SimpleGrid
-        minWidth="80vw"
-        justifyContent={'center'}
-        alignItems={'center'}
-        minChildWidth={'320px'}
-        rowGap="20px"
-        className="WRAP"
-      >
-        {futureEvents.map((event, index) => (
-          <EventCard key={index} event={event} />
-        ))}
-        {!futureEvents?.length ? (
-          <Box>
-            <Text>No Events available</Text>
-          </Box>
-        ) : null}
-      </SimpleGrid>
+      <Box maxW={"1000px"}>
+                    <Heading>Upcoming Events</Heading>
+                {futureEvents?.length ? 
+                    <Swiper
+                        slidesPerView={3}
+                        spaceBetween={10}
+                        slidesPerGroup={3}
+                        scrollbar={{
+                            hide:true
+                        }}
+                        modules={[Pagination, Scrollbar]}
+                        pagination={{
+                            clickable: true,
+                          }}
+                        loop={true}
+                        loopFillGroupWithBlank={true}
+                        className="mySwiper"
+                    >
+                        {futureEvents?.map((event, index) => (
+                        <SwiperSlide key={index}>
+                            <EventCard event={event}/>         
+                        </SwiperSlide>
+                            ))}
+                    </Swiper>
+                    :<Box><Text>No Events available</Text></Box>}
+                </Box> 
     </>
   );
 }

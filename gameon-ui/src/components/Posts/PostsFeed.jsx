@@ -1,19 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import apiClient from '../../services/apiClient';
-import {
-  Input,
-  Textarea,
-  Image,
-  Container,
-  Spacer,
-  FormControl,
-  FormLabel,
-  Button,
-  extendTheme,
-  VStack,Stack,
-  Text, Box, Heading
-} from '@chakra-ui/react';
+import { Container, VStack, Stack, Heading } from '@chakra-ui/react';
 import Posts from './Posts';
 
 export default function PostsFeed({ eventId, posts }) {
@@ -21,7 +9,7 @@ export default function PostsFeed({ eventId, posts }) {
 
   return (
     <VStack>
-    <Stack alignContent=''>
+    <Stack display={'flex'} justifyContent='flex-start'>
       <Heading p={3}>Event Comments</Heading>
     </Stack>
   

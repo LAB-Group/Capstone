@@ -95,7 +95,7 @@ function EditProfileForm({ user, profileForm, setProfileForm, setErrors, selecte
           onChange={handleOnInputChange}
         />
 
-        <FormLabel htmlFor='gameList'>Games Played</FormLabel>
+        {/* <FormLabel htmlFor='gameList'>Games Played</FormLabel> */}
         <Search selectedGames={selectedGames} setSelectedGames={setSelectedGames} />
 
       </FormControl>

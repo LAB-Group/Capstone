@@ -3,24 +3,14 @@ const Posts = require("../models/posts")
 const security = require("../middleware/security")
 const router = express.Router()
 
-router.post("/:eventId", async (req, res, next) => {
+router.get("/user/:userId", async (req, res, next) => {
     try {
-        // create a new post
-        const { user } = res.locals
-        const { eventId } = req.params
-        const post = await Posts.createNewPost({user, post: req.body, eventId})
-        return res.status(201).json({ post })
+        // list all posts associated with a user
+        const { userId } = req.params
+        const posts = await Posts.listAllPostsByUserId(userId)
+        return res.status(200).json({ posts })
     } catch (err) {
         next(err)
-    }
-})
-
-router.get("/:eventId", async (req, res, next) => {
-    try {
-        // get all posts for this event
-        
-    } catch (err) {
-
     }
 })
 

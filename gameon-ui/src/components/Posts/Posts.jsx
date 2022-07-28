@@ -2,24 +2,18 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import apiClient from '../../services/apiClient';
 import {
-  Input,
-  Textarea,
-  Image,
-  Container,
-  Spacer,
-  FormControl,
-  FormLabel,
-  Button,
-  extendTheme,
-  HStack,
-  Text,
-  Box,
-  Heading,
-  VStack, Modal, ModalOverlay, ModalFooter, ModalBody, ModalContent, ModalHeader, ModalCloseButton, useDisclosure, ButtonGroup,Stack, Skeleton, Divider, Badge,Flex
+  Textarea, Image, Container, Button,
+  HStack, Text, Box, Heading, VStack, 
+  Modal, ModalOverlay, ModalFooter, 
+  ModalBody, ModalContent, ModalHeader, 
+  ModalCloseButton, useDisclosure, ButtonGroup, 
+  Stack, Skeleton, Divider, Badge, Flex
 } from '@chakra-ui/react';
 import PostReply from './PostReply';
 
-export default function Posts({ post, eventId, key }) {
+// Located in EventPage file
+
+export default function Posts({ post, eventId }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [postReplies, setPostReplies] = useState([]);
   const [errors, setErrors] = useState(null);
@@ -68,64 +62,46 @@ export default function Posts({ post, eventId, key }) {
 
   return (
     <Container centerContent>
-      <Box
-              key={key}
-              borderWidth="1px"
-              shadow="md"
-              bg="#fbfdff"
-              position="relative"
-              rounded="md"
-              borderRadius="5px"
-              minW='1000px'
-              pb={2}
-              m={8}
-             
-            >
-         
-              <Stack isInline justifyContent="space-between" mt={2} pl={5} pr={5}>
-                <Box minW="100%">
-                  
-                  <Stack isInline align="center" marginBottom="5px">
-                    <HStack spacing={3}>
-                    <Flex
-                      justifyContent={{
-                        base: "center",
-                        md: "end",
-                      }}
-                      mt={-16}>
-                      <Image  w={20} mt={8} borderRadius="50%" src={post.creatorImageUrl}/>
-                    </Flex>
-                    <Text fontWeight={'bold'} >@{post.creatorUsername}</Text>
-
-                      {/* // <Image size="sm" width="2em" height="2em" borderRadius="50%" src={post.creatorImageUrl} /> */}
-                    </HStack>
-                    
-                  </Stack>
-          
-                  
-                  
-                  <Box pl="10px">
-                    <Stack direction="row">
-                    <Heading height="16px"  pb={10} width="100%">{post.postTitle}</Heading>
-                    <HStack>
-                   <Badge variant='subtle' colorScheme='purple'>
-                   {postDate}
-                    </Badge>
-                    <Badge variant='subtle' colorScheme='purple'>
-                    {time}
-                    </Badge>
-                    </HStack>
+      <Box 
+        borderWidth="1px" 
+        shadow="md" 
+        bg="#fbfdff"
+        position="relative"
+        rounded="md"
+        borderRadius="5px"
+        w={['350px','500px','700px','850px','1000px']}
+        pb={2}
+        
+        m={8}
+      >         
+        <Stack isInline justifyContent="space-between" mt={2} pl={5} pr={5}>
+            <Box maxW="100%">      
+                
+                  <Stack isInline display="flex" justifyContent='space-between 'mb={2}>
+                    <HStack spacing={4}>
+                        <Flex
+                          justifyContent={{
+                            base: "center",
+                            md: "end",
+                          }}
+                          mt={[-16]}>
+                          <Image  w={10,20} h={10,20} mt={8} borderRadius="50%" src={post.creatorImageUrl}/>
+                        </Flex>
+                        <Text fontWeight={'bold'} >@{post.creatorUsername}</Text>
+                      </HStack>
+                      <HStack>
+                        <Badge variant='subtle' colorScheme='purple'>{postDate}</Badge>
+                        <Badge variant='subtle'colorScheme='purple'>{time}</Badge>
+                      </HStack>
                     </Stack>
-                    <Divider w="950px"/>
-                    
-                      <Box ma>
-                      <Text  mt={2} minH="14px" width="80%">{post.postContent}</Text>
-                    </Box>
-                  </Box>
+                    <Stack>
+                        <Heading height="16px"  pb={10} width="100%">{post.postTitle}</Heading>
+                        <Divider w={['325px','450px','650px','800px','950px']}/>
+                        <Text p={2} mt={2} minH="14px" >{post.postContent}</Text>
+                    </Stack>
                 </Box>
               </Stack>
-              <Box ml="55em" >
-              <Button variant='ghost' onClick={onOpen}>Reply</Button></Box>
+              
             </Box>
       {/* <Box>
         <HStack>
@@ -152,6 +128,8 @@ export default function Posts({ post, eventId, key }) {
        {postReplies?.map((postReply, index) => (
           <PostReply key={index} postReply={postReply} eventId={eventId} />
         ))}
+        <Box ml="56em" mb={2} >
+              <Button variant='ghost' onClick={onOpen}>Reply</Button></Box>
         <Divider w='1200px'/>
         <VStack>
         

@@ -32,7 +32,7 @@ export default function EventPage(){
               setEvent(eventData.event)
               setEventGames(event.eventGame)
             } catch(error) {
-              console.log("ERROR")
+              return(error)
             }
           }
           getEvent()  

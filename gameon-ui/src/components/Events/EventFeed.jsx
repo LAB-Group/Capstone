@@ -1,5 +1,6 @@
 import * as React from "react"
-import {  Box, Text, SimpleGrid, Divider, Flex, Skeleton, Slider, SliderTrack, SliderFilledTrack, SliderThumb  } from "@chakra-ui/react"
+import { useState, useEffect } from "react"
+import {  Box, Text, SimpleGrid, Divider, Flex, Skeleton, VStack, Heading  } from "@chakra-ui/react"
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css"
 import "swiper/css/pagination"
@@ -11,37 +12,103 @@ import { useEventContext } from "../../contexts/event"
 import { Pagination, Navigation, Scrollbar } from "swiper"
 export default function EventFeed({ isFetching }){
     const { user } = useAuthContext()
-    const { events } = useEventContext()    
+    const { events } = useEventContext()
+    const [loading, setLoading] = useState(true)
+
+    let tournamentEvents = events?.filter(event => {return event.eventType === "Tournament"})
+    let speedEvents = events?.filter(event => {return event.eventType === "Speedrunning"})
+    let meetEvents = events?.filter(event => {return event.eventType === "Meet-up"})
    
         return(
             <Flex flexDirection='column' justifyContent='center' alignItems='center' minWidth="95vw" position="relative">
                 <Divider orientation='horizontal' backgroundColor={'purple.100'} marginTop={6} minWidth="95vw" marginBottom={6} />
-                <Text mb={"10"} textAlign={"center"} fontSize='3xl'>Events</Text>
+                <Heading mb={"10"} textAlign={"center"}>Events</Heading>
                 
                 <SimpleGrid minWidth="80vw" justifyContent={"center"} alignItems={"center"} minChildWidth={'320px'} rowGap='20px' className="WRAP">
-                <Box maxW={"900px"}>
-                {events?.length ? 
+                <VStack>
+
+                <Box maxW={"1000px"}>
+                    <Heading>Tournaments</Heading>
+                {tournamentEvents?.length ? 
                     <Swiper
-                        slidesPerView={3}
-                        spaceBetween={10}
-                        slidesPerGroup={3}
-                        scrollbar={{
-                            hide:true
-                        }}
-                        loop={true}
-                        loopFillGroupWithBlank={true}
-                        modules={[ Scrollbar]}
-                        className="mySwiper"
+                    slidesPerView={3}
+                    spaceBetween={10}
+                    slidesPerGroup={3}
+                    scrollbar={{
+                      hide: true,
+                    }}
+                    pagination={{
+                        clickable:true
+                    }
+                    }
+                    modules={[Scrollbar, Pagination]}
+                    loop={true}
+                    loopFillGroupWithBlank={true}
+                    className="mySwiper"
+                  >
+                        {tournamentEvents?.map((event, index) => (
+                        <SwiperSlide key={index}>
+                            <EventCard event={event}/>         
+                        </SwiperSlide>
+                            ))}
+                    </Swiper>
+                    :<Box><Text>No Events available</Text></Box>}
+                </Box> 
+
+                <Box maxW={"1000px"}>
+                <Heading>Speedrunning</Heading>
+                {speedEvents?.length ? 
+                    <Swiper
+                    slidesPerView={3}
+                    spaceBetween={10}
+                    slidesPerGroup={3}
+                    scrollbar={{
+                        hide:true
+                    }}
+                    modules={[Pagination, Scrollbar]}
+                    pagination={{
+                        clickable: true,
+                      }}
+                    loop={true}
+                    loopFillGroupWithBlank={true}
+                    className="mySwiper"
                     >
-                        {events?.map((event) => (
-                        <SwiperSlide key={event.id}>
+                        {speedEvents?.map((event, index) => (
+                        <SwiperSlide key={index}>
                             <EventCard event={event}/>         
                         </SwiperSlide>
                             ))}
                     </Swiper>
                     :<Box><Text>No Events available</Text></Box>}
                 </Box>
-                
+
+                <Box maxW={"1000px"}>
+                <Heading>Meet-ups</Heading>
+                {meetEvents?.length ? 
+                    <Swiper
+                    slidesPerView={3}
+                    spaceBetween={10}
+                    slidesPerGroup={3}
+                    scrollbar={{
+                        hide:true
+                    }}
+                    modules={[Pagination, Scrollbar]}
+                    pagination={{
+                        clickable: true,
+                      }}
+                    loop={true}
+                    loopFillGroupWithBlank={true}
+                    className="mySwiper"
+                    >
+                        {meetEvents?.map((event, index) => (
+                        <SwiperSlide key={index}>
+                            <EventCard event={event}/>         
+                        </SwiperSlide>
+                            ))}
+                    </Swiper>
+                    :<Box><Text>No Events available</Text></Box>}
+                </Box>
+                </VStack>
             {/* {events?.map((event) => (
                 // Set Skeleton here
                 <EventCard key={event.id} event={event}/>         
@@ -54,5 +121,3 @@ export default function EventFeed({ isFetching }){
                 )
                 
             }
-            
-            

@@ -6,7 +6,7 @@ const EventContext = createContext(null)
 export const EventContextProvider = ({ children }) => {
     const [events, setEvents] = useState([])
     const [initialized, setInitialized] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
 
     const eventValue = { 
@@ -17,7 +17,7 @@ export const EventContextProvider = ({ children }) => {
       error, 
       setError, 
       isLoading, 
-      setIsLoading 
+      setIsLoading
     }
 
     useEffect(() => {
@@ -31,7 +31,7 @@ export const EventContextProvider = ({ children }) => {
         }
           setIsLoading(false)
           fetchEvent()
-      },[])
+      },[isLoading===false])
 
     return (
         <EventContext.Provider value={eventValue}>

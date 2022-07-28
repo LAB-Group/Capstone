@@ -1,16 +1,16 @@
 import * as React from "react"
-import { Slide } from "react-slideshow-image"
-//import { Swiper, SwiperSlide } from "swiper/react"
-// import "swiper/css"
-// import "swiper/css/pagination"
-// import { Pagination } from "swiper"
+// import { Slide } from "react-slideshow-image"
+import { Swiper, SwiperSlide } from "swiper/react"
+import "swiper/css"
+import "swiper/css/pagination"
+import { EffectFade, Navigation, Pagination } from "swiper"
 import pic from "../../media/evo.jpg"
 import { Container, Box, Image, Text, Flex } from '@chakra-ui/react'
 import "react-slideshow-image/dist/styles.css"
 export default function Hero() {
     return(
         // Shrinks container to 480px currently
-        <Container maxW="3600px" minW="480px">
+        <Container maxW="1200px" backgroundColor={"whiteAlpha.700"}>
             <Flex flexDirection="column" alignItems="center">
                 <Slideshow/> 
             </Flex> 
@@ -26,47 +26,51 @@ function Slideshow () {
         pic,guiltyGear,blazBlue
     ]
     return (
+        //Learning Swiper 
+        
+            
+            <Box maxW={"900px"} minW={"405px"}>
+                <Swiper 
+                spaceBetween={30}
+                effect={"fade"}
+                pagination={{
+                    clickable: true
+                  }}
+                  modules={[EffectFade, Pagination]}
+                  className="mySwiper"
+                  color={"purple.400"}
+                >
+                    {slideImages.map((slideImage, idx) => (
+                        <SwiperSlide key={idx}> 
+                        <Image src={slideImage} position={"relative"} width={"100%"} height={"500px"} objectFit={"cover"} borderRadius="lg"/>
+                        </SwiperSlide>
+                    ) 
+                    )}
+                    
+                </Swiper>
+            </Box>
+            
         
         //   Old Slideshow code
         // Widen container's width 
-        <Container maxW="3600px" minW="480px" >
-            <Slide width="100%">
-                {slideImages.map((slideImage, idx) => (
-                    <Box 
-                        key={idx}
-                        height="480px"  
-                        bgPosition="center" 
-                        objectFit={'cover'}  
-                        bgRepeat="no-repeat"
-                    >
+        // <Container maxW="3600px" minW="480px" backgroundImage={"url(https://wallpaperaccess.com/full/1150850.jpg)"}>
+        //     <Slide width="100%">
+        //         {slideImages.map((slideImage, idx) => (
+        //             <Box 
+        //                 key={idx}
+        //                 height="480px"  
+        //                 bgPosition="center" 
+        //                 objectFit={'cover'}  
+        //                 bgRepeat="no-repeat"
+        //             >
             
-                        <Image src={slideImage} key={idx} width={"100%"} height={"100%"} borderRadius="lg"/>
-                    </Box>
-                    ) 
-                    )}
-                </Slide>
-            </Container>
+        //                 <Image src={slideImage} key={idx} width={"100%"} height={"100%"} borderRadius="lg"/>
+        //             </Box>
+        //             ) 
+        //             )}
+        //         </Slide>
+        //     </Container>
             
-        //Learning Swiper 
-        
-            // <>
-            //     <Swiper 
-            //      pagination={{
-            //         dynamicBullets: true,
-            //       }}
-            //       modules={[Pagination]}
-            //       className="mySwiper"
-            //     >
-            //         {slideImages.map((slideImage, idx) => (
-            //         <SwiperSlide> 
-                   
-            //             <Image src={slideImage} key={idx} width={"100%"} height={"100%"} borderRadius="lg"/>
-            //             </SwiperSlide>
-            //         ) 
-            //             )}
-                    
-            // </Swiper>
-            // </>
 
 
     )
