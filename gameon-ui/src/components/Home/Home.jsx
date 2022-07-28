@@ -6,8 +6,7 @@ import { Image, Container, Spacer, Box } from "@chakra-ui/react"
 export default function Home(){
     return (
     
-            <Container centerContent minWidth="100vw">
-
+            <Container centerContent minWidth="96vw">
                 <Hero />
                 <Spacer/>
                 <EventFeed />

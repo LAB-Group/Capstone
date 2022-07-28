@@ -179,7 +179,7 @@ export default function EventDetails({event}) {
                     <SimpleGrid columns={{base:2, md:3}} spacing={10}>  
                         {games.game?.map((game, index) => (
                             <HStack spacing={"20px"} position={"relative"}>
-                                <Box width={"300px"} borderWidth='1px' borderRadius='lg' padding={"5px"}overflow='hidden' boxShadow={'md'}>
+                                <Box width={"300px"} borderWidth='1px' borderRadius='lg' padding={"5px"} overflow='hidden' boxShadow={'md'}>
                                     <Image position={"relative"} left={"70px"} objectFit={"cover"} height={"200px"} src={game.cover.url.replace("thumb", "cover_small_2x")} alt={noImage}/>
                                     <Box p='6'>
                                         <Box display='flex' alignItems='baseline'>
