@@ -61,7 +61,19 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen }) {
                             <Divider orientation='horizontal' /> */}
                             <Box w='810px' h='70px'  >
                                 <Text>Games played:</Text>
-                                <Wrap display={'flex'} maxH={'50px'} overflowY={'auto'}>
+                                <Wrap display={'flex'} maxH={'50px'} overflowY={'auto'}
+                                      css={{
+                                        '&::-webkit-scrollbar': {
+                                          width: '8px',
+                                        },
+                                        '&::-webkit-scrollbar-track': {
+                                          width: '10px',
+                                        },
+                                        '&::-webkit-scrollbar-thumb': {
+                                          background: '#805AD5',
+                                          borderRadius: '24px',
+                                        },}}
+                                >
                                 {games.game?.map((game, index) => (
                                     <Text display={'flex'} maxWidth={'1000px'} key={index}>{game.name},</Text>
 
