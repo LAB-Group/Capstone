@@ -12,9 +12,8 @@ export default function UserUpcomingEvents({ user, futureEvents }) {
 
   return (
     <>
-      <Text fontSize="3xl">Upcoming Events</Text>
       <Box maxW={"1000px"}>
-                    <Heading>Tournaments</Heading>
+                    <Heading>Upcoming Events</Heading>
                 {futureEvents?.length ? 
                     <Swiper
                         slidesPerView={3}

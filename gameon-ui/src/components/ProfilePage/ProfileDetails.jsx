@@ -32,7 +32,7 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen }) {
 
               setGames(gameData)
             } catch(error) {
-              console.log(error)
+              return(error)
             }
           }
           getGames()  

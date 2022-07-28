@@ -27,8 +27,7 @@ router.post("/", async (req, res, next) => {
 
 router.post("/id", async (req, res, next) => {
     const gameId = req.body
-    console.log("gameId: ", gameId)
-    console.log(gameId.gameId)
+
     axios({
         url: "https://api.igdb.com/v4/games",
         method: "POST",

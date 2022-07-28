@@ -9,10 +9,6 @@ import UserPosts from './UserPosts';
 export default function UserPostsFeed({ posts }) {
     return (
         <VStack>
-        <Stack alignContent=''>
-          <Heading p={3}>Posts</Heading>
-        </Stack>
-      
         <Container centerContent minWidth="85vw">
           <VStack>
             {posts?.map((post, index) => (

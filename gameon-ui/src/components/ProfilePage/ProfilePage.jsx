@@ -1,6 +1,6 @@
 import * as React from "react"
 import { useState, useEffect } from "react"
-import { Box, Center, Text, Divider, Stack, Container, useDisclosure} from "@chakra-ui/react"
+import { Box, Center, Text, Divider, Stack, Container, useDisclosure, Heading} from "@chakra-ui/react"
 import { useAuthContext } from "../../contexts/auth"
 import ProfileDetails from "./ProfileDetails"
 import apiClient from "../../services/apiClient"
@@ -27,9 +27,7 @@ export default function ProfilePage() {
             const { data, error } = await apiClient.listAllPostsByUserId(user.id)
             if (data) {
                 const newPosts = data.posts
-                console.log("newPosts: ", newPosts)
                 setPosts(data.posts)
-                console.log(posts)
             }
             if (error) setError(error)
         }
@@ -50,7 +48,7 @@ export default function ProfilePage() {
               setEvents(eventData)
               setLoading(false)
             } catch(error) {
-              console.log("ERROR")
+              return(error)
             }
           }
           getEvents()  
@@ -71,7 +69,7 @@ export default function ProfilePage() {
 
                 
                 <Divider orientation='horizontal' />
-                <Text fontSize='3xl'>Post</Text>
+                <Heading>Posts</Heading>
                 <Box h='700px' borderRadius='sm'>
                     {
                         posts.length === 0 ? 

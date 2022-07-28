@@ -46,7 +46,7 @@ export default function EventDetails({event}) {
               const gameData = response.data
               setGames(gameData)
             } catch(error) {
-              console.log(error)
+              return(error)
             }
           }
           getGames()  

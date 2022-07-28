@@ -12,9 +12,8 @@ export default function UserPreviousEvents({ user, prevEvents }) {
 
   return (
     <>
-      <Text fontSize="3xl">Previous Events</Text>
       <Box maxW={"1000px"}>
-                    <Heading>Tournaments</Heading>
+                    <Heading>Previous Events</Heading>
                 {prevEvents?.length ? 
                     <Swiper
                         slidesPerView={3}
