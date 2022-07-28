@@ -153,7 +153,7 @@ export default function EventDetails({event}) {
                         {games.game?.map((game, index) => (
                             <ListItem>
                                 <Box width={"300px"} borderWidth='1px' borderRadius='lg' overflow='hidden' boxShadow={'md'}>
-                                    <Image position={"relative"} left={"70px"} objectFit={"cover"} height={"200px"} src={game.cover.url.replace("thumb", "cover_small_2x")} alt={noImage}/>
+                                    <Image position={"relative"} left={"70px"} objectFit={"cover"} height={"200px"} src={game.cover?.url?.replace("thumb", "cover_small_2x")} alt={noImage}/>
                                 <Box p='6'>
                                     <Box display='flex' alignItems='baseline'>
                                         <Heading textAlign={"center"} size='md'>{game.name}</Heading>

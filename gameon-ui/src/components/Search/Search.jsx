@@ -132,6 +132,7 @@ function SearchBar({
               name="searchInput"
               type="text"
               w="539px"
+              maxW={'50em'}
               focusBorderColor="purple.400"
               value={searchInput}
               onChange={handleOnInputChange}

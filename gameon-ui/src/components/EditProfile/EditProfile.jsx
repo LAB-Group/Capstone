@@ -7,26 +7,29 @@ import {
     ModalOverlay, ModalContent, ModalHeader,
     ModalFooter, ModalBody, ModalCloseButton, Button
   } from '@chakra-ui/react'
+import Search from "../Search/Search"
 
  
 export default function EditProfile({onClose}){
   const { user, setUser } = useAuthContext()
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
+  const [selectedGames, setSelectedGames] = useState([])
   const [profileForm, setProfileForm] = useState({
       username: user.username,
       firstName: user.firstName,
       lastName: user.lastName,
       imageUrl: user.imageUrl,
-      email: user.email
+      email: user.email,
+      gameList: user.gameList
     })
 
     const handleOnSubmit = async () => {
       setIsLoading(true)
       setErrors((error) => ({ ...error, form: null }))
   
-      const {data, error} = await apiClient.editUserProfile({ username: profileForm.username, firstName: profileForm.firstName, 
-                                                            lastName: profileForm.lastName, imageUrl: profileForm.imageUrl, email: user.email})
+      const {data, error} = await apiClient.editUserProfile({ username: profileForm.username, firstName: profileForm.firstName, lastName: profileForm.lastName,
+                                                             imageUrl: profileForm.imageUrl, email: user.email, gameList: selectedGames})
       if(error) setErrors((e) => ({ ...e, form: error}))
       if(data?.user) {
         
@@ -37,13 +40,13 @@ export default function EditProfile({onClose}){
     }
 
  return(
-    <Container w='1000px' h='200px' bg='white'>
-        <ModalOverlay />
-          <ModalContent>
+    <Container>
+        <ModalOverlay width={'100%'} />
+          <ModalContent maxWidth={'50rem'}>
             <ModalHeader>Edit Profile</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <EditProfileForm user={user} profileForm={profileForm} setProfileForm={setProfileForm} setErrors={setErrors} />
+              <EditProfileForm user={user} profileForm={profileForm} setProfileForm={setProfileForm} setErrors={setErrors} selectedGames={selectedGames} setSelectedGames={setSelectedGames} />
             </ModalBody>
   
             <ModalFooter>
@@ -57,7 +60,7 @@ export default function EditProfile({onClose}){
    )
 }
 
-function EditProfileForm({ user, profileForm, setProfileForm, setErrors }) {
+function EditProfileForm({ user, profileForm, setProfileForm, setErrors, selectedGames, setSelectedGames }) {
 
     const handleOnInputChange = (event) => {
 
@@ -91,6 +94,9 @@ function EditProfileForm({ user, profileForm, setProfileForm, setErrors }) {
           defaultValue={user.imageUrl}
           onChange={handleOnInputChange}
         />
+
+        <FormLabel htmlFor='gameList'>Games Played</FormLabel>
+        <Search selectedGames={selectedGames} setSelectedGames={setSelectedGames} />
 
       </FormControl>
       

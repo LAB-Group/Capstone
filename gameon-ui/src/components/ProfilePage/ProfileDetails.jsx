@@ -2,8 +2,41 @@ import * as React from "react"
 import EditProfile from "../EditProfile/EditProfile"
 import { Box, Image, Center, Text, VStack, Divider, HStack, Stack, Badge, Heading, Button, Container, useDisclosure, Modal } from "@chakra-ui/react"
 import { Routes, Route, Link } from "react-router-dom"
+import { useState, useEffect } from "react"
+import axios from "axios";
 
 export default function ProfileDetails({ user, onOpen, onClose, isOpen }) {
+    const [games, setGames] = useState([])
+    const [loading, setLoading] = useState(true)
+    let string = ""
+    if(user.gameList !== undefined) {
+        for(let i = 0; i < user.gameList?.length; i++) {
+            if(i === user.gameList.length - 1) {
+                string += user.gameList[i]
+                break
+            }
+            string += user.gameList[i] + ", "
+        }
+    }
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false)
+          }, 100)
+        const getGames = async () => {      
+            try {
+              const response = await axios.post(`http://localhost:3001/games/id`, {
+                gameId: string
+              })
+              const gameData = response.data
+
+              setGames(gameData)
+            } catch(error) {
+              console.log(error)
+            }
+          }
+          getGames()  
+    },[string])
 
     return (
         <>
@@ -26,7 +59,13 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen }) {
                             <Divider orientation='horizontal' />
                             {/* <Box w='810px' h='30px' >Location</Box>
                             <Divider orientation='horizontal' /> */}
-                            <Box w='810px' h='50px' >Games played: Waiting for API... </Box>
+                            <Box w='810px' h='50px' >
+                                <Text>Games played:</Text>
+                                {games.game?.map((game, index) => (
+                                    <Text key={index}>{game.name}</Text>
+
+                                ))}
+                             </Box>
                             <Link to="/profile/edit-profile">
                                 <Button w='810px' h='30px' borderRadius='sm' colorScheme='purple' variant='outline' onClick={onOpen} >Edit Profile</Button>
                             </Link>

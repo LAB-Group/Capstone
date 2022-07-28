@@ -11,7 +11,7 @@ import { Pagination, Navigation } from "swiper"
 export default function EventFeed({ isFetching }){
     const { user } = useAuthContext()
     const { events } = useEventContext()
-    
+
     return(
         <Flex flexDirection='column' justifyContent='center' alignItems='center' minWidth="95vw" position="relative">
             <Divider orientation='horizontal' backgroundColor={'purple.100'} marginTop={6} minWidth="95vw" marginBottom={6} />
