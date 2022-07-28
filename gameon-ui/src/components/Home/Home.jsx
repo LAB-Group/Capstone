@@ -15,26 +15,3 @@ export default function Home(){
         
     )
 }
-
-// function Swipershow() {
-//   return (
-//     <>
-//       <Swiper
-//         spaceBetween={30}
-//         effect={"fade"}
-//         navigation={true}
-//         pagination={{
-//           clickable: true,
-//         }}
-//         modules={[EffectFade, Navigation, Pagination]}
-//       >
-//         <SwiperSlide>
-//           <Image src={pic}/>
-//         </SwiperSlide>
-//         <SwiperSlide>
-//           <Image src={elmo}/>
-//         </SwiperSlide>
-//       </Swiper>
-//     </>
-//   );
-// }
