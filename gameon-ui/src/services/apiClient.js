@@ -106,6 +106,14 @@ class ApiClient {
         return await this.request({ endpoint: `events/user/${userId}`, method: `GET` })
     }
 
+    async isUserRegistered(eventId, userId) {
+        return await this.request({ endpoint: `events/${eventId}/user/${userId}`, method: `GET`})
+    }
+
+    async withdrawFromEvent(withdraw) {
+        return await this.request({ endpoint: `events/${withdraw.eventId}/withdraw`, method: `DELETE`})
+    }
+
 }
 
 export default new ApiClient("http://localhost:3001")
