@@ -34,42 +34,29 @@ export default function Posts({ post, key }) {
               <Stack isInline justifyContent="space-between" mt={2} pl={5} pr={5}>
                 <Box minW="100%">
                   
-                  <Stack isInline align="center" marginBottom="5px">
-                    <HStack spacing={3}>
-                    <Flex
-                      justifyContent={{
-                        base: "center",
-                        md: "end",
-                      }}
-                      mt={-16}>
-                      <Image  w={20} mt={8} borderRadius="50%" src={post.creatorImageUrl}/>
-                    </Flex>
-                    <Text fontWeight={'bold'} >@{post.creatorUsername}</Text>
-
-                    </HStack>
-                    
-                  </Stack>
-          
-                  
-                  
-                  <Box pl="10px">
-                    <Stack direction="row">
-                    <Heading height="16px"  pb={10} width="100%">{post.postTitle}</Heading>
-                    <HStack>
-                   <Badge variant='subtle' colorScheme='purple'>
-                   {postDate}
-                    </Badge>
-                    <Badge variant='subtle' colorScheme='purple'>
-                    {time}
-                    </Badge>
-                    </HStack>
+                <Stack isInline display="flex" justifyContent='space-between 'mb={2}>
+                    <HStack spacing={4}>
+                        <Flex
+                          justifyContent={{
+                            base: "center",
+                            md: "end",
+                          }}
+                          mt={[-16]}>
+                          <Image  w={[10,20]} h={[10,20]} mt={8} borderRadius="50%" src={post.creatorImageUrl}/>
+                        </Flex>
+                        <Text fontWeight={'bold'} >@{post.creatorUsername}</Text>
+                      </HStack>
+                      <HStack>
+                        <Badge variant='subtle' colorScheme='purple'>{postDate}</Badge>
+                        <Badge variant='subtle'colorScheme='purple'>{time}</Badge>
+                      </HStack>
                     </Stack>
-                    <Divider w="950px"/>
-                    
-                      <Box ma>
-                      <Text  mt={2} minH="14px" width="80%">{post.postContent}</Text>
-                    </Box>
-                  </Box>
+                    <Stack>
+                        <Heading height="16px"  pb={10} width="100%">{post.postTitle}</Heading>
+                        <Divider w={['325px','450px','650px','800px','950px']}/>
+                        <Text p={2} mt={2} minH="14px" >{post.postContent}</Text>
+                    </Stack>
+                    <Box/>
                 </Box>
               </Stack>
             </Box>

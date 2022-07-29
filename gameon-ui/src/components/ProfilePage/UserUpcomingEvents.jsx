@@ -13,7 +13,7 @@ export default function UserUpcomingEvents({ user, futureEvents }) {
   return (
     <>
       <Box maxW={"1000px"}>
-                    <Heading>Upcoming Events</Heading>
+                    <Heading  mb={2}>Upcoming Events</Heading>
                 {futureEvents?.length ? 
                     <Swiper
                         slidesPerView={3}
