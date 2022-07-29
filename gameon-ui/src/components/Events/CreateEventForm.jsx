@@ -2,22 +2,18 @@ import * as React from 'react';
 import { useState } from 'react';
 import apiClient from '../../services/apiClient';
 import {
-  Heading,
   Container,
   Button,
   FormControl,
   Select,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-  Badge,
   Input,
   extendTheme,
   ChakraProvider,
   VStack,
   useOutsideClick,
   Textarea,
-  Text, Flex,Stack, Icon, chakra, VisuallyHidden
+  Text
 } from '@chakra-ui/react';
 import Search from '../Search/Search';
 
@@ -226,7 +222,7 @@ export default function CreateEventForm({ onClose }) {
         
         </FormControl> 
           
-     
+            {/* Add image */}
               {/* <Flex
                 mt={1}
                 justify="center"

@@ -13,7 +13,7 @@ export default function UserPreviousEvents({ user, prevEvents }) {
   return (
     <>
       <Box maxW={"1000px"}>
-                    <Heading>Previous Events</Heading>
+                    <Heading mb={2}>Previous Events</Heading>
                 {prevEvents?.length ? 
                     <Swiper
                         slidesPerView={3}

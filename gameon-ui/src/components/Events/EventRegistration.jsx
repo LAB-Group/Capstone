@@ -5,6 +5,7 @@ import apiClient from '../../services/apiClient';
 import { useAuthContext } from '../../contexts/auth';
 import { Container, Button, FormLabel, Checkbox, Alert, AlertIcon,
   AlertDescription, CheckboxGroup, Text, Box, Stack, HStack,
+
 } from '@chakra-ui/react';
 
 export default function EventRegistration({ games }) {
@@ -78,23 +79,24 @@ export default function EventRegistration({ games }) {
   }
 
   return (
-    <Container position={"relative"}>
+    <Container centerContent>
       <FormLabel htmlFor="eventGame">
-        <Text fontSize={"lg"} textAlign={"center"}>Event Registration</Text>
+        <Heading>Event Registration</Heading>
       </FormLabel>
       <Box>
+
           <Stack>
               <HStack spacing={4}>
                   <CheckboxGroup size="lg" isDisabled={action || isRegistered}>
                       {games.game?.map((game, index) => (
-                        <Checkbox margin={2} key={game.id} value={game.name}  isChecked={checkedItems[index]} 
+                        <Checkbox colorScheme='purple' mt={2} key={game.id} value={game.name}  isChecked={checkedItems[index]} 
                         onChange={e => setCheckedItems(replaceAt(checkedItems, index, e.target.checked))}>
                         {game.name}
                         </Checkbox>
                       ))}
                   </CheckboxGroup>
-              </HStack>
-          </Stack>
+              <Button colorScheme="purple" onClick={handleOnSubmit}>Register</Button></Stack>
+          
       </Box>
       <Box position={"relative"} paddingLeft={"20px"}>
           {
@@ -110,7 +112,6 @@ export default function EventRegistration({ games }) {
             : 
             <Button margin={2} colorScheme="purple" mr={3} onClick={handleOnSubmit}>Register</Button>
           }
-          
       </Box>
     </Container>
   );

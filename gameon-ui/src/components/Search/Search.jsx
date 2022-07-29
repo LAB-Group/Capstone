@@ -18,6 +18,11 @@ import {
   TagCloseButton,
   VStack,
 } from '@chakra-ui/react';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Scrollbar, Mousewheel } from "swiper";
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/scrollbar";
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import apiClient from '../../services/apiClient';
@@ -60,7 +65,18 @@ const clearSearch = async () => {
         selectedGamesNames={selectedGamesNames}
         setSelectedGamesNames={setSelectedGamesNames}
       />
-      <Container maxH={'200px'} minW={'500px'} overflowY="auto">
+      <Container maxH={'200px'} minW={'500px'} overflowY="auto" css={{
+    '&::-webkit-scrollbar': {
+      width: '8px',
+    },
+    '&::-webkit-scrollbar-track': {
+      width: '10px',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      background: '#805AD5',
+      borderRadius: '24px',
+    },
+  }} >
         <Wrap w="450px">
           {listGames?.map((game, index) => (
             <Button
