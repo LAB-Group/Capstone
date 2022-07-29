@@ -30,6 +30,7 @@ export default function Hero() {
                 Game on!
             </Heading>
             <Box width={"70px"} height={"4px"} backgroundColor={"purple.400"} marginleft={"lg"} marginRight={"lg"}></Box>
+            <Text color={"whiteAlpha.900"} fontWeight={"semibold"}>Community through gaming</Text>
         </Box>
     )
 

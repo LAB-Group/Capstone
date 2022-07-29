@@ -34,7 +34,7 @@ export default function EventFeed({ isFetching }){
                 <Box maxW={"1000px"} width={"100%"}>
                     <Heading>Tournaments</Heading>
                 
-                <Box backgroundColor={"purple.300"} padding={"1em"}>
+                <Box backgroundColor={"purple.300"} padding={"1em"}  borderRadius={"20px"}>
                 {tournamentEvents?.length ? 
                     <Swiper
                     slidesPerView={3}
@@ -64,7 +64,7 @@ export default function EventFeed({ isFetching }){
 
                 <Box maxW={"1000px"} width={"100%"}>
                     <Heading>Speedrunning</Heading>
-                    <Box backgroundColor={"purple.300"} padding={"1em"}>
+                    <Box backgroundColor={"purple.300"} padding={"1em"} borderRadius={"20px"}>
 
                         {speedEvents?.length ? 
                             <Swiper
@@ -94,7 +94,7 @@ export default function EventFeed({ isFetching }){
 
                 <Box maxW={"1000px"} width={"100%"}>
                     <Heading>Meet-ups</Heading>
-                    <Box backgroundColor={"purple.300"} padding={"1em"}>
+                    <Box backgroundColor={"purple.300"} padding={"1em"} borderRadius={"20px"}>
 
                         {meetEvents?.length ? 
                         <Swiper
