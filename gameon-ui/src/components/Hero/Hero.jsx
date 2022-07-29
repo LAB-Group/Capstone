@@ -18,7 +18,7 @@ export default function Hero() {
         flexDirection={"column"} 
         alignItems={"center"} 
         backgroundColor={"purple.900"} 
-        backgroundPosition={"50%"}
+        backgroundPosition={"60%"}
         backgroundImage={background}
         backgroundRepeat={"no-repeat"}
         backgroundSize={"cover"}
