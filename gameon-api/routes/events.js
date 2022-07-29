@@ -130,13 +130,26 @@ router.post("/:eventId/posts/:postId/post_replies", security.requireAuthenticate
     }
 })
 
-router.get("/:eventid/posts/:postId/post_replies", async (req, res, next) => {
+router.get("/:eventId/posts/:postId/post_replies", async (req, res, next) => {
     try {
         // get all replies for a specified post
         const postId = req.params.postId
 
         const replies = await Replies.listRepliesByPostId(postId)
         return res.status(200).json({ replies })
+    } catch (err) {
+        next(err)
+    }
+})
+
+router.get("/:eventId/user/:userId", async (req, res, next) => {
+    try {
+        // get information if a specific user is registered for an event
+        const eventId = req.params.eventId
+        const userId = req.params.userId
+
+        const isRegistered = await Events.UserRegisteredForEvent({userId, eventId})
+        return res.status(200).json({isRegistered})
     } catch (err) {
         next(err)
     }
