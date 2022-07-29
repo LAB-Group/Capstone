@@ -31,7 +31,7 @@ export const EventContextProvider = ({ children }) => {
         }
           setIsLoading(false)
           fetchEvent()
-      },[events])
+      },[isLoading===false])
 
     return (
         <EventContext.Provider value={eventValue}>
