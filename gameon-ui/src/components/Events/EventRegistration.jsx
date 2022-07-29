@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import apiClient from '../../services/apiClient';
 import { useAuthContext } from '../../contexts/auth';
-import { Container, Button, FormLabel, Checkbox, Alert, AlertIcon,
+import { Container, Button, FormLabel, Checkbox, Alert, AlertIcon, Heading,
   AlertDescription, CheckboxGroup, Text, Box, Stack, HStack,
 } from '@chakra-ui/react';
 
@@ -93,7 +93,9 @@ export default function EventRegistration({ games }) {
                         </Checkbox>
                       ))}
                   </CheckboxGroup>
-              <Button colorScheme="purple" onClick={handleOnSubmit}>Register</Button></Stack>
+              <Button colorScheme="purple" onClick={handleOnSubmit}>Register</Button>
+              </HStack>
+              </Stack>
           
       </Box>
       <Box position={"relative"} paddingLeft={"20px"}>
