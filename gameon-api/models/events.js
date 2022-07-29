@@ -207,6 +207,29 @@ class Events {
         }
     }
 
+    static async UserRegisteredForEvent({eventId, userId}) {
+        const result = await db.query(
+            `
+                SELECT
+                    id,
+                    event_game,
+                    user_id,
+                    event_id
+                FROM registered_events
+                WHERE user_id = $1
+                AND event_id = $2
+            `,
+                [userId, eventId]
+        )
+        if(result.rows.length === 0) {
+            throw new NotFoundError("User not found registered for this event.")
+        }
+
+        const user = result.rows
+
+        return user
+    }
+
 }
 
 module.exports = Events
