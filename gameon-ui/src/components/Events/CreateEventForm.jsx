@@ -59,6 +59,8 @@ export const theme = extendTheme({
 export default function CreateEventForm({ onClose }) {
   const [errors, setErrors] = useState({});
   const [selectedGames, setSelectedGames] = useState([])
+  const [selectedGamesNames, setSelectedGamesNames] = useState([])
+  const [selectedGamesPic, setSelectedGamesPic] = useState([])
   const [createEventForm, setCreateEventForm] = useState({
     eventName: '',
     eventDate: '',
@@ -68,6 +70,7 @@ export default function CreateEventForm({ onClose }) {
     eventDetails: '',
     eventImageUrl: '',
   });
+
   const handleOnInputChange = event => {
     setCreateEventForm(createEventForm => ({
       ...createEventForm,
@@ -87,10 +90,14 @@ export default function CreateEventForm({ onClose }) {
       eventDetails: createEventForm.eventDetails,
       eventImageUrl: createEventForm.eventImageUrl,
     });
+    for (let i=0;i<selectedGames.length;i++) {
+        const { test } = await apiClient.addGamesToLocalDB({gameId:selectedGames[i],gameName:selectedGamesNames[i],gameImageUrl:selectedGamesPic[i]})
+    }
     if (error) setErrors(e => ({ ...e, form: error }));
     onClose();
     window.location.reload();
   };
+
   const ref = React.useRef()
   const [showTimeDate, setShowTimeDate] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
@@ -170,7 +177,6 @@ export default function CreateEventForm({ onClose }) {
         <FormLabel transform="scale(0.85) translateY(-21px)">Event Location</FormLabel>
          : 
         <FormLabel htmlFor="eventLocation">Event Location</FormLabel>}
-        
        
         {/* Need to cycle if online or offline, if offline, enter address? */}
         <Input
@@ -185,7 +191,13 @@ export default function CreateEventForm({ onClose }) {
         
         
       
-        <Search selectedGames={selectedGames} setSelectedGames={setSelectedGames} />
+        <Search selectedGames={selectedGames}
+         setSelectedGames={setSelectedGames}
+         selectedGamesNames={selectedGamesNames}
+         setSelectedGamesNames={setSelectedGamesNames}
+         selectedGamesPic={selectedGamesPic}
+         setSelectedGamesPic={setSelectedGamesPic}
+         />
     
         <FormControl variant="floating">
         {createEventForm.eventDetails.length>0?

@@ -74,12 +74,12 @@ class ApiClient {
         return await this.request({ endpoint: `games/id`, method: `POST`, data: gameId })
     }
 
-    async addGameToLocalDB(gameInfo) {
-        return await this.request({ endpoint: `games/db`, method: `POST`, data: gameInfo })
+    async addGamesToLocalDB(localDBForm) {
+        return await this.request({ endpoint: `games/db`, method: `POST`, data: localDBForm })
     }
 
     async getGameInfoById(gameId) {
-        return await this.request({ endpoint: `games/id`, method: `GET`, data: gameId })
+        return await this.request({ endpoint: `games/db`, method: `GET`, data: gameId })
     }
 
     async createNewPost(post) {
@@ -105,7 +105,6 @@ class ApiClient {
     async fetchUsersEvents(userId) {
         return await this.request({ endpoint: `events/user/${userId}`, method: `GET` })
     }
-
 }
 
 export default new ApiClient("http://localhost:3001")

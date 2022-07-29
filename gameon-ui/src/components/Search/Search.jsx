@@ -1,15 +1,10 @@
 import {
   Box,
-  Heading,
   Input,
   Button,
   FormLabel,
   Container,
   Wrap,
-  Badge,
-  CheckboxGroup,
-  Checkbox,
-  useCheckbox,
   HStack,
   extendTheme,
   Tag,
@@ -18,20 +13,14 @@ import {
   TagCloseButton,
   VStack,
 } from '@chakra-ui/react';
-import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Scrollbar, Mousewheel } from "swiper";
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/scrollbar";
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import apiClient from '../../services/apiClient';
 
-export default function Search({ selectedGames, setSelectedGames }) {
+export default function Search({ selectedGames, setSelectedGames, selectedGamesNames, setSelectedGamesNames, selectedGamesPic, setSelectedGamesPic }) {
   const [errors, setErrors] = useState({});
   const [searchInput, setSearchInput] = useState('');
   const [listGames, setListGames] = useState([]);
-  const [selectedGamesNames, setSelectedGamesNames] = useState([]);
 
   const handleOnInputChange = event => {
     setSearchInput(event.target.value);
@@ -64,6 +53,8 @@ const clearSearch = async () => {
         setSelectedGames={setSelectedGames}
         selectedGamesNames={selectedGamesNames}
         setSelectedGamesNames={setSelectedGamesNames}
+        selectedGamesPic={selectedGamesPic}
+        setSelectedGamesPic={setSelectedGamesPic}
       />
       <Container maxH={'200px'} minW={'500px'} overflowY="auto" css={{
     '&::-webkit-scrollbar': {
@@ -83,6 +74,7 @@ const clearSearch = async () => {
               onClick={() => {
                 setSelectedGames(arr => [...arr, game.id]);
                 setSelectedGamesNames(arr => [...arr, game.name]);
+                setSelectedGamesPic(arr => [...arr, game.cover.url])
               }}
               value={game.id}
               key={index}
@@ -106,15 +98,20 @@ function SearchBar({
   setSelectedGames,
   selectedGamesNames,
   setSelectedGamesNames,
+  selectedGamesPic,
+  setSelectedGamesPic
 }) {
   function removeGame(id) {
     const copyArr = [...selectedGames];
     const copyNameArr = [...selectedGamesNames];
+    const copyPicArr = [...selectedGamesPic];
     const index = copyArr.indexOf(id);
     copyArr.splice(index, 1);
     copyNameArr.splice(index, 1);
+    copyPicArr.splice(index, 1);
     setSelectedGames([...copyArr]);
     setSelectedGamesNames([...copyNameArr]);
+    setSelectedGamesPic([...copyPicArr]);
   }
 
   return (

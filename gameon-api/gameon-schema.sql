@@ -9,7 +9,8 @@ CREATE TABLE users (
     image_url   TEXT,
     game_list   INTEGER[],
     created_at  TIMESTAMP NOT NULL DEFAULT NOW(),
-    updated_at  TIMESTAMP NOT NULL DEFAULT CURRENT_DATE
+    updated_at  TIMESTAMP NOT NULL DEFAULT CURRENT_DATE,
+    UNIQUE(username)
 );
 
 CREATE TABLE events (
@@ -41,7 +42,8 @@ CREATE TABLE igdb_local (
     id                  SERIAL PRIMARY KEY,
     game_id             INTEGER NOT NULL,
     game_name           TEXT NOT NULL,
-    game_image_url      TEXT NOT NULL
+    game_image_url      TEXT NOT NULL,
+    UNIQUE(game_id)
 );
 
 CREATE TABLE posts (

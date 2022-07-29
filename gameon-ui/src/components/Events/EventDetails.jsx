@@ -12,6 +12,7 @@ import axios from "axios";
 
 
 import { useEventContext } from "../../contexts/event"
+import apiClient from "../../services/apiClient"
 
 export default function EventDetails({event}) {
     const noImage = "https://image.shutterstock.com/shutterstock/photos/571752970/display_1500/stock-photo-no-game-sign-on-white-background-571752970.jpg"
