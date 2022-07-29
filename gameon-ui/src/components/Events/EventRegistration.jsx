@@ -26,7 +26,6 @@ export default function EventRegistration({ games }) {
     const getIsRegistered = async() => {
       const { data, error } = await apiClient.isUserRegistered(eventId, user.id)
        if(data) {
-        console.log("data: ", data)
         setErrors(null)
         setIsRegistered(true)
        }
@@ -63,7 +62,6 @@ export default function EventRegistration({ games }) {
       setIsRegistered(true)
       setAction(true)
     }
-    console.log("data: ", data)
     if(error) setErrors((e) => ({ ...e, form: error}))
   }
 
@@ -76,7 +74,6 @@ export default function EventRegistration({ games }) {
       setIsRegistered(false)
       setAction(false)
     }
-    console.log("withdrawal: ", data)
     if (error) setErrors((e) => ({ ...e, form: error}))
   }
 
