@@ -4,12 +4,35 @@ import * as React from "react"
 // import "swiper/css"
 // import "swiper/css/pagination"
 // import { EffectFade, Pagination } from "swiper"
-import pic from "../../media/evo2.jpg"
-import { Container, Image } from '@chakra-ui/react'
+import pic from "../../media/Logo.png"
+import background from "../../media/indigo.jpeg"
+import { Box, Image, Heading, Text } from '@chakra-ui/react'
 // import "react-slideshow-image/dist/styles.css"
 export default function Hero() {
 
-
+    return(
+        <Box 
+        width={"100%"}
+        height={"auto"}
+        display={"flex"} 
+        flexDirection={"column"} 
+        alignItems={"center"} 
+        backgroundColor={"purple.900"} 
+        backgroundPosition={"60%"}
+        backgroundImage={background}
+        backgroundRepeat={"no-repeat"}
+        backgroundSize={"cover"}
+        textAlign={"center"}
+        padding={"3rem"}
+        borderBottomRadius={"15px"}
+        >
+            <Heading textTransform={"uppercase"} fontWeight={700} color={"whiteAlpha.900"}>
+                Game on!
+            </Heading>
+            <Box width={"70px"} height={"4px"} backgroundColor={"purple.400"} marginleft={"lg"} marginRight={"lg"}></Box>
+            <Text color={"whiteAlpha.900"} fontWeight={"semibold"}>Community through gaming</Text>
+        </Box>
+    )
 
 
     // Commented out Swiper slide

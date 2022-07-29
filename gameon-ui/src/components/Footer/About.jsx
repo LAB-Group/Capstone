@@ -7,7 +7,7 @@ export default function About(){
         <Box>
         <Heading as='h4' size='md'>About</Heading>
         <Text fontSize='sm'>
-           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum dolores blanditiis aspernatur beatae eius praesentium, impedit perferendis officiis quibusdam quis libero laborum tempora facilis asperiores qui, quae incidunt minus dolore.
+        Video games are a huge market across the globe, where anyone in your family could be a gamer, young or old. Because of this, gaming can be used to bring people together and there is a need to facilitate that growth and also allow others to find like-minded individuals.
         </Text>
         </Box>
     )

@@ -1,9 +1,10 @@
 import * as React from "react"
 // import {Link, useNavigate} from "react-router-dom"
 import {HashLink as Link } from 'react-router-hash-link'
-import { Box, Heading, Spacer, Button, ButtonGroup, Flex, Drawer,
+import { Box, Heading, Spacer, Button, ButtonGroup, Image, Flex, Drawer,
     DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure, Icon, useMediaQuery } from "@chakra-ui/react"
 import {GiHamburgerMenu} from "react-icons/gi"
+import logo from "../../media/Logo.png"
 import { ColorModeSwitcher } from "../../ColorModeSwitcher"
 import LoginPage from "../LoginPage/LoginPage"
 import RegisterPage from "../RegisterPage/RegisterPage"
@@ -36,9 +37,9 @@ export default function NavBar() {
         //  <Container bg="blackAlpha.700" minHeight="50px" width="100%" maxW={'9000px'} position='sticky' top='0'>
         <Box position="relative" width="100%" height="auto" backgroundColor={"purple.100"}>
             <Flex minWidth='max-content' alignItems='center' gap='2' paddingTop={'2'}>
-                <Box p='2'>
+                <Box>
                     <Link to="/">
-                    <Heading size='md'>Game On!</Heading>
+                    <Image width={"100px"} height={"50px"} objectFit={"cover"} src={logo}/>
                     </Link>
                 </Box>
                 <Spacer />

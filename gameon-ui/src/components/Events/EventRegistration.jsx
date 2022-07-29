@@ -5,7 +5,6 @@ import apiClient from '../../services/apiClient';
 import { useAuthContext } from '../../contexts/auth';
 import { Container, Button, FormLabel, Checkbox, Alert, AlertIcon,
   AlertDescription, CheckboxGroup, Text, Box, Stack, HStack,
-
 } from '@chakra-ui/react';
 
 export default function EventRegistration({ games }) {
@@ -84,7 +83,6 @@ export default function EventRegistration({ games }) {
         <Heading>Event Registration</Heading>
       </FormLabel>
       <Box>
-
           <Stack>
               <HStack spacing={4}>
                   <CheckboxGroup size="lg" isDisabled={action || isRegistered}>
@@ -111,7 +109,7 @@ export default function EventRegistration({ games }) {
             <Button margin={2} colorScheme="purple" mr={3} onClick={handleWithdraw}>Withdraw</Button>
             : 
             <Button margin={2} colorScheme="purple" mr={3} onClick={handleOnSubmit}>Register</Button>
-          }
+          }       
       </Box>
     </Container>
   );
