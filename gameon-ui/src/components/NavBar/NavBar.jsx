@@ -1,8 +1,9 @@
 import * as React from "react"
 // import {Link, useNavigate} from "react-router-dom"
 import {HashLink as Link } from 'react-router-hash-link'
-import { Box, Heading, Container, Text, Spacer, Button, ButtonGroup, Flex, Drawer,
-    DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure } from "@chakra-ui/react"
+import { Box, Heading, Spacer, Button, ButtonGroup, Flex, Drawer,
+    DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure, Icon, useMediaQuery } from "@chakra-ui/react"
+import {GiHamburgerMenu} from "react-icons/gi"
 import { ColorModeSwitcher } from "../../ColorModeSwitcher"
 import LoginPage from "../LoginPage/LoginPage"
 import RegisterPage from "../RegisterPage/RegisterPage"
@@ -26,11 +27,14 @@ export default function NavBar() {
         
     }
 
+    // Using media query to make navbar responsive 
+    // const [isLessthan780] = useMediaQuery('(max-width: 780px)')
+
     return (
         // This makes the navbar scrollable
         // Need to figure out how to position navbar in front of hero
         //  <Container bg="blackAlpha.700" minHeight="50px" width="100%" maxW={'9000px'} position='sticky' top='0'>
-        <Container minHeight="50px" width="100%" maxW={'9000px'} position='relative' backgroundColor={"purple.100"}>
+        <Box position="relative" width="100%" height="auto" backgroundColor={"purple.100"}>
             <Flex minWidth='max-content' alignItems='center' gap='2' paddingTop={'2'}>
                 <Box p='2'>
                     <Link to="/">
@@ -39,11 +43,24 @@ export default function NavBar() {
                 </Box>
                 <Spacer />
                 
+                {/* Navbar responsive hamburger icon */}
+                {/* {isLessthan780 ?     
+                        <Button colorScheme={"purple"} display={"block"}>
+                            <Icon as={GiHamburgerMenu} display={"block"}/>
+                        </Button>
+                        :
+                        <Button colorScheme={"purple"} display={"none"}>
+                            <Icon as={GiHamburgerMenu} display={"none"}/>
+                        </Button>
+                } */}
+
+
                 {user?.email? 
                     <ButtonGroup gap='2'>
                         <Button colorScheme='purple' onClick={onCreateOpen}>Create Event</Button>
                         <Link to ="/profile"><Button variant="outline" colorScheme='purple'>Profile</Button></Link>
                         <Link smooth to="#about"><Button variant="ghost" colorScheme='purple'>About</Button></Link>
+                        <Link smooth to="#events"><Button variant="ghost" colorScheme='purple'>Events</Button></Link>
                         <Button variant="link" colorScheme='purple' onClick={handleLogout}>Logout</Button>
                         <ColorModeSwitcher justifySelf="flex-end" />
                     </ButtonGroup>
@@ -52,6 +69,7 @@ export default function NavBar() {
                         <Button colorScheme='purple' onClick={onLoginOpen}>Log in</Button>
                         <Button variant="outline" colorScheme='purple' onClick={onRegisterOpen}>Sign Up</Button>
                         <Link smooth to="#about"><Button variant="ghost" colorScheme='purple'>About</Button></Link>
+                        <Link smooth to="#events"><Button variant="ghost" colorScheme='purple'>Events</Button></Link>
                         <ColorModeSwitcher justifySelf="flex-end" />
                     </ButtonGroup>
                 }
@@ -92,6 +110,6 @@ export default function NavBar() {
                     </DrawerContent>
                 </Drawer>
             </Flex>
-        </Container>
+        </Box>
     )
 }
