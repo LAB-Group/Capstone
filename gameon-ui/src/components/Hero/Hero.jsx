@@ -11,7 +11,10 @@ import { Box, Image, Heading, Text } from '@chakra-ui/react'
 export default function Hero() {
 
     return(
-        <Box display={"flex"} 
+        <Box 
+        width={"100%"}
+        height={"auto"}
+        display={"flex"} 
         flexDirection={"column"} 
         alignItems={"center"} 
         backgroundColor={"purple.900"} 
@@ -21,11 +24,12 @@ export default function Hero() {
         backgroundSize={"cover"}
         textAlign={"center"}
         padding={"3rem"}
+        borderBottomRadius={"15px"}
         >
             <Heading textTransform={"uppercase"} fontWeight={700} color={"whiteAlpha.900"}>
                 Game on!
             </Heading>
-            <Box width={"70px"} height={"4px"} backgroundColor={"purple.400"} margin={"lg"}></Box>
+            <Box width={"70px"} height={"4px"} backgroundColor={"purple.400"} marginleft={"lg"} marginRight={"lg"}></Box>
         </Box>
     )
 
