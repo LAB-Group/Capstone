@@ -145,19 +145,19 @@ export default function EventDetails({event}) {
                 <Stack spacing={{ base: 4, sm: 6 }} direction={"column"} divider={
                     <StackDivider borderColor={useColorModeValue("gray.200", "gray.600")}/>
                 }>
-                <Box>
+                <Box textAlign={"center"}>
                 
-                    <HStack>
+                    
                     {/* Details */}
                     <VStack spacing={{ base: 4, sm: 6 }}>
                         <Text position={"relative"} color={useColorModeValue("whiteAlpha.600", "whiteAlpha.700")} fontSize={"3xl"} fontWeight={300}>
                             Description
                         </Text>
-                        <Box alignContent={"center"} backgroundColor={"whiteAlpha.900"} width={"98%"} borderRadius={"3xl"}>
-                        <Text whiteSpace= "pre-wrap" fontSize={"lg"} padding={"4px"}>{event.eventDetails}</Text>
+                        <Box backgroundColor={"whiteAlpha.900"} width={"98%"} borderRadius={"3xl"}>
+                        <Text whiteSpace= "pre-wrap" fontSize={{}} padding={"4px"}>{event.eventDetails}</Text>
                         </Box>
                     </VStack>
-                    </HStack>
+                    
                 </Box>
                 </Stack>
 

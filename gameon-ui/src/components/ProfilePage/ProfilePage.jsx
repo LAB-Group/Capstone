@@ -8,7 +8,6 @@ import UserUpcomingEvents from "./UserUpcomingEvents"
 import UserPreviousEvents from "./UserPreviousEvents"
 import UserPostsFeed from "./UserPostsFeed"
 
-// FIXME: NEED TO FIX INTERMITTENT RENDER ISSUES FOR FILTERED EVENTS FEED
 export default function ProfilePage() {
     const { user } = useAuthContext()
     const { isOpen, onOpen, onClose } = useDisclosure()
