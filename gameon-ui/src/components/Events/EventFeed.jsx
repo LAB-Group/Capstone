@@ -11,6 +11,7 @@ import { useAuthContext } from "../../contexts/auth"
 import { useEventContext } from "../../contexts/event"
 import { Pagination, Scrollbar } from "swiper"
 import SearchedEvents from "./SearchedEvents";
+import { COLORS } from "../colors";
 export default function EventFeed({ isFetching }){
     const { user } = useAuthContext()
     const { events } = useEventContext()
@@ -24,8 +25,8 @@ export default function EventFeed({ isFetching }){
         return(
             <Flex flexDirection='column' justifyContent='center' alignItems='center' minWidth="95vw" position="relative">
                 <Divider orientation='horizontal' backgroundColor={'purple.100'} marginTop={6} minWidth="95vw" marginBottom={6} />
-                <Heading id="events" mb={"10"} textAlign={"center"} fontSize={["xl", "3xl", "4xl"]}>Events</Heading>
-                <Button variant="outline" colorScheme='purple' onClick={onOpen} >Search All Events</Button>
+                <Heading id="events" color={"#e6e6e6"} mb={"10"} textAlign={"center"} fontSize={["xl", "3xl", "4xl"]}>Events</Heading>
+                <Button variant="outline" colorScheme='purple' onClick={onOpen} style={{"transition":"background-color 2s, color 2s"}} _hover={{"background-color": COLORS.ultraViolet, "color": COLORS.offWhite}}>Search All Events</Button>
 
                 {isOpen? <SearchedEvents events={events} isOpen={isOpen} onOpen={onOpen} onClose={onClose} /> :<></>}
                 
@@ -38,7 +39,7 @@ export default function EventFeed({ isFetching }){
             }}>
 
                 <Box maxW={"1000px"} width={"100%"}>
-                    <Heading>Tournaments</Heading>
+                    <Heading color={"#e6e6e6"}>Tournaments</Heading>
                 
                 <Box backgroundColor={"purple.300"} padding={"1em"}  borderRadius={"20px"}>
                 {tournamentEvents?.length ? 
@@ -69,7 +70,7 @@ export default function EventFeed({ isFetching }){
                 </Box> 
 
                 <Box maxW={"1000px"} width={"100%"}>
-                    <Heading>Speedrunning</Heading>
+                    <Heading color={"#e6e6e6"}>Speedrunning</Heading>
                     <Box backgroundColor={"purple.300"} padding={"1em"} borderRadius={"20px"}>
 
                         {speedEvents?.length ? 
@@ -99,7 +100,7 @@ export default function EventFeed({ isFetching }){
                 </Box>
 
                 <Box maxW={"1000px"} width={"100%"}>
-                    <Heading>Meet-ups</Heading>
+                    <Heading color={"#e6e6e6"}>Meet-ups</Heading>
                     <Box backgroundColor={"purple.300"} padding={"1em"} borderRadius={"20px"}>
 
                         {meetEvents?.length ? 

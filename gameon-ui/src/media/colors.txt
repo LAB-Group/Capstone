@@ -1,0 +1,15 @@
+Ultra violet:
+rgb (113, 57, 166)
+hex: #7139A6
+
+Dark Amethyst:
+rgb (160, 61, 154)
+hex: #A03D9A
+
+Indigo:
+rgb (48, 43, 63)
+hex: #302B3F
+
+Off White:
+rgb (230, 230, 230)
+hex: #E6E6E6

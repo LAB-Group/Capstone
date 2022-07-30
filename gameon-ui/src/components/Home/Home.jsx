@@ -5,12 +5,17 @@ import { Image, Container, Spacer, Box } from "@chakra-ui/react"
 
 export default function Home(){
     return (
-    
-            <Container centerContent minWidth="98vw">
+            // Removed container from home to prevent spacing on the ends
+            // <Container centerContent minWidth="98vw">
+
+            // Blur filter for the background
+            // This doesn't effect the foreground
+                <Box style={{"backdrop-filter": "blur(10px)"}}>
                 <Hero />
                 <Spacer/>
                 <EventFeed />
-            </Container>
+                </Box>
+            //</Container>
             
         
     )
