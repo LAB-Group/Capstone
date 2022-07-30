@@ -14,15 +14,16 @@ export default function EventPage(){
     const { events } = useEventContext()
     const [loading, setLoading] = useState(true)
     const [event, setEvent] = useState([])
-    const [eventGames, setEventGames] = useState([])
+    // const [eventGames, setEventGames] = useState([])
     const [posts, setPosts] = useState([])
     const [error, setError] = useState(null)
 
     let { eventId } = useParams()
+    const { eventGame } = event
 
     useEffect(() => {
         const getEvent = async () => {
-        
+          
             try {
               setTimeout(() => {
                 setLoading(false)
@@ -30,7 +31,6 @@ export default function EventPage(){
               const response = await axios.get(`http://localhost:3001/events/${eventId}`)
               const eventData = response.data
               setEvent(eventData.event)
-              setEventGames(event.eventGame)
             } catch(error) {
               return(error)
             }

@@ -1,6 +1,6 @@
 import * as React from "react"
 import { useState, useEffect } from "react"
-import {  Box, Text, SimpleGrid, Divider, Flex, Skeleton, VStack, Heading  } from "@chakra-ui/react"
+import {  Box, Text, SimpleGrid, Divider, Flex, Skeleton, VStack, Heading, Input, Link, Button, useDisclosure } from "@chakra-ui/react"
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css"
 import "swiper/css/pagination"
@@ -10,19 +10,25 @@ import EventCard from "./EventCard"
 import { useAuthContext } from "../../contexts/auth"
 import { useEventContext } from "../../contexts/event"
 import { Pagination, Scrollbar } from "swiper"
+import SearchedEvents from "./SearchedEvents";
 export default function EventFeed({ isFetching }){
     const { user } = useAuthContext()
     const { events } = useEventContext()
     const [loading, setLoading] = useState(true)
+    const { isOpen, onOpen, onClose } = useDisclosure()
 
     let tournamentEvents = events?.filter(event => {return event.eventType === "Tournament"})
     let speedEvents = events?.filter(event => {return event.eventType === "Speedrunning"})
-    let meetEvents = events?.filter(event => {return event.eventType === "Meet-up"})
+    let meetEvents = events?.filter(event => {return event.eventType === "Meet-up"})    
    
         return(
             <Flex flexDirection='column' justifyContent='center' alignItems='center' minWidth="95vw" position="relative">
                 <Divider orientation='horizontal' backgroundColor={'purple.100'} marginTop={6} minWidth="95vw" marginBottom={6} />
                 <Heading id="events" mb={"10"} textAlign={"center"} fontSize={["xl", "3xl", "4xl"]}>Events</Heading>
+                <Button variant="outline" colorScheme='purple' onClick={onOpen} >Search All Events</Button>
+
+                {isOpen? <SearchedEvents events={events} isOpen={isOpen} onOpen={onOpen} onClose={onClose} /> :<></>}
+                
                 
                 <SimpleGrid minWidth="80vw" justifyContent={"center"} alignItems={"center"} minChildWidth={'320px'} rowGap='20px' className="WRAP">
                 <VStack css={{
@@ -34,7 +40,7 @@ export default function EventFeed({ isFetching }){
                 <Box maxW={"1000px"} width={"100%"}>
                     <Heading>Tournaments</Heading>
                 
-                <Box backgroundColor={"purple.300"} padding={"1em"}>
+                <Box backgroundColor={"purple.300"} padding={"1em"}  borderRadius={"20px"}>
                 {tournamentEvents?.length ? 
                     <Swiper
                     slidesPerView={3}
@@ -64,7 +70,7 @@ export default function EventFeed({ isFetching }){
 
                 <Box maxW={"1000px"} width={"100%"}>
                     <Heading>Speedrunning</Heading>
-                    <Box backgroundColor={"purple.300"} padding={"1em"}>
+                    <Box backgroundColor={"purple.300"} padding={"1em"} borderRadius={"20px"}>
 
                         {speedEvents?.length ? 
                             <Swiper
@@ -94,7 +100,7 @@ export default function EventFeed({ isFetching }){
 
                 <Box maxW={"1000px"} width={"100%"}>
                     <Heading>Meet-ups</Heading>
-                    <Box backgroundColor={"purple.300"} padding={"1em"}>
+                    <Box backgroundColor={"purple.300"} padding={"1em"} borderRadius={"20px"}>
 
                         {meetEvents?.length ? 
                         <Swiper
