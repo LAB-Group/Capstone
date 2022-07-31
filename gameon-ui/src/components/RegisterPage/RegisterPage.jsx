@@ -172,7 +172,8 @@ function RegisterForm({ user, registerForm, setRegisterForm, setErrors, isEmail,
     // const isError = form === ''
     return (
       <ChakraProvider theme={theme}>
-       <VStack spacing={5}>
+         {/* To adjust form add padding here */}
+       <VStack spacing={5} paddingTop={"6rem"}>
         <FormControl variant="floating" isInvalid={isEmail}>
         {registerForm.email.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Email</FormLabel>
