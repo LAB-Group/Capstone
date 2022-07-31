@@ -1,23 +1,21 @@
 import * as React from "react"
-import { Box, Flex, Text } from "@chakra-ui/react"
+import { Container, Box, Flex, Heading, SimpleGrid, Stack } from "@chakra-ui/react"
 import About from "../Footer/About"
 import { COLORS } from "../colors"
 // import ContactUs from "../Footer/ContactUs"
 
 export default function Footer(){
     return (
-        <Box>
-            <Flex flexWrap="wrap" justifyContent="center">
-                {/* Moved About to Home.jsx */}
-                {/* <Box id="contact">
-                <ContactUs/>
-                </Box> */}
-            </Flex>
-            <Box width={"200px"} backgroundColor={COLORS.ultraViolet}>
-                <Text></Text>
-            </Box>
-            
-        </Box>
+            <Box backgroundColor={COLORS.ultraViolet} color={COLORS.offWhite}>
+                <Heading>THIS IS THE FOOTER</Heading>
+                <Container maxWidth={"6xl"} paddingY={10}>
+                    <SimpleGrid columns={{base: 1, sm: 2, md: 4}} spacing={8}>
+                        <Stack align={"flex-start"}>
+
+                        </Stack>
+                    </SimpleGrid>
+                </Container>
+            </Box>           
         //<About/>
     )
 } 
