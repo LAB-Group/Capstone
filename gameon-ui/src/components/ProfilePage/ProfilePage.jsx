@@ -60,7 +60,6 @@ export default function ProfilePage() {
                 for (let i=0;i<user.gameList.length;i++) {
                     const response = await apiClient.getGameInfoById(user.gameList[i])
                     setGames(curr => [...curr, response.data])
-                    console.log("GAMES:",games)
                   }
               } catch(error) {
               return(error)
@@ -68,7 +67,6 @@ export default function ProfilePage() {
           }
           getGames()  
     },[])
-    console.log("USER: ",games)
 
     return (
 
