@@ -135,7 +135,7 @@ export default function RegisterPage({onClose}) {
 
             <DrawerBody >
                 {/* <Input placeholder='Type here...' /> */}
-                <RegisterForm user={user} registerForm={registerForm} setRegisterForm={setRegisterForm} setErrors={setErrors} isEmail={isEmail} isFristName={isFirstName} isLastName={isLastName} isPassword={isPassword} isPasswordConfirm={isPasswordConfirm} isUsername={isUsername}
+                <RegisterForm user={user} registerForm={registerForm} setRegisterForm={setRegisterForm} setErrors={setErrors} isEmail={isEmail} isFirstName={isFirstName} isLastName={isLastName} isPassword={isPassword} isPasswordConfirm={isPasswordConfirm} isUsername={isUsername}
               />
             </DrawerBody>
 
@@ -152,7 +152,7 @@ export default function RegisterPage({onClose}) {
     )
 }
 
-function RegisterForm({ user, registerForm, setRegisterForm, setErrors, isEmail,isFristName,isLastName,isPassword,isPasswordConfirm,isUsername }) {
+function RegisterForm({ user, registerForm, setRegisterForm, setErrors, isEmail, isFirstName,isLastName,isPassword,isPasswordConfirm,isUsername }) {
   const [showPassword, setShowPassword] = useState(false)
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false)
 
@@ -187,7 +187,7 @@ function RegisterForm({ user, registerForm, setRegisterForm, setErrors, isEmail,
         </FormControl>
 
       <HStack>
-        <FormControl variant="floating"isInvalid={isFristName} >
+        <FormControl variant="floating"isInvalid={isFirstName} >
         {registerForm.firstName.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">First Name</FormLabel>
          : 
@@ -197,7 +197,7 @@ function RegisterForm({ user, registerForm, setRegisterForm, setErrors, isEmail,
               defaultValue={registerForm.firstName}
               onChange={handleOnInputChange}
             />
-            {isFristName?<FormErrorMessage>Email is required.</FormErrorMessage>:null
+            {isFirstName?<FormErrorMessage>Email is required.</FormErrorMessage>:null
         }
         </FormControl>
 
@@ -207,7 +207,7 @@ function RegisterForm({ user, registerForm, setRegisterForm, setErrors, isEmail,
          :<FormLabel>Last Name</FormLabel>}
         
         <Input id='lastName' name="lastName" type='text' focusBorderColor='purple.400'
-              defaultValue={registerForm.firstName}
+              defaultValue={registerForm.lastName}
               onChange={handleOnInputChange}
             />
             {isLastName?<FormErrorMessage>Email is required.</FormErrorMessage>:null

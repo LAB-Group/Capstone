@@ -79,7 +79,7 @@ class ApiClient {
     }
 
     async getGameInfoById(gameId) {
-        return await this.request({ endpoint: `games/db`, method: `GET`, data: gameId })
+        return await this.request({ endpoint: `games/db/${gameId}`, method: `GET`})
     }
 
     async createNewPost(post) {

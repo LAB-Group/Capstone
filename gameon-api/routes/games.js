@@ -51,9 +51,10 @@ router.post("/id", async (req, res, next) => {
         
 })
 
-router.get("/db", async (req, res, next) => {
+router.get("/db/:gameId", async (req, res, next) => {
     try {
-        const gameId = req.body
+        const { gameId } = req.params
+        // const game = req.body
         const game = await Games.getGameInfoById(gameId)
         res.status(200).json(game)
     } catch(err) {

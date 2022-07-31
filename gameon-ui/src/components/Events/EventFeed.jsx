@@ -33,7 +33,7 @@ export default function EventFeed({ isFetching }){
                 <SimpleGrid minWidth="80vw" justifyContent={"center"} alignItems={"center"} minChildWidth={'320px'} rowGap='20px' className="WRAP">
                 <VStack css={{
                 ".swiper-pagination-bullet-active": {
-                    "background-color": "#B794F4"
+                    "backgroundColor": "#B794F4"
                   }
             }}>
 

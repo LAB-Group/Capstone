@@ -20,13 +20,14 @@ class Games {
 }
 
 static async getGameInfoById(gameId) {
+  console.log("GAMEID",gameId)
         const results = await db.query(
       `
             SELECT  i.game_id AS "gameId", i.game_name AS "gameName" , i.game_image_url AS "gameImageUrl"
             FROM igdb_local as i
             WHERE i.game_id = $1
             `,
-      [gameId.gameId]
+      [gameId]
     );
     return results.rows[0];
 }

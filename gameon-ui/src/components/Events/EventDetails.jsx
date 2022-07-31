@@ -1,6 +1,6 @@
 import * as React from "react"
 import EventRegistration from "../Events/EventRegistration"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { 
     Container, Box, Text, SimpleGrid, Flex, 
     Image, VStack,Heading, Stack, 
@@ -8,50 +8,13 @@ import {
 } from "@chakra-ui/react"
 import { CalendarIcon } from "@chakra-ui/icons"
 import { HiLocationMarker } from "react-icons/hi"
-import axios from "axios";
 
-
-import { useEventContext } from "../../contexts/event"
-import apiClient from "../../services/apiClient"
-
-export default function EventDetails({event}) {
+export default function EventDetails({event, games}) {
     const noImage = "https://image.shutterstock.com/shutterstock/photos/571752970/display_1500/stock-photo-no-game-sign-on-white-background-571752970.jpg"
     let date = event.eventDate
     let newDate = new Date(date)
     let myDate = newDate.toDateString()
     let time = newDate.toLocaleTimeString("en-US")
-
-    const [games, setGames] = useState([])
-    const [loading, setLoading] = useState(true)
-
-    let string = ""
-    if(event.eventGame !== undefined) {
-        for(let i = 0; i < event.eventGame.length; i++) {
-            if(i === event.eventGame.length - 1) {
-                string += event.eventGame[i]
-                break
-            }
-            string += event.eventGame[i] + ", "
-        }
-    }
-
-    useEffect(() => {
-        setTimeout(() => {
-            setLoading(false)
-          }, 100)
-        const getGames = async () => {      
-            try {
-              const response = await axios.post(`http://localhost:3001/games/id`, {
-                gameId: string
-              })
-              const gameData = response.data
-              setGames(gameData)
-            } catch(error) {
-              return(error)
-            }
-          }
-          getGames()  
-    },[string])
 
     return(
         <Container maxWidth={"7xl"}>
@@ -175,13 +138,13 @@ export default function EventDetails({event}) {
                     <HStack spacing="24px">
                     {/* Game */}
                     <SimpleGrid columns={{base:2, md:3}} spacing={10}>  
-                        {games.game?.map((game, index) => (
+                        {games?.map((game, index) => (
                             <HStack key={index} spacing={"20px"} position={"relative"}>
                                 <Box width={"400px"} borderWidth='1px' borderRadius='lg' pl={"10px"} overflow='hidden' boxShadow={'md'}>
-                                    <Image boxSize={"300px"} position={"relative"} alignContent={"center"} fit={"contain"} borderTopRadius={"lg"} src={game.cover?.url.replace("thumb", "cover_small_2x")} alt={noImage}/>
+                                    <Image boxSize={"300px"} position={"relative"} alignContent={"center"} fit={"contain"} borderTopRadius={"lg"} src={game.gameImageUrl.replace("thumb", "cover_small_2x")} alt={noImage}/>
                                     <Box p='6'>
                                         <Box display='flex' alignItems='baseline'>
-                                            <Heading textAlign={"center"} size='md'>{game.name}</Heading>
+                                            <Heading textAlign={"center"} size='md'>{game.gameName}</Heading>
                                         </Box>
                                     </Box>
                                 </Box>

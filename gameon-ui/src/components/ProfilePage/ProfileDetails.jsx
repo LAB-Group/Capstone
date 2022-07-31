@@ -14,38 +14,8 @@ import {
   faInstagram
 } from "@fortawesome/free-brands-svg-icons";
 
-export default function ProfileDetails({ user, onOpen, onClose, isOpen }) {
-    const [games, setGames] = useState([])
+export default function ProfileDetails({ user, onOpen, onClose, isOpen, games }) {
     const [loading, setLoading] = useState(true)
-    let string = ""
-    if(user.gameList !== undefined) {
-        for(let i = 0; i < user.gameList?.length; i++) {
-            if(i === user.gameList.length - 1) {
-                string += user.gameList[i]
-                break
-            }
-            string += user.gameList[i] + ", "
-        }
-    }
-
-    useEffect(() => {
-        setTimeout(() => {
-            setLoading(false)
-          }, 100)
-        const getGames = async () => {      
-            try {
-              const response = await axios.post(`http://localhost:3001/games/id`, {
-                gameId: string
-              })
-              const gameData = response.data
-
-              setGames(gameData)
-            } catch(error) {
-              return(error)
-            }
-          }
-          getGames()  
-    },[string])
 
     return (
         <>
@@ -115,7 +85,7 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen }) {
                                           borderRadius: '24px',
                                         },}}
                                 >
-              {games.game?.map((game, index) => (
+              {games?.map((game, index) => (
                                     // <Text display={'flex'} maxWidth={'1000px'} key={index}>{game.name},</Text>
                                   <Tag
                                     
@@ -124,7 +94,7 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen }) {
                                    
                                     colorScheme="purple"
                                   >
-                                    <TagLabel>{game.name}</TagLabel>
+                                    <TagLabel>{game.gameName}</TagLabel>
                                     
                                   </Tag>
 
