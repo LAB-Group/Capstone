@@ -16,6 +16,7 @@ import {
   Text
 } from '@chakra-ui/react';
 import Search from '../Search/Search';
+import {COLORS} from "../colors"
 
 // import { Calendar } from '@natscale/react-calendar';
 
@@ -112,8 +113,8 @@ export default function CreateEventForm({ onClose }) {
       <Container centerContent maxWidth='4xl' p={3}>
         {/* To adjust form add padding here */}
         <VStack spacing={5} w="700px" paddingTop={"6rem"}>
-        <Text fontSize='xl'><b>Create Event</b></Text>
-      <FormControl variant="floating" >
+        <Text backgroundColor={COLORS.offWhite} color={COLORS.indigo} fontSize='xl'><b>Create Event</b></Text>
+      <FormControl color={COLORS.indigo} variant="floating" >
       {createEventForm.eventName.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Event Name</FormLabel>
          : 
@@ -122,7 +123,7 @@ export default function CreateEventForm({ onClose }) {
         <Input
           id="eventName"
           type="text"
-          focusBorderColor='purple.400' 
+          focusBorderColor={COLORS.ultraViolet} 
           name="eventName"
           defaultValue={createEventForm.eventName}
           onChange={handleOnInputChange}
@@ -138,7 +139,7 @@ export default function CreateEventForm({ onClose }) {
         <Input
           id="eventDate"
           name="eventDate"
-          focusBorderColor='purple.400' 
+          focusBorderColor={COLORS.ultraViolet} 
           onClick={() => setShowTimeDate(true)}
           ref={ref}
           type={showTimeDate?"datetime-local":"text"}
@@ -156,7 +157,7 @@ export default function CreateEventForm({ onClose }) {
           id="eventType"
           name="eventType"
           onClick={handleClick}
-          focusBorderColor='purple.400' 
+          focusBorderColor={COLORS.ultraViolet} 
           value={createEventForm.eventType}
           onChange={handleOnInputChange}
         >
@@ -178,7 +179,7 @@ export default function CreateEventForm({ onClose }) {
           id="eventLocation"
           name="eventLocation"
           type="text"
-          focusBorderColor='purple.400' 
+          focusBorderColor={COLORS.ultraViolet}
           defaultValue={createEventForm.eventLocation}
           onChange={handleOnInputChange}
         />
@@ -199,7 +200,7 @@ export default function CreateEventForm({ onClose }) {
           id="eventDetails"
           name="eventDetails"
           type="text"
-          focusBorderColor='purple.400'
+          focusBorderColor={COLORS.ultraViolet}
           overflowY={'auto'}
           defaultValue={createEventForm.eventDetails}
           onChange={handleOnInputChange}
@@ -217,7 +218,7 @@ export default function CreateEventForm({ onClose }) {
           name="eventImageUrl"
           type="url"
           defaultValue={createEventForm.eventImageUrl}
-          focusBorderColor='purple.400' 
+          focusBorderColor={COLORS.ultraViolet}
           onChange={handleOnInputChange}
         />
         
@@ -302,7 +303,7 @@ export default function CreateEventForm({ onClose }) {
     
 
 
-        <Button colorScheme="purple" mt={1}  w="350px"onClick={handleOnSubmit}>
+        <Button backgroundColor={COLORS.ultraViolet} color={COLORS.offWhite} mt={1}  w="350px"onClick={handleOnSubmit}>
           Create
         </Button>
         {/* <Button colorScheme="purple" variant="outline" onClick={onClose}>

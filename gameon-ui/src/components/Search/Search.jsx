@@ -26,6 +26,7 @@ import "swiper/css/scrollbar";
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import apiClient from '../../services/apiClient';
+import { COLORS } from "../colors";
 
 export default function Search({ selectedGames, setSelectedGames }) {
   const [errors, setErrors] = useState({});
@@ -149,14 +150,14 @@ function SearchBar({
               type="text"
               w="539px"
               maxW={'50em'}
-              focusBorderColor="purple.400"
+              focusBorderColor={COLORS.ultraViolet}
               value={searchInput}
               onChange={handleOnInputChange}
             />
-            <Button colorScheme="purple" onClick={handleOnSubmit}>
+            <Button backgroundColor={COLORS.ultraViolet} color={COLORS.offWhite} onClick={handleOnSubmit}>
               Search
             </Button>
-            <Button colorScheme="purple" onClick={clearSearch}>
+            <Button backgroundColor={COLORS.ultraViolet} color={COLORS.offWhite} onClick={clearSearch}>
               Clear
             </Button>
           </HStack>

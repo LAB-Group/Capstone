@@ -34,7 +34,7 @@ export default function NavBar() {
 
     return (
         // This makes the navbar scrollable
-        <Box zIndex={10000} position="sticky" top={0} width="100%" height="70px" backgroundColor={COLORS.indigo} fontSize={{ "base":"lg","md":"lg", "lg":"xl"}}>
+        <Box fontFamily={"Roboto, sans-serif"} zIndex={10000} position="sticky" top={0} width="100%" height="70px" backgroundColor={COLORS.indigo} fontSize={{ "base":"lg","md":"lg", "lg":"xl"}}>
             <Flex minWidth='max-content' alignItems='center' gap='2'>
                 <Box maxWidth={"100px"} height={"auto"}>
                     <Link to="/">
@@ -155,6 +155,7 @@ export default function NavBar() {
                     onClose={onCreateClose}
                     finalFocusRef={btnRef}
                     paddingTop={"10rem"}
+                    
                 >
                     <DrawerOverlay />
                     <DrawerContent>

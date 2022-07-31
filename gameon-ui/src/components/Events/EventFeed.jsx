@@ -1,6 +1,6 @@
 import * as React from "react"
 import { useState, useEffect } from "react"
-import {  Box, Text, SimpleGrid, Divider, Flex, Skeleton, VStack, Heading, Input, Link, Button, useDisclosure } from "@chakra-ui/react"
+import {  Box, Text, SimpleGrid, Flex, Skeleton, VStack, Heading, useDisclosure } from "@chakra-ui/react"
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css"
 import "swiper/css/pagination"
@@ -27,27 +27,42 @@ export default function EventFeed({ isFetching }){
             // Might comeback and make this a paddingTop
             <Flex marginTop={"2rem"} flexDirection='column' justifyContent='center' alignItems='center' minWidth="95vw" position="relative">
                 {/* <Divider orientation='horizontal' backgroundColor={'purple.100'} marginTop={6} minWidth="95vw" marginBottom={6} /> */}
-                <Heading id="events" color={"#e6e6e6"} mb={"10"} textAlign={"center"} fontSize={["xl", "3xl", "4xl"]}>Events</Heading>
-                <Button variant="outline" colorScheme='purple' onClick={onOpen} style={{"transition":"background-color 2s, color 2s"}} _hover={{"background-color": COLORS.ultraViolet, "color": COLORS.offWhite}}>Search All Events</Button>
+                {/* font-family: 'Roboto', sans-serif for headings */}
+                <Heading id="events" fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite} marginBottom={"1em"} textAlign={"center"} fontSize={["xl", "3xl", "4xl"]}>Events</Heading>
+                <Text onClick={onOpen} style={{
+                    "color":"hsl(0, 0%, 90%)",
+                    "backgroundColor":"none",
+                    "border":"2px",
+                    "border-color":COLORS.ultraViolet,
+                    "border-style":"solid", 
+                    "border-radius":"5px",
+                    "padding":"1em",
+                    "transition":"border-color 0.8s, background-color 0.8s"
+                    }} 
+                    _hover={{
+                        "cursor":"pointer",
+                        "border-color":COLORS.darkAmethyst,
+                        "background-color": COLORS.darkAmethyst, 
+                    }}>Search All Events</Text>
 
                 {isOpen? <SearchedEvents events={events} isOpen={isOpen} onOpen={onOpen} onClose={onClose} /> :<></>}
                 
                 
-                <SimpleGrid minWidth="80vw" justifyContent={"center"} alignItems={"center"} minChildWidth={'320px'} rowGap='20px' className="WRAP">
+                <SimpleGrid marginTop={"1rem"} minWidth="80vw" justifyContent={"center"} alignItems={"center"} minChildWidth={'320px'} rowGap='20px' className="WRAP">
                 <VStack css={{
                 ".swiper-pagination-bullet-active": {
                     "background-color": "#B794F4"
                   }
             }}>
 
-                <Box maxW={"1000px"} width={"100%"}>
-                    <Heading color={"#e6e6e6"}>Tournaments</Heading>
+                <Box marginTop={"0.5rem"} width={"100%"} maxWidth={"80em"} flexGrow={1} flexShrink={1} flexBasis={"auto"}>
+                    <Heading fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite}>Tournaments</Heading>
                 
-                <Box backgroundColor={"purple.300"} padding={"1em"}  borderRadius={"20px"}>
+                <Box marginTop={"0.5rem"} style={{"background":"rgba(113, 57, 166, .6)"}} padding={"1em"} borderRadius={"20px"}>
                 {tournamentEvents?.length ? 
                     <Swiper
                     slidesPerView={3}
-                    spaceBetween={10}
+                    spaceBetween={20}
                     slidesPerGroup={3}
                     scrollbar={{
                       hide: true,
@@ -71,9 +86,9 @@ export default function EventFeed({ isFetching }){
                 </Box>
                 </Box> 
 
-                <Box maxW={"1000px"} width={"100%"}>
-                    <Heading color={"#e6e6e6"}>Speedrunning</Heading>
-                    <Box backgroundColor={"purple.300"} padding={"1em"} borderRadius={"20px"}>
+                <Box marginTop={"0.5rem"} maxW={"1000px"} width={"100%"}>
+                    <Heading fontFamily={"Roboto"} color={COLORS.offWhite}>Speedrunning</Heading>
+                    <Box marginTop={"0.5rem"} style={{"background":"rgba(113, 57, 166, .6)"}} padding={"1em"} borderRadius={"20px"}>
 
                         {speedEvents?.length ? 
                             <Swiper
@@ -101,9 +116,9 @@ export default function EventFeed({ isFetching }){
                     </Box>
                 </Box>
 
-                <Box maxW={"1000px"} width={"100%"}>
-                    <Heading color={"#e6e6e6"}>Meet-ups</Heading>
-                    <Box backgroundColor={"purple.300"} padding={"1em"} borderRadius={"20px"}>
+                <Box marginTop={"0.5rem"} maxW={"1000px"} width={"100%"}>
+                    <Heading fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite}>Meet-ups</Heading>
+                    <Box marginTop={"0.5rem"} style={{"background":"rgba(113, 57, 166, .6)"}} padding={"1em"} borderRadius={"20px"}>
 
                         {meetEvents?.length ? 
                         <Swiper

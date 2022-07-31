@@ -21,11 +21,14 @@ export default function Hero() {
             "background-color": "hsl(255, 50%, 21%)",
         }}
         >
-            <Heading fontSize={"6xl"} paddingTop={"4rem"} paddingBottom={"1rem"} textTransform={"uppercase"} fontWeight={700} color={COLORS.offWhite}>
+            {/* font-family: 'VT323', monospace; */}
+            <Heading textTransform={"uppercase"} fontFamily={"VT323, monospace"} fontSize={"6xl"} paddingTop={"4rem"} paddingBottom={"1rem"} fontWeight={700} color={COLORS.offWhite}>
                 Game on!
             </Heading>
             <Box width={"70px"} height={"4px"} backgroundColor={COLORS.darkAmethyst} marginleft={"lg"} marginRight={"lg"}></Box>
-            <Text paddingTop={"1rem"} color={COLORS.offWhite} fontSize={"xl"} fontWeight={"semibold"}>Community through gaming</Text>
+            
+            {/* font-family: 'Roboto', sans-serif */}
+            <Text fontFamily={"Roboto, sans-serif"} paddingTop={"1rem"} color={COLORS.offWhite} fontSize={"xl"} fontWeight={"semibold"}>Community through gaming</Text>
         </Box>
     )
 
