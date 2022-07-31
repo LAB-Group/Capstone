@@ -3,7 +3,12 @@ import {useState} from "react"
 import { Link } from "@chakra-ui/react"
 import apiClient from "../../services/apiClient"
 import  { useAuthContext } from "../../contexts/auth"
-import { Text, Container, DrawerHeader, DrawerBody, Input, DrawerFooter, Button, FormControl,
+import { ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,Text, Container, DrawerHeader, DrawerBody, Input, DrawerFooter, Button, FormControl,
     FormLabel,
     FormErrorMessage,
     extendTheme,ChakraProvider, VStack, InputGroup, InputRightElement, HStack} from "@chakra-ui/react"
@@ -54,7 +59,6 @@ export default function LoginPage({onClose}) {
       email: "",
       password: "",
     })
-   
 
     const handleOnSubmit = async (event) => {
       event.preventDefault()
@@ -83,28 +87,28 @@ export default function LoginPage({onClose}) {
         setIsPassword(false)
       }
     }
-  
+
     return (
-        <Container centerContent maxWidth='4xl' >
-          
-            <DrawerHeader>Login to your account</DrawerHeader>
-            <Text fontSize='sm' color='red.500' p={0}>{errors.form}</Text>
+      <Container centerContent >
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Login to your account</ModalHeader>
+        <Text fontSize='sm' color='red.500' p={0}>{errors.form}</Text>
+        <ModalCloseButton />
+        <ModalBody>
+        <LoginForm user={user} loginForm={loginForm} setLoginForm={setLoginForm} setErrors={setErrors} isEmail={isEmail} isPassword={isPassword}/>
+        </ModalBody>
 
-            <DrawerBody>
-                {/* <Input placeholder='Type here...' /> */}
-                <LoginForm user={user} loginForm={loginForm} setLoginForm={setLoginForm} setErrors={setErrors} isEmail={isEmail} isPassword={isPassword}/>
-            </DrawerBody>
-
-            <DrawerFooter>
-              <VStack>
-                <Button colorScheme='purple' w="250px" onClick={handleOnSubmit} >Login</Button>
-                <HStack>
-                <Text fontSize='sm'>Don't have an account?</Text><Link><Text fontSize='sm' color='purple.400'>Sign Up</Text></Link></HStack>
-              </VStack>
-            </DrawerFooter>
-        </Container>
-
-    )
+        <ModalFooter display={'flex'} justifyContent={'center'}>
+             <VStack >
+               <Button colorScheme='purple' w="250px" onClick={handleOnSubmit} >Login</Button>
+               <HStack>
+               <Text fontSize='sm'>Don't have an account?</Text><Link><Text fontSize='sm' color='purple.400'>Sign Up</Text></Link></HStack>
+             </VStack>
+        </ModalFooter>
+      </ModalContent>
+    </Container>
+  )
 }
 
 function LoginForm({ user, loginForm, setLoginForm, setErrors,isEmail, isPassword}) {
@@ -127,7 +131,7 @@ function LoginForm({ user, loginForm, setLoginForm, setErrors,isEmail, isPasswor
     return (
       <ChakraProvider theme={theme}> 
        {/* To adjust form add padding here */}
-      <VStack spacing={5} paddingTop={"6rem"}>
+      <VStack spacing={5}>
         
         <FormControl variant="floating" isInvalid={isEmail}>
         {loginForm.email.length>0?
@@ -136,19 +140,14 @@ function LoginForm({ user, loginForm, setLoginForm, setErrors,isEmail, isPasswor
          <FormLabel htmlFor='email'>Email</FormLabel>}
        
         <Input
-          id='email' name="email" type='email' w="300px" focusBorderColor='purple.400' 
+          id='email' name="email" type='email' focusBorderColor='purple.400' 
           defaultValue={loginForm.email}
           onChange={handleOnInputChange}
         /> 
         {isEmail?<FormErrorMessage>Email is required.</FormErrorMessage>:null
         }
-        
-        
-      
-        
         </FormControl>
 
-    
         <FormControl variant="floating"  isInvalid={isPassword}>
               {loginForm.password.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Password</FormLabel>
@@ -173,8 +172,6 @@ function LoginForm({ user, loginForm, setLoginForm, setErrors,isEmail, isPasswor
         </FormControl>
         </VStack>
 
-       
-      
       </ChakraProvider>
     )
 }

@@ -106,7 +106,7 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen, games })
                                 <Button w='800px' h='30px'mt={3} borderRadius='sm' colorScheme='purple' variant='outline' onClick={onOpen} >Edit Profile</Button>
                             </Link>
 
-                            <Modal isOpen={isOpen} onClose={onClose}><EditProfile onClose={onClose} /></Modal>
+                            <Modal isCentered isOpen={isOpen} onClose={onClose}><EditProfile onClose={onClose} /></Modal>
 
           
           </Stack>

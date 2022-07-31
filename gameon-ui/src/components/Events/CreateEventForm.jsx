@@ -1,7 +1,12 @@
 import * as React from 'react';
 import { useState } from 'react';
 import apiClient from '../../services/apiClient';
-import {
+import { ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
   Container,
   Button,
   FormControl,
@@ -116,13 +121,17 @@ export default function CreateEventForm({ onClose }) {
   //   add stream/video link so we can embed player?
 
   return (
-    <ChakraProvider theme={theme}>
-      <Container centerContent maxWidth='4xl' p={3}>
-        {/* To adjust form add padding here */}
-        <VStack spacing={5} w="700px" paddingTop={"6rem"}>
-        <Text backgroundColor={COLORS.offWhite} color={COLORS.indigo} fontSize='xl'><b>Create Event</b></Text>
-      <FormControl color={COLORS.indigo} variant="floating" >
-      {createEventForm.eventName.length>0?
+    <Container centerContent >
+    <ModalOverlay />
+    <ModalContent>
+      <ModalHeader>Create Event</ModalHeader>
+      <Text fontSize='sm' color='red.500' p={0}>{errors.form}</Text>
+      <ModalCloseButton />
+      <ModalBody>
+         {/* To adjust form add padding here */}
+        <VStack spacing={5}>
+       <FormControl color={COLORS.indigo} variant="floating" >
+       {createEventForm.eventName.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Event Name</FormLabel>
          : 
         <FormLabel>Event Name</FormLabel>}
@@ -309,22 +318,18 @@ export default function CreateEventForm({ onClose }) {
                     PNG, JPG, GIF up to 10MB
                   </Text>
                 </Stack>
-              </Flex>
-             */}
-          
-    
+              </Flex> */}
 
-
-        <Button backgroundColor={COLORS.ultraViolet} color={COLORS.offWhite} mt={1}  w="350px"onClick={handleOnSubmit}>
-          Create
-        </Button>
         {/* <Button colorScheme="purple" variant="outline" onClick={onClose}>
           Cancel
        </Button> */}
       
       </VStack>
-     </Container>
-    
-    </ChakraProvider>
-  );
+      </ModalBody>
+      <ModalFooter display={'flex'} justifyContent={'center'}>
+      <Button backgroundColor={COLORS.ultraViolet} color={COLORS.offWhite} mt={1}  w="350px"onClick={handleOnSubmit}>Create</Button>
+      </ModalFooter>
+    </ModalContent>
+  </Container>
+)
 }

@@ -57,7 +57,7 @@ const clearSearch = async () => {
         selectedGamesPic={selectedGamesPic}
         setSelectedGamesPic={setSelectedGamesPic}
       />
-      <Container maxH={'200px'} minW={'500px'} overflowY="auto" css={{
+      <Container maxH={'200px'} overflowY="auto" css={{
     '&::-webkit-scrollbar': {
       width: '8px',
     },
@@ -69,7 +69,7 @@ const clearSearch = async () => {
       borderRadius: '24px',
     },
   }} >
-        <Wrap w="450px">
+        <Wrap >
           {listGames?.map((game, index) => (
             <Button
               onClick={() => {
@@ -145,7 +145,7 @@ function SearchBar({
             <Input
               name="searchInput"
               type="text"
-              w="539px"
+              // w="539px"
               maxW={'50em'}
               focusBorderColor={COLORS.ultraViolet}
               value={searchInput}

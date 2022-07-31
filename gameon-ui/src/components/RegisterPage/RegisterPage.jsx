@@ -4,7 +4,12 @@ import { Link } from "@chakra-ui/react"
 import apiClient from "../../services/apiClient"
 import  { useAuthContext } from "../../contexts/auth"
 
-import { Container, Text,  DrawerHeader, DrawerBody, Input, DrawerFooter, Button, FormControl,
+import { Container, Text,  DrawerHeader, DrawerBody, Input, DrawerFooter, Button, FormControl,ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
     FormLabel,
     HStack,
     VStack,
@@ -129,26 +134,25 @@ export default function RegisterPage({onClose}) {
     }
 
     return (
-        <Container centerContent maxWidth='4xl' >
-            <DrawerHeader>Create your account</DrawerHeader>
-            <Text fontSize='sm' color='red.500' p={0}>{errors.form}</Text>
+      <Container centerContent >
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Create your account</ModalHeader>
+        <Text fontSize='sm' color='red.500' p={0}>{errors.form}</Text>
+        <ModalCloseButton />
+        <ModalBody>
+        <RegisterForm user={user} registerForm={registerForm} setRegisterForm={setRegisterForm} setErrors={setErrors} isEmail={isEmail} isFirstName={isFirstName} isLastName={isLastName} isPassword={isPassword} isPasswordConfirm={isPasswordConfirm} isUsername={isUsername} />
+        </ModalBody>
 
-            <DrawerBody >
-                {/* <Input placeholder='Type here...' /> */}
-                <RegisterForm user={user} registerForm={registerForm} setRegisterForm={setRegisterForm} setErrors={setErrors} isEmail={isEmail} isFirstName={isFirstName} isLastName={isLastName} isPassword={isPassword} isPasswordConfirm={isPasswordConfirm} isUsername={isUsername}
-              />
-            </DrawerBody>
-
-            <DrawerFooter>
-              <VStack>
-                <Button colorScheme='purple' w="300px" onClick={handleOnSubmit}>Create Account</Button>
-              
-               <HStack><Text fontSize='sm'>Already have an account? </Text><Link><Text fontSize='sm' color='purple.400'>Sign In</Text></Link></HStack>
-                </VStack>
-                {/* <Button colorScheme='purple' variant='outline' onClick={onClose}>Cancel</Button> */}
-            </DrawerFooter>
-        </Container>
-
+        <ModalFooter display={'flex'} justifyContent={'center'}>
+         <VStack>
+         <Button colorScheme='purple' w="300px" onClick={handleOnSubmit}>Create Account</Button>
+             
+        <HStack><Text fontSize='sm'>Already have an account? </Text><Link><Text fontSize='sm' color='purple.400'>Sign In</Text></Link></HStack>
+        </VStack>
+        </ModalFooter>
+      </ModalContent>
+    </Container>
     )
 }
 
@@ -173,7 +177,7 @@ function RegisterForm({ user, registerForm, setRegisterForm, setErrors, isEmail,
     return (
       <ChakraProvider theme={theme}>
          {/* To adjust form add padding here */}
-       <VStack spacing={5} paddingTop={"6rem"}>
+       <VStack spacing={5}>
         <FormControl variant="floating" isInvalid={isEmail}>
         {registerForm.email.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Email</FormLabel>

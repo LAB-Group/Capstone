@@ -1,8 +1,8 @@
 import * as React from "react"
 // import {Link, useNavigate} from "react-router-dom"
 import {HashLink as Link } from 'react-router-hash-link'
-import { Box, Heading, Text, Spacer, Button, ButtonGroup, Image, Flex, Drawer,
-    DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure, Icon, useMediaQuery, List, ListItem } from "@chakra-ui/react"
+import { Box, Text, Spacer, Button, ButtonGroup, Image, Flex, Modal,
+    useDisclosure, Icon, useMediaQuery, List, ListItem } from "@chakra-ui/react"
 import {GiHamburgerMenu} from "react-icons/gi"
 import logo from "../../media/Logo.png"
 import { ColorModeSwitcher } from "../../ColorModeSwitcher"
@@ -125,44 +125,13 @@ export default function NavBar() {
                         {/* <ColorModeSwitcher justifySelf="flex-end" /> */}
                     </ButtonGroup>
                 }
-                <Drawer
-                    isOpen={isLoginOpen}
-                    placement='top'
-                    onClose={onLoginClose}
-                    finalFocusRef={btnRef}
-                >
-                    <DrawerOverlay />
-                    <DrawerContent>
-                        <DrawerCloseButton />
-                        <LoginPage onClose={onLoginClose} />
-                    </DrawerContent>
-                </Drawer>
-                <Drawer
-                    isOpen={isRegisterOpen}
-                    placement='top'
-                    onClose={onRegisterClose}
-                    finalFocusRef={btnRef}
-                >
-                    <DrawerOverlay />
-                    <DrawerContent>
-                        <DrawerCloseButton />
-                        <RegisterPage onClose={onRegisterClose} />
-                    </DrawerContent>
-                </Drawer>
-                <Drawer
-                    isOpen={isCreateOpen}
-                    placement='top'
-                    onClose={onCreateClose}
-                    finalFocusRef={btnRef}
-                    paddingTop={"10rem"}
-                    
-                >
-                    <DrawerOverlay />
-                    <DrawerContent>
-                        <DrawerCloseButton />
-                        <CreateEventForm onClose={onCreateClose} />
-                    </DrawerContent>
-                </Drawer>
+
+                <Modal isCentered isOpen={isLoginOpen} onClose={onLoginClose} finalFocusRef={btnRef}><LoginPage onClose={onLoginClose} isOpen={isLoginOpen} finalFocusRef={btnRef} /></Modal>
+                
+                <Modal isCentered isOpen={isRegisterOpen} onClose={onRegisterClose} finalFocusRef={btnRef}><RegisterPage onClose={onRegisterClose} /></Modal>
+
+                <Modal isCentered isOpen={isCreateOpen} onClose={onCreateClose} finalFocusRef={btnRef}><CreateEventForm onClose={onCreateClose} /></Modal>
+
             </Flex>
         </Box>
     )
