@@ -61,7 +61,7 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen, games })
             pt={2}>
             <Heading fontSize={'2xl'} fontFamily={'body'}>{user.firstName} {user.lastName}</Heading>
             <Stack direction={'row'} display={"flex"} justifyContent= "space-between">
-            <Text fontWeight={600} color={'gray.500'} size="sm" >@{user.username}</Text>
+            <Text fontWeight={600} color={'gray.500'} size="sm" >@{user.username.toLowerCase()}</Text>
             <HStack>
                 <FontAwesomeIcon icon={faFacebookSquare} />
                 <FontAwesomeIcon icon={faTwitter} />

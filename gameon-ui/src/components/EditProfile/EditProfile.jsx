@@ -30,7 +30,7 @@ export default function EditProfile({onClose}){
       setIsLoading(true)
       setErrors((error) => ({ ...error, form: null }))
   
-      const {data, error} = await apiClient.editUserProfile({ username: profileForm.username, firstName: profileForm.firstName, lastName: profileForm.lastName,
+      const {data, error} = await apiClient.editUserProfile({ username: profileForm.username.toLowerCase(), firstName: profileForm.firstName, lastName: profileForm.lastName,
                                                              imageUrl: profileForm.imageUrl, email: user.email, gameList: selectedGames})
       for (let i=0;i<selectedGames.length;i++) {
         const { test } = await apiClient.addGamesToLocalDB({gameId:selectedGames[i],gameName:selectedGamesNames[i],gameImageUrl:selectedGamesPic[i]})
@@ -81,8 +81,8 @@ function EditProfileForm({ user, profileForm, setProfileForm, setErrors, selecte
         <FormControl>
 
         <FormLabel htmlFor='username'>Username</FormLabel>
-        <Input id='username' name="username" type='text'
-          defaultValue={user.username}
+        <Input id='username' name="username" type='text' textTransform={'lowercase'} maxLength={'15'}
+          defaultValue={user.username.toLowerCase()}
           onChange={handleOnInputChange}
         />
 

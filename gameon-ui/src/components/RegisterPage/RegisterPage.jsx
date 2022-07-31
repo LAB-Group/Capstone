@@ -80,7 +80,7 @@ export default function RegisterPage({onClose}) {
         setErrors((error) => ({ ...error, passwordConfirm: null }))
       }
 
-      const {data, error} = await apiClient.signupUser({ email: registerForm.email, password: registerForm.password, username: registerForm.username, 
+      const {data, error} = await apiClient.signupUser({ email: registerForm.email, password: registerForm.password, username: registerForm.username.toLowerCase(), 
                                                           firstName: registerForm.firstName, lastName: registerForm.lastName, imageUrl: registerForm.imageUrl})
       if(error) setErrors((e) => ({ ...e, form: error}))
       if(data?.user) {
@@ -220,11 +220,11 @@ function RegisterForm({ user, registerForm, setRegisterForm, setErrors, isEmail,
         <FormLabel transform="scale(0.85) translateY(-21px)">Username</FormLabel>
          :<FormLabel>Username</FormLabel>}
           
-          <Input id='username' name="username" type='text'  focusBorderColor='purple.400' bg={"white"}
-              defaultValue={registerForm.username}
+          <Input id='username' name="username" type='text'  focusBorderColor='purple.400' bg={"white"} textTransform={'lowercase'} maxLength={'15'}
+              defaultValue={registerForm.username.toLowerCase()}
               onChange={handleOnInputChange}
           /> 
-          {isUsername?<FormErrorMessage>Email is required.</FormErrorMessage>:null
+          {isUsername?<FormErrorMessage>Username is required.</FormErrorMessage>:null
         }
         </FormControl>
         <FormControl variant="floating" isInvalid={isPassword}>
