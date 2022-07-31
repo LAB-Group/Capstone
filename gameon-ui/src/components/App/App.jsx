@@ -8,7 +8,7 @@ import NavBar from "../NavBar/NavBar"
 import ProfilePage from "../ProfilePage/ProfilePage"
 import EventPage from "../Events/EventPage";
 import Footer from "../Footer/Footer"
-import background from "../../media/indigobg.jpg"
+import background from "../../media/evo2.jpg"
 
 export default function AppContainer() {
     return (
@@ -25,7 +25,7 @@ function App(){
 
     return( 
         <ChakraProvider>
-        <Box backgroundImage={background}>     
+        <Box backgroundPosition={"bottom"} backgroundImage={background} backgroundRepeat={"no-repeat"} backgroundAttachment={"fixed"} backgroundSize={"175%"}>     
         <BrowserRouter>
         <NavBar/>
         <Routes>

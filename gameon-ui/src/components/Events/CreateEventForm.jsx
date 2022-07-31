@@ -110,7 +110,8 @@ export default function CreateEventForm({ onClose }) {
   return (
     <ChakraProvider theme={theme}>
       <Container centerContent maxWidth='4xl' p={3}>
-        <VStack spacing={5} w="700px">
+        {/* To adjust form add padding here */}
+        <VStack spacing={5} w="700px" paddingTop={"6rem"}>
         <Text fontSize='xl'><b>Create Event</b></Text>
       <FormControl variant="floating" >
       {createEventForm.eventName.length>0?

@@ -23,8 +23,10 @@ export default function EventFeed({ isFetching }){
     let meetEvents = events?.filter(event => {return event.eventType === "Meet-up"})    
    
         return(
-            <Flex flexDirection='column' justifyContent='center' alignItems='center' minWidth="95vw" position="relative">
-                <Divider orientation='horizontal' backgroundColor={'purple.100'} marginTop={6} minWidth="95vw" marginBottom={6} />
+            // Created margintop space out the EventFeed and Hero
+            // Might comeback and make this a paddingTop
+            <Flex marginTop={"2rem"} flexDirection='column' justifyContent='center' alignItems='center' minWidth="95vw" position="relative">
+                {/* <Divider orientation='horizontal' backgroundColor={'purple.100'} marginTop={6} minWidth="95vw" marginBottom={6} /> */}
                 <Heading id="events" color={"#e6e6e6"} mb={"10"} textAlign={"center"} fontSize={["xl", "3xl", "4xl"]}>Events</Heading>
                 <Button variant="outline" colorScheme='purple' onClick={onOpen} style={{"transition":"background-color 2s, color 2s"}} _hover={{"background-color": COLORS.ultraViolet, "color": COLORS.offWhite}}>Search All Events</Button>
 

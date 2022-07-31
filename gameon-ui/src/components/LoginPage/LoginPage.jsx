@@ -126,7 +126,8 @@ function LoginForm({ user, loginForm, setLoginForm, setErrors,isEmail, isPasswor
     // const isError = form === ''
     return (
       <ChakraProvider theme={theme}> 
-      <VStack spacing={5}>
+       {/* To adjust form add padding here */}
+      <VStack spacing={5} paddingTop={"6rem"}>
         
         <FormControl variant="floating" isInvalid={isEmail}>
         {loginForm.email.length>0?
