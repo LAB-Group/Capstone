@@ -12,7 +12,7 @@ export default function EventCard({event}){
         // Need to prevent card squishing
         <Box flex={"none"} maxWidth={"400px"} minWidth={"50px"} width={"100%"} height={"auto"} 
         alignItems={"center"} 
-        flexGrow={0} flexShrink={0} flexBasis={"auto"} borderWidth='1px' borderRadius='lg' overflow='hidden' backgroundColor={"whiteAlpha.900"} boxShadow={'md'} _hover={{transform: "scale3d(1.05, 1.05, 1)" }} >
+        flexGrow={0} flexShrink={0} flexBasis={"auto"} borderWidth='1px' borderRadius='lg' overflow='hidden' backgroundColor={COLORS.offWhite} boxShadow={'md'} _hover={{"transform": "scale3d(1.05, 1.05, 1)" }} >
             <Link to={`/events/${event.id}`}  >
             <Image src={event.eventImageUrl} objectFit={"contain"} minW={"10rem"} width={"40rem"} height={"10rem"}/>
             <Box paddingTop={"1rem"}>

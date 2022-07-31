@@ -18,7 +18,7 @@ export default function Hero() {
         paddingBottom={"2rem"}
         borderBottomRadius={"15px"}
         style={{
-            "background-color": "hsl(255, 50%, 21%)",
+            "backgroundColor": "hsl(255, 50%, 21%)",
         }}
         >
             {/* font-family: 'VT323', monospace; */}

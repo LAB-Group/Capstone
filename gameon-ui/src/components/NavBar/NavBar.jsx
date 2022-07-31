@@ -46,23 +46,23 @@ export default function NavBar() {
                 <Link smooth to="#about">
                     <Text color={COLORS.offWhite} fontWeight={700} 
                     style={{
-                        "transition": "font-size 0.8s, border-bottom 0.8s, border-style 0.8s, border-color 0.8s"}}
+                        "transition": "fontSize 0.8s, borderBottom 0.8s, borderStyle 0.8s, borderColor 0.8s"}}
                     _hover={{
-                        "font-size": "24px", 
-                        "border-bottom": "4px",
-                        "border-style": "solid",
-                        "border-color": COLORS.darkAmethyst}}>About</Text></Link>
+                        "fontSize": "24px", 
+                        "borderBottom": "4px",
+                        "borderStyle": "solid",
+                        "borderColor": COLORS.darkAmethyst}}>About</Text></Link>
                     </ListItem>
                     <ListItem float={"left"} display={"block"}>
                 <Link smooth to="#events">
                     <Text color={COLORS.offWhite} fontWeight={700} 
                     style={{
-                        "transition": "font-size 0.8s, border-bottom 0.8s, border-style 0.8s, border-color 0.8s"}}
+                        "transition": "fontSize 0.8s, borderBottom 0.8s, borderStyle 0.8s, borderColor 0.8s"}}
                     _hover={{
-                        "font-size": "24px", 
-                        "border-bottom": "4px",
-                        "border-style": "solid",
-                        "border-color": COLORS.darkAmethyst}}>Events</Text></Link>
+                        "fontSize": "24px", 
+                        "borderBottom": "4px",
+                        "borderStyle": "solid",
+                        "borderColor": COLORS.darkAmethyst}}>Events</Text></Link>
                     </ListItem>
                
                 </List>
@@ -83,13 +83,13 @@ export default function NavBar() {
                 {user?.email? 
                     <ButtonGroup gap='2' paddingBottom={"2rem"}>
                         <Button fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} backgroundColor={COLORS.ultraViolet} color={COLORS.offWhite} onClick={onCreateOpen}
-                        style={{"transition": "background-color 0.5s, color 0.5s"}} _hover={{"background-color": COLORS.offWhite, "color": COLORS.indigo}}>Create Event</Button>
+                        style={{"transition": "backgroundColor 0.5s, color 0.5s"}} _hover={{"backgroundColor": COLORS.offWhite, "color": COLORS.indigo}}>Create Event</Button>
                         <Box border={"2px"} borderStyle={"solid"} borderRadius={"5px"} borderColor={COLORS.darkAmethyst} 
                             paddingStart={"1rem"} paddingEnd={"1rem"} paddingTop={"0.2rem"} paddingBottom={"0.2rem"}
-                            style={{"transition": "background-color 0.5s"}} _hover={{"background-color": COLORS.offWhite}}>
+                            style={{"transition": "backgroundColor 0.5s"}} _hover={{"backgroundColor": COLORS.offWhite}}>
                         <Link to ="/profile">
                             <Text 
-                            fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} color={COLORS.offWhite} onClick={onCreateOpen}
+                            fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} color={COLORS.offWhite}
                             style={{"transition": "color 0.5s"}} _hover={{"color": COLORS.indigo}}>Profile</Text>
                         </Link>
                         </Box>
@@ -101,7 +101,7 @@ export default function NavBar() {
                         paddingTop={"0.4rem"}
                         color={COLORS.darkAmethyst}
                         style={{
-                            "transition": "padding 0.5s, color 0.1s, border 0.1s, border-size 0.1s, border-style 0.1s, border-radius 0.5s, border-color 0.5s, transform 0.5s"
+                            "transition": "padding 0.5s, color 0.1s, border 0.1s, borderSize 0.1s, borderStyle 0.1s, borderRadius 0.5s, borderColor 0.5s, transform 0.5s"
                             }} 
                         _hover={{
                             "cursor": "pointer",

@@ -33,16 +33,16 @@ export default function EventFeed({ isFetching }){
                     "color":"hsl(0, 0%, 90%)",
                     "backgroundColor":"none",
                     "border":"2px",
-                    "border-color":COLORS.ultraViolet,
-                    "border-style":"solid", 
-                    "border-radius":"5px",
+                    "borderColor":COLORS.ultraViolet,
+                    "borderStyle":"solid", 
+                    "borderRadius":"5px",
                     "padding":"1em",
-                    "transition":"border-color 0.8s, background-color 0.8s"
+                    "transition":"borderColor 0.8s, backgroundColor 0.8s"
                     }} 
                     _hover={{
                         "cursor":"pointer",
-                        "border-color":COLORS.darkAmethyst,
-                        "background-color": COLORS.darkAmethyst, 
+                        "borderColor":COLORS.darkAmethyst,
+                        "backgroundColor": COLORS.darkAmethyst, 
                     }}>Search All Events</Text>
 
                 {isOpen? <SearchedEvents events={events} isOpen={isOpen} onOpen={onOpen} onClose={onClose} /> :<></>}
@@ -51,7 +51,7 @@ export default function EventFeed({ isFetching }){
                 <SimpleGrid marginTop={"1rem"} minWidth="80vw" justifyContent={"center"} alignItems={"center"} minChildWidth={'320px'} rowGap='20px' className="WRAP">
                 <VStack css={{
                 ".swiper-pagination-bullet-active": {
-                    "background-color": "#B794F4"
+                    "backgroundColor": COLORS.ultraViolet
                   }
             }}>
 
@@ -78,7 +78,7 @@ export default function EventFeed({ isFetching }){
                   >
                         {tournamentEvents?.map((event, index) => (
                         <SwiperSlide key={index}>
-                            <EventCard event={event}/>         
+                            <EventCard key={index} event={event}/>         
                         </SwiperSlide>
                             ))}
                     </Swiper>
@@ -108,7 +108,7 @@ export default function EventFeed({ isFetching }){
                             >
                         {speedEvents?.map((event, index) => (
                                 <SwiperSlide key={index}>
-                                    <EventCard event={event}/>         
+                                    <EventCard key={index} event={event}/>         
                                 </SwiperSlide>
                             ))}
                     </Swiper>
@@ -138,7 +138,7 @@ export default function EventFeed({ isFetching }){
                         >
                             {meetEvents?.map((event, index) => (
                                 <SwiperSlide key={index}>
-                                    <EventCard event={event}/>         
+                                    <EventCard key={index} event={event}/>         
                                 </SwiperSlide>
                             ))}
                     </Swiper>
