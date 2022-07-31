@@ -4,7 +4,12 @@ import { Link } from "@chakra-ui/react"
 import apiClient from "../../services/apiClient"
 import  { useAuthContext } from "../../contexts/auth"
 
-import { Container, Text,  DrawerHeader, DrawerBody, Input, DrawerFooter, Button, FormControl,
+import { Container, Text,  DrawerHeader, DrawerBody, Input, DrawerFooter, Button, FormControl,ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
     FormLabel,
     HStack,
     VStack,
@@ -80,7 +85,7 @@ export default function RegisterPage({onClose}) {
         setErrors((error) => ({ ...error, passwordConfirm: null }))
       }
 
-      const {data, error} = await apiClient.signupUser({ email: registerForm.email, password: registerForm.password, username: registerForm.username, 
+      const {data, error} = await apiClient.signupUser({ email: registerForm.email, password: registerForm.password, username: registerForm.username.toLowerCase(), 
                                                           firstName: registerForm.firstName, lastName: registerForm.lastName, imageUrl: registerForm.imageUrl})
       if(error) setErrors((e) => ({ ...e, form: error}))
       if(data?.user) {
@@ -129,30 +134,29 @@ export default function RegisterPage({onClose}) {
     }
 
     return (
-        <Container centerContent maxWidth='4xl' >
-            <DrawerHeader>Create your account</DrawerHeader>
-            <Text fontSize='sm' color='red.500' p={0}>{errors.form}</Text>
+      <Container centerContent >
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Create your account</ModalHeader>
+        <Text fontSize='sm' color='red.500' p={0}>{errors.form}</Text>
+        <ModalCloseButton />
+        <ModalBody>
+        <RegisterForm user={user} registerForm={registerForm} setRegisterForm={setRegisterForm} setErrors={setErrors} isEmail={isEmail} isFirstName={isFirstName} isLastName={isLastName} isPassword={isPassword} isPasswordConfirm={isPasswordConfirm} isUsername={isUsername} />
+        </ModalBody>
 
-            <DrawerBody >
-                {/* <Input placeholder='Type here...' /> */}
-                <RegisterForm user={user} registerForm={registerForm} setRegisterForm={setRegisterForm} setErrors={setErrors} isEmail={isEmail} isFristName={isFirstName} isLastName={isLastName} isPassword={isPassword} isPasswordConfirm={isPasswordConfirm} isUsername={isUsername}
-              />
-            </DrawerBody>
-
-            <DrawerFooter>
-              <VStack>
-                <Button colorScheme='purple' w="300px" onClick={handleOnSubmit}>Create Account</Button>
-              
-               <HStack><Text fontSize='sm'>Already have an account? </Text><Link><Text fontSize='sm' color='purple.400'>Sign In</Text></Link></HStack>
-                </VStack>
-                {/* <Button colorScheme='purple' variant='outline' onClick={onClose}>Cancel</Button> */}
-            </DrawerFooter>
-        </Container>
-
+        <ModalFooter display={'flex'} justifyContent={'center'}>
+         <VStack>
+         <Button colorScheme='purple' w="300px" onClick={handleOnSubmit}>Create Account</Button>
+             
+        <HStack><Text fontSize='sm'>Already have an account? </Text><Link><Text fontSize='sm' color='purple.400'>Sign In</Text></Link></HStack>
+        </VStack>
+        </ModalFooter>
+      </ModalContent>
+    </Container>
     )
 }
 
-function RegisterForm({ user, registerForm, setRegisterForm, setErrors, isEmail,isFristName,isLastName,isPassword,isPasswordConfirm,isUsername }) {
+function RegisterForm({ user, registerForm, setRegisterForm, setErrors, isEmail, isFirstName,isLastName,isPassword,isPasswordConfirm,isUsername }) {
   const [showPassword, setShowPassword] = useState(false)
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false)
 
@@ -172,6 +176,7 @@ function RegisterForm({ user, registerForm, setRegisterForm, setErrors, isEmail,
     // const isError = form === ''
     return (
       <ChakraProvider theme={theme}>
+         {/* To adjust form add padding here */}
        <VStack spacing={5}>
         <FormControl variant="floating" isInvalid={isEmail}>
         {registerForm.email.length>0?
@@ -187,7 +192,7 @@ function RegisterForm({ user, registerForm, setRegisterForm, setErrors, isEmail,
         </FormControl>
 
       <HStack>
-        <FormControl variant="floating"isInvalid={isFristName} >
+        <FormControl variant="floating"isInvalid={isFirstName} >
         {registerForm.firstName.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">First Name</FormLabel>
          : 
@@ -197,7 +202,7 @@ function RegisterForm({ user, registerForm, setRegisterForm, setErrors, isEmail,
               defaultValue={registerForm.firstName}
               onChange={handleOnInputChange}
             />
-            {isFristName?<FormErrorMessage>Email is required.</FormErrorMessage>:null
+            {isFirstName?<FormErrorMessage>Email is required.</FormErrorMessage>:null
         }
         </FormControl>
 
@@ -207,7 +212,7 @@ function RegisterForm({ user, registerForm, setRegisterForm, setErrors, isEmail,
          :<FormLabel>Last Name</FormLabel>}
         
         <Input id='lastName' name="lastName" type='text' focusBorderColor='purple.400'
-              defaultValue={registerForm.firstName}
+              defaultValue={registerForm.lastName}
               onChange={handleOnInputChange}
             />
             {isLastName?<FormErrorMessage>Email is required.</FormErrorMessage>:null
@@ -220,11 +225,11 @@ function RegisterForm({ user, registerForm, setRegisterForm, setErrors, isEmail,
         <FormLabel transform="scale(0.85) translateY(-21px)">Username</FormLabel>
          :<FormLabel>Username</FormLabel>}
           
-          <Input id='username' name="username" type='text'  focusBorderColor='purple.400' bg={"white"}
-              defaultValue={registerForm.username}
+          <Input id='username' name="username" type='text'  focusBorderColor='purple.400' bg={"white"} textTransform={'lowercase'} maxLength={'15'}
+              defaultValue={registerForm.username.toLowerCase()}
               onChange={handleOnInputChange}
           /> 
-          {isUsername?<FormErrorMessage>Email is required.</FormErrorMessage>:null
+          {isUsername?<FormErrorMessage>Username is required.</FormErrorMessage>:null
         }
         </FormControl>
         <FormControl variant="floating" isInvalid={isPassword}>

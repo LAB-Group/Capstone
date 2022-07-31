@@ -1,11 +1,12 @@
 import * as React from "react"
 // import {Link, useNavigate} from "react-router-dom"
 import {HashLink as Link } from 'react-router-hash-link'
-import { Box, Heading, Spacer, Button, ButtonGroup, Image, Flex, Drawer,
-    DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure, Icon, useMediaQuery } from "@chakra-ui/react"
+import { Box, Text, Spacer, Button, ButtonGroup, Image, Flex, Modal,
+    useDisclosure, Icon, useMediaQuery, List, ListItem } from "@chakra-ui/react"
 import {GiHamburgerMenu} from "react-icons/gi"
 import logo from "../../media/Logo.png"
 import { ColorModeSwitcher } from "../../ColorModeSwitcher"
+import {COLORS} from "../colors"
 import LoginPage from "../LoginPage/LoginPage"
 import RegisterPage from "../RegisterPage/RegisterPage"
 import CreateEventForm from "../Events/CreateEventForm"
@@ -33,17 +34,40 @@ export default function NavBar() {
 
     return (
         // This makes the navbar scrollable
-        // Need to figure out how to position navbar in front of hero
-        //  <Container bg="blackAlpha.700" minHeight="50px" width="100%" maxW={'9000px'} position='sticky' top='0'>
-        <Box position="relative" width="100%" height="auto" backgroundColor={"purple.100"}>
-            <Flex minWidth='max-content' alignItems='center' gap='2' paddingTop={'2'}>
-                <Box>
+        <Box fontFamily={"Roboto, sans-serif"} zIndex={10000} position="sticky" top={0} width="100%" height="70px" backgroundColor={COLORS.indigo} fontSize={{ "base":"lg","md":"lg", "lg":"xl"}}>
+            <Flex minWidth='max-content' alignItems='center' gap='2'>
+                <Box maxWidth={"100px"} height={"auto"}>
                     <Link to="/">
-                    <Image width={"100px"} height={"50px"} objectFit={"cover"} src={logo}/>
+                    <Image maxWidth={"100%"} height={"100px"} objectFit={"fill"} src={logo}/>
                     </Link>
                 </Box>
+                <List marginBottom={"1.5rem"}>
+                    <ListItem marginRight={6} float={"left"} display={"block"}>
+                <Link smooth to="#about">
+                    <Text color={COLORS.offWhite} fontWeight={700} 
+                    style={{
+                        "transition": "fontSize 0.8s, borderBottom 0.8s, borderStyle 0.8s, borderColor 0.8s"}}
+                    _hover={{
+                        "fontSize": "24px", 
+                        "borderBottom": "4px",
+                        "borderStyle": "solid",
+                        "borderColor": COLORS.darkAmethyst}}>About</Text></Link>
+                    </ListItem>
+                    <ListItem float={"left"} display={"block"}>
+                <Link smooth to="#events">
+                    <Text color={COLORS.offWhite} fontWeight={700} 
+                    style={{
+                        "transition": "fontSize 0.8s, borderBottom 0.8s, borderStyle 0.8s, borderColor 0.8s"}}
+                    _hover={{
+                        "fontSize": "24px", 
+                        "borderBottom": "4px",
+                        "borderStyle": "solid",
+                        "borderColor": COLORS.darkAmethyst}}>Events</Text></Link>
+                    </ListItem>
+               
+                </List>
+                    
                 <Spacer />
-                
                 {/* Navbar responsive hamburger icon */}
                 {/* {isLessthan780 ?     
                         <Button colorScheme={"purple"} display={"block"}>
@@ -57,59 +81,57 @@ export default function NavBar() {
 
 
                 {user?.email? 
-                    <ButtonGroup gap='2'>
-                        <Button colorScheme='purple' onClick={onCreateOpen}>Create Event</Button>
-                        <Link to ="/profile"><Button variant="outline" colorScheme='purple'>Profile</Button></Link>
-                        <Link smooth to="#about"><Button variant="ghost" colorScheme='purple'>About</Button></Link>
-                        <Link smooth to="#events"><Button variant="ghost" colorScheme='purple'>Events</Button></Link>
-                        <Button variant="link" colorScheme='purple' onClick={handleLogout}>Logout</Button>
-                        <ColorModeSwitcher justifySelf="flex-end" />
+                    <ButtonGroup gap='2' paddingBottom={"2rem"}>
+                        <Button fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} backgroundColor={COLORS.ultraViolet} color={COLORS.offWhite} onClick={onCreateOpen}
+                        style={{"transition": "backgroundColor 0.5s, color 0.5s"}} _hover={{"backgroundColor": COLORS.offWhite, "color": COLORS.indigo}}>Create Event</Button>
+                        <Box border={"2px"} borderStyle={"solid"} borderRadius={"5px"} borderColor={COLORS.darkAmethyst} 
+                            paddingStart={"1rem"} paddingEnd={"1rem"} paddingTop={"0.2rem"} paddingBottom={"0.2rem"}
+                            style={{"transition": "backgroundColor 0.5s"}} _hover={{"backgroundColor": COLORS.offWhite}}>
+                        <Link to ="/profile">
+                            <Text 
+                            fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} color={COLORS.offWhite}
+                            style={{"transition": "color 0.5s"}} _hover={{"color": COLORS.indigo}}>Profile</Text>
+                        </Link>
+                        </Box>
+                        {/* <Link smooth to="#about"><Button variant="ghost" colorScheme='purple'>About</Button></Link>
+                        <Link smooth to="#events"><Button variant="ghost" colorScheme='purple'>Events</Button></Link> */}
+                        
+                        {/* Log out transition * Needs a revisit on the transition*/}
+                        <Text 
+                        paddingTop={"0.4rem"}
+                        color={COLORS.darkAmethyst}
+                        style={{
+                            "transition": "padding 0.5s, color 0.1s, border 0.1s, borderSize 0.1s, borderStyle 0.1s, borderRadius 0.5s, borderColor 0.5s, transform 0.5s"
+                            }} 
+                        _hover={{
+                            "cursor": "pointer",
+                            "transform": "scale(1)",
+                            "border":"2px", 
+                        "borderStyle":"solid", 
+                        "borderRadius":"20%", 
+                        "borderColor":COLORS.darkAmethyst, 
+                        "padding":"2px 2px 2px 0px", 
+                        "color":"hsl(271, 49%, 60%)"  
+                        }} marginRight={"1em"} onClick={handleLogout}>Logout</Text>
+                        {/* Commented out the Light/Dark mode */}
+                        {/* <ColorModeSwitcher justifySelf="flex-end" /> */}
                     </ButtonGroup>
                     :
                     <ButtonGroup gap='2'>
                         <Button colorScheme='purple' onClick={onLoginOpen}>Log in</Button>
                         <Button variant="outline" colorScheme='purple' onClick={onRegisterOpen}>Sign Up</Button>
-                        <Link smooth to="#about"><Button variant="ghost" colorScheme='purple'>About</Button></Link>
-                        <Link smooth to="#events"><Button variant="ghost" colorScheme='purple'>Events</Button></Link>
-                        <ColorModeSwitcher justifySelf="flex-end" />
+                        {/* <Link smooth to="#about"><Button variant="ghost" colorScheme='purple'>About</Button></Link>
+                        <Link smooth to="#events"><Button variant="ghost" colorScheme='purple'>Events</Button></Link> */}
+                        {/* <ColorModeSwitcher justifySelf="flex-end" /> */}
                     </ButtonGroup>
                 }
-                <Drawer
-                    isOpen={isLoginOpen}
-                    placement='top'
-                    onClose={onLoginClose}
-                    finalFocusRef={btnRef}
-                >
-                    <DrawerOverlay />
-                    <DrawerContent>
-                        <DrawerCloseButton />
-                        <LoginPage onClose={onLoginClose} />
-                    </DrawerContent>
-                </Drawer>
-                <Drawer
-                    isOpen={isRegisterOpen}
-                    placement='top'
-                    onClose={onRegisterClose}
-                    finalFocusRef={btnRef}
-                >
-                    <DrawerOverlay />
-                    <DrawerContent>
-                        <DrawerCloseButton />
-                        <RegisterPage onClose={onRegisterClose} />
-                    </DrawerContent>
-                </Drawer>
-                <Drawer
-                    isOpen={isCreateOpen}
-                    placement='top'
-                    onClose={onCreateClose}
-                    finalFocusRef={btnRef}
-                >
-                    <DrawerOverlay />
-                    <DrawerContent>
-                        <DrawerCloseButton />
-                        <CreateEventForm onClose={onCreateClose} />
-                    </DrawerContent>
-                </Drawer>
+
+                <Modal isCentered isOpen={isLoginOpen} onClose={onLoginClose} finalFocusRef={btnRef}><LoginPage onClose={onLoginClose} isOpen={isLoginOpen} finalFocusRef={btnRef} /></Modal>
+                
+                <Modal isCentered isOpen={isRegisterOpen} onClose={onRegisterClose} finalFocusRef={btnRef}><RegisterPage onClose={onRegisterClose} /></Modal>
+
+                <Modal isCentered isOpen={isCreateOpen} onClose={onCreateClose} finalFocusRef={btnRef}><CreateEventForm onClose={onCreateClose} /></Modal>
+
             </Flex>
         </Box>
     )

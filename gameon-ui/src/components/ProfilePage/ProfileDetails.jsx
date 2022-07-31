@@ -14,38 +14,8 @@ import {
   faInstagram
 } from "@fortawesome/free-brands-svg-icons";
 
-export default function ProfileDetails({ user, onOpen, onClose, isOpen }) {
-    const [games, setGames] = useState([])
+export default function ProfileDetails({ user, onOpen, onClose, isOpen, games }) {
     const [loading, setLoading] = useState(true)
-    let string = ""
-    if(user.gameList !== undefined) {
-        for(let i = 0; i < user.gameList?.length; i++) {
-            if(i === user.gameList.length - 1) {
-                string += user.gameList[i]
-                break
-            }
-            string += user.gameList[i] + ", "
-        }
-    }
-
-    useEffect(() => {
-        setTimeout(() => {
-            setLoading(false)
-          }, 100)
-        const getGames = async () => {      
-            try {
-              const response = await axios.post(`http://localhost:3001/games/id`, {
-                gameId: string
-              })
-              const gameData = response.data
-
-              setGames(gameData)
-            } catch(error) {
-              return(error)
-            }
-          }
-          getGames()  
-    },[string])
 
     return (
         <>
@@ -91,7 +61,7 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen }) {
             pt={2}>
             <Heading fontSize={'2xl'} fontFamily={'body'}>{user.firstName} {user.lastName}</Heading>
             <Stack direction={'row'} display={"flex"} justifyContent= "space-between">
-            <Text fontWeight={600} color={'gray.500'} size="sm" >@{user.username}</Text>
+            <Text fontWeight={600} color={'gray.500'} size="sm" >@{user.username.toLowerCase()}</Text>
             <HStack>
                 <FontAwesomeIcon icon={faFacebookSquare} />
                 <FontAwesomeIcon icon={faTwitter} />
@@ -115,7 +85,7 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen }) {
                                           borderRadius: '24px',
                                         },}}
                                 >
-              {games.game?.map((game, index) => (
+              {games?.map((game, index) => (
                                     // <Text display={'flex'} maxWidth={'1000px'} key={index}>{game.name},</Text>
                                   <Tag
                                     
@@ -124,7 +94,7 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen }) {
                                    
                                     colorScheme="purple"
                                   >
-                                    <TagLabel>{game.name}</TagLabel>
+                                    <TagLabel>{game.gameName}</TagLabel>
                                     
                                   </Tag>
 
@@ -136,7 +106,7 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen }) {
                                 <Button w='800px' h='30px'mt={3} borderRadius='sm' colorScheme='purple' variant='outline' onClick={onOpen} >Edit Profile</Button>
                             </Link>
 
-                            <Modal isOpen={isOpen} onClose={onClose}><EditProfile onClose={onClose} /></Modal>
+                            <Modal isCentered isOpen={isOpen} onClose={onClose}><EditProfile onClose={onClose} /></Modal>
 
           
           </Stack>

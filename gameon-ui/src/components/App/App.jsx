@@ -1,10 +1,5 @@
 import * as React from "react"
-import {
-  Box,
-    ChakraProvider,
-    Container,
-    VStack,
-  } from '@chakra-ui/react';
+import { Box, ChakraProvider } from '@chakra-ui/react';
 import { BrowserRouter, Routes, Route} from "react-router-dom"
 import { AuthContextProvider, useAuthContext } from "../../contexts/auth"
 import { EventContextProvider } from "../../contexts/event"
@@ -13,6 +8,7 @@ import NavBar from "../NavBar/NavBar"
 import ProfilePage from "../ProfilePage/ProfilePage"
 import EventPage from "../Events/EventPage";
 import Footer from "../Footer/Footer"
+import background from "../../media/evo2.jpg"
 
 export default function AppContainer() {
     return (
@@ -29,7 +25,8 @@ function App(){
 
     return( 
         <ChakraProvider>
-        <Box>     
+        {/* Need to come back to this because of background image */}
+        <Box backgroundPosition={"bottom"} backgroundImage={background} backgroundRepeat={"no-repeat"} backgroundAttachment={"fixed"} backgroundSize={"200%"}>     
         <BrowserRouter>
         <NavBar/>
         <Routes>
