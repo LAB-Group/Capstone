@@ -21,9 +21,9 @@ export default function SearchedEvents({events, isOpen, onOpen, onClose}){
     return (
         <Container centerContent>
 
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isCentered isOpen={isOpen} onClose={onClose} >
         <ModalOverlay overflowY={'auto'} width={'100%'} />
-        <ModalContent maxWidth={'100rem'} >
+        <ModalContent maxWidth={'100rem'} width={'90%'} height={'85%'} >
           <ModalHeader>Search Events</ModalHeader>
           <ModalCloseButton />
           <ModalBody>

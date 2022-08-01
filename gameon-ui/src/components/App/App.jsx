@@ -9,6 +9,8 @@ import ProfilePage from "../ProfilePage/ProfilePage"
 import EventPage from "../Events/EventPage";
 import Footer from "../Footer/Footer"
 import background from "../../media/evo2.jpg"
+import LoginPage from "../LoginPage/LoginPage";
+import RegisterPage from "../RegisterPage/RegisterPage";
 
 export default function AppContainer() {
     return (
@@ -35,7 +37,7 @@ function App(){
             <Route path="/" element={<Home/>}/>
             
             {/* ProfilePage */}
-            <Route path="/profile/*" element={user?.email?<ProfilePage/>:<></>}/>
+            <Route path="/profile/*" element={user?.email?<ProfilePage/>:<>NOT FOUND</>}/>
 
             {/* EventFeed */}
             <Route path={"/events/:eventId"} element={<EventPage />}/>

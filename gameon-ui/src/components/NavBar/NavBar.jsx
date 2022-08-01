@@ -1,5 +1,5 @@
 import * as React from "react"
-// import {Link, useNavigate} from "react-router-dom"
+import { useNavigate} from "react-router-dom"
 import {HashLink as Link } from 'react-router-hash-link'
 import { Box, Text, Spacer, Button, ButtonGroup, Image, Flex, Modal,
     useDisclosure, Icon, useMediaQuery, List, ListItem } from "@chakra-ui/react"
@@ -19,14 +19,14 @@ export default function NavBar() {
     const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure()
     const { isOpen: isRegisterOpen, onOpen: onRegisterOpen, onClose: onRegisterClose } = useDisclosure()
     const { isOpen: isCreateOpen, onOpen: onCreateOpen, onClose: onCreateClose } = useDisclosure()
-
+    const navigate = useNavigate()
     const btnRef = useRef()
 
     const handleLogout = async () => {
         await apiClient.logoutUser()
         setUser({})
         setError(null)
-        
+        navigate("/")
     }
 
     // Using media query to make navbar responsive 
@@ -118,8 +118,8 @@ export default function NavBar() {
                     </ButtonGroup>
                     :
                     <ButtonGroup gap='2'>
-                        <Button colorScheme='purple' onClick={onLoginOpen}>Log in</Button>
-                        <Button variant="outline" colorScheme='purple' onClick={onRegisterOpen}>Sign Up</Button>
+                        <Button colorScheme='purple' onClick={onLoginOpen} to={"/login"} >Log in</Button>
+                        <Button variant="outline" colorScheme='purple' onClick={onRegisterOpen} to={"/register"} >Sign Up</Button>
                         {/* <Link smooth to="#about"><Button variant="ghost" colorScheme='purple'>About</Button></Link>
                         <Link smooth to="#events"><Button variant="ghost" colorScheme='purple'>Events</Button></Link> */}
                         {/* <ColorModeSwitcher justifySelf="flex-end" /> */}
