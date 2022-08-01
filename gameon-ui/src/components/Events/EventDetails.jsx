@@ -21,12 +21,12 @@ export default function EventDetails({event, games}) {
         <Box style={{"backdropFilter": "blur(6px)"}}>
             {/* Need to resize image */}
             {/* Image */}
-            
+{/*             
             <Box width={"100%"} height={"400px"} backgroundImage={event?.eventImageUrl}
             backgroundPosition={"center"}
             backgroundSize={"contain"}
             backgroundRepeat={"no-repeat"}>
-            </Box>
+            </Box> */}
             
             <Center>
             <Box width={"960px"} backgroundColor={COLORS.offWhite} rounded={"20px"}>
@@ -41,7 +41,7 @@ export default function EventDetails({event, games}) {
                 <Flex paddingLeft={"1rem"} borderRadius={"15px"} background={"rgba(230, 230, 230, 0.9)"} minW={0} alignItems={"flex-start"} flexGrow={1} flexDirection={"row"}>
                     <Image
                     src={event?.eventImageUrl} 
-                    width={"80px"} height={"64px"} 
+                    boxSize={"80px"} 
                     alignItems={"center"} 
                     flexGrow={0} flexShrink={0} flexBasis={"auto"}
                     />
@@ -108,11 +108,9 @@ export default function EventDetails({event, games}) {
 
             
                 {/* Event */}
-                <Box position={"relative"} pt={"25px"} pb={"25px"} pl={"0"} pr={0} background={"rgba(113, 57, 166, 0.7)"} borderRadius={"3xl"}>
+                <Box position={"relative"} pt={"25px"} pb={"25px"} pl={"0"} pr={0} background={"rgba(113, 57, 166, 0.8)"}>
                     {/* Divides/Spaces */}
-                <Stack spacing={{ base: 4, sm: 6 }} direction={"column"} divider={
-                    <StackDivider borderColor={useColorModeValue("gray.200", "gray.600")}/>
-                }>
+                <Stack spacing={{ base: 4, sm: 6 }} direction={"column"}>
                 <Box textAlign={"center"}>
                 
                     
