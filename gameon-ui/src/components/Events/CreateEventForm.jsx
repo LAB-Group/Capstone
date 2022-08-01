@@ -121,9 +121,20 @@ export default function CreateEventForm({ onClose }) {
   //   add stream/video link so we can embed player?
 
   return (
-    <Container centerContent >
+    <Container centerContent  >
     <ModalOverlay />
-    <ModalContent height={"600px"} overflowY={"auto"}>
+    <ModalContent maxWidth={'100rem'} width={'90%'} maxHeight={'85%'} overflowY={'auto'}
+                                      css={{
+                                        '&::-webkit-scrollbar': {
+                                          width: '8px',
+                                        },
+                                        '&::-webkit-scrollbar-track': {
+                                          width: '10px',
+                                        },
+                                        '&::-webkit-scrollbar-thumb': {
+                                          background: '#805AD5',
+                                          borderRadius: '24px',
+                                        },}} >
       <ModalHeader>Create Event</ModalHeader>
       <Text fontSize='sm' color='red.500' p={0}>{errors.form}</Text>
       <ModalCloseButton />
@@ -158,7 +169,8 @@ export default function CreateEventForm({ onClose }) {
           focusBorderColor={COLORS.ultraViolet} 
           onClick={() => setShowTimeDate(true)}
           ref={ref}
-          type={showTimeDate?"datetime-local":"text"}
+          type={showTimeDate?"date":"text"}
+          placeholder="mm/dd/yyyy"
           value={createEventForm.eventDate}
           onChange={handleOnInputChange}
         />
@@ -175,6 +187,7 @@ export default function CreateEventForm({ onClose }) {
           onClick={handleClick}
           focusBorderColor={COLORS.ultraViolet} 
           value={createEventForm.eventType}
+          placeholder="Select..."
           onChange={handleOnInputChange}
         >
           <option>Meet-up</option>

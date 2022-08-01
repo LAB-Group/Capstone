@@ -75,7 +75,7 @@ const clearSearch = async () => {
               onClick={() => {
                 setSelectedGames(arr => [...arr, game.id]);
                 setSelectedGamesNames(arr => [...arr, game.name]);
-                setSelectedGamesPic(arr => [...arr, game.cover.url])
+                setSelectedGamesPic(arr => [...arr, game.cover?.url ? game.cover.url : ""])
               }}
               value={game.id}
               key={index}
