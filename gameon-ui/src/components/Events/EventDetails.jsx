@@ -150,20 +150,21 @@ export default function EventDetails({event, games}) {
                     borderRadius='lg' 
                     overflow='hidden' 
                     boxShadow={'md'} 
-                    _hover={{"transform": "scale3d(1.05, 1.05, 1)" }} 
-                    >
-                        <Image 
+                    >   <Box paddingTop={3}>
+                            <Image 
                             display={"block"}
                             marginLeft={"auto"}
                             marginRight={"auto"}
-                            width={"50%"}
-                            objectFit={"cover"} 
+                            width={"250px"}
+                            height={"200px"}
+                            objectFit={"fill"} 
                             borderTopRadius={"lg"} 
                             src={game.gameImageUrl.replace("thumb", "cover_small_2x")} 
                             alt={noImage}/>
+                        </Box>
                             <Box p='4'>
                                 <Box display='flex' alignItems='baseline'>
-                                    <Heading textAlign={"center"} size='md'>{game.gameName}</Heading>
+                                    <Heading color={COLORS.offWhite} textAlign={"center"} size='md'>{game.gameName}</Heading>
                                 </Box>
                             </Box>
                                 
