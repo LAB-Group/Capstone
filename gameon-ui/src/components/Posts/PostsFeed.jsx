@@ -8,7 +8,7 @@ export default function PostsFeed({ eventId, posts }) {
 
 
   return (
-    <VStack>
+    <VStack style={{"backdropFilter": "blur(9px)"}}>
     <Stack display={'flex'} justifyContent='flex-start'>
       <Heading color={COLORS.offWhite} p={3}>Event Comments</Heading>
     </Stack>

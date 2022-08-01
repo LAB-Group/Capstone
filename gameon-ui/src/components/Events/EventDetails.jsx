@@ -68,7 +68,7 @@ export default function EventDetails({event, games}) {
                     {/* Date */}
                     <Icon as={CalendarIcon} color={COLORS.darkAmethyst}/>    
                     <Text
-                        color={useColorModeValue("gray.900", "gray.400")}
+                        color={"hsl(255, 23%, 10%)"}
                         fontWeight={300}
                         fontSize={"md"}
                     >
@@ -80,7 +80,7 @@ export default function EventDetails({event, games}) {
                     <HStack>
                     <Icon as={HiLocationMarker} color={COLORS.darkAmethyst}/>
                     <Text
-                        color={useColorModeValue("gray.900", "gray.400")}
+                        color={"hsl(255, 23%, 10%)"}
                         fontWeight={300}
                         fontSize={"md"}
                     > 
@@ -123,7 +123,7 @@ export default function EventDetails({event, games}) {
                 <Stack>
                     <Text
                     fontSize={{ base: "16px", lg: "18px" }}
-                    color={useColorModeValue("yellow.500", "yellow.300")}
+                    color={COLORS.indigo}
                     fontWeight={'500'}
                     textTransform={'uppercase'}
                     mb={'4'}>

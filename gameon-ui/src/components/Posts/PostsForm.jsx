@@ -14,6 +14,7 @@ import {
   ChakraProvider,
   VStack,Box,Stack,HStack,Skeleton, Divider
 } from '@chakra-ui/react';
+import { COLORS } from '../colors';
 
 const activeLabelStyles = {
   transform: "scale(0.85) translateY(-24px)"
@@ -87,7 +88,7 @@ export default function PostsForm({event, eventId}) {
               key="1"
               borderWidth="1px"
               shadow="md"
-              bg="#fbfdff"
+              bg={"hsl(0,0%,98%)"}
               position="relative"
               align="center"
               rounded="md"
