@@ -18,7 +18,6 @@ export default function SearchedEvents({events, isOpen, onOpen, onClose}){
       const searchedEvents = events.filter(event => {
         return (event.eventName.toLowerCase().includes(searchInput.toLowerCase()))
       })
-      console.log("SEARCHED: ", searchedEvents)
     return (
         <Container centerContent>
 

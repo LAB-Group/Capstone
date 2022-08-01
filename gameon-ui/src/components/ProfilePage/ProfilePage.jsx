@@ -16,6 +16,8 @@ export default function ProfilePage() {
     const [events, setEvents] = useState([])
     const [loading, setLoading] = useState(true)
 
+    const [games, setGames] = useState([])
+
     const curDate = new Date()
     curDate.setHours(0,0,0,0)
     let prevEvents = events?.filter(event => {return Date.parse(event.eventDate) < curDate.getTime()})
@@ -25,8 +27,7 @@ export default function ProfilePage() {
         const fetchUsersPosts = async () => {
             const { data, error } = await apiClient.listAllPostsByUserId(user.id)
             if (data) {
-                const newPosts = data.posts
-                setPosts(data.posts)
+              setPosts(data.posts)
             }
             if (error) setError(error)
         }
@@ -53,12 +54,26 @@ export default function ProfilePage() {
           getEvents()  
     },[])
 
+    useEffect(() => {
+        const getGames = async () => {      
+            try {
+                for (let i=0;i<user.gameList.length;i++) {
+                    const response = await apiClient.getGameInfoById(user.gameList[i])
+                    setGames(curr => [...curr, response.data])
+                  }
+              } catch(error) {
+              return(error)
+            }
+          }
+          getGames()  
+    },[])
+
     return (
 
         <Container centerContent padding={6}>
 
             <Stack direction='column' spacing={7} align='stretch'>
-                <ProfileDetails user={user} isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
+                <ProfileDetails user={user} isOpen={isOpen} onOpen={onOpen} onClose={onClose} games={games} />
                 
                 <Divider orientation='horizontal' />
                     <UserUpcomingEvents futureEvents={futureEvents} />

@@ -95,6 +95,7 @@ export default function EventRegistration({ games }) {
                         </Checkbox>
                       ))}
                   </CheckboxGroup>
+              {/* <Button colorScheme="purple" onClick={handleOnSubmit}>Register</Button> */}
               </HStack>
               </Stack>
           

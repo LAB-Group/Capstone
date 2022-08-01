@@ -3,18 +3,15 @@ import * as React from "react"
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import EventDetails from "./EventDetails"
-import EventRegistration from "./EventRegistration"
-import { useEventContext } from "../../contexts/event"
 import axios from "axios";
 import apiClient from '../../services/apiClient';
 import PostsForm from "../Posts/PostsForm"
 import PostsFeed from "../Posts/PostsFeed"
 
 export default function EventPage(){
-    const { events } = useEventContext()
     const [loading, setLoading] = useState(true)
     const [event, setEvent] = useState([])
-    const [eventGames, setEventGames] = useState([])
+    const [games, setGames] = useState([])
     const [posts, setPosts] = useState([])
     const [error, setError] = useState(null)
 
@@ -22,7 +19,7 @@ export default function EventPage(){
 
     useEffect(() => {
         const getEvent = async () => {
-        
+          
             try {
               setTimeout(() => {
                 setLoading(false)
@@ -30,7 +27,12 @@ export default function EventPage(){
               const response = await axios.get(`http://localhost:3001/events/${eventId}`)
               const eventData = response.data
               setEvent(eventData.event)
-              setEventGames(event.eventGame)
+
+              for (let i=0;i<eventData.event.eventGame.length;i++) {
+                const test = await apiClient.getGameInfoById(eventData.event.eventGame[i])
+                setGames(curr => [...curr, test.data])
+              }
+
             } catch(error) {
               return(error)
             }
@@ -51,7 +53,7 @@ export default function EventPage(){
 
     return(
         <Container maxW="1200px">
-            <EventDetails event={event} />
+            <EventDetails event={event} games={games} />
             <Divider orientation='horizontal' />
             {/* Moved this to EventDetails file */}
             {/* <EventRegistration event={event} /> */}

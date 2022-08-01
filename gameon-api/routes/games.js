@@ -51,11 +51,24 @@ router.post("/id", async (req, res, next) => {
         
 })
 
-router.get("/id", async (req, res, next) => {
+router.get("/db/:gameId", async (req, res, next) => {
     try {
-        const gameId = req.body.gameId
+        const { gameId } = req.params
+        // const game = req.body
         const game = await Games.getGameInfoById(gameId)
         res.status(200).json(game)
+    } catch(err) {
+        next(err)
+    }
+
+})
+
+router.post("/db", async (req, res, next) => {
+    try {
+        const localDBForm = req.body
+        console.log("REQ",req)
+        const games = await Games.addGamesToLocalDB(localDBForm)
+        res.status(200).json(games)
     } catch(err) {
         next(err)
     }

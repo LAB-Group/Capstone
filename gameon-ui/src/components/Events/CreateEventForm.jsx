@@ -1,7 +1,12 @@
 import * as React from 'react';
 import { useState } from 'react';
 import apiClient from '../../services/apiClient';
-import {
+import { ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
   Container,
   Button,
   FormControl,
@@ -16,6 +21,7 @@ import {
   Text
 } from '@chakra-ui/react';
 import Search from '../Search/Search';
+import {COLORS} from "../colors"
 
 // import { Calendar } from '@natscale/react-calendar';
 
@@ -59,6 +65,8 @@ export const theme = extendTheme({
 export default function CreateEventForm({ onClose }) {
   const [errors, setErrors] = useState({});
   const [selectedGames, setSelectedGames] = useState([])
+  const [selectedGamesNames, setSelectedGamesNames] = useState([])
+  const [selectedGamesPic, setSelectedGamesPic] = useState([])
   const [createEventForm, setCreateEventForm] = useState({
     eventName: '',
     eventDate: '',
@@ -68,6 +76,7 @@ export default function CreateEventForm({ onClose }) {
     eventDetails: '',
     eventImageUrl: '',
   });
+
   const handleOnInputChange = event => {
     setCreateEventForm(createEventForm => ({
       ...createEventForm,
@@ -87,10 +96,14 @@ export default function CreateEventForm({ onClose }) {
       eventDetails: createEventForm.eventDetails,
       eventImageUrl: createEventForm.eventImageUrl,
     });
+    for (let i=0;i<selectedGames.length;i++) {
+        const { test } = await apiClient.addGamesToLocalDB({gameId:selectedGames[i],gameName:selectedGamesNames[i],gameImageUrl:selectedGamesPic[i]})
+    }
     if (error) setErrors(e => ({ ...e, form: error }));
     onClose();
     window.location.reload();
   };
+
   const ref = React.useRef()
   const [showTimeDate, setShowTimeDate] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
@@ -108,12 +121,17 @@ export default function CreateEventForm({ onClose }) {
   //   add stream/video link so we can embed player?
 
   return (
-    <ChakraProvider theme={theme}>
-      <Container centerContent maxWidth='4xl' p={3}>
-        <VStack spacing={5} w="700px">
-        <Text fontSize='xl'><b>Create Event</b></Text>
-      <FormControl variant="floating" >
-      {createEventForm.eventName.length>0?
+    <Container centerContent >
+    <ModalOverlay />
+    <ModalContent>
+      <ModalHeader>Create Event</ModalHeader>
+      <Text fontSize='sm' color='red.500' p={0}>{errors.form}</Text>
+      <ModalCloseButton />
+      <ModalBody>
+         {/* To adjust form add padding here */}
+        <VStack spacing={5}>
+       <FormControl color={COLORS.indigo} variant="floating" >
+       {createEventForm.eventName.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Event Name</FormLabel>
          : 
         <FormLabel>Event Name</FormLabel>}
@@ -121,7 +139,7 @@ export default function CreateEventForm({ onClose }) {
         <Input
           id="eventName"
           type="text"
-          focusBorderColor='purple.400' 
+          focusBorderColor={COLORS.ultraViolet} 
           name="eventName"
           defaultValue={createEventForm.eventName}
           onChange={handleOnInputChange}
@@ -137,7 +155,7 @@ export default function CreateEventForm({ onClose }) {
         <Input
           id="eventDate"
           name="eventDate"
-          focusBorderColor='purple.400' 
+          focusBorderColor={COLORS.ultraViolet} 
           onClick={() => setShowTimeDate(true)}
           ref={ref}
           type={showTimeDate?"datetime-local":"text"}
@@ -155,7 +173,7 @@ export default function CreateEventForm({ onClose }) {
           id="eventType"
           name="eventType"
           onClick={handleClick}
-          focusBorderColor='purple.400' 
+          focusBorderColor={COLORS.ultraViolet} 
           value={createEventForm.eventType}
           onChange={handleOnInputChange}
         >
@@ -170,14 +188,13 @@ export default function CreateEventForm({ onClose }) {
         <FormLabel transform="scale(0.85) translateY(-21px)">Event Location</FormLabel>
          : 
         <FormLabel htmlFor="eventLocation">Event Location</FormLabel>}
-        
        
         {/* Need to cycle if online or offline, if offline, enter address? */}
         <Input
           id="eventLocation"
           name="eventLocation"
           type="text"
-          focusBorderColor='purple.400' 
+          focusBorderColor={COLORS.ultraViolet}
           defaultValue={createEventForm.eventLocation}
           onChange={handleOnInputChange}
         />
@@ -185,7 +202,13 @@ export default function CreateEventForm({ onClose }) {
         
         
       
-        <Search selectedGames={selectedGames} setSelectedGames={setSelectedGames} />
+        <Search selectedGames={selectedGames}
+         setSelectedGames={setSelectedGames}
+         selectedGamesNames={selectedGamesNames}
+         setSelectedGamesNames={setSelectedGamesNames}
+         selectedGamesPic={selectedGamesPic}
+         setSelectedGamesPic={setSelectedGamesPic}
+         />
     
         <FormControl variant="floating">
         {createEventForm.eventDetails.length>0?
@@ -198,7 +221,7 @@ export default function CreateEventForm({ onClose }) {
           id="eventDetails"
           name="eventDetails"
           type="text"
-          focusBorderColor='purple.400'
+          focusBorderColor={COLORS.ultraViolet}
           overflowY={'auto'}
           defaultValue={createEventForm.eventDetails}
           onChange={handleOnInputChange}
@@ -216,7 +239,7 @@ export default function CreateEventForm({ onClose }) {
           name="eventImageUrl"
           type="url"
           defaultValue={createEventForm.eventImageUrl}
-          focusBorderColor='purple.400' 
+          focusBorderColor={COLORS.ultraViolet}
           onChange={handleOnInputChange}
         />
         
@@ -295,22 +318,18 @@ export default function CreateEventForm({ onClose }) {
                     PNG, JPG, GIF up to 10MB
                   </Text>
                 </Stack>
-              </Flex>
-             */}
-          
-    
+              </Flex> */}
 
-
-        <Button colorScheme="purple" mt={1}  w="350px"onClick={handleOnSubmit}>
-          Create
-        </Button>
         {/* <Button colorScheme="purple" variant="outline" onClick={onClose}>
           Cancel
        </Button> */}
       
       </VStack>
-     </Container>
-    
-    </ChakraProvider>
-  );
+      </ModalBody>
+      <ModalFooter display={'flex'} justifyContent={'center'}>
+      <Button backgroundColor={COLORS.ultraViolet} color={COLORS.offWhite} mt={1}  w="350px"onClick={handleOnSubmit}>Create</Button>
+      </ModalFooter>
+    </ModalContent>
+  </Container>
+)
 }
