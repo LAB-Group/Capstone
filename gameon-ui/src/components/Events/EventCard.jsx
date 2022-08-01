@@ -11,7 +11,8 @@ export default function EventCard({event}){
         //FIXME: Need to prevent card squishing
         <Box 
         display={"block"} 
-        // maxWidth={"400px"} 
+        maxWidth={"400px"}
+        margin={1}
         // minWidth={"50px"} 
         // width={"100%"} 
         height={"auto"} 
@@ -23,7 +24,7 @@ export default function EventCard({event}){
         boxShadow={'md'} 
         _hover={{"transform": "scale3d(1.05, 1.05, 1)" }} >
             <Link to={`/events/${event.id}`}  >
-            <Image position={"static"} src={event.eventImageUrl} objectFit={"contain"} width={"40rem"} height={"10rem"}/>
+            <Image display position={"static"} src={event.eventImageUrl} objectFit={"cover"} width={"40rem"} height={"10rem"}/>
             <Box paddingTop={"0.5em"} paddingBottom={"0.5em"}>
                 <Stack display="flex-start" alignItems="center">
                     <HStack 
