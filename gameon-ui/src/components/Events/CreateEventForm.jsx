@@ -123,7 +123,7 @@ export default function CreateEventForm({ onClose }) {
   return (
     <Container centerContent >
     <ModalOverlay />
-    <ModalContent>
+    <ModalContent height={"600px"} overflowY={"auto"}>
       <ModalHeader>Create Event</ModalHeader>
       <Text fontSize='sm' color='red.500' p={0}>{errors.form}</Text>
       <ModalCloseButton />

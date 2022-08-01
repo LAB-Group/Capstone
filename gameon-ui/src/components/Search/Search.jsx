@@ -118,7 +118,18 @@ function SearchBar({
   return (
     <VStack spacing={2}>
       {/* Fixed it: The Tags were floating */}
-      <Wrap w="400px">
+      <Wrap w="400px" maxHeight={"30px"} overflowY="auto" css={{
+    '&::-webkit-scrollbar': {
+      width: '8px',
+    },
+    '&::-webkit-scrollbar-track': {
+      width: '10px',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      background: '#805AD5',
+      borderRadius: '24px',
+    },
+  }}>
         {selectedGames?.map((id, index) => (
           <Tag
             size="md"
