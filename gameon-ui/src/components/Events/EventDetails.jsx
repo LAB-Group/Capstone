@@ -136,9 +136,43 @@ export default function EventDetails({event, games}) {
                     mb={'4'}>
                         Games:
                     </Text>
-                    <HStack spacing="24px">
+                    <HStack justifyContent={"space-evenly"}>
                     {/* Game */}
-                    <SimpleGrid columns={{base:2, md:3}} spacing={10}>  
+                    <Flex justifyContent={"center"} flexDirection={"row"} flexWrap={"wrap"} gap={6}>
+
+                    {games?.map((game, index) => (
+                    <Box
+                    background={"rgba(113, 57, 166, 0.7)"}
+                    display={"block"}
+                    width={"300px"} 
+                    height={"300px"} 
+                    alignItems={"center"}  
+                    borderRadius='lg' 
+                    overflow='hidden' 
+                    boxShadow={'md'} 
+                    _hover={{"transform": "scale3d(1.05, 1.05, 1)" }} 
+                    >
+                        <Image 
+                            display={"block"}
+                            marginLeft={"auto"}
+                            marginRight={"auto"}
+                            width={"50%"}
+                            objectFit={"cover"} 
+                            borderTopRadius={"lg"} 
+                            src={game.gameImageUrl.replace("thumb", "cover_small_2x")} 
+                            alt={noImage}/>
+                            <Box p='4'>
+                                <Box display='flex' alignItems='baseline'>
+                                    <Heading textAlign={"center"} size='md'>{game.gameName}</Heading>
+                                </Box>
+                            </Box>
+                                
+                    </Box>
+                    ))}
+                    </Flex>
+
+
+                    {/* <SimpleGrid columns={{base:2, md:3}} spacing={10}>  
                         {games?.map((game, index) => (
                             <HStack key={index} spacing={"20px"} position={"relative"}>
                                 <Box width={"400px"} borderWidth='1px' borderRadius='lg' pl={"10px"} overflow='hidden' boxShadow={'md'}>
@@ -152,7 +186,7 @@ export default function EventDetails({event, games}) {
                             </HStack>
                         ))}
                         
-                    </SimpleGrid>
+                    </SimpleGrid> */}
 
                     </HStack>
                 </Stack>

@@ -118,7 +118,7 @@ function SearchBar({
   return (
     <VStack spacing={2}>
       {/* Fixed it: The Tags were floating */}
-      <Wrap w="400px" maxHeight={"30px"} overflowY="auto" css={{
+      <Wrap w="400px" maxHeight={"40px"} overflowY="auto" css={{
     '&::-webkit-scrollbar': {
       width: '8px',
     },

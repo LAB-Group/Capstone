@@ -89,9 +89,9 @@ export default function EventFeed({ isFetching }){
                 </Box> 
                 
                 
-                <Box marginTop={"0.5rem"} maxW={"1000px"} width={"100%"}>
+                <Box marginTop={"0.5rem"} width={"100%"} maxWidth={"80em"} flexGrow={1} flexShrink={1} flexBasis={"auto"}>
                     <Heading fontFamily={"Roboto"} color={COLORS.offWhite}>Speedrunning</Heading>
-                    <Box marginTop={"0.5rem"} style={{"background":"rgba(113, 57, 166, .6)"}} padding={"1em"} borderRadius={"20px"}>
+                    <Box position={"static"} marginTop={"0.5rem"} style={{"background":"rgba(113, 57, 166, .6)"}} padding={"1em"} borderRadius={"20px"}>
 
                         {speedEvents?.length ? 
                             <Swiper
@@ -119,7 +119,7 @@ export default function EventFeed({ isFetching }){
                     </Box>
                 </Box>
                 
-                <Box marginTop={"0.5rem"} maxW={"1000px"} width={"100%"}>
+                <Box marginTop={"0.5rem"} width={"100%"} maxWidth={"80em"} flexGrow={1} flexShrink={1} flexBasis={"auto"}>
                     <Heading fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite}>Meet-ups</Heading>
                     <Box marginTop={"0.5rem"} style={{"background":"rgba(113, 57, 166, .6)"}} padding={"1em"} borderRadius={"20px"}>
 

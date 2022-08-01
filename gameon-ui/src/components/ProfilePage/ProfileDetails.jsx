@@ -81,13 +81,14 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen, games })
               // <Text display={'flex'} maxWidth={'1000px'} key={index}>{game.name},</Text>
                 <Tag 
                 key={index} 
-                width={"100px"}
-                height={"30px"}
+                width={"180px"}
+                height={"50px"}
                 borderRadius={"30px"}
                 border={"1px"}
+                wordBreak={"break-all"}
                 borderColor={COLORS.darkAmethyst}
                 backgroundColor={"hsl(304, 45%, 50%)"}>
-                  <TagLabel color={"hsl(0,0%,80%)"} fontSize={"md"}>{game.gameName}</TagLabel>
+                  <TagLabel textAlign={"center"} width={"100%"} color={"hsl(0,0%,80%)"} fontSize={"sm"}>{game.gameName}</TagLabel>
                 </Tag>
               ))}
               </Wrap>
