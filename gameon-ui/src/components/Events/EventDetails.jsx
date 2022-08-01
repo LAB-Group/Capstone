@@ -75,14 +75,6 @@ export default function EventDetails({event, games}) {
                     {
                         myDate
                     }</Text>
-                    {/* Time */}
-                    <Text
-                        color={useColorModeValue("gray.900", "gray.400")}
-                        fontWeight={300}
-                        fontSize={"md"}
-                    >{
-                        time
-                    }</Text>
                     </HStack>
                     {/* Location */}
                     <HStack>
