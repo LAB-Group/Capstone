@@ -51,6 +51,8 @@ class Events {
                        e.details AS "eventDetails",
                        e.event_image_url AS "eventImageUrl",
                        u.id AS "creatorId",
+                       u.username AS "creatorUsername",
+                       u.email AS "creatorEmail",
                        e.created_at AS "eventCreatedAt",
                        e.updated_at AS "eventUpdatedAt",
                        COUNT(r.user_id) AS "numRegistered"
