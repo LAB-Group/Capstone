@@ -107,7 +107,6 @@ export default function NavBar() {
                     </ButtonGroup>
                     :
                     <ButtonGroup gap='2'>
-<<<<<<< HEAD
                          <Button fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} backgroundColor={COLORS.ultraViolet} color={COLORS.offWhite} onClick={onLoginOpen}
                         style={{"transition": "backgroundColor 0.5s, color 0.5s"}} _hover={{"backgroundColor": COLORS.offWhite, "color": COLORS.indigo}}>Log in</Button>
                         {/* <Button colorScheme='purple' onClick={onLoginOpen}>Log in</Button> */}
@@ -115,13 +114,6 @@ export default function NavBar() {
                         border={"2px"} borderColor={COLORS.darkAmethyst} borderStyle={"solid"}
                         style={{"transition": "backgroundColor 0.5s, color 0.5s"}} _hover={{"backgroundColor":COLORS.offWhite,"color": COLORS.indigo}} onClick={onRegisterOpen}>Sign Up</Button>
                         {/* <Button variant="outline" colorScheme='purple' onClick={onRegisterOpen}>Sign Up</Button> */}
-=======
-                        <Button colorScheme='purple' onClick={onLoginOpen} to={"/login"} >Log in</Button>
-                        <Button variant="outline" colorScheme='purple' onClick={onRegisterOpen} to={"/register"} >Sign Up</Button>
-                        {/* <Link smooth to="#about"><Button variant="ghost" colorScheme='purple'>About</Button></Link>
-                        <Link smooth to="#events"><Button variant="ghost" colorScheme='purple'>Events</Button></Link> */}
-                        {/* <ColorModeSwitcher justifySelf="flex-end" /> */}
->>>>>>> main-test
                     </ButtonGroup>
                 }
 
