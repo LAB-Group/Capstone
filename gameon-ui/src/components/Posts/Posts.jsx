@@ -65,7 +65,7 @@ export default function Posts({ post, eventId }) {
       <Box 
         borderWidth="1px" 
         shadow="md" 
-        bg="#fbfdff"
+        bg={"hsl(0,0%,98%)"}
         position="relative"
         rounded="md"
         borderRadius="5px"

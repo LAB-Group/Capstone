@@ -81,7 +81,7 @@ export default function EventRegistration({ games }) {
   return (
     <Container centerContent>
       <FormLabel htmlFor="eventGame">
-        <Heading color={COLORS.offWhite}>Event Registration</Heading>
+        <Heading color={COLORS.indigo}>Event Registration</Heading>
       </FormLabel>
       <Box>
           <Stack>
