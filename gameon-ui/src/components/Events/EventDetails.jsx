@@ -4,10 +4,11 @@ import { useState } from "react"
 import { 
     Container, Box, Text, SimpleGrid, Flex, 
     Image, VStack,Heading, Stack, 
-    StackDivider, Icon, HStack, useColorModeValue 
+    StackDivider, Icon, HStack, useColorModeValue, ColorModeScript 
 } from "@chakra-ui/react"
 import { CalendarIcon } from "@chakra-ui/icons"
 import { HiLocationMarker } from "react-icons/hi"
+import {COLORS} from "../colors"
 
 export default function EventDetails({event, games}) {
     const noImage = "https://image.shutterstock.com/shutterstock/photos/571752970/display_1500/stock-photo-no-game-sign-on-white-background-571752970.jpg"
@@ -17,7 +18,7 @@ export default function EventDetails({event, games}) {
     let time = newDate.toLocaleTimeString("en-US")
 
     return(
-        <Container maxWidth={"7xl"}>
+        <Box width={"100%"} style={{"backdropFilter": "blur(6px)"}}>
             {/* Need to resize image */}
             {/* Image */}
             <Box width={"100%"} height={"400px"} backgroundImage={event?.eventImageUrl}
@@ -34,18 +35,18 @@ export default function EventDetails({event, games}) {
             >
             
             <Stack spacing={{base:6, md:10}} justifyContent={"center"}>
-                <Flex minW={0} alignItems={"flex-start"} flexGrow={1} flexDirection={"row"}>
+                <Flex borderRadius={"15px"} background={"rgba(230, 230, 230, 0.9)"} minW={0} alignItems={"flex-start"} flexGrow={1} flexDirection={"row"}>
                     <Image 
                     src={event?.eventImageUrl} 
-                    width={"54px"} height={"54px"} 
+                    width={"60px"} height={"56px"} 
                     alignItems={"center"} 
                     flexGrow={0} flexShrink={0} flexBasis={"auto"}
                     />
-                <Box flexGrow={1} flexShrink={1} flexBasis={"auto"}>
+                <Box marginLeft={2} flexGrow={1} flexShrink={1} flexBasis={"auto"}>
                     {/* Type */}
                     <Text
-                        color={useColorModeValue("gray.900", "gray.400")}
-                        fontWeight={300}
+                        color={"hsl(0,0%,50%)"}
+                        fontWeight={400}
                         fontSize={{base:"xl", sm:"lg", lg:"2xl"}}
                         textTransform={"uppercase"}
                     >{
@@ -62,7 +63,7 @@ export default function EventDetails({event, games}) {
                     
                     <HStack spacing={"10px"} >
                     {/* Date */}
-                    <Icon as={CalendarIcon}/>    
+                    <Icon as={CalendarIcon} color={COLORS.darkAmethyst}/>    
                     <Text
                         color={useColorModeValue("gray.900", "gray.400")}
                         fontWeight={300}
@@ -82,7 +83,7 @@ export default function EventDetails({event, games}) {
                     </HStack>
                     {/* Location */}
                     <HStack>
-                    <Icon as={HiLocationMarker}/>
+                    <Icon as={HiLocationMarker} color={COLORS.darkAmethyst}/>
                     <Text
                         color={useColorModeValue("gray.900", "gray.400")}
                         fontWeight={300}
@@ -104,7 +105,7 @@ export default function EventDetails({event, games}) {
 
             
                 {/* Event */}
-                <Box position={"relative"} pt={"25px"} pb={"25px"} pl={"0"} pr={0} backgroundColor={"purple.500"} borderRadius={"3xl"}>
+                <Box position={"relative"} pt={"25px"} pb={"25px"} pl={"0"} pr={0} background={"rgba(113, 57, 166, 0.7)"} borderRadius={"3xl"}>
                     {/* Divides/Spaces */}
                 <Stack spacing={{ base: 4, sm: 6 }} direction={"column"} divider={
                     <StackDivider borderColor={useColorModeValue("gray.200", "gray.600")}/>
@@ -172,6 +173,6 @@ export default function EventDetails({event, games}) {
                     <EventFeed/>
                  </Box> */}
 
-        </Container>
+        </Box>
     )
 }

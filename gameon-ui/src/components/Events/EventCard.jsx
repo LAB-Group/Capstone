@@ -27,16 +27,7 @@ export default function EventCard({event}){
             <Image position={"static"} src={event.eventImageUrl} objectFit={"contain"} width={"40rem"} height={"10rem"}/>
             <Box paddingTop={"0.5em"} paddingBottom={"0.5em"}>
                 <Stack display="flex-start" alignItems="center">
-                    <HStack 
-                    // flexGrow={0} 
-                    // flexShrink={1} 
-                    // flexBasis={"0"} 
-                    // display='flex' 
-                    // flexDir={'row'} 
-                    // alignItems={'center'} 
-                    // justifyContent={'flex-start'} 
-                    spacing='56px'
-                    >
+                    <HStack spacing='56px'>
                         <Heading 
                             whiteSpace={"pre-wrap"}
                             fontSize={"sm"}

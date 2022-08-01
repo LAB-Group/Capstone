@@ -26,7 +26,7 @@ function App(){
     return( 
         <ChakraProvider>
         {/* Need to come back to this because of background image */}
-        <Box backgroundPosition={"bottom"} backgroundImage={background} backgroundRepeat={"no-repeat"} backgroundAttachment={"fixed"} backgroundSize={"200%"}>     
+        <Box backgroundPosition={"bottom"} backgroundImage={background} backgroundRepeat={"repeat"} backgroundAttachment={"fixed"} backgroundSize={"125%"}>     
         <BrowserRouter>
         <NavBar/>
         <Routes>

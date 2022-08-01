@@ -7,13 +7,14 @@ import {
   Heading
 } from '@chakra-ui/react';
 import EventCard from '../Events/EventCard';
+import { COLORS } from "../colors"
 
 export default function UserPreviousEvents({ user, prevEvents }) {
 
   return (
     <>
       <Box maxW={"1000px"}>
-                    <Heading mb={2}>Previous Events</Heading>
+                    <Heading color={COLORS.offWhite}>Previous Events</Heading>
                 {prevEvents?.length ? 
                     <Swiper
                         slidesPerView={3}
@@ -36,7 +37,7 @@ export default function UserPreviousEvents({ user, prevEvents }) {
                         </SwiperSlide>
                             ))}
                     </Swiper>
-                    :<Box><Text>No Events available</Text></Box>}
+                    :<Box><Text color={COLORS.offWhite}>No Events available</Text></Box>}
                 </Box> 
     </>
   );

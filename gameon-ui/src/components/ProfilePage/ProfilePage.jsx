@@ -7,7 +7,7 @@ import apiClient from "../../services/apiClient"
 import UserUpcomingEvents from "./UserUpcomingEvents"
 import UserPreviousEvents from "./UserPreviousEvents"
 import UserPostsFeed from "./UserPostsFeed"
-
+import { COLORS } from "../colors"
 export default function ProfilePage() {
     const { user } = useAuthContext()
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -70,12 +70,12 @@ export default function ProfilePage() {
 
     return (
 
-        <Container centerContent padding={6}>
+        <Center paddingTop={6} width={"100%"} style={{"backdropFilter": "blur(10px)", "background":"rgba(48, 43, 63, .4)"}}>
 
             <Stack direction='column' spacing={7} align='stretch'>
                 <ProfileDetails user={user} isOpen={isOpen} onOpen={onOpen} onClose={onClose} games={games} />
                 
-                <Divider orientation='horizontal' />
+                {/* <Divider orientation='horizontal' /> */}
                     <UserUpcomingEvents futureEvents={futureEvents} />
 
                 <Divider orientation='horizontal' />
@@ -83,13 +83,13 @@ export default function ProfilePage() {
 
                 
                 <Divider orientation='horizontal' />
-                <Heading>Posts</Heading>
+                <Heading color={COLORS.offWhite}>Posts</Heading>
                 <Box h='700px' borderRadius='sm'>
                     {
                         posts.length === 0 ? 
                         
                         <Center h='100px'>
-                            <Text fontSize='3xl'>No Post Found</Text>
+                            <Text color={COLORS.offWhite} fontSize='3xl'>No Post Found</Text>
                          </Center>
                         : 
                         <UserPostsFeed posts={posts} />
@@ -97,6 +97,6 @@ export default function ProfilePage() {
                 </Box>
 
             </Stack>
-        </Container>
+        </Center>
     )
 }

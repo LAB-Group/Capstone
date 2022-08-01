@@ -34,14 +34,14 @@ export default function NavBar() {
 
     return (
         // This makes the navbar scrollable
-        <Box fontFamily={"Roboto, sans-serif"} zIndex={10000} position="sticky" top={0} width="100%" height="70px" backgroundColor={COLORS.indigo} fontSize={{ "base":"lg","md":"lg", "lg":"xl"}}>
+        <Box fontFamily={"Roboto, sans-serif"} zIndex={1} position="sticky" top={0} width="100%" height="50px" backgroundColor={COLORS.indigo} fontSize={{ "base":"lg","md":"lg", "lg":"xl"}}>
             <Flex minWidth='max-content' alignItems='center' gap='2'>
-                <Box maxWidth={"100px"} height={"auto"}>
+                <Box maxWidth={"100px"} height={"50px"}>
                     <Link to="/">
-                    <Image maxWidth={"100%"} height={"100px"} objectFit={"fill"} src={logo}/>
+                    <Image maxWidth={"100%"} height={"70px"} objectFit={"contain"} src={logo}/>
                     </Link>
                 </Box>
-                <List marginBottom={"1.5rem"}>
+                <List>
                     <ListItem marginRight={6} float={"left"} display={"block"}>
                 <Link smooth to="#about">
                     <Text color={COLORS.offWhite} fontWeight={700} 
@@ -81,48 +81,39 @@ export default function NavBar() {
 
 
                 {user?.email? 
-                    <ButtonGroup gap='2' paddingBottom={"2rem"}>
+                    <ButtonGroup gap='2'>
                         <Button fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} backgroundColor={COLORS.ultraViolet} color={COLORS.offWhite} onClick={onCreateOpen}
                         style={{"transition": "backgroundColor 0.5s, color 0.5s"}} _hover={{"backgroundColor": COLORS.offWhite, "color": COLORS.indigo}}>Create Event</Button>
-                        <Box border={"2px"} borderStyle={"solid"} borderRadius={"5px"} borderColor={COLORS.darkAmethyst} 
+                        {/* <Box border={"2px"} borderStyle={"solid"} borderRadius={"5px"} borderColor={COLORS.darkAmethyst} 
                             paddingStart={"1rem"} paddingEnd={"1rem"} paddingTop={"0.2rem"} paddingBottom={"0.2rem"}
-                            style={{"transition": "backgroundColor 0.5s"}} _hover={{"backgroundColor": COLORS.offWhite}}>
+                            style={{"transition": "backgroundColor 0.5s"}} _hover={{"backgroundColor": COLORS.offWhite}}> */}
                         <Link to ="/profile">
-                            <Text 
-                            fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} color={COLORS.offWhite}
-                            style={{"transition": "color 0.5s"}} _hover={{"color": COLORS.indigo}}>Profile</Text>
+                        <Button fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} backgroundColor={COLORS.indigo} color={COLORS.offWhite}
+                        border={"2px"} borderColor={COLORS.ultraViolet} borderStyle={"solid"}
+                        style={{"transition": "backgroundColor 0.5s, color 0.5s, borderColor 0.5s"}} _hover={{"backgroundColor":COLORS.offWhite,"color": COLORS.indigo, "borderColor": COLORS.offWhite}}>Profile</Button>
                         </Link>
-                        </Box>
+                        {/* </Box> */}
                         {/* <Link smooth to="#about"><Button variant="ghost" colorScheme='purple'>About</Button></Link>
                         <Link smooth to="#events"><Button variant="ghost" colorScheme='purple'>Events</Button></Link> */}
                         
-                        {/* Log out transition * Needs a revisit on the transition*/}
-                        <Text 
-                        paddingTop={"0.4rem"}
-                        color={COLORS.darkAmethyst}
-                        style={{
-                            "transition": "padding 0.5s, color 0.1s, border 0.1s, borderSize 0.1s, borderStyle 0.1s, borderRadius 0.5s, borderColor 0.5s, transform 0.5s"
-                            }} 
-                        _hover={{
-                            "cursor": "pointer",
-                            "transform": "scale(1)",
-                            "border":"2px", 
-                        "borderStyle":"solid", 
-                        "borderRadius":"20%", 
-                        "borderColor":COLORS.darkAmethyst, 
-                        "padding":"2px 2px 2px 0px", 
-                        "color":"hsl(271, 49%, 60%)"  
-                        }} marginRight={"1em"} onClick={handleLogout}>Logout</Text>
+                        {/* FIXME: Log out transition * Needs a revisit on the transition*/}
+                        
+                        <Button fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} backgroundColor={COLORS.indigo} color={COLORS.offWhite}
+                        border={"2px"} borderColor={COLORS.indigo} borderStyle={"solid"}
+                        style={{"transition": "borderColor 0.8s"}} _hover={{"borderColor": COLORS.darkAmethyst}} onClick={handleLogout}>Logout</Button>
+                        
                         {/* Commented out the Light/Dark mode */}
                         {/* <ColorModeSwitcher justifySelf="flex-end" /> */}
                     </ButtonGroup>
                     :
                     <ButtonGroup gap='2'>
-                        <Button colorScheme='purple' onClick={onLoginOpen}>Log in</Button>
-                        <Button variant="outline" colorScheme='purple' onClick={onRegisterOpen}>Sign Up</Button>
-                        {/* <Link smooth to="#about"><Button variant="ghost" colorScheme='purple'>About</Button></Link>
-                        <Link smooth to="#events"><Button variant="ghost" colorScheme='purple'>Events</Button></Link> */}
-                        {/* <ColorModeSwitcher justifySelf="flex-end" /> */}
+                         <Button fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} backgroundColor={COLORS.ultraViolet} color={COLORS.offWhite} onClick={onLoginOpen}
+                        style={{"transition": "backgroundColor 0.5s, color 0.5s"}} _hover={{"backgroundColor": COLORS.offWhite, "color": COLORS.indigo}}>Log in</Button>
+                        {/* <Button colorScheme='purple' onClick={onLoginOpen}>Log in</Button> */}
+                        <Button fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} backgroundColor={COLORS.indigo} color={COLORS.offWhite}
+                        border={"2px"} borderColor={COLORS.darkAmethyst} borderStyle={"solid"}
+                        style={{"transition": "backgroundColor 0.5s, color 0.5s"}} _hover={{"backgroundColor":COLORS.offWhite,"color": COLORS.indigo}} onClick={onRegisterOpen}>Sign Up</Button>
+                        {/* <Button variant="outline" colorScheme='purple' onClick={onRegisterOpen}>Sign Up</Button> */}
                     </ButtonGroup>
                 }
 

@@ -117,7 +117,8 @@ function SearchBar({
 
   return (
     <VStack spacing={2}>
-      <Wrap w="700px">
+      {/* Fixed it: The Tags were floating */}
+      <Wrap w="400px">
         {selectedGames?.map((id, index) => (
           <Tag
             size="md"
@@ -151,10 +152,24 @@ function SearchBar({
               value={searchInput}
               onChange={handleOnInputChange}
             />
-            <Button backgroundColor={COLORS.ultraViolet} color={COLORS.offWhite} onClick={handleOnSubmit}>
+            <Button 
+            background={"hsl(271, 70%, 60%)"} 
+            color={"hsl(0, 0%, 100%)"} 
+            _hover={{
+              "background":COLORS.ultraViolet,
+              "color": COLORS.offWhite
+            }}
+            onClick={handleOnSubmit}>
               Search
             </Button>
-            <Button backgroundColor={COLORS.ultraViolet} color={COLORS.offWhite} onClick={clearSearch}>
+            <Button 
+            background={"hsl(271, 70%, 70%)"} 
+            color={"hsl(0, 0%, 100%)"}
+            _hover={{
+              "background":COLORS.ultraViolet,
+              "color": COLORS.offWhite
+            }} 
+            onClick={clearSearch}>
               Clear
             </Button>
           </HStack>

@@ -1,6 +1,6 @@
 import * as React from "react"
 import { useState, useEffect } from "react"
-import {  Box, Text, SimpleGrid, Flex, Skeleton, VStack, Heading, useDisclosure } from "@chakra-ui/react"
+import {  Box, Text, SimpleGrid, Flex, Center, Skeleton, VStack, Heading, useDisclosure } from "@chakra-ui/react"
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css"
 import "swiper/css/pagination"
@@ -54,6 +54,8 @@ export default function EventFeed({ isFetching }){
                     "backgroundColor": COLORS.ultraViolet
                   }
             }}>
+                <Center>
+                <VStack>
 
                 <Box marginTop={"0.5rem"} width={"100%"} maxWidth={"80em"} flexGrow={1} flexShrink={1} flexBasis={"auto"}>
                     <Heading fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite}>Tournaments</Heading>
@@ -62,7 +64,7 @@ export default function EventFeed({ isFetching }){
                 {tournamentEvents?.length ? 
                     <Swiper
                     slidesPerView={3}
-                    spaceBetween={20}
+                    spaceBetween={30}
                     slidesPerGroup={3}
                     scrollbar={{
                       hide: true,
@@ -85,7 +87,8 @@ export default function EventFeed({ isFetching }){
                     :<Box><Text>No Events available</Text></Box>}
                 </Box>
                 </Box> 
-
+                
+                
                 <Box marginTop={"0.5rem"} maxW={"1000px"} width={"100%"}>
                     <Heading fontFamily={"Roboto"} color={COLORS.offWhite}>Speedrunning</Heading>
                     <Box marginTop={"0.5rem"} style={{"background":"rgba(113, 57, 166, .6)"}} padding={"1em"} borderRadius={"20px"}>
@@ -93,7 +96,7 @@ export default function EventFeed({ isFetching }){
                         {speedEvents?.length ? 
                             <Swiper
                                 slidesPerView={3}
-                                spaceBetween={10}
+                                spaceBetween={30}
                                 slidesPerGroup={3}
                                 scrollbar={{
                                     hide:true
@@ -115,7 +118,7 @@ export default function EventFeed({ isFetching }){
                     :<Box><Text>No Events available</Text></Box>}
                     </Box>
                 </Box>
-
+                
                 <Box marginTop={"0.5rem"} maxW={"1000px"} width={"100%"}>
                     <Heading fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite}>Meet-ups</Heading>
                     <Box marginTop={"0.5rem"} style={{"background":"rgba(113, 57, 166, .6)"}} padding={"1em"} borderRadius={"20px"}>
@@ -123,7 +126,7 @@ export default function EventFeed({ isFetching }){
                         {meetEvents?.length ? 
                         <Swiper
                             slidesPerView={3}
-                            spaceBetween={10}
+                            spaceBetween={30}
                             slidesPerGroup={3}
                             scrollbar={{
                                 hide:true
@@ -145,6 +148,8 @@ export default function EventFeed({ isFetching }){
                     :<Box><Text>No Events available</Text></Box>}
                     </Box>
                 </Box>
+                </VStack>
+                </Center>
                 </VStack>
             {/* {events?.map((event) => (
                 // Set Skeleton here
