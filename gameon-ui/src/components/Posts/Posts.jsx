@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import apiClient from '../../services/apiClient';
+import apiClient from '../../services/apiClient'
+import { Link } from "react-router-dom"
 import {
   Textarea, Image, Container, Button,
   HStack, Text, Box, Heading, VStack, 
@@ -87,7 +88,7 @@ export default function Posts({ post, eventId }) {
                           mt={[-16]}>
                           <Image  w={[10,20]} h={[10,20]} mt={8} borderRadius="50%" src={post.creatorImageUrl}/>
                         </Flex>
-                        <Text fontWeight={'bold'} >@{post.creatorUsername}</Text>
+                        <Link to={`/user/${post.creatorId}/profile`}  ><Text fontWeight={'bold'} >@{post.creatorUsername}</Text></ Link>
                       </HStack>
                       <HStack>
                         <Badge variant='subtle' colorScheme='purple'>{postDate}</Badge>
@@ -103,44 +104,13 @@ export default function Posts({ post, eventId }) {
               </Stack>
               
             </Box>
-      {/* <Box>
-        <HStack>
-          <VStack>
-            <Text fontWeight={'bold'}>{post.creatorUsername}</Text>
-            <Image
-              borderRadius={'lg'}
-              w="80px"
-              h="80px"
-              borderWidth="9px"
-              src={post.creatorImageUrl}
-            />
-            <Text>{postDate}</Text>
-            <Text>{time}</Text>
-          </VStack>
-          <VStack>
-            <Heading as={'h3'} size="md" display={'flex'}>
-              {post.postTitle}
-            </Heading>
-            <Text>{post.postContent}</Text>
-          </VStack>
-        </HStack>
-      </Box> */}
        {postReplies?.map((postReply, index) => (
           <PostReply key={index} postReply={postReply} eventId={eventId} />
         ))}
         <Box ml="56em" mb={2} >
               <Button variant='ghost' onClick={onOpen}>Reply</Button></Box>
         <Divider w='1200px'/>
-        <VStack>
-        
-       
-        {/* {posts?.length ? (
-            <Box>
-                <Text>No Posts available</Text>
-            </Box>
-            ) : null} */}
-        
-        
+        <VStack>    
         <Modal onClose={onClose} isOpen={isOpen} isCentered>
           <ModalOverlay />
           <ModalContent>

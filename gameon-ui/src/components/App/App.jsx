@@ -5,7 +5,7 @@ import { AuthContextProvider, useAuthContext } from "../../contexts/auth"
 import { EventContextProvider } from "../../contexts/event"
 import Home from "../Home/Home"
 import NavBar from "../NavBar/NavBar"
-import ProfilePage from "../ProfilePage/ProfilePage"
+import OtherUsersProfilePage from "../UsersProfilePage/UsersProfilePage"
 import EventPage from "../Events/EventPage";
 import Footer from "../Footer/Footer"
 import background from "../../media/evo2.jpg"
@@ -34,11 +34,14 @@ function App(){
             {/* Home */}
             <Route path="/" element={<Home/>}/>
             
-            {/* ProfilePage */}
-            <Route path="/profile/*" element={user?.email?<ProfilePage/>:<></>}/>
+            {/* ProfilePage <Route path="/profile/*" element={user?.email?<ProfilePage/>:<></>}/>*/}
+            
 
             {/* EventFeed */}
             <Route path={"/events/:eventId"} element={<EventPage />}/>
+
+            {/* OtherUserProfilePage */}
+            <Route path={"/user/:userId/profile/*"} element={<OtherUsersProfilePage />} />
 
         </Routes>
 

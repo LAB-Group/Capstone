@@ -87,7 +87,7 @@ export default function NavBar() {
                         <Box border={"2px"} borderStyle={"solid"} borderRadius={"5px"} borderColor={COLORS.darkAmethyst} 
                             paddingStart={"1rem"} paddingEnd={"1rem"} paddingTop={"0.2rem"} paddingBottom={"0.2rem"}
                             style={{"transition": "backgroundColor 0.5s"}} _hover={{"backgroundColor": COLORS.offWhite}}>
-                        <Link to ="/profile">
+                        <Link to ={`/user/${user.id}/profile`}>
                             <Text 
                             fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} color={COLORS.offWhite}
                             style={{"transition": "color 0.5s"}} _hover={{"color": COLORS.indigo}}>Profile</Text>

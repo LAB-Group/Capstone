@@ -1,6 +1,7 @@
 import * as React from "react"
 import EditProfile from "../EditProfile/EditProfile"
-import { Box, Image, Center, Text, VStack, Divider, HStack, Stack, Badge, Heading, Button, Container, useDisclosure, Modal, SimpleGrid, Wrap,Flex, Tag, TagLabel} from "@chakra-ui/react"
+import { useAuthContext } from "../../contexts/auth"
+import { Box, Image, Center, Text, HStack, Stack, Heading, Button, Modal, Wrap, Tag, TagLabel} from "@chakra-ui/react"
 import { Routes, Route, Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 import axios from "axios";
@@ -14,17 +15,18 @@ import {
   faInstagram
 } from "@fortawesome/free-brands-svg-icons";
 
-export default function ProfileDetails({ user, onOpen, onClose, isOpen }) {
+export default function UsersProfileDetails({ viewedUser, onOpen, onClose, isOpen }) {
+  const { user } = useAuthContext()
     const [games, setGames] = useState([])
     const [loading, setLoading] = useState(true)
     let string = ""
-    if(user.gameList !== undefined) {
-        for(let i = 0; i < user.gameList?.length; i++) {
-            if(i === user.gameList.length - 1) {
-                string += user.gameList[i]
+    if(viewedUser.gameList !== undefined) {
+        for(let i = 0; i < viewedUser.gameList?.length; i++) {
+            if(i === viewedUser.gameList.length - 1) {
+                string += viewedUser.gameList[i]
                 break
             }
-            string += user.gameList[i] + ", "
+            string += viewedUser.gameList[i] + ", "
         }
     }
 
@@ -54,7 +56,6 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen }) {
                 <EditProfile />
             } />
         </Routes>
-
         <Center>
         <Stack
           borderWidth="1px"
@@ -65,9 +66,7 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen }) {
           height={{ sm: '476px', md: '20rem' }}
           direction={{ base: 'column', md: 'row' }}
           display='flex'
-          justifyContent={"space-between"}
-              
-        
+          justifyContent={"space-between"}    
           padding={4}>
           <Box>
             <Image
@@ -78,7 +77,7 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen }) {
                borderRadius="5px"
               objectFit="cover"
               boxSize="100%"
-              src={user.imageUrl}
+              src={viewedUser.imageUrl}
               />
           </Box>
           <Box w={900} >
@@ -86,12 +85,11 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen }) {
             flex={1}
             flexDirection="column"
             m={30}
-            p={1} 
-            
+            p={1}       
             pt={2}>
-            <Heading fontSize={'2xl'} fontFamily={'body'}>{user.firstName} {user.lastName}</Heading>
+            <Heading fontSize={'2xl'} fontFamily={'body'}>{viewedUser.firstName} {viewedUser.lastName}</Heading>
             <Stack direction={'row'} display={"flex"} justifyContent= "space-between">
-            <Text fontWeight={600} color={'gray.500'} size="sm" >@{user.username}</Text>
+            <Text fontWeight={600} color={'gray.500'} size="sm" >@{viewedUser.username}</Text>
             <HStack>
                 <FontAwesomeIcon icon={faFacebookSquare} />
                 <FontAwesomeIcon icon={faTwitter} />
@@ -116,7 +114,6 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen }) {
                                         },}}
                                 >
               {games.game?.map((game, index) => (
-                                    // <Text display={'flex'} maxWidth={'1000px'} key={index}>{game.name},</Text>
                                   <Tag
                                     
                                     variant="subtle"
@@ -132,8 +129,11 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen }) {
                                 </Stack>
                                 
                              
-                            <Link to="/profile/edit-profile">
-                                <Button w='800px' h='30px'mt={3} borderRadius='sm' colorScheme='purple' variant='outline' onClick={onOpen} >Edit Profile</Button>
+                            <Link to={`/user/${user.id}/profile/edit-profile`}>
+                              {
+                                viewedUser.userId == user.id ? <Button w='800px' h='30px'mt={3} borderRadius='sm' colorScheme='purple' variant='outline' onClick={onOpen} >Edit Profile</Button> : null
+                              }
+                                
                             </Link>
 
                             <Modal isOpen={isOpen} onClose={onClose}><EditProfile onClose={onClose} /></Modal>

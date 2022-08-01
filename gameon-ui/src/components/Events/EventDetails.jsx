@@ -17,7 +17,7 @@ export default function EventDetails({event, games}) {
     let time = newDate.toLocaleTimeString("en-US")
 
     return(
-        <Container maxWidth={"7xl"}>
+        <Container maxWidth={"7xl"} bg="white">
             {/* Need to resize image */}
             {/* Image */}
             <Box width={"100%"} height={"400px"} backgroundImage={event?.eventImageUrl}

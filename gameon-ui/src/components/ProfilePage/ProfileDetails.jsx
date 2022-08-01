@@ -113,55 +113,6 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen, games })
           </Box>
         </Stack>
       </Center>
-
-
-
-
-        {/* <Box w="1200px" h='300px' p={4} borderRadius='sm'>
-                <HStack spacing='24px'>
-                    <Box borderWidth='1px' borderRadius={'lg'} boxShadow={'md'}>
-                        <Image borderRadius={'lg'} w='260px' h='260px' borderWidth='9px' src={user.imageUrl} />
-                    </Box>
-                    <Box w='1000px' h='200px'>
-                        <VStack p={5} spacing={4} >
-                            <Box w='810px' h='30px' >Username: {user.username}</Box>
-                            <Divider orientation='horizontal' />
-                            <Box w='810px' h='30px' >Name: {user.firstName} {user.lastName}</Box>
-                            <Divider orientation='horizontal' />
-                            {/* <Box w='810px' h='30px' >Location</Box>
-                            <Divider orientation='horizontal' /> */}
-                            {/* <Box w='810px' h='70px'  >
-                                <Text>Games played:</Text>
-                                <Wrap display={'flex'} maxH={'50px'} overflowY={'auto'}
-                                      css={{
-                                        '&::-webkit-scrollbar': {
-                                          width: '8px',
-                                        },
-                                        '&::-webkit-scrollbar-track': {
-                                          width: '10px',
-                                        },
-                                        '&::-webkit-scrollbar-thumb': {
-                                          background: '#805AD5',
-                                          borderRadius: '24px',
-                                        },}}
-                                >
-                                {games.game?.map((game, index) => (
-                                    <Text display={'flex'} maxWidth={'1000px'} key={index}>{game.name},</Text>
-
-                                ))}
-                                </Wrap>
-                             </Box>
-                            <Link to="/profile/edit-profile">
-                                <Button w='810px' h='30px' borderRadius='sm' colorScheme='purple' variant='outline' onClick={onOpen} >Edit Profile</Button>
-                            </Link>
-
-                            <Modal isOpen={isOpen} onClose={onClose}><EditProfile onClose={onClose} /></Modal>
-
-                        </VStack>
-                    </Box>
-                </HStack>
-            </Box> */} 
-
 </>
     )
 

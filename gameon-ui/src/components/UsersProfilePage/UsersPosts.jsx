@@ -9,7 +9,7 @@ import {
   VStack, Stack, Divider, Badge,Flex
 } from '@chakra-ui/react';
 
-export default function Posts({ post, key }) {
+export default function UsersPosts({ post, key }) {
   let date = post.postCreatedAt;
   let newDate = new Date(date);
   let postDate = newDate.toLocaleDateString('en-US');
@@ -27,13 +27,11 @@ export default function Posts({ post, key }) {
               borderRadius="5px"
               minW='1000px'
               pb={2}
-              m={8}
-             
+              m={8}          
             >
          
               <Stack isInline justifyContent="space-between" mt={2} pl={5} pr={5}>
                 <Box minW="100%">
-                  
                 <Stack isInline display="flex" justifyContent='space-between 'mb={2}>
                     <HStack spacing={4}>
                         <Flex

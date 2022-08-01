@@ -8,13 +8,13 @@ import {
 } from '@chakra-ui/react';
 import EventCard from '../Events/EventCard';
 
-export default function UserUpcomingEvents({ user, futureEvents }) {
+export default function UsersPreviousEvents({ user, prevEvents }) {
 
   return (
     <>
       <Box maxW={"1000px"}>
-                    <Heading  mb={2}>Upcoming Events</Heading>
-                {futureEvents?.length ? 
+                    <Heading mb={2} color="white">Previous Events</Heading>
+                {prevEvents?.length ? 
                     <Swiper
                         slidesPerView={3}
                         spaceBetween={10}
@@ -30,13 +30,13 @@ export default function UserUpcomingEvents({ user, futureEvents }) {
                         loopFillGroupWithBlank={true}
                         className="mySwiper"
                     >
-                        {futureEvents?.map((event, index) => (
+                        {prevEvents?.map((event, index) => (
                         <SwiperSlide key={index}>
                             <EventCard event={event}/>         
                         </SwiperSlide>
                             ))}
                     </Swiper>
-                    :<Box><Text>No Events available</Text></Box>}
+                    :<Box><Text color="white">No Events available</Text></Box>}
                 </Box> 
     </>
   );

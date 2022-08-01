@@ -1,18 +1,17 @@
 import * as React from 'react';
 import {
   Container,
-  VStack,Stack,
-  Heading
+  VStack,
 } from '@chakra-ui/react';
-import UserPosts from './UserPosts';
+import UsersPosts from './UsersPosts';
 
-export default function UserPostsFeed({ posts }) {
+export default function UsersPostsFeed({ posts }) {
     return (
         <VStack>
         <Container centerContent minWidth="85vw">
           <VStack>
             {posts?.map((post, index) => (
-              <UserPosts key={index} post={post} />
+              <UsersPosts key={index} post={post} />
             ))}
           </VStack>
         </Container>

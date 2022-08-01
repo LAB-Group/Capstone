@@ -1,15 +1,16 @@
 import * as React from "react"
 import { useState, useEffect } from "react"
+import { useParams } from 'react-router-dom'
 import { Box, Center, Text, Divider, Stack, Container, useDisclosure, Heading} from "@chakra-ui/react"
-import { useAuthContext } from "../../contexts/auth"
-import ProfileDetails from "./ProfileDetails"
+import UsersProfileDetails from "./UsersProfileDetails"
 import apiClient from "../../services/apiClient"
-import UserUpcomingEvents from "./UserUpcomingEvents"
-import UserPreviousEvents from "./UserPreviousEvents"
-import UserPostsFeed from "./UserPostsFeed"
+import UsersUpcomingEvents from "./UsersUpcomingEvents"
+import UsersPreviousEvents from "./UsersPreviousEvents"
+import UsersPostsFeed from "./UsersPostsFeed"
 
-export default function ProfilePage() {
-    const { user } = useAuthContext()
+export default function UsersProfilePage() {
+    const [viewedUser, setViewedUser] = useState({})
+    const { userId } = useParams()
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [posts, setPosts] = useState([])
     const [error, setError] = useState(null)
@@ -22,8 +23,20 @@ export default function ProfilePage() {
     let futureEvents = events?.filter(event => {return Date.parse(event.eventDate) >= curDate.getTime()})
 
     useEffect(() => {
+        const fetchUser = async () => {
+          const { data, error } = await apiClient.fetchUserFromID(userId)
+          if(data) {
+            setViewedUser(data.user)
+            console.log("data: ", data)
+          }
+          if (error) setError(error)
+        }
+        fetchUser()
+      },[userId])
+
+    useEffect(() => {
         const fetchUsersPosts = async () => {
-            const { data, error } = await apiClient.listAllPostsByUserId(user.id)
+            const { data, error } = await apiClient.listAllPostsByUserId(userId)
             if (data) {
                 const newPosts = data.posts
                 setPosts(data.posts)
@@ -32,8 +45,7 @@ export default function ProfilePage() {
         }
 
         fetchUsersPosts()
-    }, [user.id])
-    
+    }, [viewedUser.userId, userId])
 
     useEffect(() => {
         const getEvents = async () => {
@@ -42,7 +54,7 @@ export default function ProfilePage() {
               setTimeout(() => {
                 
               }, 100)
-              const response = await apiClient.fetchUsersEvents(user.id)
+              const response = await apiClient.fetchUsersEvents(userId)
               const eventData = response.data
               setEvents(eventData)
               setLoading(false)
@@ -58,26 +70,26 @@ export default function ProfilePage() {
         <Container centerContent padding={6}>
 
             <Stack direction='column' spacing={7} align='stretch'>
-                <ProfileDetails user={user} isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
+                <UsersProfileDetails viewedUser={viewedUser} isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
                 
                 <Divider orientation='horizontal' />
-                    <UserUpcomingEvents futureEvents={futureEvents} />
+                    <UsersUpcomingEvents futureEvents={futureEvents} />
 
                 <Divider orientation='horizontal' />
-                    <UserPreviousEvents prevEvents={prevEvents} />
+                    <UsersPreviousEvents prevEvents={prevEvents} />
 
                 
                 <Divider orientation='horizontal' />
-                <Heading>Posts</Heading>
+                <Heading color="white">Posts</Heading>
                 <Box h='700px' borderRadius='sm'>
                     {
                         posts.length === 0 ? 
                         
                         <Center h='100px'>
-                            <Text fontSize='3xl'>No Post Found</Text>
+                            <Text fontSize='3xl' color="white">No Post Found</Text>
                          </Center>
                         : 
-                        <UserPostsFeed posts={posts} />
+                        <UsersPostsFeed posts={posts} />
                     }
                 </Box>
 
