@@ -340,7 +340,16 @@ export default function CreateEventForm({ onClose }) {
       </VStack>
       </ModalBody>
       <ModalFooter display={'flex'} justifyContent={'center'}>
-      <Button backgroundColor={COLORS.ultraViolet} color={COLORS.offWhite} mt={1}  w="350px"onClick={handleOnSubmit}>Create</Button>
+      <Button 
+      background={"hsl(271, 70%, 60%)"} 
+      color={"hsl(0, 0%, 100%)"} 
+      _hover={{
+        "background":COLORS.ultraViolet,
+        "color": COLORS.offWhite
+      }} 
+      marginTop={1}
+      width="250px"
+      onClick={handleOnSubmit}>Create</Button>
       </ModalFooter>
     </ModalContent>
   </Container>

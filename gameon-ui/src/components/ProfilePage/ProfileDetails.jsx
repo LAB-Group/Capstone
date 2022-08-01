@@ -1,6 +1,9 @@
 import * as React from "react"
 import EditProfile from "../EditProfile/EditProfile"
-import { Box, Image, Center, Text, VStack, Divider, HStack, Stack, Badge, Heading, Button, Container, useDisclosure, Modal, SimpleGrid, Wrap,Flex, Tag, TagLabel} from "@chakra-ui/react"
+import { Box, Image, Text, 
+         HStack, Stack, Heading, 
+         Button, Modal, Wrap, 
+         Flex, Tag, TagLabel } from "@chakra-ui/react"
 import { Routes, Route, Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 import axios from "axios";
@@ -13,6 +16,7 @@ import {
   faTwitter,
   faInstagram
 } from "@fortawesome/free-brands-svg-icons";
+import { COLORS } from "../colors"
 
 export default function ProfileDetails({ user, onOpen, onClose, isOpen, games }) {
     const [loading, setLoading] = useState(true)
@@ -24,95 +28,90 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen, games })
                 <EditProfile />
             } />
         </Routes>
+        <Box width={"1200px"}>
 
-        <Center>
         <Stack
-          borderWidth="1px"
-          rounded="md"
-          borderRadius="5px"
-          w= "1200px"
-          bg="#fbfdff"
-          height={{ sm: '476px', md: '20rem' }}
+          // borderWidth="1px"
+          borderRadius="lg"
+          width={"100%"}
+          background={"rgba(113, 57, 166, 0.9)"} 
+          height={"auto"}
           direction={{ base: 'column', md: 'row' }}
           display='flex'
           justifyContent={"space-between"}
-              
-        
           padding={4}>
-          <Box>
+          <Flex flex={1}>
             <Image
-            mr={9}
-               borderWidth="1px"
-               rounded="md"
-               position={"relative"}
-               borderRadius="5px"
+              borderWidth="1px"
+              rounded="md"
+              borderRadius="5px"
               objectFit="cover"
-              boxSize="100%"
+              // boxSize="100%"
               src={user.imageUrl}
               />
-          </Box>
-          <Box w={900} >
+          </Flex>
+          <Box w={"70%"} >
           <Stack
             flex={1}
             flexDirection="column"
             m={30}
-            p={1} 
-            
+            p={1}
             pt={2}>
-            <Heading fontSize={'2xl'} fontFamily={'body'}>{user.firstName} {user.lastName}</Heading>
+            <Heading fontSize={'2xl'} fontFamily={'body'} color={COLORS.offWhite}>{user.firstName} {user.lastName}</Heading>
             <Stack direction={'row'} display={"flex"} justifyContent= "space-between">
-            <Text fontWeight={600} color={'gray.500'} size="sm" >@{user.username.toLowerCase()}</Text>
-            <HStack>
+              <Text fontWeight={600} color={"	hsl(0, 0%, 60%)"} fontSize="lg">@{user.username.toLowerCase()}</Text>
+              <HStack color={COLORS.indigo}>
                 <FontAwesomeIcon icon={faFacebookSquare} />
                 <FontAwesomeIcon icon={faTwitter} />
                 <FontAwesomeIcon icon={faInstagram}/>
-               </HStack> 
+              </HStack> 
             </Stack>
-            <Stack
-            display={"flex"}
-            mt={0}
-           >
-              <Wrap display={'flex'} H={'70px'} overflowY={'auto'}
-                                      css={{
-                                        '&::-webkit-scrollbar': {
-                                          width: '8px',
-                                        },
-                                        '&::-webkit-scrollbar-track': {
-                                          width: '10px',
-                                        },
-                                        '&::-webkit-scrollbar-thumb': {
-                                          background: '#805AD5',
-                                          borderRadius: '24px',
-                                        },}}
-                                >
-              {games?.map((game, index) => (
-                                    // <Text display={'flex'} maxWidth={'1000px'} key={index}>{game.name},</Text>
-                                  <Tag
-                                    
-                                    variant="subtle"
-                                    key={index}
-                                   
-                                    colorScheme="purple"
-                                  >
-                                    <TagLabel>{game.gameName}</TagLabel>
-                                    
-                                  </Tag>
-
-                                ))}</Wrap>
-                                </Stack>
-                                
-                             
-                            <Link to="/profile/edit-profile">
-                                <Button w='800px' h='30px'mt={3} borderRadius='sm' colorScheme='purple' variant='outline' onClick={onOpen} >Edit Profile</Button>
-                            </Link>
-
-                            <Modal isCentered isOpen={isOpen} onClose={onClose}><EditProfile onClose={onClose} /></Modal>
-
-          
+            <Stack display={"flex"} marginTop={0}>
+              <Wrap display={"flex"} height={"60px"} overflowY={"auto"}
+                  css={{
+                      '&::-webkit-scrollbar': {width: '8px'},
+                      '&::-webkit-scrollbar-track': {width: '10px'},
+                      '&::-webkit-scrollbar-thumb': {
+                          backgroundColor: "hsl(304, 50%, 45%)",
+                          borderRadius: "30px",
+                      }
+                    }}
+              >
+              {games?.map((game, index) => (                      
+              // <Text display={'flex'} maxWidth={'1000px'} key={index}>{game.name},</Text>
+                <Tag 
+                key={index} 
+                rounded={"20px"}
+                backgroundColor={"rgba(160, 61, 154, 0.6)"}>
+                  <TagLabel color={"hsl(0,0%,90%)"} fontSize={"sm"}>{game.gameName}</TagLabel>
+                </Tag>
+              ))}
+              </Wrap>
+            </Stack>
+            <Link to="/profile/edit-profile">
+              {/* FIXME: Restyle the button hovering */}
+              <Button 
+              marginStart={"32%"} width='300px' height='30px' 
+              mt={3} borderRadius={"8px"} border={"2px"} borderColor={"hsl(271, 50%, 40%)"}
+              backgroundColor={"hsl(271, 49%, 52%)"} color={COLORS.offWhite} 
+              style={{
+                "transition": "backgroundColor 1s, color 1s"
+              }}
+              _hover={{
+                "background":"rgba(160, 61, 154, 1)",
+                "color": COLORS.indigo 
+              }}onClick={onOpen}>Edit Profile</Button>
+            </Link>
+            <Modal isCentered isOpen={isOpen} onClose={onClose}><EditProfile onClose={onClose} /></Modal>
           </Stack>
           </Box>
         </Stack>
-      </Center>
+        </Box>
+                                
+                             
+
+
+          
 
 
 
