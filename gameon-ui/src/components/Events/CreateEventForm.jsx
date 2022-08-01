@@ -158,7 +158,7 @@ export default function CreateEventForm({ onClose }) {
           focusBorderColor={COLORS.ultraViolet} 
           onClick={() => setShowTimeDate(true)}
           ref={ref}
-          type={showTimeDate?"datetime-local":"text"}
+          type={showTimeDate?"date":"text"}
           value={createEventForm.eventDate}
           onChange={handleOnInputChange}
         />

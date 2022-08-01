@@ -6,7 +6,6 @@ export default function EventCard({event}){
 
     const timestamp = Date.parse(event.eventDate)
     const date = new Date(timestamp).toLocaleDateString('en-US')
-    const time = new Date(timestamp).toLocaleTimeString('en-US')
 
     return (
         //FIXME: Need to prevent card squishing
@@ -48,7 +47,6 @@ export default function EventCard({event}){
                         <VStack width={'130px'} paddingLeft={"2rem"}>
                             <Badge borderRadius='full' px='2' style={{"background":"rgba(160, 61, 154, .2)"}} color={COLORS.indigo}>{event.eventType}</Badge>
                             <Badge borderRadius='full' px='2' style={{"background":"rgba(160, 61, 154, .2)"}} color={COLORS.indigo}>{date}</Badge>
-                            <Badge borderRadius='full' px='2' style={{"background":"rgba(160, 61, 154, .2)"}} color={COLORS.indigo}>{time}</Badge>
                             <Badge borderRadius='full' px='2' style={{"background":"rgba(160, 61, 154, .2)"}} color={COLORS.indigo}>{event.numRegistered} Attendees</Badge>
                         </VStack>   
                     </HStack>
