@@ -4,7 +4,7 @@ import { useState } from "react"
 import { 
     Container, Box, Text, SimpleGrid, Flex, 
     Image, VStack,Heading, Stack, 
-    StackDivider, Icon, HStack, useColorModeValue, ColorModeScript 
+    StackDivider, Icon, HStack, useColorModeValue, ColorModeScript, Center 
 } from "@chakra-ui/react"
 import { CalendarIcon } from "@chakra-ui/icons"
 import { HiLocationMarker } from "react-icons/hi"
@@ -18,27 +18,30 @@ export default function EventDetails({event, games}) {
     let time = newDate.toLocaleTimeString("en-US")
 
     return(
-        <Box width={"100%"} style={{"backdropFilter": "blur(6px)"}}>
+        <Box style={{"backdropFilter": "blur(6px)"}}>
             {/* Need to resize image */}
             {/* Image */}
+            
             <Box width={"100%"} height={"400px"} backgroundImage={event?.eventImageUrl}
             backgroundPosition={"center"}
             backgroundSize={"contain"}
             backgroundRepeat={"no-repeat"}>
             </Box>
             
-            <>
+            <Center>
+            <Box width={"960px"} backgroundColor={COLORS.offWhite} rounded={"20px"}>
+
             <SimpleGrid 
             column={{base:1, lg:2}}
             spacing={{base:8, md: 10}}
             py={{base:18, md:24}}
             >
             
-            <Stack spacing={{base:6, md:10}} justifyContent={"center"}>
-                <Flex borderRadius={"15px"} background={"rgba(230, 230, 230, 0.9)"} minW={0} alignItems={"flex-start"} flexGrow={1} flexDirection={"row"}>
-                    <Image 
+            <Stack spacing={{base:6, md:10}}>
+                <Flex paddingLeft={"1rem"} borderRadius={"15px"} background={"rgba(230, 230, 230, 0.9)"} minW={0} alignItems={"flex-start"} flexGrow={1} flexDirection={"row"}>
+                    <Image
                     src={event?.eventImageUrl} 
-                    width={"60px"} height={"56px"} 
+                    width={"80px"} height={"64px"} 
                     alignItems={"center"} 
                     flexGrow={0} flexShrink={0} flexBasis={"auto"}
                     />
@@ -101,7 +104,7 @@ export default function EventDetails({event, games}) {
 
             </Stack>
             </SimpleGrid>
-            </>
+            
 
             
                 {/* Event */}
@@ -194,14 +197,15 @@ export default function EventDetails({event, games}) {
 
             
                 
-                <Stack>
+                <Stack paddingTop={"1rem"}>
 
-                <VStack position={"relative"} p={"20px"}>
+                <VStack position={"relative"}>
                         {/* Registration Button */}
                     <EventRegistration event={event} games={games}/>
                 </VStack>
                 </Stack>
-
+                </Box>
+            </Center>
                 {/* Used for later */}
                 {/* Other events */}
                  {/* <Box>
