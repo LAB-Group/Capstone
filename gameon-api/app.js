@@ -6,6 +6,7 @@ const authRoutes = require("./routes/auth")
 const eventsRoutes = require("./routes/events")
 const gamesRoutes = require("./routes/games")
 const postsRoutes = require("./routes/posts")
+const userRoutes = require("./routes/user")
 
 const { BadRequestError, NotFoundError } = require("./utils/errors")
 
@@ -30,6 +31,7 @@ app.use("/auth", authRoutes)
 app.use("/events", eventsRoutes)
 app.use("/games", gamesRoutes)
 app.use("/posts", postsRoutes)
+app.use("/user", userRoutes)
 
 app.use((req, res, next) => {
     return next(new NotFoundError())
