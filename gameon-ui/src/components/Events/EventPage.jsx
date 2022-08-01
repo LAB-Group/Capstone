@@ -1,4 +1,4 @@
-import { Container, Divider } from "@chakra-ui/react"
+import { Box, Container, Divider } from "@chakra-ui/react"
 import * as React from "react"
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
@@ -52,13 +52,13 @@ export default function EventPage(){
       },[])
 
     return(
-        <Container maxW="1200px">
+        <Box>
             <EventDetails event={event} games={games} />
             <Divider orientation='horizontal' />
             {/* Moved this to EventDetails file */}
             {/* <EventRegistration event={event} /> */}
             <PostsFeed eventId={eventId} posts={posts} />
             <PostsForm event={event} eventId={eventId} />
-        </Container>
+        </Box>
     )
 }

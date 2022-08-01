@@ -23,9 +23,12 @@ class Events {
                        u.id AS "creatorId",
                        u.username AS "creatorUsername",
                        e.created_at AS "eventCreatedAt",
-                       e.updated_at AS "eventUpdatedAt"
+                       e.updated_at AS "eventUpdatedAt",
+                       COUNT(r.user_id) AS "numRegistered"
                 FROM events AS e
                        LEFT JOIN users AS u ON u.id = e.user_id
+                       LEFT JOIN registered_events as r ON r.event_id = e.id
+                GROUP BY r.event_id, e.id, u.id
                 ORDER BY e.created_at DESC
             `
         )
@@ -48,11 +51,16 @@ class Events {
                        e.details AS "eventDetails",
                        e.event_image_url AS "eventImageUrl",
                        u.id AS "creatorId",
+                       u.username AS "creatorUsername",
+                       u.email AS "creatorEmail",
                        e.created_at AS "eventCreatedAt",
-                       e.updated_at AS "eventUpdatedAt"
+                       e.updated_at AS "eventUpdatedAt",
+                       COUNT(r.user_id) AS "numRegistered"
                 FROM events AS e
                        LEFT JOIN users AS u ON u.id = e.user_id
+                       LEFT JOIN registered_events as r ON r.event_id = e.id
                 WHERE e.id = $1
+                GROUP BY r.event_id, e.id, u.id
             `,
                 [eventId]
         )

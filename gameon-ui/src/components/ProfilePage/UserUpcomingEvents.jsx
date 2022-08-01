@@ -7,17 +7,19 @@ import {
   Heading
 } from '@chakra-ui/react';
 import EventCard from '../Events/EventCard';
+import { COLORS } from '../colors';
 
 export default function UserUpcomingEvents({ user, futureEvents }) {
 
   return (
-    <>
-      <Box maxW={"1000px"}>
-                    <Heading  mb={2}>Upcoming Events</Heading>
+    
+      <Box width={"1200px"} >
+                    <Heading color={COLORS.offWhite}>Upcoming Events</Heading>
+          <Box marginTop={"0.5rem"} style={{"background":"rgba(113, 57, 166, .6)"}} padding={"1em"} borderRadius={"20px"}>
                 {futureEvents?.length ? 
                     <Swiper
                         slidesPerView={3}
-                        spaceBetween={10}
+                        spaceBetween={30}
                         slidesPerGroup={3}
                         scrollbar={{
                             hide:true
@@ -36,8 +38,9 @@ export default function UserUpcomingEvents({ user, futureEvents }) {
                         </SwiperSlide>
                             ))}
                     </Swiper>
-                    :<Box><Text>No Events available</Text></Box>}
+                    :<Box><Text color={COLORS.offWhite}>No Events available</Text></Box>}
                 </Box> 
-    </>
+          </Box>
+    
   );
 }

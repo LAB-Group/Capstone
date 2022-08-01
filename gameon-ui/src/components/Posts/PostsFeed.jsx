@@ -3,14 +3,14 @@ import { useState, useEffect } from 'react';
 import apiClient from '../../services/apiClient';
 import { Container, VStack, Stack, Heading } from '@chakra-ui/react';
 import Posts from './Posts';
-
+import { COLORS } from "../colors"
 export default function PostsFeed({ eventId, posts }) {
 
 
   return (
-    <VStack>
+    <VStack style={{"backdropFilter": "blur(9px)"}}>
     <Stack display={'flex'} justifyContent='flex-start'>
-      <Heading p={3}>Event Comments</Heading>
+      <Heading color={COLORS.offWhite} p={3}>Event Comments</Heading>
     </Stack>
   
     <Container centerContent minWidth="85vw">

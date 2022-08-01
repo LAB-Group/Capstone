@@ -5,10 +5,12 @@ import { AuthContextProvider, useAuthContext } from "../../contexts/auth"
 import { EventContextProvider } from "../../contexts/event"
 import Home from "../Home/Home"
 import NavBar from "../NavBar/NavBar"
-import OtherUsersProfilePage from "../UsersProfilePage/UsersProfilePage"
+import UsersProfilePage from "../UsersProfilePage/UsersProfilePage"
 import EventPage from "../Events/EventPage";
 import Footer from "../Footer/Footer"
 import background from "../../media/evo2.jpg"
+import LoginPage from "../LoginPage/LoginPage";
+import RegisterPage from "../RegisterPage/RegisterPage";
 
 export default function AppContainer() {
     return (
@@ -26,7 +28,7 @@ function App(){
     return( 
         <ChakraProvider>
         {/* Need to come back to this because of background image */}
-        <Box backgroundPosition={"bottom"} backgroundImage={background} backgroundRepeat={"no-repeat"} backgroundAttachment={"fixed"} backgroundSize={"200%"}>     
+        <Box backgroundPosition={"bottom"} backgroundImage={background} backgroundRepeat={"repeat"} backgroundAttachment={"fixed"} backgroundSize={"125%"}>     
         <BrowserRouter>
         <NavBar/>
         <Routes>
@@ -35,13 +37,12 @@ function App(){
             <Route path="/" element={<Home/>}/>
             
             {/* ProfilePage <Route path="/profile/*" element={user?.email?<ProfilePage/>:<></>}/>*/}
-            
 
             {/* EventFeed */}
             <Route path={"/events/:eventId"} element={<EventPage />}/>
 
             {/* OtherUserProfilePage */}
-            <Route path={"/user/:userId/profile/*"} element={<OtherUsersProfilePage />} />
+            <Route path={"/user/:userId/profile/*"} element={<UsersProfilePage />} />
 
         </Routes>
 

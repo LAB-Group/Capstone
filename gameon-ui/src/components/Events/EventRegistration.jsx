@@ -6,6 +6,7 @@ import { useAuthContext } from '../../contexts/auth';
 import { Container, Button, FormLabel, Checkbox, Alert, AlertIcon, Heading,
   AlertDescription, CheckboxGroup, Text, Box, Stack, HStack,
 } from '@chakra-ui/react';
+import { COLORS } from "../colors"
 
 export default function EventRegistration({ games }) {
   const { user } = useAuthContext()
@@ -82,7 +83,7 @@ export default function EventRegistration({ games }) {
   return (
     <Container centerContent>
       <FormLabel htmlFor="eventGame">
-        <Heading>Event Registration</Heading>
+        <Heading color={COLORS.indigo}>Event Registration</Heading>
       </FormLabel>
       <Box>
           <Stack>
@@ -110,9 +111,31 @@ export default function EventRegistration({ games }) {
           }
           {
             isRegistered ? 
-            <Button margin={2} colorScheme="purple" mr={3} onClick={handleWithdraw}>Withdraw</Button>
+            <Button 
+            margin={2} 
+            background={"hsl(271, 54%, 52%)"} 
+            borderColor={"hsl(271, 49%, 44%)"} 
+            color={"hsl(0,0%,100%)"} 
+            marginRight={3} 
+            _hover={{
+              "background":"hsl(271, 49%, 44%)", 
+              "borderColor":"hsl(271, 49%, 44%)", 
+              "color":"hsl(0,0%,70%)" 
+            }}
+            onClick={handleWithdraw}>Withdraw</Button>
             : 
-            <Button margin={2} colorScheme="purple" mr={3} onClick={handleOnSubmit}>Register</Button>
+            <Button 
+            margin={2} 
+            background={"hsl(271, 54%, 52%)"} 
+            borderColor={"hsl(271, 49%, 44%)"} 
+            color={"hsl(0,0%,100%)"} 
+            marginRight={3} 
+            _hover={{
+              "background":"hsl(271, 49%, 60%)", 
+              "borderColor":"hsl(271, 49%, 44%)", 
+              "color":"hsl(0,10%,100%)" 
+            }}
+            onClick={handleOnSubmit}>Register</Button>
           }       
       </Box>
     </Container>

@@ -2,8 +2,7 @@ import * as React from "react"
 import Hero from "../Hero/Hero"
 import EventFeed from "../Events/EventFeed"
 import About from "../Footer/About"
-import { Image, Container, Spacer, Box } from "@chakra-ui/react"
-import {COLORS} from "../colors"
+import { Box } from "@chakra-ui/react"
 export default function Home(){
     return (
             // Removed container from home to prevent spacing on the ends

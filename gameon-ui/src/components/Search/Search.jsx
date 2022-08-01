@@ -18,7 +18,7 @@ import { useState, useEffect } from 'react';
 import apiClient from '../../services/apiClient';
 import { COLORS } from "../colors";
 
-export default function Search({ selectedGames, setSelectedGames, selectedGamesNames, setSelectedGamesNames, selectedGamesPic, setSelectedGamesPic }) {
+export default function Search({ selectedGames, setSelectedGames, selectedGamesNames, setSelectedGamesNames, selectedGamesPic, setSelectedGamesPic, selectedGamesSummary, setSelectedGamesSummary }) {
   const [errors, setErrors] = useState({});
   const [searchInput, setSearchInput] = useState('');
   const [listGames, setListGames] = useState([]);
@@ -54,6 +54,8 @@ const clearSearch = async () => {
         setSelectedGames={setSelectedGames}
         selectedGamesNames={selectedGamesNames}
         setSelectedGamesNames={setSelectedGamesNames}
+        selectedGamesSummary={selectedGamesSummary}
+        setSelectedGamesSummary={setSelectedGamesSummary}
         selectedGamesPic={selectedGamesPic}
         setSelectedGamesPic={setSelectedGamesPic}
       />
@@ -75,7 +77,8 @@ const clearSearch = async () => {
               onClick={() => {
                 setSelectedGames(arr => [...arr, game.id]);
                 setSelectedGamesNames(arr => [...arr, game.name]);
-                setSelectedGamesPic(arr => [...arr, game.cover.url])
+                setSelectedGamesSummary(arr => [...arr, game?.summary ? game.summary : ""]);
+                setSelectedGamesPic(arr => [...arr, game.cover?.url ? game.cover.url : ""]);
               }}
               value={game.id}
               key={index}
@@ -99,25 +102,42 @@ function SearchBar({
   setSelectedGames,
   selectedGamesNames,
   setSelectedGamesNames,
+  selectedGamesSummary,
+  setSelectedGamesSummary,
   selectedGamesPic,
   setSelectedGamesPic
 }) {
   function removeGame(id) {
     const copyArr = [...selectedGames];
     const copyNameArr = [...selectedGamesNames];
+    const copySummArr = [...selectedGamesSummary];
     const copyPicArr = [...selectedGamesPic];
     const index = copyArr.indexOf(id);
     copyArr.splice(index, 1);
     copyNameArr.splice(index, 1);
+    copySummArr.splice(index, 1);
     copyPicArr.splice(index, 1);
     setSelectedGames([...copyArr]);
     setSelectedGamesNames([...copyNameArr]);
+    setSelectedGamesSummary([...copySummArr])
     setSelectedGamesPic([...copyPicArr]);
   }
 
   return (
     <VStack spacing={2}>
-      <Wrap w="700px">
+      {/* Fixed it: The Tags were floating */}
+      <Wrap w="400px" maxHeight={"40px"} overflowY="auto" css={{
+    '&::-webkit-scrollbar': {
+      width: '8px',
+    },
+    '&::-webkit-scrollbar-track': {
+      width: '10px',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      background: '#805AD5',
+      borderRadius: '24px',
+    },
+  }}>
         {selectedGames?.map((id, index) => (
           <Tag
             size="md"
@@ -151,10 +171,24 @@ function SearchBar({
               value={searchInput}
               onChange={handleOnInputChange}
             />
-            <Button backgroundColor={COLORS.ultraViolet} color={COLORS.offWhite} onClick={handleOnSubmit}>
+            <Button 
+            background={"hsl(271, 70%, 60%)"} 
+            color={"hsl(0, 0%, 100%)"} 
+            _hover={{
+              "background":COLORS.ultraViolet,
+              "color": COLORS.offWhite
+            }}
+            onClick={handleOnSubmit}>
               Search
             </Button>
-            <Button backgroundColor={COLORS.ultraViolet} color={COLORS.offWhite} onClick={clearSearch}>
+            <Button 
+            background={"hsl(271, 70%, 70%)"} 
+            color={"hsl(0, 0%, 100%)"}
+            _hover={{
+              "background":COLORS.ultraViolet,
+              "color": COLORS.offWhite
+            }} 
+            onClick={clearSearch}>
               Clear
             </Button>
           </HStack>

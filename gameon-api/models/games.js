@@ -7,20 +7,20 @@ class Games {
   static async addGamesToLocalDB(localDBForm) {
         const results = await db.query(
           `
-           INSERT INTO igdb_local (game_id, game_name, game_image_url)
-           VALUES ($1, $2, $3)
+           INSERT INTO igdb_local (game_id, game_name, game_summary, game_image_url)
+           VALUES ($1, $2, $3, $4)
            ON CONFLICT (game_id)
            DO NOTHING
            RETURNING game_id AS "gameId",
                      game_name AS "gameName",
+                     game_summary AS "gameSummary",
                      game_image_url AS "gameImageUrl"
            `,
-            [localDBForm.gameId, localDBForm.gameName, localDBForm.gameImageUrl]
+            [localDBForm.gameId, localDBForm.gameName, localDBForm.gameSummary, localDBForm.gameImageUrl]
         );
 }
 
 static async getGameInfoById(gameId) {
-  console.log("GAMEID",gameId)
         const results = await db.query(
       `
             SELECT  i.game_id AS "gameId", i.game_name AS "gameName" , i.game_image_url AS "gameImageUrl"

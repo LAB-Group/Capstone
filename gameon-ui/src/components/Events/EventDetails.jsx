@@ -4,10 +4,11 @@ import { useState } from "react"
 import { 
     Container, Box, Text, SimpleGrid, Flex, 
     Image, VStack,Heading, Stack, 
-    StackDivider, Icon, HStack, useColorModeValue 
+    StackDivider, Icon, HStack, useColorModeValue, ColorModeScript, Center 
 } from "@chakra-ui/react"
 import { CalendarIcon } from "@chakra-ui/icons"
 import { HiLocationMarker } from "react-icons/hi"
+import {COLORS} from "../colors"
 
 export default function EventDetails({event, games}) {
     const noImage = "https://image.shutterstock.com/shutterstock/photos/571752970/display_1500/stock-photo-no-game-sign-on-white-background-571752970.jpg"
@@ -17,35 +18,38 @@ export default function EventDetails({event, games}) {
     let time = newDate.toLocaleTimeString("en-US")
 
     return(
-        <Container maxWidth={"7xl"} bg="white">
+        <Box style={{"backdropFilter": "blur(6px)"}}>
             {/* Need to resize image */}
             {/* Image */}
+{/*             
             <Box width={"100%"} height={"400px"} backgroundImage={event?.eventImageUrl}
             backgroundPosition={"center"}
             backgroundSize={"contain"}
             backgroundRepeat={"no-repeat"}>
-            </Box>
+            </Box> */}
             
-            <>
+            <Center>
+            <Box width={"960px"} backgroundColor={COLORS.offWhite} rounded={"20px"}>
+
             <SimpleGrid 
             column={{base:1, lg:2}}
             spacing={{base:8, md: 10}}
             py={{base:18, md:24}}
             >
             
-            <Stack spacing={{base:6, md:10}} justifyContent={"center"}>
-                <Flex minW={0} alignItems={"flex-start"} flexGrow={1} flexDirection={"row"}>
-                    <Image 
+            <Stack spacing={{base:6, md:10}}>
+                <Flex paddingLeft={"1rem"} borderRadius={"15px"} background={"rgba(230, 230, 230, 0.9)"} minW={0} alignItems={"flex-start"} flexGrow={1} flexDirection={"row"}>
+                    <Image
                     src={event?.eventImageUrl} 
-                    width={"54px"} height={"54px"} 
+                    boxSize={"80px"} 
                     alignItems={"center"} 
                     flexGrow={0} flexShrink={0} flexBasis={"auto"}
                     />
-                <Box flexGrow={1} flexShrink={1} flexBasis={"auto"}>
+                <Box marginLeft={2} flexGrow={1} flexShrink={1} flexBasis={"auto"}>
                     {/* Type */}
                     <Text
-                        color={useColorModeValue("gray.900", "gray.400")}
-                        fontWeight={300}
+                        color={"hsl(0,0%,50%)"}
+                        fontWeight={400}
                         fontSize={{base:"xl", sm:"lg", lg:"2xl"}}
                         textTransform={"uppercase"}
                     >{
@@ -62,29 +66,21 @@ export default function EventDetails({event, games}) {
                     
                     <HStack spacing={"10px"} >
                     {/* Date */}
-                    <Icon as={CalendarIcon}/>    
+                    <Icon as={CalendarIcon} color={COLORS.darkAmethyst}/>    
                     <Text
-                        color={useColorModeValue("gray.900", "gray.400")}
+                        color={"hsl(255, 23%, 10%)"}
                         fontWeight={300}
                         fontSize={"md"}
                     >
                     {
                         myDate
                     }</Text>
-                    {/* Time */}
-                    <Text
-                        color={useColorModeValue("gray.900", "gray.400")}
-                        fontWeight={300}
-                        fontSize={"md"}
-                    >{
-                        time
-                    }</Text>
                     </HStack>
                     {/* Location */}
                     <HStack>
-                    <Icon as={HiLocationMarker}/>
+                    <Icon as={HiLocationMarker} color={COLORS.darkAmethyst}/>
                     <Text
-                        color={useColorModeValue("gray.900", "gray.400")}
+                        color={"hsl(255, 23%, 10%)"}
                         fontWeight={300}
                         fontSize={"md"}
                     > 
@@ -100,15 +96,13 @@ export default function EventDetails({event, games}) {
 
             </Stack>
             </SimpleGrid>
-            </>
+            
 
             
                 {/* Event */}
-                <Box position={"relative"} pt={"25px"} pb={"25px"} pl={"0"} pr={0} backgroundColor={"purple.500"} borderRadius={"3xl"}>
+                <Box position={"relative"} pt={"25px"} pb={"25px"} pl={"0"} pr={0} background={"rgba(113, 57, 166, 0.8)"}>
                     {/* Divides/Spaces */}
-                <Stack spacing={{ base: 4, sm: 6 }} direction={"column"} divider={
-                    <StackDivider borderColor={useColorModeValue("gray.200", "gray.600")}/>
-                }>
+                <Stack spacing={{ base: 4, sm: 6 }} direction={"column"}>
                 <Box textAlign={"center"}>
                 
                     
@@ -129,15 +123,50 @@ export default function EventDetails({event, games}) {
                 <Stack>
                     <Text
                     fontSize={{ base: "16px", lg: "18px" }}
-                    color={useColorModeValue("yellow.500", "yellow.300")}
+                    color={COLORS.indigo}
                     fontWeight={'500'}
                     textTransform={'uppercase'}
                     mb={'4'}>
                         Games:
                     </Text>
-                    <HStack spacing="24px">
+                    <HStack justifyContent={"space-evenly"}>
                     {/* Game */}
-                    <SimpleGrid columns={{base:2, md:3}} spacing={10}>  
+                    <Flex justifyContent={"center"} flexDirection={"row"} flexWrap={"wrap"} gap={6}>
+
+                    {games?.map((game, index) => (
+                    <Box
+                    background={"rgba(113, 57, 166, 0.7)"}
+                    display={"block"}
+                    width={"300px"} 
+                    height={"300px"} 
+                    alignItems={"center"}  
+                    borderRadius='lg' 
+                    overflow='hidden' 
+                    boxShadow={'md'} 
+                    >   <Box paddingTop={3}>
+                            <Image 
+                            display={"block"}
+                            marginLeft={"auto"}
+                            marginRight={"auto"}
+                            width={"250px"}
+                            height={"200px"}
+                            objectFit={"fill"} 
+                            borderTopRadius={"lg"} 
+                            src={game.gameImageUrl.replace("thumb", "cover_small_2x")} 
+                            alt={noImage}/>
+                        </Box>
+                            <Box p='4'>
+                                <Box display='flex' alignItems='baseline'>
+                                    <Heading color={COLORS.offWhite} textAlign={"center"} size='md'>{game.gameName}</Heading>
+                                </Box>
+                            </Box>
+                                
+                    </Box>
+                    ))}
+                    </Flex>
+
+
+                    {/* <SimpleGrid columns={{base:2, md:3}} spacing={10}>  
                         {games?.map((game, index) => (
                             <HStack key={index} spacing={"20px"} position={"relative"}>
                                 <Box width={"400px"} borderWidth='1px' borderRadius='lg' pl={"10px"} overflow='hidden' boxShadow={'md'}>
@@ -151,27 +180,28 @@ export default function EventDetails({event, games}) {
                             </HStack>
                         ))}
                         
-                    </SimpleGrid>
+                    </SimpleGrid> */}
 
                     </HStack>
                 </Stack>
 
             
                 
-                <Stack>
+                <Stack paddingTop={"1rem"}>
 
-                <VStack position={"relative"} p={"20px"}>
+                <VStack position={"relative"}>
                         {/* Registration Button */}
                     <EventRegistration event={event} games={games}/>
                 </VStack>
                 </Stack>
-
+                </Box>
+            </Center>
                 {/* Used for later */}
                 {/* Other events */}
                  {/* <Box>
                     <EventFeed/>
                  </Box> */}
 
-        </Container>
+        </Box>
     )
 }

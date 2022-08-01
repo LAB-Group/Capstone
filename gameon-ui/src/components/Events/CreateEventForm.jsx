@@ -66,6 +66,7 @@ export default function CreateEventForm({ onClose }) {
   const [errors, setErrors] = useState({});
   const [selectedGames, setSelectedGames] = useState([])
   const [selectedGamesNames, setSelectedGamesNames] = useState([])
+  const [selectedGamesSummary, setSelectedGamesSummary] = useState([])
   const [selectedGamesPic, setSelectedGamesPic] = useState([])
   const [createEventForm, setCreateEventForm] = useState({
     eventName: '',
@@ -97,7 +98,7 @@ export default function CreateEventForm({ onClose }) {
       eventImageUrl: createEventForm.eventImageUrl,
     });
     for (let i=0;i<selectedGames.length;i++) {
-        const { test } = await apiClient.addGamesToLocalDB({gameId:selectedGames[i],gameName:selectedGamesNames[i],gameImageUrl:selectedGamesPic[i]})
+        const { test } = await apiClient.addGamesToLocalDB({gameId:selectedGames[i],gameName:selectedGamesNames[i],gameSummary:selectedGamesSummary[i],gameImageUrl:selectedGamesPic[i]})
     }
     if (error) setErrors(e => ({ ...e, form: error }));
     onClose();
@@ -121,9 +122,20 @@ export default function CreateEventForm({ onClose }) {
   //   add stream/video link so we can embed player?
 
   return (
-    <Container centerContent >
+    <Container centerContent  >
     <ModalOverlay />
-    <ModalContent>
+    <ModalContent maxWidth={'100rem'} width={'90%'} maxHeight={'85%'} overflowY={'auto'}
+                                      css={{
+                                        '&::-webkit-scrollbar': {
+                                          width: '8px',
+                                        },
+                                        '&::-webkit-scrollbar-track': {
+                                          width: '10px',
+                                        },
+                                        '&::-webkit-scrollbar-thumb': {
+                                          background: '#805AD5',
+                                          borderRadius: '24px',
+                                        },}} >
       <ModalHeader>Create Event</ModalHeader>
       <Text fontSize='sm' color='red.500' p={0}>{errors.form}</Text>
       <ModalCloseButton />
@@ -158,7 +170,8 @@ export default function CreateEventForm({ onClose }) {
           focusBorderColor={COLORS.ultraViolet} 
           onClick={() => setShowTimeDate(true)}
           ref={ref}
-          type={showTimeDate?"datetime-local":"text"}
+          type={showTimeDate?"date":"text"}
+          placeholder="mm/dd/yyyy"
           value={createEventForm.eventDate}
           onChange={handleOnInputChange}
         />
@@ -175,6 +188,7 @@ export default function CreateEventForm({ onClose }) {
           onClick={handleClick}
           focusBorderColor={COLORS.ultraViolet} 
           value={createEventForm.eventType}
+          placeholder="Select..."
           onChange={handleOnInputChange}
         >
           <option>Meet-up</option>
@@ -206,6 +220,8 @@ export default function CreateEventForm({ onClose }) {
          setSelectedGames={setSelectedGames}
          selectedGamesNames={selectedGamesNames}
          setSelectedGamesNames={setSelectedGamesNames}
+         selectedGamesSummary={selectedGamesSummary}
+         setSelectedGamesSummary={setSelectedGamesSummary}
          selectedGamesPic={selectedGamesPic}
          setSelectedGamesPic={setSelectedGamesPic}
          />
@@ -327,7 +343,16 @@ export default function CreateEventForm({ onClose }) {
       </VStack>
       </ModalBody>
       <ModalFooter display={'flex'} justifyContent={'center'}>
-      <Button backgroundColor={COLORS.ultraViolet} color={COLORS.offWhite} mt={1}  w="350px"onClick={handleOnSubmit}>Create</Button>
+      <Button 
+      background={"hsl(271, 70%, 60%)"} 
+      color={"hsl(0, 0%, 100%)"} 
+      _hover={{
+        "background":COLORS.ultraViolet,
+        "color": COLORS.offWhite
+      }} 
+      marginTop={1}
+      width="250px"
+      onClick={handleOnSubmit}>Create</Button>
       </ModalFooter>
     </ModalContent>
   </Container>

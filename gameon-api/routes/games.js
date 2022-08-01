@@ -14,7 +14,7 @@ router.post("/", async (req, res, next) => {
             'Client-ID': `${TWITCH_CLIENT_ID}`,
             'Authorization': `Bearer ${TWITCH_APP_ACCESS_TOKEN}`,
         },
-        data: `search "${searched.searched}"; fields id, name, cover.url; limit 500;`,
+        data: `search "${searched.searched}"; fields id, name, summary, cover.url; limit 500;`,
     })
         .then((response) => {
             const games = response.data
@@ -66,7 +66,6 @@ router.get("/db/:gameId", async (req, res, next) => {
 router.post("/db", async (req, res, next) => {
     try {
         const localDBForm = req.body
-        console.log("REQ",req)
         const games = await Games.addGamesToLocalDB(localDBForm)
         res.status(200).json(games)
     } catch(err) {

@@ -16,6 +16,7 @@ export default function EditProfile({onClose}){
   const [isLoading, setIsLoading] = useState(false)
   const [selectedGames, setSelectedGames] = useState([])
   const [selectedGamesNames, setSelectedGamesNames] = useState([])
+  const [selectedGamesSummary, setSelectedGamesSummary] = useState([])
   const [selectedGamesPic, setSelectedGamesPic] = useState([])
   const [profileForm, setProfileForm] = useState({
       username: user.username,
@@ -33,7 +34,7 @@ export default function EditProfile({onClose}){
       const {data, error} = await apiClient.editUserProfile({ username: profileForm.username.toLowerCase(), firstName: profileForm.firstName, lastName: profileForm.lastName,
                                                              imageUrl: profileForm.imageUrl, email: user.email, gameList: selectedGames})
       for (let i=0;i<selectedGames.length;i++) {
-        const { test } = await apiClient.addGamesToLocalDB({gameId:selectedGames[i],gameName:selectedGamesNames[i],gameImageUrl:selectedGamesPic[i]})
+        const { test } = await apiClient.addGamesToLocalDB({gameId:selectedGames[i],gameName:selectedGamesNames[i],gameSummary:selectedGamesSummary[i],gameImageUrl:selectedGamesPic[i]})
       }
       if(error) setErrors((e) => ({ ...e, form: error}))
       if(data?.user) {
@@ -52,8 +53,10 @@ export default function EditProfile({onClose}){
             <ModalHeader>Edit Profile</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <EditProfileForm user={user} profileForm={profileForm} setProfileForm={setProfileForm} setErrors={setErrors} selectedGames={selectedGames} setSelectedGames={setSelectedGames}         selectedGamesNames={selectedGamesNames}
+              <EditProfileForm user={user} profileForm={profileForm} setProfileForm={setProfileForm} setErrors={setErrors} selectedGames={selectedGames} setSelectedGames={setSelectedGames} selectedGamesNames={selectedGamesNames}
         setSelectedGamesNames={setSelectedGamesNames}
+        selectedGamesSummary={selectedGamesSummary}
+        setSelectedGamesSummary={setSelectedGamesSummary}
         selectedGamesPic={selectedGamesPic}
         setSelectedGamesPic={setSelectedGamesPic} />
             </ModalBody>
@@ -69,7 +72,7 @@ export default function EditProfile({onClose}){
    )
 }
 
-function EditProfileForm({ user, profileForm, setProfileForm, setErrors, selectedGames, setSelectedGames, selectedGamesNames, setSelectedGamesNames, selectedGamesPic, setSelectedGamesPic }) {
+function EditProfileForm({ user, profileForm, setProfileForm, setErrors, selectedGames, setSelectedGames, selectedGamesNames, setSelectedGamesNames, selectedGamesSummary, setSelectedGamesSummary, selectedGamesPic, setSelectedGamesPic }) {
 
     const handleOnInputChange = (event) => {
 
@@ -106,7 +109,7 @@ function EditProfileForm({ user, profileForm, setProfileForm, setErrors, selecte
 
         {/* <FormLabel htmlFor='gameList'>Games Played</FormLabel> */}
         <Search selectedGames={selectedGames} setSelectedGames={setSelectedGames} selectedGamesNames={selectedGamesNames}
-         setSelectedGamesNames={setSelectedGamesNames}
+         setSelectedGamesNames={setSelectedGamesNames} selectedGamesSummary={selectedGamesSummary} setSelectedGamesSummary={setSelectedGamesSummary}
          selectedGamesPic={selectedGamesPic}
          setSelectedGamesPic={setSelectedGamesPic} />
 
