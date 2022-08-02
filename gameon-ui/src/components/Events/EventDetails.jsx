@@ -3,23 +3,29 @@ import EventRegistration from "../Events/EventRegistration"
 import { useState } from "react"
 import { useAuthContext } from '../../contexts/auth'
 import { 
-    Box, Text, SimpleGrid, Flex, 
-    Image, VStack,Heading, Stack, 
-    Icon, HStack, useColorModeValue, Center 
+    Box, Text, SimpleGrid, Flex, Button,
+    Image, VStack, Heading, Stack, Modal,
+    Icon, HStack, useColorModeValue, useDisclosure, Center 
 } from "@chakra-ui/react"
 import { CalendarIcon } from "@chakra-ui/icons"
 import { HiLocationMarker } from "react-icons/hi"
+import { useRef } from "react"
+import LoginPage from "../LoginPage/LoginPage"
+import RegisterPage from "../RegisterPage/RegisterPage"
 import {COLORS} from "../colors"
 
 export default function EventDetails({event, games}) {
     const noImage = "https://image.shutterstock.com/shutterstock/photos/571752970/display_1500/stock-photo-no-game-sign-on-white-background-571752970.jpg"
     const { user } = useAuthContext()
+    const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure()
+    const { isOpen: isRegisterOpen, onOpen: onRegisterOpen, onClose: onRegisterClose } = useDisclosure()
     console.log("user: ", user.email)
     let date = event.eventDate
     let newDate = new Date(date)
     let myDate = newDate.toDateString()
     let time = newDate.toLocaleTimeString("en-US")
-    const [isHovering, setIsHovering] = useState(false);
+    const [isHovering, setIsHovering] = useState(false)
+    const btnRef = useRef()
 
     const handleMouseOver = () => {
       setIsHovering(true);
@@ -195,9 +201,21 @@ export default function EventDetails({event, games}) {
 
                 <Stack paddingTop={"1rem"}>
 
-                <VStack position={"relative"}>
-                    <EventRegistration event={event} games={games}/>
-                </VStack>
+                <HStack position={"relative"} display={"flex"} justifyContent={"center"}>
+                    {
+                        user.email ? <EventRegistration event={event} games={games}/> 
+                        : 
+                        <Text>
+                            You must 
+                            <Button onClick={onRegisterOpen} variant={"link"} mx={1}>Sign Up</Button>
+                            or 
+                            <Button onClick={onLoginOpen} variant={"link"} mx={1}>Login</Button> 
+                            to register. 
+                        </Text>
+                    }
+                    <Modal isCentered isOpen={isLoginOpen} onClose={onLoginClose} finalFocusRef={btnRef}><LoginPage onClose={onLoginClose} isOpen={isLoginOpen} finalFocusRef={btnRef} /></Modal>
+                    <Modal isCentered isOpen={isRegisterOpen} onClose={onRegisterClose} finalFocusRef={btnRef}><RegisterPage onClose={onRegisterClose} /></Modal>
+                </HStack>
                 </Stack>
                 </Box>
             </Center>
