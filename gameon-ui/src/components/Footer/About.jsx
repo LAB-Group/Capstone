@@ -10,7 +10,7 @@ export default function About(){
             <Heading id="events" fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite} marginBottom={"1em"} textAlign={"center"} fontSize={["xl", "3xl", "4xl"]}>About</Heading>
             <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10} background={"hsl(255, 50%, 21%)"} roundedTop={"25px"}>
                 <Stack spacing={4}>
-                <Text
+                {/* <Text
                     textTransform={'uppercase'}
                     color={'blue.400'}
                     fontWeight={600}
@@ -20,9 +20,9 @@ export default function About(){
                     alignSelf={'flex-start'}
                     rounded={'md'}>
                     About us
-                </Text>
-                <Heading color={COLORS.offWhite}>GameOn</Heading>
-                <Text color={COLORS.offWhite} fontSize={'lg'}>
+                </Text> */}
+                <Heading fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite}>GameOn</Heading>
+                <Text fontFamily={"mono, sans-serif"} color={COLORS.offWhite} fontSize={'lg'}>
                     Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
                     nonumy eirmod tempor invidunt ut labore
                 </Text>

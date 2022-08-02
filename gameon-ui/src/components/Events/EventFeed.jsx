@@ -1,6 +1,6 @@
 import * as React from "react"
 import { useState, useEffect } from "react"
-import {  Box, Text, SimpleGrid, Flex, Center, Skeleton, VStack, Heading, useDisclosure } from "@chakra-ui/react"
+import {  Box, Text, SimpleGrid, Flex, Button, Center, Skeleton, VStack, Heading, useDisclosure } from "@chakra-ui/react"
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css"
 import "swiper/css/pagination"
@@ -29,7 +29,17 @@ export default function EventFeed({ isFetching }){
                 {/* <Divider orientation='horizontal' backgroundColor={'purple.100'} marginTop={6} minWidth="95vw" marginBottom={6} /> */}
                 {/* font-family: 'Roboto', sans-serif for headings */}
                 <Heading id="events" fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite} marginBottom={"1em"} textAlign={"center"} fontSize={["xl", "3xl", "4xl"]}>Events</Heading>
-                <Text onClick={onOpen} style={{
+                <Button onClick={onOpen} 
+                fontFamily={"mono, sans-serif"}
+                fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} 
+                background={"rgba(0,0,0,0)"} 
+                color={COLORS.offWhite}
+                border={"2px"} borderColor={COLORS.ultraViolet} borderStyle={"solid"}
+                style={{"transition": "backgroundColor 0.5s, color 0.5s, borderColor 0.5s"}}
+                 _hover={{"backgroundColor":COLORS.offWhite,"color": COLORS.indigo, "borderColor": COLORS.offWhite}}>Search All Events</Button>
+                
+                
+                {/* <Text onClick={onOpen} style={{
                     "color":"hsl(0, 0%, 90%)",
                     "backgroundColor":"none",
                     "border":"2px",
@@ -43,7 +53,7 @@ export default function EventFeed({ isFetching }){
                         "cursor":"pointer",
                         "borderColor":COLORS.darkAmethyst,
                         "backgroundColor": COLORS.darkAmethyst, 
-                    }}>Search All Events</Text>
+                    }}>Search All Events</Text> */}
 
                 {isOpen? <SearchedEvents events={events} isOpen={isOpen} onOpen={onOpen} onClose={onClose} /> :<></>}
                 
