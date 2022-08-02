@@ -155,7 +155,6 @@ export default function CreateEventForm({ onClose }) {
                                           borderRadius: '24px',
                                         },}} >
       <ModalHeader>Create Event</ModalHeader>
-      <Text align={"center"} fontSize='sm' color='red.500' p={0}>{errors.form}</Text>
       <ModalCloseButton />
       <ModalBody>
          {/* To adjust form add padding here */}
