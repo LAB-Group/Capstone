@@ -50,7 +50,7 @@ export default function UsersProfileDetails({ viewedUser, onOpen, onClose, isOpe
     },[string])
 
     return (
-        <>
+        <Box padding={6}>
         <Routes>
             <Route path="/profile/edit-profile" element={
                 <EditProfile />
@@ -87,9 +87,9 @@ export default function UsersProfileDetails({ viewedUser, onOpen, onClose, isOpe
             m={30}
             p={1}       
             pt={2}>
-            <Heading fontSize={'2xl'} fontFamily={'body'}>{viewedUser.firstName} {viewedUser.lastName}</Heading>
+            <Heading fontSize={'2xl'} fontFamily={'body'}>@{viewedUser.username}</Heading>
             <Stack direction={'row'} display={"flex"} justifyContent= "space-between">
-            <Text fontWeight={600} color={'gray.500'} size="sm" >@{viewedUser.username}</Text>
+            <Text fontWeight={600} color={'gray.500'} size="sm" >{viewedUser.firstName} {viewedUser.lastName}</Text>
             <HStack>
                 <FontAwesomeIcon icon={faFacebookSquare} />
                 <FontAwesomeIcon icon={faTwitter} />
@@ -143,7 +143,7 @@ export default function UsersProfileDetails({ viewedUser, onOpen, onClose, isOpe
           </Box>
         </Stack>
       </Center>
-</>
+</Box>
     )
 
 }

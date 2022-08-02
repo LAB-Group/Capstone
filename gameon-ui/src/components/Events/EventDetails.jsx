@@ -1,5 +1,7 @@
 import * as React from "react"
 import EventRegistration from "../Events/EventRegistration"
+import PostsForm from "../Posts/PostsForm"
+import PostsFeed from "../Posts/PostsFeed"
 import { useState } from "react"
 import { 
     Container, Box, Text, SimpleGrid, Flex, 
@@ -10,7 +12,7 @@ import { CalendarIcon } from "@chakra-ui/icons"
 import { HiLocationMarker } from "react-icons/hi"
 import {COLORS} from "../colors"
 
-export default function EventDetails({event, games}) {
+export default function EventDetails({event, games, eventId, posts}) {
     const noImage = "https://image.shutterstock.com/shutterstock/photos/571752970/display_1500/stock-photo-no-game-sign-on-white-background-571752970.jpg"
     let date = event.eventDate
     let newDate = new Date(date)
@@ -37,8 +39,8 @@ export default function EventDetails({event, games}) {
             backgroundRepeat={"no-repeat"}>
             </Box> */}
             
-            <Center>
-            <Box width={"960px"} backgroundColor={COLORS.offWhite} rounded={"20px"}>
+            {/* <Center> */}
+            <Box width={"100%"} backgroundColor={COLORS.offWhite}>
 
             <SimpleGrid 
             column={{base:1, lg:2}}
@@ -233,13 +235,14 @@ export default function EventDetails({event, games}) {
                 </VStack>
                 </Stack>
                 </Box>
-            </Center>
+            {/* </Center> */}
                 {/* Used for later */}
                 {/* Other events */}
                  {/* <Box>
                     <EventFeed/>
                  </Box> */}
-
+            <PostsFeed eventId={eventId} posts={posts} />
+            <PostsForm event={event} eventId={eventId} />
         </Box>
     )
 }
