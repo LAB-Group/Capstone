@@ -66,7 +66,7 @@ export default function UsersProfilePage() {
 
     return (
 
-        <Container centerContent padding={6}>
+        <Box style={{"backdropFilter": "blur(10px)", "background":"rgba(0, 0, 0, 0.05)"}} >
 
             <Stack direction='column' spacing={7} align='stretch'>
                 <UsersProfileDetails viewedUser={viewedUser} isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
@@ -93,6 +93,6 @@ export default function UsersProfilePage() {
                 </Box>
 
             </Stack>
-        </Container>
+        </Box>
     )
 }
