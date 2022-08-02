@@ -2,14 +2,13 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import apiClient from '../../services/apiClient';
-import { useAuthContext } from '../../contexts/auth';
+import { useAuthContext } from '../../contexts/auth'
 import { Container, Button, FormLabel, Checkbox, Alert, AlertIcon, Heading, FormControl,
   AlertDescription, CheckboxGroup, Box, Stack, Input, extendTheme, ChakraProvider, Grid
 } from '@chakra-ui/react';
 import { COLORS } from "../colors"
 
 export default function EventRegistration({ games }) {
-  console.log("games: ", games)
   const { user } = useAuthContext()
   const { eventId } = useParams()
   const [checkedItems, setCheckedItems] = useState([])
