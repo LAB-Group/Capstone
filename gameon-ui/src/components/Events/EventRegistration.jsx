@@ -9,6 +9,7 @@ import { Container, Button, FormLabel, Checkbox, Alert, AlertIcon, Heading,
 import { COLORS } from "../colors"
 
 export default function EventRegistration({ games }) {
+  console.log("games: ", games)
   const { user } = useAuthContext()
   const { eventId } = useParams()
   const [checkedItems, setCheckedItems] = useState([])
@@ -18,8 +19,8 @@ export default function EventRegistration({ games }) {
 
   useEffect(() => {  
     const setItems = async() => {
-      if(games.game) {
-        setCheckedItems(new Array(games.game.length).fill(false))
+      if(games) {
+        setCheckedItems(new Array(games.length).fill(false))
       }
     }
     setItems()
@@ -36,7 +37,7 @@ export default function EventRegistration({ games }) {
        }   
     }
     getIsRegistered()    
-  }, [games.game, user.id, eventId]);
+  }, [games, user.id, eventId]);
 
   function replaceAt(array, index, value) {
     const newArray = array.slice(0)
@@ -48,7 +49,7 @@ export default function EventRegistration({ games }) {
     let registeredArray = []
     for(let i = 0; i < gameArray.length; i++) {
       if(gameArray[i]) {
-        registeredArray.push(games.game[i].id)
+        registeredArray.push(games[i].id)
       }   
     }
     return registeredArray
