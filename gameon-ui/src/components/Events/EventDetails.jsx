@@ -170,8 +170,8 @@ export default function EventDetails({event, games}) {
                                           background: '#805AD5',
                                           borderRadius: '24px',
                                         },}}>
-                                            <Heading color={COLORS.offWhite} textAlign={"center"} size='sm'>{game.gameName}</Heading>
-                                            <Text >{game.gameSummary}</Text></Box>
+                                            <Heading color={COLORS.offWhite} textAlign={"center"} size='sm'>{game?.gameName}</Heading>
+                                            <Text >{game?.gameSummary}</Text></Box>
                             <Box zIndex={0} position={'relative'} _hover={{bg:"black"}} >
                             <Image
                             display={"block"}
@@ -180,7 +180,7 @@ export default function EventDetails({event, games}) {
                             objectFit={"fill"} 
                             borderTopRadius={"lg"}
                             
-                            src={game.gameImageUrl.replace("thumb", "cover_big")} 
+                            src={game?.gameImageUrl?.replace("thumb", "cover_big")} 
                             alt={noImage}
                             />
                             </Box>
@@ -193,7 +193,7 @@ export default function EventDetails({event, games}) {
                             marginRight={"auto"}
                             objectFit={"fill"} 
                             borderTopRadius={"lg"} 
-                            src={game.gameImageUrl.replace("thumb", "cover_big")} 
+                            src={game?.gameImageUrl?.replace("thumb", "cover_big")} 
                             alt={noImage}/>
                         </Box>
                             }
