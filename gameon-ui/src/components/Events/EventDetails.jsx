@@ -1,10 +1,11 @@
 import * as React from "react"
 import EventRegistration from "../Events/EventRegistration"
 import { useState } from "react"
+import { useAuthContext } from '../../contexts/auth'
 import { 
-    Container, Box, Text, SimpleGrid, Flex, 
+    Box, Text, SimpleGrid, Flex, 
     Image, VStack,Heading, Stack, 
-    StackDivider, Icon, HStack, useColorModeValue, ColorModeScript, Center 
+    Icon, HStack, useColorModeValue, Center 
 } from "@chakra-ui/react"
 import { CalendarIcon } from "@chakra-ui/icons"
 import { HiLocationMarker } from "react-icons/hi"
@@ -12,6 +13,8 @@ import {COLORS} from "../colors"
 
 export default function EventDetails({event, games}) {
     const noImage = "https://image.shutterstock.com/shutterstock/photos/571752970/display_1500/stock-photo-no-game-sign-on-white-background-571752970.jpg"
+    const { user } = useAuthContext()
+    console.log("user: ", user.email)
     let date = event.eventDate
     let newDate = new Date(date)
     let myDate = newDate.toDateString()
@@ -27,19 +30,9 @@ export default function EventDetails({event, games}) {
     };
 
     return(
-        <Box style={{"backdropFilter": "blur(6px)"}}>
-            {/* Need to resize image */}
-            {/* Image */}
-{/*             
-            <Box width={"100%"} height={"400px"} backgroundImage={event?.eventImageUrl}
-            backgroundPosition={"center"}
-            backgroundSize={"contain"}
-            backgroundRepeat={"no-repeat"}>
-            </Box> */}
-            
+        <Box style={{"backdropFilter": "blur(6px)"}}>        
             <Center>
             <Box width={"960px"} backgroundColor={COLORS.offWhite} rounded={"20px"}>
-
             <SimpleGrid 
             column={{base:1, lg:2}}
             spacing={{base:8, md: 10}}
@@ -105,9 +98,6 @@ export default function EventDetails({event, games}) {
 
             </Stack>
             </SimpleGrid>
-            
-
-            
                 {/* Event */}
                 <Box position={"relative"} pt={"25px"} pb={"25px"} pl={"0"} pr={0} background={"rgba(113, 57, 166, 0.8)"}>
                     {/* Divides/Spaces */}
@@ -196,50 +186,21 @@ export default function EventDetails({event, games}) {
                             src={game?.gameImageUrl?.replace("thumb", "cover_big")} 
                             alt={noImage}/>
                         </Box>
-                            }
-
-                                
+                            }         
                     </Box>
                     ))}
                     </Flex>
-
-
-                    {/* <SimpleGrid columns={{base:2, md:3}} spacing={10}>  
-                        {games?.map((game, index) => (
-                            <HStack key={index} spacing={"20px"} position={"relative"}>
-                                <Box width={"400px"} borderWidth='1px' borderRadius='lg' pl={"10px"} overflow='hidden' boxShadow={'md'}>
-                                    <Image boxSize={"300px"} position={"relative"} alignContent={"center"} fit={"contain"} borderTopRadius={"lg"} src={game.gameImageUrl.replace("thumb", "cover_small_2x")} alt={noImage}/>
-                                    <Box p='6'>
-                                        <Box display='flex' alignItems='baseline'>
-                                            <Heading textAlign={"center"} size='md'>{game.gameName}</Heading>
-                                        </Box>
-                                    </Box>
-                                </Box>
-                            </HStack>
-                        ))}
-                        
-                    </SimpleGrid> */}
-
                     </HStack>
                 </Stack>
 
-            
-                
                 <Stack paddingTop={"1rem"}>
 
                 <VStack position={"relative"}>
-                        {/* Registration Button */}
                     <EventRegistration event={event} games={games}/>
                 </VStack>
                 </Stack>
                 </Box>
             </Center>
-                {/* Used for later */}
-                {/* Other events */}
-                 {/* <Box>
-                    <EventFeed/>
-                 </Box> */}
-
         </Box>
     )
 }
