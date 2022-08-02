@@ -32,6 +32,7 @@ export default function EventRegistration({ games }) {
        }
        if (error) {
         setErrors(error)
+        setIsRegistered(false)
        }   
     }
     getIsRegistered()    
@@ -140,7 +141,7 @@ export default function EventRegistration({ games }) {
   );
 }
 
-export function AlertBox({ message}) {
+export function AlertBox({ message }) {
   return (
     <Alert status='success'>
       <AlertIcon />

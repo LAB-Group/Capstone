@@ -108,14 +108,6 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen, games })
         </Stack>
         </Box>
                                 
-                             
-
-
-          
-
-
-
-
         {/* <Box w="1200px" h='300px' p={4} borderRadius='sm'>
                 <HStack spacing='24px'>
                     <Box borderWidth='1px' borderRadius={'lg'} boxShadow={'md'}>

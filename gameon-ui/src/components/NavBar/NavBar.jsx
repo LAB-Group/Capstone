@@ -86,11 +86,13 @@ export default function NavBar() {
                         style={{"transition": "backgroundColor 0.5s, color 0.5s"}} _hover={{"backgroundColor": COLORS.offWhite, "color": COLORS.indigo}}>Create Event</Button>
                         {/* <Box border={"2px"} borderStyle={"solid"} borderRadius={"5px"} borderColor={COLORS.darkAmethyst} 
                             paddingStart={"1rem"} paddingEnd={"1rem"} paddingTop={"0.2rem"} paddingBottom={"0.2rem"}
-                            style={{"transition": "backgroundColor 0.5s"}} _hover={{"backgroundColor": COLORS.offWhite}}> */}
-                        <Link to ="/profile">
+
+                        style={{"transition": "backgroundColor 0.5s"}} _hover={{"backgroundColor": COLORS.offWhite}}> */}
+                        <Link to ={`/user/${user.id}/profile`}>
                         <Button fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} backgroundColor={COLORS.indigo} color={COLORS.offWhite}
                         border={"2px"} borderColor={COLORS.ultraViolet} borderStyle={"solid"}
                         style={{"transition": "backgroundColor 0.5s, color 0.5s, borderColor 0.5s"}} _hover={{"backgroundColor":COLORS.offWhite,"color": COLORS.indigo, "borderColor": COLORS.offWhite}}>Profile</Button>
+
                         </Link>
                         {/* </Box> */}
                         {/* <Link smooth to="#about"><Button variant="ghost" colorScheme='purple'>About</Button></Link>

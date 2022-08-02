@@ -50,6 +50,10 @@ class ApiClient {
         return await this.request({ endpoint: `auth/me`, method: `GET` })
     }
 
+    async fetchUserFromID(userId) {
+        return await this.request({ endpoint: `user/${userId}/profile`, method: `GET` })
+    }
+
     async editUserProfile(editedUser) {
         return await this.request({ endpoint: `auth/profile`, method: `PUT`, data: editedUser })
     }
