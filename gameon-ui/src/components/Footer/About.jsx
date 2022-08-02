@@ -6,13 +6,13 @@ import pic from "../../media/Logo.png"
 
 export default function About(){
     return (
-        <Box width={"100%"} py={12}
-            css={{
-                "position": "relative",
-                "transform": "translateY(150px)",
-                "opacity": 0,
-                "transition": "2s all ease"
-            }}
+        <Box width={"100%"} pt={12}
+            // css={{
+            //     "position": "relative",
+            //     "transform": "translateY(150px)",
+            //     "opacity": 0,
+            //     "transition": "2s all ease"
+            // }}
         
         
         >
