@@ -32,6 +32,7 @@ export default function EventRegistration({ games }) {
        }
        if (error) {
         setErrors(error)
+        setIsRegistered(false)
        }   
     }
     getIsRegistered()    
@@ -87,10 +88,10 @@ export default function EventRegistration({ games }) {
           <Stack>
               <HStack spacing={4}>
                   <CheckboxGroup size="lg" isDisabled={action || isRegistered}>
-                      {games.game?.map((game, index) => (
-                        <Checkbox colorScheme='purple' mt={2} key={game.id} value={game.name}  isChecked={checkedItems[index]} 
+                      {games?.map((game, index) => (
+                        <Checkbox colorScheme='purple' mt={2} key={game.gameId} value={game.gameName} isChecked={checkedItems[index]} 
                         onChange={e => setCheckedItems(replaceAt(checkedItems, index, e.target.checked))}>
-                        {game.name}
+                        {game.gameName}
                         </Checkbox>
                       ))}
                   </CheckboxGroup>
@@ -140,7 +141,7 @@ export default function EventRegistration({ games }) {
   );
 }
 
-export function AlertBox({ message}) {
+export function AlertBox({ message }) {
   return (
     <Alert status='success'>
       <AlertIcon />

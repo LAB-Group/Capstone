@@ -66,6 +66,7 @@ export default function CreateEventForm({ onClose }) {
   const [errors, setErrors] = useState({});
   const [selectedGames, setSelectedGames] = useState([])
   const [selectedGamesNames, setSelectedGamesNames] = useState([])
+  const [selectedGamesSummary, setSelectedGamesSummary] = useState([])
   const [selectedGamesPic, setSelectedGamesPic] = useState([])
   const [createEventForm, setCreateEventForm] = useState({
     eventName: '',
@@ -97,7 +98,7 @@ export default function CreateEventForm({ onClose }) {
       eventImageUrl: createEventForm.eventImageUrl,
     });
     for (let i=0;i<selectedGames.length;i++) {
-        const { test } = await apiClient.addGamesToLocalDB({gameId:selectedGames[i],gameName:selectedGamesNames[i],gameImageUrl:selectedGamesPic[i]})
+        const { test } = await apiClient.addGamesToLocalDB({gameId:selectedGames[i],gameName:selectedGamesNames[i],gameSummary:selectedGamesSummary[i],gameImageUrl:selectedGamesPic[i]})
     }
     if (error) setErrors(e => ({ ...e, form: error }));
     onClose();
@@ -219,6 +220,8 @@ export default function CreateEventForm({ onClose }) {
          setSelectedGames={setSelectedGames}
          selectedGamesNames={selectedGamesNames}
          setSelectedGamesNames={setSelectedGamesNames}
+         selectedGamesSummary={selectedGamesSummary}
+         setSelectedGamesSummary={setSelectedGamesSummary}
          selectedGamesPic={selectedGamesPic}
          setSelectedGamesPic={setSelectedGamesPic}
          />

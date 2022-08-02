@@ -1,18 +1,9 @@
 import * as React from 'react';
-import { useState } from 'react';
-import apiClient from '../../services/apiClient';
+import { Link } from "react-router-dom"
 import {
-  Input,
-  Textarea,
   Image,
-  Container,
-  Spacer,
-  FormControl,
-  FormLabel,
-  Button,
-  extendTheme,
   HStack,
-  Text, Box, Heading, VStack, Stack,Badge,Divider, Flex
+  Text, Box, Stack,Badge,Divider, Flex
 } from '@chakra-ui/react';
 
 export default function PostReply({postReply}) {
@@ -51,19 +42,13 @@ export default function PostReply({postReply}) {
                           mt={-16}>
                           <Image  w={20} h={20} mt={8} borderRadius="50%" src={postReply.creatorImageUrl}/>
                         </Flex>
-                        <Text fontWeight={'bold'} >@{postReply.creatorUsername}</Text>
+                        <Link to={`/user/${postReply.creatorId}/profile`}  ><Text fontWeight={'bold'} >@{postReply.creatorUsername}</Text></ Link>
                       </HStack>
                       <HStack>
                         <Badge variant='subtle'  colorScheme='purple'>{replyDate}</Badge>
                         <Badge variant='subtle'  colorScheme='purple'>{time}</Badge>
                       </HStack>
                     </Stack>
-               
-                  
-                  
-                 
-               
-                  
                   <Divider   w={['125px','250px','450px','600px','750px']}/>
                   <Box pl={1.5}>
                     
@@ -74,20 +59,5 @@ export default function PostReply({postReply}) {
                 </Box>
               </Stack>
             </Box>
-    // <Container centerContent minWidth="65vw"  >
-    //     <HStack>
-
-    //         <VStack>
-    //             <Text fontWeight={'bold'} >{postReply.creatorUsername}</Text>
-    //             <Image borderRadius={'lg'} w='80px' h='80px' borderWidth='9px' src={postReply.creatorImageUrl} />
-    //             <Text>{replyDate}</Text>
-    //             <Text>{time}</Text>
-    //         </VStack>
-    //         <VStack>
-    //             {/* <Heading as={'h3'} size='md' display={'flex'} >{postReply.postTitle}</Heading> */}
-    //             <Text>{postReply.replyContent}</Text>
-    //         </VStack>
-    //     </HStack>
-    // </Container>
   );
 }

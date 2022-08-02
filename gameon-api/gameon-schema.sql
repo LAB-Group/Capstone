@@ -42,6 +42,7 @@ CREATE TABLE igdb_local (
     id                  SERIAL PRIMARY KEY,
     game_id             INTEGER NOT NULL,
     game_name           TEXT NOT NULL,
+    game_summary        TEXT NOT NULL,
     game_image_url      TEXT NOT NULL,
     UNIQUE(game_id)
 );

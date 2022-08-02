@@ -18,7 +18,7 @@ import { useState, useEffect } from 'react';
 import apiClient from '../../services/apiClient';
 import { COLORS } from "../colors";
 
-export default function Search({ selectedGames, setSelectedGames, selectedGamesNames, setSelectedGamesNames, selectedGamesPic, setSelectedGamesPic }) {
+export default function Search({ selectedGames, setSelectedGames, selectedGamesNames, setSelectedGamesNames, selectedGamesPic, setSelectedGamesPic, selectedGamesSummary, setSelectedGamesSummary }) {
   const [errors, setErrors] = useState({});
   const [searchInput, setSearchInput] = useState('');
   const [listGames, setListGames] = useState([]);
@@ -54,6 +54,8 @@ const clearSearch = async () => {
         setSelectedGames={setSelectedGames}
         selectedGamesNames={selectedGamesNames}
         setSelectedGamesNames={setSelectedGamesNames}
+        selectedGamesSummary={selectedGamesSummary}
+        setSelectedGamesSummary={setSelectedGamesSummary}
         selectedGamesPic={selectedGamesPic}
         setSelectedGamesPic={setSelectedGamesPic}
       />
@@ -75,7 +77,8 @@ const clearSearch = async () => {
               onClick={() => {
                 setSelectedGames(arr => [...arr, game.id]);
                 setSelectedGamesNames(arr => [...arr, game.name]);
-                setSelectedGamesPic(arr => [...arr, game.cover?.url ? game.cover.url : ""])
+                setSelectedGamesSummary(arr => [...arr, game?.summary ? game.summary : ""]);
+                setSelectedGamesPic(arr => [...arr, game.cover?.url ? game.cover.url : ""]);
               }}
               value={game.id}
               key={index}
@@ -99,19 +102,24 @@ function SearchBar({
   setSelectedGames,
   selectedGamesNames,
   setSelectedGamesNames,
+  selectedGamesSummary,
+  setSelectedGamesSummary,
   selectedGamesPic,
   setSelectedGamesPic
 }) {
   function removeGame(id) {
     const copyArr = [...selectedGames];
     const copyNameArr = [...selectedGamesNames];
+    const copySummArr = [...selectedGamesSummary];
     const copyPicArr = [...selectedGamesPic];
     const index = copyArr.indexOf(id);
     copyArr.splice(index, 1);
     copyNameArr.splice(index, 1);
+    copySummArr.splice(index, 1);
     copyPicArr.splice(index, 1);
     setSelectedGames([...copyArr]);
     setSelectedGamesNames([...copyNameArr]);
+    setSelectedGamesSummary([...copySummArr])
     setSelectedGamesPic([...copyPicArr]);
   }
 

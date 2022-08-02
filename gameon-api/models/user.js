@@ -102,6 +102,31 @@ class User {
     return editedUser
   }
 
+  static async fetchUserById({userId}) {
+    // fetches a user by their id
+
+    const result = await db.query(
+      `
+        SELECT
+                id AS "userId",
+                username,
+                first_name AS "firstName",
+                last_name AS "lastName",
+                email,
+                image_url AS "imageUrl",
+                game_list AS "gameList",
+                created_at AS "createdAt"
+        FROM users
+        WHERE id = $1
+      `,
+        [userId]
+    )
+    
+    const user = result.rows[0]
+
+    return user
+  }
+
 }
 
 module.exports = User
