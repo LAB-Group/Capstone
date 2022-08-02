@@ -22,9 +22,11 @@ export default function PostReply({postReply}) {
               position="relative"
               rounded="md"
               borderRadius="5px"
-              maxW='900px'
-              w={['325px','500px','650px','800px']}
-              ml={['0px','175px']}
+              // maxW='100%'
+              // w={['300px','450px','600px','750px', '900px']}
+              w={['250px','350px','500px', '675px', '800px']}
+              ml={'100px'}
+              // ml={['0px','175px', '300px']}
               mb={30}
               mt={2}
               minH='150px'
@@ -49,7 +51,7 @@ export default function PostReply({postReply}) {
                         <Badge variant='subtle'  colorScheme='purple'>{time}</Badge>
                       </HStack>
                     </Stack>
-                  <Divider   w={['125px','250px','450px','600px','750px']}/>
+                  <Divider   w={['150px','300px','450px','600px','750px']}/>
                   <Box pl={1.5}>
                     
                     <Stack spacing={2} mt={1} isInline alignItems="center">

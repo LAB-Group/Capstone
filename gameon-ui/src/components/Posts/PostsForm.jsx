@@ -83,7 +83,7 @@ export default function PostsForm({event, eventId}) {
     <ChakraProvider theme={theme}>
       <Divider/>
     
-    <Container mt={3} centerContent minWidth="50vw" w="75px">
+    <Container mt={3} centerContent minWidth="50vw" w="75px" pb={8}>
       <Box
               key="1"
               borderWidth="1px"
@@ -119,7 +119,7 @@ export default function PostsForm({event, eventId}) {
           onChange={handleOnInputChange}
         />
       </FormControl>
-      <Divider/>
+      <Divider w={['150px','300px','450px','600px','750px']}/>
       <FormControl >
     
         <Textarea

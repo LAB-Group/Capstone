@@ -81,75 +81,108 @@ export default function EventRegistration({ games }) {
 
   return (
     <ChakraProvider theme={theme}>
+    {isRegistered ? 
     <Container centerContent>
-      <FormLabel htmlFor="eventGame">
-        <Heading color={COLORS.indigo}>Event Registration</Heading>
-      </FormLabel>
-      <Box>
-          <Stack>
-          <FormControl variant="floating">
-            <FormLabel transform="scale(0.85) translateY(-21px)" >Email</FormLabel>
-            <Input marginBottom={1} onFocusBorderColor='purple.400' value={user.email} isReadOnly />
+      
+      <Button 
+          margin={2} 
+          background={"hsl(271, 54%, 52%)"} 
+          borderColor={"hsl(271, 49%, 44%)"} 
+          color={"hsl(0,0%,100%)"} 
+          marginRight={3} 
+          _hover={{
+            "background":"hsl(271, 49%, 44%)", 
+            "borderColor":"hsl(271, 49%, 44%)", 
+            "color":"hsl(0,0%,70%)" 
+          }}
+          onClick={handleWithdraw}>Withdraw</Button>
+
+    </Container>
+    
+    :
+    <Container centerContent>
+    <FormLabel htmlFor="eventGame">
+      <Heading color={COLORS.indigo}>Event Registration</Heading>
+    </FormLabel>
+    <Box>
+        <Stack>
+        <FormControl variant="floating">
+          <FormLabel transform="scale(0.85) translateY(-21px)" >Email</FormLabel>
+          <Input marginBottom={1} onFocusBorderColor='purple.400' value={user.email} isReadOnly />
+        </FormControl>
+        <FormControl variant="floating">
+          <FormLabel transform="scale(0.85) translateY(-21px)">Username</FormLabel>
+          <Input marginBottom={1} onFocusBorderColor='purple.400' value={user.username} isReadOnly />
           </FormControl>
           <FormControl variant="floating">
-            <FormLabel transform="scale(0.85) translateY(-21px)">Username</FormLabel>
-            <Input marginBottom={1} onFocusBorderColor='purple.400' value={user.username} isReadOnly />
-            </FormControl>
-            <FormControl variant="floating">
-            <FormLabel transform="scale(0.85) translateY(-21px)">Name</FormLabel>
-            <Input marginBottom={1} onFocusBorderColor='purple.400' value={(user.firstName + " " + user.lastName)} isReadOnly />
-            </FormControl>
-              <Grid spacing={4}>
-                  <CheckboxGroup size="lg" isDisabled={action || isRegistered}>
-                      {games?.map((game, index) => (
-                        <Checkbox colorScheme='purple' mt={2} key={game.gameId} value={game.gameName} isChecked={checkedItems[index]} 
-                        onChange={e => setCheckedItems(replaceAt(checkedItems, index, e.target.checked))}>
-                        {game.gameName}
-                        </Checkbox>
-                      ))}
-                  </CheckboxGroup>
-              </Grid>
-              </Stack>
-          
-      </Box>
-      <Box position={"relative"} paddingLeft={"20px"}>
-          {
-            action === true ? 
-            <AlertBox message={"Registered successfully!"}/>
-            : action === false ?
-            <AlertBox message={"Withdrew successfully!"}/>
-            : null
-          }
-          {
-            isRegistered ? 
-            <Button 
-            margin={2} 
-            background={"hsl(271, 54%, 52%)"} 
-            borderColor={"hsl(271, 49%, 44%)"} 
-            color={"hsl(0,0%,100%)"} 
-            marginRight={3} 
-            _hover={{
-              "background":"hsl(271, 49%, 44%)", 
-              "borderColor":"hsl(271, 49%, 44%)", 
-              "color":"hsl(0,0%,70%)" 
-            }}
-            onClick={handleWithdraw}>Withdraw</Button>
-            : 
-            <Button 
-            margin={2} 
-            background={"hsl(271, 54%, 52%)"} 
-            borderColor={"hsl(271, 49%, 44%)"} 
-            color={"hsl(0,0%,100%)"} 
-            marginRight={3} 
-            _hover={{
-              "background":"hsl(271, 49%, 60%)", 
-              "borderColor":"hsl(271, 49%, 44%)", 
-              "color":"hsl(0,10%,100%)" 
-            }}
-            onClick={handleOnSubmit}>Register</Button>
-          }       
-      </Box>
-    </Container>
+          <FormLabel transform="scale(0.85) translateY(-21px)">Name</FormLabel>
+          <Input marginBottom={1} onFocusBorderColor='purple.400' value={(user.firstName + " " + user.lastName)} isReadOnly />
+          </FormControl>
+            <Grid spacing={4}>
+                <CheckboxGroup size="lg" isDisabled={action || isRegistered}>
+                    {games?.map((game, index) => (
+                      <Checkbox colorScheme='purple' mt={2} key={game.gameId} value={game.gameName} isChecked={checkedItems[index]} 
+                      onChange={e => setCheckedItems(replaceAt(checkedItems, index, e.target.checked))}>
+                      {game.gameName}
+                      </Checkbox>
+                    ))}
+                </CheckboxGroup>
+            </Grid>
+            </Stack>
+        
+    </Box>
+    <Box position={"relative"} paddingLeft={"20px"}>
+        {
+          action === true ? 
+          <AlertBox message={"Registered successfully!"}/>
+          : action === false ?
+          <AlertBox message={"Withdrew successfully!"}/>
+          : null
+        }
+        <Button 
+          margin={2} 
+          background={"hsl(271, 54%, 52%)"} 
+          borderColor={"hsl(271, 49%, 44%)"} 
+          color={"hsl(0,0%,100%)"} 
+          marginRight={3} 
+          _hover={{
+            "background":"hsl(271, 49%, 60%)", 
+            "borderColor":"hsl(271, 49%, 44%)", 
+            "color":"hsl(0,10%,100%)" 
+          }}
+          onClick={handleOnSubmit}>Register</Button>
+        {/* {
+          isRegistered ? 
+          <Button 
+          margin={2} 
+          background={"hsl(271, 54%, 52%)"} 
+          borderColor={"hsl(271, 49%, 44%)"} 
+          color={"hsl(0,0%,100%)"} 
+          marginRight={3} 
+          _hover={{
+            "background":"hsl(271, 49%, 44%)", 
+            "borderColor":"hsl(271, 49%, 44%)", 
+            "color":"hsl(0,0%,70%)" 
+          }}
+          onClick={handleWithdraw}>Withdraw</Button>
+          : 
+          <Button 
+          margin={2} 
+          background={"hsl(271, 54%, 52%)"} 
+          borderColor={"hsl(271, 49%, 44%)"} 
+          color={"hsl(0,0%,100%)"} 
+          marginRight={3} 
+          _hover={{
+            "background":"hsl(271, 49%, 60%)", 
+            "borderColor":"hsl(271, 49%, 44%)", 
+            "color":"hsl(0,10%,100%)" 
+          }}
+          onClick={handleOnSubmit}>Register</Button>
+        }        */}
+    </Box>
+  </Container>
+    }
+
     </ChakraProvider>
   );
 }

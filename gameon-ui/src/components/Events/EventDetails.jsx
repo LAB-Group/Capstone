@@ -1,5 +1,7 @@
 import * as React from "react"
 import EventRegistration from "../Events/EventRegistration"
+import PostsForm from "../Posts/PostsForm"
+import PostsFeed from "../Posts/PostsFeed"
 import { useState } from "react"
 import { useAuthContext } from '../../contexts/auth'
 import { 
@@ -14,7 +16,7 @@ import LoginPage from "../LoginPage/LoginPage"
 import RegisterPage from "../RegisterPage/RegisterPage"
 import {COLORS} from "../colors"
 
-export default function EventDetails({event, games}) {
+export default function EventDetails({event, games, eventId, posts}) {
     const noImage = "https://image.shutterstock.com/shutterstock/photos/571752970/display_1500/stock-photo-no-game-sign-on-white-background-571752970.jpg"
     const { user } = useAuthContext()
     const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure()
@@ -35,13 +37,22 @@ export default function EventDetails({event, games}) {
     };
 
     return(
-        <Box style={{"backdropFilter": "blur(6px)"}}>        
-            <Center>
-            <Box width={"960px"} backgroundColor={COLORS.offWhite} rounded={"20px"}>
+        <Box style={{"backdropFilter": "blur(6px)"}}>
+            {/* Need to resize image */}
+            {/* Image */}
+{/*             
+            <Box width={"100%"} height={"400px"} backgroundImage={event?.eventImageUrl}
+            backgroundPosition={"center"}
+            backgroundSize={"contain"}
+            backgroundRepeat={"no-repeat"}>
+            </Box> */}
+            
+            <Box width={"100%"} backgroundColor={COLORS.offWhite} px={5}>
+
             <SimpleGrid 
             column={{base:1, lg:2}}
             spacing={{base:8, md: 10}}
-            py={{base:18, md:24}}
+            pt={{base:10, md:14}}
             >
             
             <Stack spacing={{base:6, md:10}}>
@@ -50,7 +61,7 @@ export default function EventDetails({event, games}) {
                     src={event?.eventImageUrl} 
                     boxSize={"80px"} 
                     alignItems={"center"} 
-                    flexGrow={0} flexShrink={0} flexBasis={"auto"}
+                    flexGrow={0} flexShrink={0} flexBasis={"auto"} borderRadius={"50%"}
                     />
                 <Box marginLeft={2} flexGrow={1} flexShrink={1} flexBasis={"auto"}>
                     {/* Type */}
@@ -104,35 +115,17 @@ export default function EventDetails({event, games}) {
             </Stack>
             </SimpleGrid>
                 {/* Event */}
-                <Box position={"relative"} pt={"25px"} pb={"25px"} pl={"0"} pr={0} background={"rgba(113, 57, 166, 0.8)"}>
-                    {/* Divides/Spaces */}
+                <Box position={"relative"} py={"25px"}>
                 <Stack spacing={{ base: 4, sm: 6 }} direction={"column"}>
-                <Box textAlign={"center"}>
-                
-                    
-                    {/* Details */}
-                    <VStack spacing={{ base: 4, sm: 6 }}>
-                        <Text position={"relative"} color={useColorModeValue("whiteAlpha.600", "whiteAlpha.700")} fontSize={"3xl"} fontWeight={300}>
-                            Description
-                        </Text>
-                        <Box backgroundColor={"whiteAlpha.900"} width={"98%"} borderRadius={"3xl"}>
-                        <Text whiteSpace= "pre-wrap" fontSize={{}} padding={"4px"}>{event.eventDetails}</Text>
-                        </Box>
-                    </VStack>
-                    
+                <Box textAlign={"left"} fontWeight={'bold'} mx={5}>
+                        <Text position={"relative"} fontSize={"3xl"} fontWeight={300} textTransform={'uppercase'} mb={4}>Details:</Text>
+                        <Text whiteSpace= "pre-wrap" fontSize={{}} padding={"4px"}>{event.eventDetails}</Text>                    
                 </Box>
                 </Stack>
 
                 </Box>
-                <Stack>
-                    <Text
-                    fontSize={{ base: "16px", lg: "18px" }}
-                    color={COLORS.indigo}
-                    fontWeight={'500'}
-                    textTransform={'uppercase'}
-                    mb={'4'}>
-                        Featured Games:
-                    </Text>
+                <Stack spacing={{ base: 4, sm: 6 }} direction={"column"}>
+                    <Text mx={5} position={"relative"} fontSize={"3xl"} fontWeight={300} textTransform={'uppercase'} mb={4}>Featured Games:</Text>
                     <HStack justifyContent={"space-evenly"}>
                     {/* Game */}
                     <Flex justifyContent={"center"} flexDirection={"row"} flexWrap={"wrap"} gap={6}>
@@ -141,8 +134,6 @@ export default function EventDetails({event, games}) {
                     <Box
                     background={"rgba(113, 57, 166, 0.7)"}
                     display={"block"}
-                    // width={"300px"} 
-                    // height={"300px"} 
                     alignItems={"center"}  
                     borderRadius='lg' 
                     overflow='hidden' 
@@ -217,7 +208,8 @@ export default function EventDetails({event, games}) {
                 </HStack>
                 </Stack>
                 </Box>
-            </Center>
+                <PostsFeed eventId={eventId} posts={posts} />
+            <PostsForm event={event} eventId={eventId} />
         </Box>
     )
 }
