@@ -6,7 +6,16 @@ import pic from "../../media/Logo.png"
 
 export default function About(){
     return (
-        <Box width={"100%"} py={12}>
+        <Box width={"100%"} py={12}
+            css={{
+                "position": "relative",
+                "transform": "translateY(150px)",
+                "opacity": 0,
+                "transition": "2s all ease"
+            }}
+        
+        
+        >
             <Heading id="events" fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite} marginBottom={"1em"} textAlign={"center"} fontSize={["xl", "3xl", "4xl"]}>About</Heading>
             <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10} background={"hsl(255, 50%, 21%)"} roundedTop={"25px"}>
                 <Stack spacing={4}>
@@ -38,22 +47,5 @@ export default function About(){
             </SimpleGrid>
         </Box>
 
-
-
-
-
-        // <Box 
-        // position={"relative"} 
-        // height={"400px"} 
-        // background={"hsl(271, 49%, 44%)"}>
-        // <Heading fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite} marginBottom={"1em"} textAlign={"center"} fontSize={["xl", "3xl", "4xl"]}>About</Heading>
-        // <Stack>
-        //     <VStack display={"flex"}>
-        //         <Text color={COLORS.offWhite} display={"flex"} flexDirection={"column"} fontSize='lg'>
-        //             Video games are a huge market across the globe, where anyone in your family could be a gamer, young or old. Because of this, gaming can be used to bring people together and there is a need to facilitate that growth and also allow others to find like-minded individuals.
-        //         </Text>
-        //     </VStack>
-        // </Stack>
-        // </Box>
     )
 }

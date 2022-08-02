@@ -53,7 +53,13 @@ export default function NavBar() {
                         "fontSize": "24px", 
                         "borderBottom": "4px",
                         "borderStyle": "solid",
-                        "borderColor": COLORS.darkAmethyst}}>About</Text></Link>
+                        "borderColor": COLORS.darkAmethyst}}
+                    _after={{
+                        "fontSize": "24px", 
+                        "borderBottom": "4px",
+                        "borderStyle": "solid",
+                        "borderColor": COLORS.darkAmethyst
+                    }}>About</Text></Link>
                     </ListItem>
                     <ListItem float={"left"} display={"block"}>
                 <Link smooth to="#events">
