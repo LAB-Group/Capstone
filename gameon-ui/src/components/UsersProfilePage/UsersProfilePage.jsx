@@ -27,7 +27,6 @@ export default function UsersProfilePage() {
           const { data, error } = await apiClient.fetchUserFromID(userId)
           if(data) {
             setViewedUser(data.user)
-            console.log("data: ", data)
           }
           if (error) setError(error)
         }
