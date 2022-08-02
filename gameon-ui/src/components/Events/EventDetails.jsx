@@ -40,12 +40,12 @@ export default function EventDetails({event, games, eventId, posts}) {
             </Box> */}
             
             {/* <Center> */}
-            <Box width={"100%"} backgroundColor={COLORS.offWhite}>
+            <Box width={"100%"} backgroundColor={COLORS.offWhite} px={5}>
 
             <SimpleGrid 
             column={{base:1, lg:2}}
             spacing={{base:8, md: 10}}
-            py={{base:18, md:24}}
+            pt={{base:10, md:14}}
             >
             
             <Stack spacing={{base:6, md:10}}>
@@ -54,7 +54,7 @@ export default function EventDetails({event, games, eventId, posts}) {
                     src={event?.eventImageUrl} 
                     boxSize={"80px"} 
                     alignItems={"center"} 
-                    flexGrow={0} flexShrink={0} flexBasis={"auto"}
+                    flexGrow={0} flexShrink={0} flexBasis={"auto"} borderRadius={"50%"}
                     />
                 <Box marginLeft={2} flexGrow={1} flexShrink={1} flexBasis={"auto"}>
                     {/* Type */}
@@ -111,21 +111,25 @@ export default function EventDetails({event, games, eventId, posts}) {
 
             
                 {/* Event */}
-                <Box position={"relative"} pt={"25px"} pb={"25px"} pl={"0"} pr={0} background={"rgba(113, 57, 166, 0.8)"}>
+                <Box position={"relative"} pt={"25px"} pb={"25px"} pl={"0"} pr={0} 
+                // background={"rgba(113, 57, 166, 0.8)"}
+                >
                     {/* Divides/Spaces */}
                 <Stack spacing={{ base: 4, sm: 6 }} direction={"column"}>
-                <Box textAlign={"center"}>
+                <Box textAlign={"left"} fontWeight={'bold'} marginLeft={5} marginRight={5}>
                 
                     
                     {/* Details */}
-                    <VStack spacing={{ base: 4, sm: 6 }}>
-                        <Text position={"relative"} color={useColorModeValue("whiteAlpha.600", "whiteAlpha.700")} fontSize={"3xl"} fontWeight={300}>
-                            Description
+                    {/* <VStack spacing={{ base: 4, sm: 6 }}> */}
+                        <Text position={"relative"}
+                        //  color={useColorModeValue("whiteAlpha.600", "whiteAlpha.700")}
+                          fontSize={"3xl"} fontWeight={300}>
+                            Details
                         </Text>
-                        <Box backgroundColor={"whiteAlpha.900"} width={"98%"} borderRadius={"3xl"}>
+                        {/* <Box backgroundColor={"whiteAlpha.900"} width={"98%"} borderRadius={"3xl"}> */}
                         <Text whiteSpace= "pre-wrap" fontSize={{}} padding={"4px"}>{event.eventDetails}</Text>
-                        </Box>
-                    </VStack>
+                        {/* </Box> */}
+                    {/* </VStack> */}
                     
                 </Box>
                 </Stack>
