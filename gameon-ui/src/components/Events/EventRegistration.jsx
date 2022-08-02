@@ -109,7 +109,6 @@ export default function EventRegistration({ games }) {
                         </Checkbox>
                       ))}
                   </CheckboxGroup>
-              {/* <Button colorScheme="purple" onClick={handleOnSubmit}>Register</Button> */}
               </Grid>
               </Stack>
           
@@ -168,11 +167,6 @@ export function AlertBox({ message }) {
     </Alert>
   )
 }
-
-// const activeLabelStyles = {
-//   transform: "scale(0.85) translateY(-24px)"
-  
-// };
 
 export const theme = extendTheme({
   components: {
