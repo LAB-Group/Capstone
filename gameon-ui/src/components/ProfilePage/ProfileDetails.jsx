@@ -67,7 +67,7 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen, games })
               </HStack> 
             </Stack>
             <Stack display={"flex"} marginTop={0}>
-              <Wrap display={"flex"} height={"60px"} overflowY={"auto"}
+              <Wrap height={"60px"} overflowY={"auto"}
                   css={{
                       '&::-webkit-scrollbar': {width: '8px'},
                       '&::-webkit-scrollbar-track': {width: '10px'},

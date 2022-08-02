@@ -8,7 +8,7 @@ export default function About(){
         <Box 
         position={"relative"} 
         // style={{
-        //     "transform": "translateY(2rem)", 
+        //     "transform": "translateY(1px)", 
         //     "opacity":0, 
         //     "transition": "2s all ease"
         // }} 
@@ -18,9 +18,11 @@ export default function About(){
         //     }}
         >
         <Heading fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite} marginBottom={"1em"} textAlign={"center"} fontSize={["xl", "3xl", "4xl"]}>About</Heading>
-        <Text color={COLORS.offWhite} display={"flex"} flexDirection={"column"} fontSize='sm'>
+        <Box background={"rgba(113, 57, 166, 0.9)"}>
+        <Text color={COLORS.offWhite} display={"flex"} flexDirection={"column"} fontSize='lg'>
         Video games are a huge market across the globe, where anyone in your family could be a gamer, young or old. Because of this, gaming can be used to bring people together and there is a need to facilitate that growth and also allow others to find like-minded individuals.
         </Text>
+        </Box>
         </Box>
     )
 }
