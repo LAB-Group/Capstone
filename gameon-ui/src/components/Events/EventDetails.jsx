@@ -111,39 +111,17 @@ export default function EventDetails({event, games, eventId, posts}) {
 
             
                 {/* Event */}
-                <Box position={"relative"} pt={"25px"} pb={"25px"} pl={"0"} pr={0} 
-                // background={"rgba(113, 57, 166, 0.8)"}
-                >
-                    {/* Divides/Spaces */}
+                <Box position={"relative"} py={"25px"}>
                 <Stack spacing={{ base: 4, sm: 6 }} direction={"column"}>
-                <Box textAlign={"left"} fontWeight={'bold'} marginLeft={5} marginRight={5}>
-                
-                    
-                    {/* Details */}
-                    {/* <VStack spacing={{ base: 4, sm: 6 }}> */}
-                        <Text position={"relative"}
-                        //  color={useColorModeValue("whiteAlpha.600", "whiteAlpha.700")}
-                          fontSize={"3xl"} fontWeight={300}>
-                            Details
-                        </Text>
-                        {/* <Box backgroundColor={"whiteAlpha.900"} width={"98%"} borderRadius={"3xl"}> */}
-                        <Text whiteSpace= "pre-wrap" fontSize={{}} padding={"4px"}>{event.eventDetails}</Text>
-                        {/* </Box> */}
-                    {/* </VStack> */}
-                    
+                <Box textAlign={"left"} fontWeight={'bold'} mx={5}>
+                        <Text position={"relative"} fontSize={"3xl"} fontWeight={300} textTransform={'uppercase'} mb={4}>Details:</Text>
+                        <Text whiteSpace= "pre-wrap" fontSize={{}} padding={"4px"}>{event.eventDetails}</Text>                    
                 </Box>
                 </Stack>
 
                 </Box>
-                <Stack>
-                    <Text
-                    fontSize={{ base: "16px", lg: "18px" }}
-                    color={COLORS.indigo}
-                    fontWeight={'500'}
-                    textTransform={'uppercase'}
-                    mb={'4'}>
-                        Featured Games:
-                    </Text>
+                <Stack spacing={{ base: 4, sm: 6 }} direction={"column"}>
+                    <Text mx={5} position={"relative"} fontSize={"3xl"} fontWeight={300} textTransform={'uppercase'} mb={4}>Featured Games:</Text>
                     <HStack justifyContent={"space-evenly"}>
                     {/* Game */}
                     <Flex justifyContent={"center"} flexDirection={"row"} flexWrap={"wrap"} gap={6}>
@@ -152,8 +130,6 @@ export default function EventDetails({event, games, eventId, posts}) {
                     <Box
                     background={"rgba(113, 57, 166, 0.7)"}
                     display={"block"}
-                    // width={"300px"} 
-                    // height={"300px"} 
                     alignItems={"center"}  
                     borderRadius='lg' 
                     overflow='hidden' 
@@ -233,7 +209,7 @@ export default function EventDetails({event, games, eventId, posts}) {
                 
                 <Stack paddingTop={"1rem"}>
 
-                <VStack position={"relative"}>
+                <VStack position={"relative"} py={5}>
                         {/* Registration Button */}
                     <EventRegistration event={event} games={games}/>
                 </VStack>
