@@ -16,6 +16,15 @@ export default function EventDetails({event, games}) {
     let newDate = new Date(date)
     let myDate = newDate.toDateString()
     let time = newDate.toLocaleTimeString("en-US")
+    const [isHovering, setIsHovering] = useState(false);
+
+    const handleMouseOver = () => {
+      setIsHovering(true);
+    };
+  
+    const handleMouseOut = () => {
+      setIsHovering(false);
+    };
 
     return(
         <Box style={{"backdropFilter": "blur(6px)"}}>
@@ -127,7 +136,7 @@ export default function EventDetails({event, games}) {
                     fontWeight={'500'}
                     textTransform={'uppercase'}
                     mb={'4'}>
-                        Games:
+                        Featured Games:
                     </Text>
                     <HStack justifyContent={"space-evenly"}>
                     {/* Game */}
@@ -137,29 +146,58 @@ export default function EventDetails({event, games}) {
                     <Box
                     background={"rgba(113, 57, 166, 0.7)"}
                     display={"block"}
-                    width={"300px"} 
-                    height={"300px"} 
+                    // width={"300px"} 
+                    // height={"300px"} 
                     alignItems={"center"}  
                     borderRadius='lg' 
                     overflow='hidden' 
                     boxShadow={'md'} 
-                    >   <Box paddingTop={3}>
+                    _hover={{"transform": "scale3d(1.05, 1.05, 1)" }}
+                    onMouseOver={handleMouseOver}
+                    onMouseOut={handleMouseOut}
+                    >   
+                    {isHovering? 
+                        <Box >
+                            <Box borderRadius={"lg"} zIndex={1} padding={2} width={"264px"} height={"354px"} opacity={10} backgroundColor={'blackAlpha.700'} textColor={"white"} position={'absolute'} overflowY={'auto'}
+                                      css={{
+                                        '&::-webkit-scrollbar': {
+                                          width: '6px',
+                                        },
+                                        '&::-webkit-scrollbar-track': {
+                                          width: '8px',
+                                        },
+                                        '&::-webkit-scrollbar-thumb': {
+                                          background: '#805AD5',
+                                          borderRadius: '24px',
+                                        },}}>
+                                            <Heading color={COLORS.offWhite} textAlign={"center"} size='sm'>{game?.gameName}</Heading>
+                                            <Text >{game?.gameSummary}</Text></Box>
+                            <Box zIndex={0} position={'relative'} _hover={{bg:"black"}} >
+                            <Image
+                            display={"block"}
+                            marginLeft={"auto"}
+                            marginRight={"auto"}
+                            objectFit={"fill"} 
+                            borderTopRadius={"lg"}
+                            
+                            src={game?.gameImageUrl?.replace("thumb", "cover_big")} 
+                            alt={noImage}
+                            />
+                            </Box>
+                        </Box> 
+                        :
+                        <Box >
                             <Image 
                             display={"block"}
                             marginLeft={"auto"}
                             marginRight={"auto"}
-                            width={"250px"}
-                            height={"200px"}
                             objectFit={"fill"} 
                             borderTopRadius={"lg"} 
-                            src={game.gameImageUrl.replace("thumb", "cover_small_2x")} 
+                            src={game?.gameImageUrl?.replace("thumb", "cover_big")} 
                             alt={noImage}/>
                         </Box>
-                            <Box p='4'>
-                                <Box display='flex' alignItems='baseline'>
-                                    <Heading color={COLORS.offWhite} textAlign={"center"} size='md'>{game.gameName}</Heading>
-                                </Box>
-                            </Box>
+                            }
+
                                 
                     </Box>
                     ))}

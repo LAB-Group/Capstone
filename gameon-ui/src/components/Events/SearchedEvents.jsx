@@ -23,7 +23,18 @@ export default function SearchedEvents({events, isOpen, onOpen, onClose}){
 
     <Modal isCentered isOpen={isOpen} onClose={onClose} >
         <ModalOverlay overflowY={'auto'} width={'100%'} />
-        <ModalContent maxWidth={'100rem'} width={'90%'} height={'85%'} >
+        <ModalContent maxWidth={'100rem'} width={'90%'} height={'85%'} overflowY={'auto'} overflowX={'hidden'}
+                                      css={{
+                                        '&::-webkit-scrollbar': {
+                                          width: '8px',
+                                        },
+                                        '&::-webkit-scrollbar-track': {
+                                          width: '10px',
+                                        },
+                                        '&::-webkit-scrollbar-thumb': {
+                                          background: '#805AD5',
+                                          borderRadius: '24px',
+                                        },}} >
           <ModalHeader>Search Events</ModalHeader>
           <ModalCloseButton />
           <ModalBody>

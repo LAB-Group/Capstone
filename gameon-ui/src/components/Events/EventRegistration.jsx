@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import apiClient from '../../services/apiClient';
 import { useAuthContext } from '../../contexts/auth';
-import { Container, Button, FormLabel, Checkbox, Alert, AlertIcon, Heading,
-  AlertDescription, CheckboxGroup, Text, Box, Stack, HStack,
+import { Container, Button, FormLabel, Checkbox, Alert, AlertIcon, Heading, FormControl,
+  AlertDescription, CheckboxGroup, Text, Box, Stack, HStack, Input, extendTheme, ChakraProvider, Grid
 } from '@chakra-ui/react';
 import { COLORS } from "../colors"
 
@@ -81,13 +81,26 @@ export default function EventRegistration({ games }) {
   }
 
   return (
+    <ChakraProvider theme={theme}>
     <Container centerContent>
       <FormLabel htmlFor="eventGame">
         <Heading color={COLORS.indigo}>Event Registration</Heading>
       </FormLabel>
       <Box>
           <Stack>
-              <HStack spacing={4}>
+          <FormControl variant="floating">
+            <FormLabel transform="scale(0.85) translateY(-21px)" >Email</FormLabel>
+            <Input marginBottom={1} onFocusBorderColor='purple.400' value={user.email} isReadOnly />
+          </FormControl>
+          <FormControl variant="floating">
+            <FormLabel transform="scale(0.85) translateY(-21px)">Username</FormLabel>
+            <Input marginBottom={1} onFocusBorderColor='purple.400' value={user.username} isReadOnly />
+            </FormControl>
+            <FormControl variant="floating">
+            <FormLabel transform="scale(0.85) translateY(-21px)">Name</FormLabel>
+            <Input marginBottom={1} onFocusBorderColor='purple.400' value={(user.firstName + " " + user.lastName)} isReadOnly />
+            </FormControl>
+              <Grid spacing={4}>
                   <CheckboxGroup size="lg" isDisabled={action || isRegistered}>
                       {games?.map((game, index) => (
                         <Checkbox colorScheme='purple' mt={2} key={game.gameId} value={game.gameName} isChecked={checkedItems[index]} 
@@ -97,7 +110,7 @@ export default function EventRegistration({ games }) {
                       ))}
                   </CheckboxGroup>
               {/* <Button colorScheme="purple" onClick={handleOnSubmit}>Register</Button> */}
-              </HStack>
+              </Grid>
               </Stack>
           
       </Box>
@@ -139,6 +152,7 @@ export default function EventRegistration({ games }) {
           }       
       </Box>
     </Container>
+    </ChakraProvider>
   );
 }
 
@@ -154,3 +168,41 @@ export function AlertBox({ message }) {
     </Alert>
   )
 }
+
+// const activeLabelStyles = {
+//   transform: "scale(0.85) translateY(-24px)"
+  
+// };
+
+export const theme = extendTheme({
+  components: {
+    Form: {
+      variants: {
+        floating: {
+          container: {
+            _focusWithin: {
+              label: {
+                // ...activeLabelStyles
+              }
+            },
+            "input:not(:placeholder-shown) + label, .chakra-select__wrapper + label": {
+              // ...activeLabelStyles
+            },
+            label: {
+              top: 0,
+              left: 0,
+              zIndex: 2,
+              position: "absolute",
+              backgroundColor: "white",
+              pointerEvents: "none",
+              mx: 3,
+              px: 1,
+              my: 2,
+              transformOrigin: "left top"
+            }
+          }
+        }
+      }
+    }
+  }
+});
