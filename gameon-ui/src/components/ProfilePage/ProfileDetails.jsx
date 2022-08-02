@@ -28,15 +28,14 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen, games })
                 <EditProfile />
             } />
         </Routes>
-        <Box width={"1200px"}>
-
+        <Box>
         <Stack
           // borderWidth="1px"
           borderRadius="lg"
-          width={"100%"}
-          background={"rgba(113, 57, 166, 0.9)"} 
+          width={"400px"}
+          // background={"rgba(113, 57, 166, 0.9)"} 
           height={"auto"}
-          direction={{ base: 'column', md: 'row' }}
+          direction={"row"}
           display='flex'
           justifyContent={"space-between"}
           padding={4}>
@@ -50,7 +49,7 @@ export default function ProfileDetails({ user, onOpen, onClose, isOpen, games })
               src={user.imageUrl}
               />
           </Flex>
-          <Box w={"70%"} >
+          <Box>
           <Stack
             flex={1}
             flexDirection="column"

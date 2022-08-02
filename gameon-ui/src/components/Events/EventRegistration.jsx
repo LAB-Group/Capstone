@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import apiClient from '../../services/apiClient';
 import { useAuthContext } from '../../contexts/auth';
 import { Container, Button, FormLabel, Checkbox, Alert, AlertIcon, Heading, FormControl,
-  AlertDescription, CheckboxGroup, Text, Box, Stack, HStack, Input, extendTheme, ChakraProvider, Grid
+  AlertDescription, CheckboxGroup, Box, Stack, Input, extendTheme, ChakraProvider, Grid
 } from '@chakra-ui/react';
 import { COLORS } from "../colors"
 
