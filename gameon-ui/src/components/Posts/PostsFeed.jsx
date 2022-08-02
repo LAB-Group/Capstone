@@ -11,7 +11,7 @@ export default function PostsFeed({ eventId, posts }) {
     <>
     <VStack>
     <Stack display={'flex'} justifyContent='flex-start'>
-      <Heading color={COLORS.offWhite} p={3}>Event Comments</Heading>
+      <Heading p={3}>Comments</Heading>
     </Stack>
   
     {/* <Container centerContent minWidth="85vw"> */}
