@@ -27,7 +27,6 @@ export default function EventRegistration({ games }) {
     const getIsRegistered = async() => {
       const { data, error } = await apiClient.isUserRegistered(eventId, user.id)
        if(data) {
-        console.log("data: ", data)
         setErrors(null)
         setIsRegistered(true)
        }
