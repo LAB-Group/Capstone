@@ -72,6 +72,17 @@ export default function NavBar() {
                         "borderStyle": "solid",
                         "borderColor": COLORS.darkAmethyst}}>Events</Text></Link>
                     </ListItem>
+                    <ListItem float={"left"} display={"block"} hidden>
+                <Link smooth to="#events">
+                    <Text color={COLORS.offWhite} fontWeight={700} 
+                    style={{
+                        "transition": "fontSize 0.8s, borderBottom 0.8s, borderStyle 0.8s, borderColor 0.8s"}}
+                    _hover={{
+                        "fontSize": "24px", 
+                        "borderBottom": "4px",
+                        "borderStyle": "solid",
+                        "borderColor": COLORS.darkAmethyst}}>Events</Text></Link>
+                    </ListItem>
                
                 </List>
                     

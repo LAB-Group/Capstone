@@ -11,6 +11,7 @@ import Footer from "../Footer/Footer"
 import background from "../../media/evo2.jpg"
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
+import EventFeed from "../Events/EventFeed";
 
 export default function AppContainer() {
     return (
@@ -40,6 +41,7 @@ function App(){
 
             {/* EventFeed */}
             <Route path={"/events/:eventId"} element={<EventPage />}/>
+            <Route path={"/events"} element={<EventFeed />}/>
 
             {/* OtherUserProfilePage */}
             <Route path={"/user/:userId/profile/*"} element={<UsersProfilePage />} />

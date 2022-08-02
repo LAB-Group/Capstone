@@ -9,11 +9,14 @@ export default function About(){
         <Box width={"100%"} pt={12}
             // css={{
             //     "position": "relative",
-            //     "transform": "translateY(150px)",
+            //     "transform": "translateX(150px)",
             //     "opacity": 0,
             //     "transition": "2s all ease"
             // }}
-        
+            // _active={{
+            //     "transform": "translateX(0)",
+            //     "opacity": 1
+            // }}
         
         >
             <Heading id="events" fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite} marginBottom={"1em"} textAlign={"center"} fontSize={["xl", "3xl", "4xl"]}>About</Heading>
