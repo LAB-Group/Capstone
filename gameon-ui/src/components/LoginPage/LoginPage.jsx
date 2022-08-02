@@ -52,8 +52,7 @@ import { ModalOverlay,
 export default function LoginPage({onClose}) {
   const { user, setUser } = useAuthContext()
   const [errors, setErrors] = useState({})
-  const [isEmail,setIsEmail]=useState(false)
-  const [isPassword,setIsPassword]=useState(false)
+  const [isSubmit,setIsSubmit]=useState()
   const [isLoading, setIsLoading] = useState(false)
   const [loginForm, setLoginForm] = useState({
       email: "",
@@ -73,19 +72,10 @@ export default function LoginPage({onClose}) {
         apiClient.setToken(data.token)
         onClose()
       }
+      setIsSubmit(true)
       setIsLoading(false)
 
-      if(!loginForm.email>0){
-            setIsEmail(true)
-          }else{
-            setIsEmail(false)
-
-            }
-      if(!loginForm.password>0){
-        setIsPassword(true)
-      }else{
-        setIsPassword(false)
-      }
+     
     }
 
     return (
@@ -93,10 +83,9 @@ export default function LoginPage({onClose}) {
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Login to your account</ModalHeader>
-        <Text fontSize='sm' color='red.500' p={0}>{errors.form}</Text>
         <ModalCloseButton />
         <ModalBody>
-        <LoginForm user={user} loginForm={loginForm} setLoginForm={setLoginForm} setErrors={setErrors} isEmail={isEmail} isPassword={isPassword}/>
+        <LoginForm user={user} loginForm={loginForm} setLoginForm={setLoginForm} setErrors={setErrors} isSubmit={isSubmit}/>
         </ModalBody>
 
         <ModalFooter display={'flex'} justifyContent={'center'}>
@@ -111,7 +100,7 @@ export default function LoginPage({onClose}) {
   )
 }
 
-function LoginForm({ user, loginForm, setLoginForm, setErrors,isEmail, isPassword}) {
+function LoginForm({ user, loginForm, setLoginForm, setErrors, isSubmit}) {
     const [showPassword, setShowPassword] = useState(false)
   
     const handleClick = () => setShowPassword(!showPassword)
@@ -133,7 +122,7 @@ function LoginForm({ user, loginForm, setLoginForm, setErrors,isEmail, isPasswor
        {/* To adjust form add padding here */}
       <VStack spacing={5}>
         
-        <FormControl variant="floating" isInvalid={isEmail}>
+        <FormControl variant="floating" isInvalid={!loginForm.email.length>0&&isSubmit?true:false}>
         {loginForm.email.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Email</FormLabel>
          : 
@@ -144,11 +133,11 @@ function LoginForm({ user, loginForm, setLoginForm, setErrors,isEmail, isPasswor
           defaultValue={loginForm.email}
           onChange={handleOnInputChange}
         /> 
-        {isEmail?<FormErrorMessage>Email is required.</FormErrorMessage>:null
+        {!loginForm.email.length>0&&isSubmit?<FormErrorMessage>Email is required.</FormErrorMessage>:null
         }
         </FormControl>
 
-        <FormControl variant="floating"  isInvalid={isPassword}>
+        <FormControl variant="floating"  isInvalid={!loginForm.password.length>0&&isSubmit?true:false}>
               {loginForm.password.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Password</FormLabel>
          : 
@@ -168,7 +157,7 @@ function LoginForm({ user, loginForm, setLoginForm, setErrors,isEmail, isPasswor
         </InputRightElement>
         
         </InputGroup>
-        {isPassword?<FormErrorMessage>password is required.</FormErrorMessage>:null}
+        {!loginForm.password.length>0&&isSubmit?<FormErrorMessage>password is required.</FormErrorMessage>:null}
         </FormControl>
         </VStack>
 

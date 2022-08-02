@@ -18,7 +18,7 @@ import { ModalOverlay,
   VStack,
   useOutsideClick,
   Textarea,
-  Text
+  Text, FormErrorMessage
 } from '@chakra-ui/react';
 import Search from '../Search/Search';
 import {COLORS} from "../colors"
@@ -68,6 +68,10 @@ export default function CreateEventForm({ onClose }) {
   const [selectedGamesNames, setSelectedGamesNames] = useState([])
   const [selectedGamesSummary, setSelectedGamesSummary] = useState([])
   const [selectedGamesPic, setSelectedGamesPic] = useState([])
+  const [isSubmit,setIsSubmit]=useState()
+ 
+ 
+  
   const [createEventForm, setCreateEventForm] = useState({
     eventName: '',
     eventDate: '',
@@ -84,6 +88,7 @@ export default function CreateEventForm({ onClose }) {
       [event.target.name]: event.target.value,
     }));
   };
+ 
 
   const handleOnSubmit = async () => {
     setErrors(error => ({ ...error, form: null }));
@@ -101,9 +106,21 @@ export default function CreateEventForm({ onClose }) {
         const { test } = await apiClient.addGamesToLocalDB({gameId:selectedGames[i],gameName:selectedGamesNames[i],gameSummary:selectedGamesSummary[i],gameImageUrl:selectedGamesPic[i]})
     }
     if (error) setErrors(e => ({ ...e, form: error }));
-    onClose();
-    window.location.reload();
+    setIsSubmit(true)
+   
+     if(createEventForm.eventName.length>0&&createEventForm.eventDate.length>0&&createEventForm.eventType.length>0&&createEventForm.eventLocation.length>0&&createEventForm.eventDetails.length>0){
+          onClose();
+          window.location.reload();
+     }
+   
+
+      
+     
+    
+   
+    
   };
+
 
   const ref = React.useRef()
   const [showTimeDate, setShowTimeDate] = useState(false)
@@ -122,6 +139,7 @@ export default function CreateEventForm({ onClose }) {
   //   add stream/video link so we can embed player?
 
   return (
+    <ChakraProvider theme={theme}>
     <Container centerContent  >
     <ModalOverlay />
     <ModalContent maxWidth={'100rem'} width={'90%'} maxHeight={'85%'} overflowY={'auto'}
@@ -137,12 +155,12 @@ export default function CreateEventForm({ onClose }) {
                                           borderRadius: '24px',
                                         },}} >
       <ModalHeader>Create Event</ModalHeader>
-      <Text fontSize='sm' color='red.500' p={0}>{errors.form}</Text>
+      <Text align={"center"} fontSize='sm' color='red.500' p={0}>{errors.form}</Text>
       <ModalCloseButton />
       <ModalBody>
          {/* To adjust form add padding here */}
         <VStack spacing={5}>
-       <FormControl color={COLORS.indigo} variant="floating" >
+       <FormControl color={COLORS.indigo} variant="floating"  isInvalid={!createEventForm.eventName.length>0&&isSubmit?true:false}>
        {createEventForm.eventName.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Event Name</FormLabel>
          : 
@@ -156,9 +174,12 @@ export default function CreateEventForm({ onClose }) {
           defaultValue={createEventForm.eventName}
           onChange={handleOnInputChange}
         />
+        {!createEventForm.eventName.length>0&&isSubmit?<FormErrorMessage>Event Name is required.</FormErrorMessage>:null
+      }
+        {/* {isEventName?<FormErrorMessage>Event Name is required.</FormErrorMessage>:null} */}
       </FormControl>
 
-        <FormControl variant="floating">
+        <FormControl variant="floating" isInvalid={!createEventForm.eventDate.length>0&&isSubmit?true:false}>
         {createEventForm.eventDate.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Event Date</FormLabel>
          : 
@@ -171,12 +192,14 @@ export default function CreateEventForm({ onClose }) {
           onClick={() => setShowTimeDate(true)}
           ref={ref}
           type={showTimeDate?"date":"text"}
-          placeholder="mm/dd/yyyy"
           value={createEventForm.eventDate}
           onChange={handleOnInputChange}
         />
+        {!createEventForm.eventDate.length>0&&isSubmit?<FormErrorMessage>Event Date is required.</FormErrorMessage>:null
+        }
+        
         </FormControl>
-        <FormControl variant="floating">
+        <FormControl variant="floating" isInvalid={!createEventForm.eventType.length>0&&isSubmit?true:false}>
         {createEventForm.eventType.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Event Type</FormLabel>
          : 
@@ -195,9 +218,11 @@ export default function CreateEventForm({ onClose }) {
           <option>Tournament</option>
           <option>Speedrunning</option>
         </Select>
+        {!createEventForm.eventType.length>0&&isSubmit?<FormErrorMessage>Event Type is required.</FormErrorMessage>:null
+        }
         </FormControl>
 
-        <FormControl variant="floating">
+        <FormControl variant="floating" isInvalid={!createEventForm.eventLocation.length>0&&isSubmit?true:false}>
         {createEventForm.eventLocation.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Event Location</FormLabel>
          : 
@@ -212,6 +237,9 @@ export default function CreateEventForm({ onClose }) {
           defaultValue={createEventForm.eventLocation}
           onChange={handleOnInputChange}
         />
+        {!createEventForm.eventLocation.length>0&&isSubmit?<FormErrorMessage>Event Location is required.</FormErrorMessage>:null
+        }
+        
         </FormControl>
         
         
@@ -226,7 +254,7 @@ export default function CreateEventForm({ onClose }) {
          setSelectedGamesPic={setSelectedGamesPic}
          />
     
-        <FormControl variant="floating">
+        <FormControl variant="floating" isInvalid={!createEventForm.eventDetails.length>0&&isSubmit?true:false}>
         {createEventForm.eventDetails.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Event Details</FormLabel>
          : 
@@ -243,7 +271,7 @@ export default function CreateEventForm({ onClose }) {
           onChange={handleOnInputChange}
         />
         </FormControl>
-        <FormControl variant="floating">
+        <FormControl variant="floating"  isInvalid={!createEventForm.eventImageUrl.length>0&&isSubmit?true:false}>
         {createEventForm.eventImageUrl.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Event Image</FormLabel>
          : 
@@ -258,6 +286,8 @@ export default function CreateEventForm({ onClose }) {
           focusBorderColor={COLORS.ultraViolet}
           onChange={handleOnInputChange}
         />
+        {!createEventForm.eventImageUrl.length>0&&isSubmit?<FormErrorMessage>Image URL is required.</FormErrorMessage>:null
+            }
         
         </FormControl> 
           
@@ -355,6 +385,6 @@ export default function CreateEventForm({ onClose }) {
       onClick={handleOnSubmit}>Create</Button>
       </ModalFooter>
     </ModalContent>
-  </Container>
+  </Container></ChakraProvider>
 )
 }
