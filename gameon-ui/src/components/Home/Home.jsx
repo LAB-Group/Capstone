@@ -10,7 +10,7 @@ export default function Home(){
 
             // Blur filter for the background
             // This doesn't effect the foreground
-                <Box style={{"backdropFilter": "blur(10px)", "background":"rgba(48, 43, 63, .4)"}}>
+                <Box overflow={"hidden"} style={{"backdropFilter": "blur(10px)", "background":"rgba(48, 43, 63, .4)"}}>
                 <Hero />
 
                 {/* Why is this here? */}
