@@ -52,13 +52,13 @@ export default function EventPage(){
       },[])
 
     return(
-        <Box>
+        <Container centerContent >
             <EventDetails event={event} games={games} />
             <Divider orientation='horizontal' />
             {/* Moved this to EventDetails file */}
             {/* <EventRegistration event={event} /> */}
             <PostsFeed eventId={eventId} posts={posts} />
             <PostsForm event={event} eventId={eventId} />
-        </Box>
+        </Container>
     )
 }

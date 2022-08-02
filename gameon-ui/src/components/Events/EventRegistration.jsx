@@ -4,11 +4,12 @@ import { useParams } from 'react-router-dom';
 import apiClient from '../../services/apiClient';
 import { useAuthContext } from '../../contexts/auth';
 import { Container, Button, FormLabel, Checkbox, Alert, AlertIcon, Heading, FormControl,
-  AlertDescription, CheckboxGroup, Text, Box, Stack, HStack, Input, extendTheme, ChakraProvider, Grid
+  AlertDescription, CheckboxGroup, Box, Stack, Input, extendTheme, ChakraProvider, Grid
 } from '@chakra-ui/react';
 import { COLORS } from "../colors"
 
 export default function EventRegistration({ games }) {
+  console.log("games: ", games)
   const { user } = useAuthContext()
   const { eventId } = useParams()
   const [checkedItems, setCheckedItems] = useState([])
@@ -18,8 +19,8 @@ export default function EventRegistration({ games }) {
 
   useEffect(() => {  
     const setItems = async() => {
-      if(games.game) {
-        setCheckedItems(new Array(games.game.length).fill(false))
+      if(games) {
+        setCheckedItems(new Array(games.length).fill(false))
       }
     }
     setItems()
@@ -36,7 +37,7 @@ export default function EventRegistration({ games }) {
        }   
     }
     getIsRegistered()    
-  }, [games.game, user.id, eventId]);
+  }, [games, user.id, eventId]);
 
   function replaceAt(array, index, value) {
     const newArray = array.slice(0)
@@ -48,7 +49,7 @@ export default function EventRegistration({ games }) {
     let registeredArray = []
     for(let i = 0; i < gameArray.length; i++) {
       if(gameArray[i]) {
-        registeredArray.push(games.game[i].id)
+        registeredArray.push(games[i].id)
       }   
     }
     return registeredArray
@@ -108,7 +109,6 @@ export default function EventRegistration({ games }) {
                         </Checkbox>
                       ))}
                   </CheckboxGroup>
-              {/* <Button colorScheme="purple" onClick={handleOnSubmit}>Register</Button> */}
               </Grid>
               </Stack>
           
@@ -167,11 +167,6 @@ export function AlertBox({ message }) {
     </Alert>
   )
 }
-
-// const activeLabelStyles = {
-//   transform: "scale(0.85) translateY(-24px)"
-  
-// };
 
 export const theme = extendTheme({
   components: {
