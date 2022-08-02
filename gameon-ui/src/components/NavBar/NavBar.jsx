@@ -35,7 +35,7 @@ export default function NavBar() {
     return (
         // This makes the navbar scrollable
 
-        <Box fontFamily={"Roboto, sans-serif"} zIndex={1} position="sticky" top={0} width="100%" height="50px" backgroundColor={COLORS.indigo} fontSize={{ "base":"lg","md":"lg", "lg":"xl"}}>
+        <Box overflow={"hidden"} fontFamily={"Roboto, sans-serif"} zIndex={1} position="sticky" top={0} width="100%" height="50px" backgroundColor={COLORS.indigo} fontSize={{ "base":"lg","md":"lg", "lg":"xl"}}>
             <Flex minWidth='max-content' alignItems='center' gap='2'>
                 {/* FIXME: Image revisit */}
                 <Box width={"150px"} height={"50px"}>
@@ -54,7 +54,7 @@ export default function NavBar() {
                         "borderBottom": "4px",
                         "borderStyle": "solid",
                         "borderColor": COLORS.darkAmethyst}}
-                    _after={{
+                    _={{
                         "fontSize": "24px", 
                         "borderBottom": "4px",
                         "borderStyle": "solid",
