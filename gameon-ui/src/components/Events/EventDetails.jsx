@@ -19,7 +19,6 @@ export default function EventDetails({event, games}) {
     const { user } = useAuthContext()
     const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure()
     const { isOpen: isRegisterOpen, onOpen: onRegisterOpen, onClose: onRegisterClose } = useDisclosure()
-    console.log("user: ", user.email)
     let date = event.eventDate
     let newDate = new Date(date)
     let myDate = newDate.toDateString()

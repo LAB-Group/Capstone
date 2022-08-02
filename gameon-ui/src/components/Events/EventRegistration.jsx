@@ -9,7 +9,6 @@ import { Container, Button, FormLabel, Checkbox, Alert, AlertIcon, Heading, Form
 import { COLORS } from "../colors"
 
 export default function EventRegistration({ games }) {
-  console.log("games: ", games)
   const { user } = useAuthContext()
   const { eventId } = useParams()
   const [checkedItems, setCheckedItems] = useState([])
