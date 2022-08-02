@@ -119,7 +119,7 @@ export default function PostsForm({event, eventId}) {
           onChange={handleOnInputChange}
         />
       </FormControl>
-      <Divider/>
+      <Divider w={['150px','300px','450px','600px','750px']}/>
       <FormControl >
     
         <Textarea

@@ -53,7 +53,7 @@ export default function EventPage(){
 
     return(
         <Box style={{"backdropFilter": "blur(10px)", "background":"rgba(0, 0, 0, 0.05)"}} >
-          <Container centerContent width={"70%"} bg={"white"}>
+          <Container centerContent minWidth={"80%"} bg={"white"}>
             <EventDetails event={event} games={games} eventId={eventId} posts={posts} />
             {/* <Divider orientation='horizontal' /> */}
             {/* Moved this to EventDetails file */}

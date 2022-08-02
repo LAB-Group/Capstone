@@ -70,7 +70,9 @@ export default function Posts({ post, eventId }) {
         position="relative"
         rounded="md"
         borderRadius="5px"
-        w={['350px','500px','700px','850px','1000px']}
+        // maxW='100%'
+        w={['350px','450px','600px','775px','900px']}
+        // w={['350px','500px','700px','850px','1000px']}
         pb={2}
         
         m={8}
@@ -97,8 +99,8 @@ export default function Posts({ post, eventId }) {
                     </Stack>
                     <Stack>
                         <Heading height="16px"  pb={10} width="100%">{post.postTitle}</Heading>
-                        <Divider w={['325px','450px','650px','800px','950px']}/>
-                        <Text p={2} mt={2} minH="14px" >{post.postContent}</Text>
+                        <Divider w={['200px','350px','500px','650px','800px']}/>
+                        <Text p={2} mt={2} minH="14px" width="80%" >{post.postContent}</Text>
                     </Stack>
                 </Box>
               </Stack>
@@ -107,9 +109,9 @@ export default function Posts({ post, eventId }) {
        {postReplies?.map((postReply, index) => (
           <PostReply key={index} postReply={postReply} eventId={eventId} />
         ))}
-        <Box ml="56em" mb={2} >
+        <Box w={['150px','300px','450px','600px','750px']} mb={2} >
               <Button variant='ghost' onClick={onOpen}>Reply</Button></Box>
-        <Divider w='1200px'/>
+        <Divider w={['150px','300px','450px','600px','750px']} />
         <VStack>    
         <Modal onClose={onClose} isOpen={isOpen} isCentered>
           <ModalOverlay />
