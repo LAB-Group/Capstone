@@ -117,9 +117,9 @@ export default function EventDetails({event, games, eventId, posts}) {
                 {/* Event */}
                 <Box position={"relative"} py={"25px"}>
                 <Stack spacing={{ base: 4, sm: 6 }} direction={"column"}>
-                <Box textAlign={"left"} fontWeight={'bold'} mx={5}>
+                <Box textAlign={"left"} mx={5}>
                         <Text position={"relative"} fontSize={"3xl"} fontWeight={300} textTransform={'uppercase'} mb={4}>Details:</Text>
-                        <Text whiteSpace= "pre-wrap" fontSize={{}} padding={"4px"}>{event.eventDetails}</Text>                    
+                        <Text whiteSpace= "pre-wrap"fontSize={'md'} padding={"4px"}>{event.eventDetails}</Text>                    
                 </Box>
                 </Stack>
 
@@ -131,7 +131,7 @@ export default function EventDetails({event, games, eventId, posts}) {
                     <Flex justifyContent={"center"} flexDirection={"row"} flexWrap={"wrap"} gap={6}>
 
                     {games?.map((game, index) => (
-                    <Box
+                    <Box width={"264px"} height={"354px"}
                     background={"rgba(113, 57, 166, 0.7)"}
                     display={"block"}
                     alignItems={"center"}  
@@ -139,12 +139,13 @@ export default function EventDetails({event, games, eventId, posts}) {
                     overflow='hidden' 
                     boxShadow={'md'} 
                     _hover={{"transform": "scale3d(1.05, 1.05, 1)" }}
+                    sx={{"& .gameInfo":{opacity:0, transition:"all .2s"}, "&:hover .gameInfo":{opacity:100}}}
                     onMouseOver={handleMouseOver}
                     onMouseOut={handleMouseOut}
                     >   
-                    {isHovering? 
-                        <Box >
-                            <Box borderRadius={"lg"} zIndex={1} padding={2} width={"264px"} height={"354px"} opacity={10} backgroundColor={'blackAlpha.700'} textColor={"white"} position={'absolute'} overflowY={'auto'}
+
+                        <Box width={"264px"} height={"354px"} >
+                            <Box className="gameInfo" borderRadius={"lg"} zIndex={1} padding={2} width={"264px"} height={"354px"} opacity={10} backgroundColor={'blackAlpha.700'} textColor={"white"} position={'absolute'} overflowY={'auto'}
                                       css={{
                                         '&::-webkit-scrollbar': {
                                           width: '6px',
@@ -156,9 +157,9 @@ export default function EventDetails({event, games, eventId, posts}) {
                                           background: '#805AD5',
                                           borderRadius: '24px',
                                         },}}>
-                                            <Heading color={COLORS.offWhite} textAlign={"center"} size='sm'>{game?.gameName}</Heading>
+                                            <Heading py={2} color={COLORS.offWhite} textAlign={"center"} size='sm'>{game?.gameName}</Heading>
                                             <Text >{game?.gameSummary}</Text></Box>
-                            <Box zIndex={0} position={'relative'} _hover={{bg:"black"}} >
+                            <Box width={"264px"} height={"354px"} zIndex={0} position={'relative'} _hover={{bg:"black"}} >
                             <Image
                             display={"block"}
                             marginLeft={"auto"}
@@ -171,18 +172,7 @@ export default function EventDetails({event, games, eventId, posts}) {
                             />
                             </Box>
                         </Box> 
-                        :
-                        <Box >
-                            <Image 
-                            display={"block"}
-                            marginLeft={"auto"}
-                            marginRight={"auto"}
-                            objectFit={"fill"} 
-                            borderTopRadius={"lg"} 
-                            src={game?.gameImageUrl?.replace("thumb", "cover_big")} 
-                            alt={noImage}/>
-                        </Box>
-                            }         
+       
                     </Box>
                     ))}
                     </Flex>

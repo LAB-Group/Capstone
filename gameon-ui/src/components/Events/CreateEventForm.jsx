@@ -22,7 +22,7 @@ import { ModalOverlay,
 } from '@chakra-ui/react';
 import Search from '../Search/Search';
 import {COLORS} from "../colors"
-
+import axios from 'axios';
 // import { Calendar } from '@natscale/react-calendar';
 
 const activeLabelStyles = {
@@ -69,7 +69,7 @@ export default function CreateEventForm({ onClose }) {
   const [selectedGamesSummary, setSelectedGamesSummary] = useState([])
   const [selectedGamesPic, setSelectedGamesPic] = useState([])
   const [isSubmit,setIsSubmit]=useState()
- 
+  const [selectedImage, setSelectedImage] = useState(null);
  
   
   const [createEventForm, setCreateEventForm] = useState({
@@ -111,14 +111,7 @@ export default function CreateEventForm({ onClose }) {
      if(createEventForm.eventName.length>0&&createEventForm.eventDate.length>0&&createEventForm.eventType.length>0&&createEventForm.eventLocation.length>0&&createEventForm.eventDetails.length>0){
           onClose();
           window.location.reload();
-     }
-   
-
-      
-     
-    
-   
-    
+     }    
   };
 
 
@@ -126,7 +119,6 @@ export default function CreateEventForm({ onClose }) {
   const [showTimeDate, setShowTimeDate] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const handleClick = () => setShowPassword(!showPassword)
-  
   
   useOutsideClick({
     ref: ref,
@@ -137,6 +129,24 @@ export default function CreateEventForm({ onClose }) {
 
   // const handleClick = () => setShowPassword(!showPassword)
   //   add stream/video link so we can embed player?
+
+  // const onFileChange = event => {
+  //   this.setState({ selectedFile: event.target.files[0] });
+  // };
+
+  // const onFileUpload = () => {
+  //   const formData = new FormData();
+  
+  //   formData.append(
+  //     "myFile",
+  //     this.state.selectedFile,
+  //     this.state.selectedFile.name
+  //   );
+
+  //   axios.post("api/uploadfile", formData);
+  // };
+
+
 
   return (
     <ChakraProvider theme={theme}>
@@ -287,6 +297,9 @@ export default function CreateEventForm({ onClose }) {
         />
         {!createEventForm.eventImageUrl.length>0&&isSubmit?<FormErrorMessage>Image URL is required.</FormErrorMessage>:null
             }
+
+        {/* <Input type={"file"} accept={".jpg, .jpeg, .png, .gif"} onChange={onFileChange} placeholder={"Select File"}></Input>
+        <Button onClick={onFileUpload}>Upload</Button> */}
         
         </FormControl> 
           
