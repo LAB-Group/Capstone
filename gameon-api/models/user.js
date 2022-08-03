@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt")
 const { BCRYPT_WORK_FACTOR } = require("../config")
 const db = require("../db")
-const { BadRequestError, UnauthorizedError } = require("../utils/errors")
+const { BadRequestError, UnauthorizedError, NotFoundError } = require("../utils/errors")
 
 class User {
   static makePublicUser(user) {
@@ -104,7 +104,6 @@ class User {
 
   static async fetchUserById({userId}) {
     // fetches a user by their id
-
     const result = await db.query(
       `
         SELECT
@@ -124,6 +123,9 @@ class User {
     
     const user = result.rows[0]
 
+    if(!user) {
+      throw new NotFoundError("No user was found.")
+    }
     return user
   }
 

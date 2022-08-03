@@ -1,4 +1,5 @@
 const db = require("../db")
+const User = require("../models/user")
 const { BadRequestError, NotFoundError } = require("../utils/errors")
 
 class Events {
@@ -9,7 +10,6 @@ class Events {
             from most recent to least recent
             each event will be displayed in a post
         */
-
         const results = await db.query(
             `
                 SELECT e.id,
@@ -32,14 +32,11 @@ class Events {
                 ORDER BY e.created_at DESC
             `
         )
-
         return results.rows
-
     }
 
     static async fetchEventById(eventId) {
         // fetches an event by its id
-
         const results = await db.query(
             `
                 SELECT e.id,
@@ -75,7 +72,6 @@ class Events {
     }
 
     static async createNewEvent({event, user}) {
-
         // ensures all required fields are present
         // NEED EVENT DATE
          const requiredFields = ["eventName", "eventDate", "eventType", "eventLocation", "eventGame", "eventDetails", "eventImageUrl"]
@@ -84,7 +80,6 @@ class Events {
                 throw new BadRequestError(`Required field - ${field} - missing from request body.`)
             }
          })
-
          // insert event into database
          const results = await db.query(
             `
@@ -103,7 +98,6 @@ class Events {
             `,
                 [event.eventName, event.eventDate, event.eventType, event.eventLocation, event.eventGame, event.eventDetails, event.eventImageUrl, user.email]
          )
-
          return results.rows[0]
     }
 
@@ -131,7 +125,6 @@ class Events {
             `,
             [registration.eventGame, user.email, eventId]
         )
-
         return results.rows[0]
     }
 
@@ -147,11 +140,11 @@ class Events {
             `,
             [user.username, eventId]
         )
-
         return `Withdrew user ${user.username} from event successfully!` 
     }
 
-    static async fetchRegisteredForEventByUser({ user, eventId}) {
+    static async fetchRegisteredForEventByUser({user, eventId}) {
+        // fetches a specific user from a specific event if they/event exists
         const results = await db.query(
             `
                 SELECT user_id, event_id, registered_at
@@ -160,11 +153,14 @@ class Events {
             `,
             [user.username, eventId]
         )
-
         return results.rows[0]
     }
 
-    static async fetchUsersEvents(id) {
+    static async fetchUsersEvents(userId) {
+        const userExists = User.fetchUserById(userId)
+        if(!userExists) {
+            throw new NotFoundError("User does not exist.")
+        }
         const results = await db.query(
             `
                 SELECT r.user_id, 
@@ -183,14 +179,17 @@ class Events {
                     LEFT JOIN events AS e ON e.id = r.event_id
                 WHERE r.user_id = (SELECT id FROM users WHERE id = $1)
             `,
-            [id]
+            [userId]
         )
-
         return results.rows
     }
 
-
     static async fetchUsersRegisteredForEvent(eventId) {
+        const eventExists = fetchEventById(eventId)
+        if(!eventExists) {
+            throw new NotFoundError("Event does not exist.")
+        }
+        
         const numOfUsers = await db.query(
             `
                 SELECT COUNT(user_id)
@@ -216,6 +215,16 @@ class Events {
     }
 
     static async UserRegisteredForEvent({eventId, userId}) {
+        const eventExists = fetchEventById(eventId)
+        if(!eventExists) {
+            throw new NotFoundError("Event does not exist.")
+        }
+
+        const userExists = User.fetchUserById(userId)
+        if(!userExists) {
+            throw new NotFoundError("User does not exist.")
+        }
+
         const result = await db.query(
             `
                 SELECT
