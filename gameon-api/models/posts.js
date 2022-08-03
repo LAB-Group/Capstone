@@ -82,6 +82,7 @@ class Posts {
                        LEFT JOIN users AS u ON u.id = p.user_id
                        LEFT JOIN events AS e ON e.id = p.event_id
                 WHERE e.id = $1
+                ORDER BY p.created_at DESC
             `,
                 [eventId]
         )

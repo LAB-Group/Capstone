@@ -12,7 +12,7 @@ import {
   Button,
   extendTheme,
   ChakraProvider,
-  VStack,Box,Stack,HStack,Skeleton, Divider
+  VStack,Box,Stack,HStack,Skeleton, Divider, FormErrorMessage
 } from '@chakra-ui/react';
 import { COLORS } from '../colors';
 
@@ -55,6 +55,7 @@ export const theme = extendTheme({
 
 export default function PostsForm({event, eventId}) {
   const [errors, setErrors] = useState({});
+  const [isSubmit,setIsSubmit]=useState()
   const [createPostForm, setCreatePostForm] = useState({
     postTitle: '',
     postContent: '',
@@ -69,7 +70,13 @@ export default function PostsForm({event, eventId}) {
       postContent: createPostForm.postContent,
     });
     if (error) setErrors(e => ({ ...e, form: error }));
-    window.location.reload();
+    setIsSubmit(true)
+
+    if(createPostForm.postTitle.length>0&&createPostForm.postContent.length>0){
+      window.location.reload();
+    }
+
+    
   };
 
   const handleOnInputChange = event => {
@@ -103,36 +110,36 @@ export default function PostsForm({event, eventId}) {
               
               w="75vw"
             >
-      <VStack spacing={5} w='700px'>
+      <VStack spacing={5} mx={5} >
   
-      <FormControl variant="floating">
+      <FormControl variant="floating" isInvalid={!createPostForm.postTitle.length>0&&isSubmit?true:false}>
       
         <Input
           id="postTitle"
           type="text"
-          w='900px'
           placeholder='Title'
-          variant='unstyled'
+          variant={'filled'}
           focusBorderColor="purple.400"
           name="postTitle"
           defaultValue={createPostForm.postTitle}
           onChange={handleOnInputChange}
         />
+        {!createPostForm.postTitle.length>0&&isSubmit?<FormErrorMessage>Title is required.</FormErrorMessage>:null}
       </FormControl>
       <Divider w={['150px','300px','450px','600px','750px']}/>
-      <FormControl >
+      <FormControl isInvalid={!createPostForm.postContent.length>0&&isSubmit?true:false} >
     
         <Textarea
           id="postContent"
           name="postContent"
           type="text"
-          variant='unstyled'
           placeholder='Comment'
-          
+          variant={'filled'}
           focusBorderColor="purple.400"
           defaultValue={createPostForm.postContent}
           onChange={handleOnInputChange}
         />
+        {!createPostForm.postContent.length>0&&isSubmit?<FormErrorMessage>Comment is required.</FormErrorMessage>:null}
       </FormControl>
       
        <Button colorScheme="purple" mt={1} w="350px"  variant='ghost' onClick={handleOnSubmit}>

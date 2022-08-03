@@ -43,7 +43,8 @@ const clearSearch = async () => {
 }
 
   return (
-    <Container centerContent>
+    <>
+    {/* <Container centerContent maxW={'100%'}> */}
       <SearchBar
         searchInput={searchInput}
         value={searchInput}
@@ -59,7 +60,7 @@ const clearSearch = async () => {
         selectedGamesPic={selectedGamesPic}
         setSelectedGamesPic={setSelectedGamesPic}
       />
-      <Container maxH={'200px'} overflowY="auto" css={{
+      <Container maxW={"100%"} maxH={'200px'} overflowY="auto" css={{
     '&::-webkit-scrollbar': {
       width: '8px',
     },
@@ -71,7 +72,7 @@ const clearSearch = async () => {
       borderRadius: '24px',
     },
   }} >
-        <Wrap >
+        <Wrap maxW={'100%'}>
           {listGames?.map((game, index) => (
             <Button
               onClick={() => {
@@ -89,7 +90,8 @@ const clearSearch = async () => {
           ))}
         </Wrap>
       </Container>
-    </Container>
+    {/* </Container> */}
+    </>
   );
 }
 
@@ -126,9 +128,9 @@ function SearchBar({
 
 
   return (
-    <VStack spacing={2}>
+    <VStack  w={'100%'} maxW={'100%'} spacing={2}>
       {/* Fixed it: The Tags were floating */}
-      <Wrap w="400px" maxHeight={"40px"} overflowY="auto" css={{
+      <Wrap w={'100%'} maxW={'100%'} maxHeight={"80px"} overflowY="auto" css={{
     '&::-webkit-scrollbar': {
       width: '8px',
     },
@@ -154,7 +156,7 @@ function SearchBar({
         ))}
       </Wrap>
 
-      <Box>
+      <Box w={'100%'} maxW={'100%'}>
         <FormControl variant="floating" mt={2}>
           {searchInput.length > 0 ? (
             <FormLabel transform="scale(0.85) translateY(-21px)">
@@ -163,12 +165,11 @@ function SearchBar({
           ) : (
             <FormLabel>Games</FormLabel>
           )}
-          <HStack marginBottom={2}>
+          <HStack maxW={'100%'} marginBottom={2}>
             <Input
               name="searchInput"
               type="text"
-              // w="539px"
-              maxW={'50em'}
+              maxW={'100%'}
               focusBorderColor={COLORS.ultraViolet}
               value={searchInput}
               onChange={handleOnInputChange}

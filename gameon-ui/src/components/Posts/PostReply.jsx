@@ -42,7 +42,7 @@ export default function PostReply({postReply}) {
                             md: "end",
                           }}
                           mt={-16}>
-                          <Image  w={20} h={20} mt={8} borderRadius="50%" src={postReply.creatorImageUrl}/>
+                          <Image  w={[0,20]} h={[0,20]} mt={8} borderRadius="50%" src={postReply.creatorImageUrl}/>
                         </Flex>
                         <Link to={`/user/${postReply.creatorId}/profile`}  ><Text fontWeight={'bold'} >@{postReply.creatorUsername}</Text></ Link>
                       </HStack>

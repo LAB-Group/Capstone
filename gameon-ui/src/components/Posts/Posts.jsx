@@ -8,7 +8,8 @@ import {
   Modal, ModalOverlay, ModalFooter, 
   ModalBody, ModalContent, ModalHeader, 
   ModalCloseButton, useDisclosure, ButtonGroup, 
-  Stack, Skeleton, Divider, Badge, Flex
+  Stack, Skeleton, Divider, Badge, Flex,
+  FormControl, FormErrorMessage
 } from '@chakra-ui/react';
 import PostReply from './PostReply';
 
@@ -18,6 +19,7 @@ export default function Posts({ post, eventId }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [postReplies, setPostReplies] = useState([]);
   const [errors, setErrors] = useState(null);
+  const [isSubmit,setIsSubmit]=useState()
   const [createReplyForm, setCreateReplyForm] = useState({
     replyContent: '',
   });
@@ -50,8 +52,13 @@ export default function Posts({ post, eventId }) {
       replyContent: createReplyForm.replyContent,
     });
     if (error) setErrors(e => ({ ...e, form: error }));
-    onClose()
-    window.location.reload();
+    setIsSubmit(true)
+    
+    if(createReplyForm.replyContent.length>0){
+      onClose()
+      window.location.reload();
+    }
+    
   };
 
   const handleOnInputChange = event => {
@@ -115,11 +122,25 @@ export default function Posts({ post, eventId }) {
         <VStack>    
         <Modal onClose={onClose} isOpen={isOpen} isCentered>
           <ModalOverlay />
-          <ModalContent>
+          <ModalContent maxWidth={'100rem'} width={'90%'} maxHeight={'75%'} overflowY={'auto'}
+                                      css={{
+                                        '&::-webkit-scrollbar': {
+                                          width: '8px',
+                                        },
+                                        '&::-webkit-scrollbar-track': {
+                                          width: '10px',
+                                        },
+                                        '&::-webkit-scrollbar-thumb': {
+                                          background: '#805AD5',
+                                          borderRadius: '24px',
+                                        },}}>
             <ModalHeader>Reply</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <Textarea name="replyContent" defaultValue={createReplyForm.replyContent} onChange={handleOnInputChange} />
+              <FormControl variant="floating" isInvalid={!createReplyForm.replyContent.length>0&&isSubmit?true:false}>
+                <Textarea name="replyContent" defaultValue={createReplyForm.replyContent} onChange={handleOnInputChange} />
+                {!createReplyForm.replyContent.length>0&&isSubmit?<FormErrorMessage>Reply is required.</FormErrorMessage>:null}
+              </FormControl>
             </ModalBody>
             <ModalFooter>
                 <ButtonGroup margin={2} >
