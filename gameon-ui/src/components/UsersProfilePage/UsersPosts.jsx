@@ -26,8 +26,7 @@ export default function UsersPosts({ post, key }) {
               rounded="md"
               borderRadius="5px"
               width='600px'
-              pb={2}
-              m={8}          
+              pb={2}          
             >
          
               <Stack isInline justifyContent="space-between" mt={2} pl={5} pr={5}>
