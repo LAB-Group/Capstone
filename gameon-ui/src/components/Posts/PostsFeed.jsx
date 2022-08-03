@@ -4,6 +4,7 @@ import apiClient from '../../services/apiClient';
 import { Text, Container, VStack, Stack, Heading, Box } from '@chakra-ui/react';
 import Posts from './Posts';
 import { COLORS } from "../colors"
+
 export default function PostsFeed({ eventId, posts }) {
 
 

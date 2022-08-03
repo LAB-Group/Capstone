@@ -75,7 +75,6 @@ export default function LoginPage({onClose}) {
       setIsSubmit(true)
       setIsLoading(false)
 
-     
     }
 
     return (
