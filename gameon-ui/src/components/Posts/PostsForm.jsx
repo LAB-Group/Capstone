@@ -103,16 +103,15 @@ export default function PostsForm({event, eventId}) {
               
               w="75vw"
             >
-      <VStack spacing={5} w='700px'>
+      <VStack spacing={5} mx={5} >
   
       <FormControl variant="floating">
       
         <Input
           id="postTitle"
           type="text"
-          w='900px'
           placeholder='Title'
-          variant='unstyled'
+          variant={'filled'}
           focusBorderColor="purple.400"
           name="postTitle"
           defaultValue={createPostForm.postTitle}
@@ -126,9 +125,8 @@ export default function PostsForm({event, eventId}) {
           id="postContent"
           name="postContent"
           type="text"
-          variant='unstyled'
           placeholder='Comment'
-          
+          variant={'filled'}
           focusBorderColor="purple.400"
           defaultValue={createPostForm.postContent}
           onChange={handleOnInputChange}
