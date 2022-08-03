@@ -12,7 +12,7 @@ export default function PostsFeed({ eventId, posts }) {
     <>
     <VStack>
     <Stack display={'flex'} justifyContent='flex-start'>
-      <Text position={"relative"} fontSize={"3xl"} fontWeight={300} textTransform={'uppercase'} mb={4}>Comments</Text>
+      <Text alignItems={"left"} position={"relative"} fontSize={"3xl"} fontWeight={300} textTransform={'uppercase'} mb={4}>Comments</Text>
     </Stack>
       <VStack>
         {posts?.map((post, index) => (

@@ -105,9 +105,9 @@ export default function Posts({ post, eventId }) {
                       </HStack>
                     </Stack>
                     <Stack>
-                        <Heading height="16px" fontSize={['20px','24px','26px','28px']} pb={10} width="100%">{post.postTitle}</Heading>
+                        <Heading height="16px" fontSize={['18px','20px','22px','24px']} pb={10} width="100%">{post.postTitle}</Heading>
                         <Divider w={['300px','400px','550px','725px','850px']}/>
-                        <Text p={2} mt={2} minH="14px" width="80%" >{post.postContent}</Text>
+                        <Text whiteSpace= "pre-wrap" p={2} mt={2} minH="14px" width="80%" >{post.postContent}</Text>
                     </Stack>
                 </Box>
               </Stack>

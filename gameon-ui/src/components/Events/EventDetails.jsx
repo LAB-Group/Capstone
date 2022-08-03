@@ -119,7 +119,7 @@ export default function EventDetails({event, games, eventId, posts}) {
                 <Stack spacing={{ base: 4, sm: 6 }} direction={"column"}>
                 <Box textAlign={"left"} mx={5}>
                         <Text position={"relative"} fontSize={"3xl"} fontWeight={300} textTransform={'uppercase'} mb={4}>Details:</Text>
-                        <Text whiteSpace= "pre-wrap"fontSize={'md'} padding={"4px"}>{event.eventDetails}</Text>                    
+                        <Text whiteSpace= "pre-wrap" fontSize={'md'} padding={"4px"}>{event.eventDetails}</Text>                    
                 </Box>
                 </Stack>
 
