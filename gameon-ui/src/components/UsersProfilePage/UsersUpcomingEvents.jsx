@@ -33,7 +33,7 @@ export default function UsersUpcomingEvents({ user, futureEvents }) {
                   }
               },
           }}>
-          <Heading fontFamily={"Roboto, sans-serif"} mb={2} color={COLORS.offWhite}>Upcoming Events</Heading>
+          <Heading fontFamily={"Roboto, sans-serif"} marginLeft={4} mb={2} color={COLORS.offWhite}>Upcoming Events</Heading>
           <Box className="swiperContainer" position={"static"} marginTop={"0.5rem"} style={{"background":"rgba(232, 232, 232, 0)"}} padding={"2em"} borderRadius={"20px"}> 
             {futureEvents?.length ? 
               <Swiper
