@@ -22,7 +22,7 @@ class Games {
   }
 
   static async getGameInfoById(gameId) {
-    const gameIdExists = fetchGameById(gameId)
+    // const gameIdExists = fetchGameById(gameId)
     const results = await db.query(
       `
         SELECT  i.game_id AS "gameId", i.game_name AS "gameName", i.game_summary AS "gameSummary", i.game_image_url AS "gameImageUrl"

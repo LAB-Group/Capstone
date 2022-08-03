@@ -185,10 +185,10 @@ class Events {
     }
 
     static async fetchUsersRegisteredForEvent(eventId) {
-        const eventExists = fetchEventById(eventId)
-        if(!eventExists) {
-            throw new NotFoundError("Event does not exist.")
-        }
+        // const eventExists = fetchEventById(eventId)
+        // if(!eventExists) {
+        //     throw new NotFoundError("Event does not exist.")
+        // }
         
         const numOfUsers = await db.query(
             `
@@ -215,10 +215,10 @@ class Events {
     }
 
     static async UserRegisteredForEvent({eventId, userId}) {
-        const eventExists = fetchEventById(eventId)
-        if(!eventExists) {
-            throw new NotFoundError("Event does not exist.")
-        }
+        // const eventExists = fetchEventById(eventId)
+        // if(!eventExists) {
+        //     throw new NotFoundError("Event does not exist.")
+        // }
 
         const userExists = User.fetchUserById(userId)
         if(!userExists) {

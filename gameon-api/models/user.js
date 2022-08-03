@@ -123,9 +123,9 @@ class User {
     
     const user = result.rows[0]
 
-    if(!user) {
-      throw new NotFoundError("No user was found.")
-    }
+    // if(!user) {
+    //   throw new NotFoundError("No user was found.")
+    // }
     return user
   }
 
