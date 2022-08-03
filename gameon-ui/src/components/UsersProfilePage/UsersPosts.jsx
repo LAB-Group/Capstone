@@ -16,7 +16,7 @@ export default function UsersPosts({ post, key }) {
   let time = newDate.toLocaleTimeString('en-US');
 
   return (
-    <Container centerContent>
+    <>
       <Box
               key={key}
               borderWidth="1px"
@@ -25,13 +25,13 @@ export default function UsersPosts({ post, key }) {
               position="relative"
               rounded="md"
               borderRadius="5px"
-              minW='1000px'
+              width='600px'
               pb={2}
               m={8}          
             >
          
               <Stack isInline justifyContent="space-between" mt={2} pl={5} pr={5}>
-                <Box minW="100%">
+                <Box minWidth="100%">
                 <Stack isInline display="flex" justifyContent='space-between 'mb={2}>
                     <HStack spacing={4}>
                         <Flex
@@ -51,16 +51,16 @@ export default function UsersPosts({ post, key }) {
                     </Stack>
                     <Stack>
                         <Heading height="16px"  pb={10} width="100%">{post.postTitle}</Heading>
-                        <Divider w={['325px','450px','650px','800px','950px']}/>
+                        {/* <Divider w={['325px','450px','650px','800px','950px']}/> */}
                         <Text p={2} mt={2} minH="14px" >{post.postContent}</Text>
                     </Stack>
                     <Box/>
                 </Box>
               </Stack>
             </Box>
-        <Divider w='1200px'/>
+        {/* <Divider w='1200px'/> */}
         <VStack>
       </VStack>
-    </Container>
+    </>
   );
 }

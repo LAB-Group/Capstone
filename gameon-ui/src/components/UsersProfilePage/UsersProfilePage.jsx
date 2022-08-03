@@ -7,6 +7,7 @@ import apiClient from "../../services/apiClient"
 import UsersUpcomingEvents from "./UsersUpcomingEvents"
 import UsersPreviousEvents from "./UsersPreviousEvents"
 import UsersPostsFeed from "./UsersPostsFeed"
+import { COLORS } from "../colors"
 
 export default function UsersProfilePage() {
     const [viewedUser, setViewedUser] = useState({})
@@ -79,14 +80,15 @@ export default function UsersProfilePage() {
 
                 
                 <Divider orientation='horizontal' />
-                <Heading color="white">Posts</Heading>
-                <Box h='700px' borderRadius='sm'>
+                {/* <Heading fontFamily={"Roboto, sans-serif"} marginLeft={10} mb={2} color={COLORS.offWhite}>Posts</Heading> */}
+                <Box height="700px" borderRadius='sm'>
+                <Heading fontFamily={"Roboto, sans-serif"} marginLeft={6} mb={2} color={COLORS.offWhite}>Posts</Heading>
                     {
                         posts.length === 0 ? 
                         
-                        <Center h='100px'>
-                            <Text fontSize='3xl' color="white">No Post Found</Text>
-                         </Center>
+                        <Box width={"100%"} height='100px'>
+                            <Text fontSize='3xl' color={COLORS.offWhite}>No Post Found</Text>
+                         </Box>
                         : 
                         <UsersPostsFeed posts={posts} />
                     }

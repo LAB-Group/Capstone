@@ -72,7 +72,7 @@ export default function UsersPreviousEvents({ user, prevEvents }) {
               </SwiperSlide>
                           ))}
             </Swiper>
-          :<Box><Text color="white">No Events available</Text></Box>}
+          :<Box><Text fontFamily={"Open Sans, sans-serif"} color={COLORS.offWhite}>No Events available</Text></Box>}
         </Box> 
     </Box>
   </Box>
