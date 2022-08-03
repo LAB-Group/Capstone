@@ -56,13 +56,7 @@ export default function RegisterPage({onClose}) {
   const { user, setUser } = useAuthContext()
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
-  const [isEmail,setIsEmail]=useState(false)
-  const [isPassword,setIsPassword]=useState(false)
-  const [isPasswordConfirm,setIsPasswordConfirm]=useState(false)
-  const [isUsername,setIsUsername]=useState(false)
-  const [isLastName,setIsLastName]=useState(false)
-  const [isFirstName,setIsFirstName]=useState(false)
-  const [isImageUrl,setIsImageUrl]=useState(false)
+  const [isSubmit,setIsSubmit]=useState()
   const [registerForm, setRegisterForm] = useState({
       email: "",
       password: "",
@@ -94,42 +88,9 @@ export default function RegisterPage({onClose}) {
         apiClient.setToken(data.token)
         onClose()
       }
+      setIsSubmit(true)
       setIsLoading(false)
 
-      if(!registerForm.email>0){
-        setIsEmail(true)
-      }else{
-        setIsEmail(false)
-      }
-
-      if(!registerForm.password>0){
-        setIsPassword(true)
-      }else{
-        setIsPassword(false)
-      }
-      
-      if(!registerForm.passwordConfirm>0){
-        setIsPasswordConfirm(true)
-      }else{
-        setIsPasswordConfirm(false)
-
-        }
-      if(!registerForm.firstName>0){
-      setIsFirstName(true)
-      }else{
-      setIsFirstName(false)
-      }
-      if(!registerForm.lastName>0){
-        setIsLastName(true)
-      }else{
-        setIsLastName(false)
-
-        }
-      if(!registerForm.username>0){
-      setIsUsername(true)
-      }else{
-      setIsUsername(false)
-      }
 
     }
 
@@ -138,10 +99,10 @@ export default function RegisterPage({onClose}) {
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Create your account</ModalHeader>
-        <Text fontSize='sm' color='red.500' p={0}>{errors.form}</Text>
+      
         <ModalCloseButton />
         <ModalBody>
-        <RegisterForm user={user} registerForm={registerForm} setRegisterForm={setRegisterForm} setErrors={setErrors} isEmail={isEmail} isFirstName={isFirstName} isLastName={isLastName} isPassword={isPassword} isPasswordConfirm={isPasswordConfirm} isUsername={isUsername} />
+        <RegisterForm user={user} registerForm={registerForm} setRegisterForm={setRegisterForm} setErrors={setErrors} isSubmit={isSubmit}/>
         </ModalBody>
 
         <ModalFooter display={'flex'} justifyContent={'center'}>
@@ -156,7 +117,7 @@ export default function RegisterPage({onClose}) {
     )
 }
 
-function RegisterForm({ user, registerForm, setRegisterForm, setErrors, isEmail, isFirstName,isLastName,isPassword,isPasswordConfirm,isUsername }) {
+function RegisterForm({ user, registerForm, setRegisterForm, setErrors,isSubmit }) {
   const [showPassword, setShowPassword] = useState(false)
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false)
 
@@ -178,7 +139,7 @@ function RegisterForm({ user, registerForm, setRegisterForm, setErrors, isEmail,
       <ChakraProvider theme={theme}>
          {/* To adjust form add padding here */}
        <VStack spacing={5}>
-        <FormControl variant="floating" isInvalid={isEmail}>
+        <FormControl variant="floating" isInvalid={!registerForm.email.length>0&&isSubmit?true:false}>
         {registerForm.email.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Email</FormLabel>
          : 
@@ -187,12 +148,12 @@ function RegisterForm({ user, registerForm, setRegisterForm, setErrors, isEmail,
               defaultValue={registerForm.email}
               onChange={handleOnInputChange}
             />
-           {isEmail?<FormErrorMessage>Email is required.</FormErrorMessage>:null
+           {!registerForm.email.length>0&&isSubmit?<FormErrorMessage>Email is required.</FormErrorMessage>:null
         }
         </FormControl>
 
       <HStack>
-        <FormControl variant="floating"isInvalid={isFirstName} >
+        <FormControl variant="floating"isInvalid={!registerForm.firstName.length>0&&isSubmit?true:false} >
         {registerForm.firstName.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">First Name</FormLabel>
          : 
@@ -202,11 +163,11 @@ function RegisterForm({ user, registerForm, setRegisterForm, setErrors, isEmail,
               defaultValue={registerForm.firstName}
               onChange={handleOnInputChange}
             />
-            {isFirstName?<FormErrorMessage>Email is required.</FormErrorMessage>:null
+            {!registerForm.firstName.length>0&&isSubmit?<FormErrorMessage>Frist Name is required.</FormErrorMessage>:null
         }
         </FormControl>
 
-        <FormControl variant="floating" isInvalid={isLastName}>
+        <FormControl variant="floating" isInvalid={!registerForm.lastName.length>0&&isSubmit?true:false}>
         {registerForm.lastName.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Last Name</FormLabel>
          :<FormLabel>Last Name</FormLabel>}
@@ -215,12 +176,12 @@ function RegisterForm({ user, registerForm, setRegisterForm, setErrors, isEmail,
               defaultValue={registerForm.lastName}
               onChange={handleOnInputChange}
             />
-            {isLastName?<FormErrorMessage>Email is required.</FormErrorMessage>:null
+            {!registerForm.lastName.length>0&&isSubmit?<FormErrorMessage>Last Name is required.</FormErrorMessage>:null
         }
         </FormControl>
       </HStack>
 
-        <FormControl variant="floating" isInvalid={isUsername}>
+        <FormControl variant="floating" isInvalid={!registerForm.username.length>0&&isSubmit?true:false}>
         {registerForm.username.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Username</FormLabel>
          :<FormLabel>Username</FormLabel>}
@@ -229,10 +190,10 @@ function RegisterForm({ user, registerForm, setRegisterForm, setErrors, isEmail,
               defaultValue={registerForm.username.toLowerCase()}
               onChange={handleOnInputChange}
           /> 
-          {isUsername?<FormErrorMessage>Username is required.</FormErrorMessage>:null
+          {!registerForm.username.length>0&&isSubmit?<FormErrorMessage>Username is required.</FormErrorMessage>:null
         }
         </FormControl>
-        <FormControl variant="floating" isInvalid={isPassword}>
+        <FormControl variant="floating" isInvalid={!registerForm.password.length>0&&isSubmit?true:false}>
           {registerForm.password.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Password</FormLabel>
          :<FormLabel>Password</FormLabel>}
@@ -248,12 +209,12 @@ function RegisterForm({ user, registerForm, setRegisterForm, setErrors, isEmail,
             </Button>
         </InputRightElement>
         </InputGroup>
-        {isPassword?<FormErrorMessage>Email is required.</FormErrorMessage>:null
+        {!registerForm.password.length>0&&isSubmit?<FormErrorMessage>Password is required.</FormErrorMessage>:null
             }
         </FormControl>
 
     
-      <FormControl variant="floating" isInvalid={isPasswordConfirm}>
+      <FormControl variant="floating" isInvalid={!registerForm.passwordConfirm.length>0&&isSubmit?true:false}>
       {registerForm.passwordConfirm.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Confirm Password</FormLabel>
          :<FormLabel>Confirm Password</FormLabel>}
@@ -269,7 +230,7 @@ function RegisterForm({ user, registerForm, setRegisterForm, setErrors, isEmail,
             </Button>
         </InputRightElement>
         </InputGroup>
-        {isPasswordConfirm?<FormErrorMessage>Email is required.</FormErrorMessage>:null
+        {!registerForm.passwordConfirm.length>0&&isSubmit?<FormErrorMessage>Password is required.</FormErrorMessage>:null
         }
       </FormControl>
 

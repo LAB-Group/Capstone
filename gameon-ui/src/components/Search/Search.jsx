@@ -123,6 +123,8 @@ function SearchBar({
     setSelectedGamesPic([...copyPicArr]);
   }
 
+
+
   return (
     <VStack spacing={2}>
       {/* Fixed it: The Tags were floating */}
@@ -156,7 +158,7 @@ function SearchBar({
         <FormControl variant="floating" mt={2}>
           {searchInput.length > 0 ? (
             <FormLabel transform="scale(0.85) translateY(-21px)">
-              Event Game
+              Games
             </FormLabel>
           ) : (
             <FormLabel>Games</FormLabel>

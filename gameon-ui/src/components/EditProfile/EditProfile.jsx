@@ -5,10 +5,46 @@ import apiClient from "../../services/apiClient"
 import {
     Container, FormControl, FormLabel, Input,
     ModalOverlay, ModalContent, ModalHeader,
-    ModalFooter, ModalBody, ModalCloseButton, Button
+    ModalFooter, ModalBody, ModalCloseButton, Button, extendTheme,VStack, ChakraProvider
   } from '@chakra-ui/react'
 import Search from "../Search/Search"
 
+const activeLabelStyles = {
+  transform: "scale(0.85) translateY(-24px)"
+  
+};
+export const theme = extendTheme({
+  components: {
+    Form: {
+      variants: {
+        floating: {
+          container: {
+            _focusWithin: {
+              label: {
+                ...activeLabelStyles
+              }
+            },
+            "input:not(:placeholder-shown) + label, .chakra-select__wrapper + label": {
+              ...activeLabelStyles
+            },
+            label: {
+              top: 0,
+              left: 0,
+              zIndex: 2,
+              position: "absolute",
+              backgroundColor: "white",
+              pointerEvents: "none",
+              mx: 3,
+              px: 1,
+              my: 2,
+              transformOrigin: "left top"
+            }
+          }
+        }
+      }
+    }
+  }
+});
  
 export default function EditProfile({onClose}){
   const { user, setUser } = useAuthContext()
@@ -81,31 +117,43 @@ function EditProfileForm({ user, profileForm, setProfileForm, setErrors, selecte
   
     // const isError = form === ''
     return (
-        <FormControl>
-
-        <FormLabel htmlFor='username'>Username</FormLabel>
+      <ChakraProvider theme={theme}>
+        <VStack spacing={5}>
+        <FormControl variant="floating">
+        {profileForm.username.length>0?
+        <FormLabel transform="scale(0.85) translateY(-21px)">Username</FormLabel>
+        :<FormLabel >Username</FormLabel>}
         <Input id='username' name="username" type='text' textTransform={'lowercase'} maxLength={'15'}
           defaultValue={user.username.toLowerCase()}
           onChange={handleOnInputChange}
         />
-
-        <FormLabel htmlFor='firstName'>First Name</FormLabel>
+        </FormControl>
+        <FormControl variant="floating">
+        {profileForm.firstName.length>0?
+        <FormLabel transform="scale(0.85) translateY(-21px)">First Name</FormLabel>
+        :<FormLabel >First Name</FormLabel>}
         <Input id='firstName' name="firstName" type='text'
           defaultValue={user.firstName}
           onChange={handleOnInputChange}
-        />
-
-        <FormLabel htmlFor='lastName'>Last Name</FormLabel>
+        /></FormControl>
+        <FormControl variant="floating">
+        {profileForm.firstName.length>0?
+        <FormLabel transform="scale(0.85) translateY(-21px)">Last Name</FormLabel>
+        :<FormLabel >Last Name</FormLabel>}
+       
         <Input id='lastName' name="lastName" type='text'
           defaultValue={user.lastName}
           onChange={handleOnInputChange}
-        />
+        /></FormControl>
 
-        <FormLabel htmlFor='imageUrl'>Image URL</FormLabel>
-        <Input id='imageUrl' name="imageUrl" type='text'
+        <FormControl variant="floating">
+        {profileForm.firstName.length>0?
+        <FormLabel transform="scale(0.85) translateY(-21px)">Image URL</FormLabel>
+        :<FormLabel >Image URL</FormLabel>}
+        <Input  id='imageUrl' name="imageUrl" type='text'
           defaultValue={user.imageUrl}
           onChange={handleOnInputChange}
-        />
+        /></FormControl>
 
         {/* <FormLabel htmlFor='gameList'>Games Played</FormLabel> */}
         <Search selectedGames={selectedGames} setSelectedGames={setSelectedGames} selectedGamesNames={selectedGamesNames}
@@ -113,7 +161,7 @@ function EditProfileForm({ user, profileForm, setProfileForm, setErrors, selecte
          selectedGamesPic={selectedGamesPic}
          setSelectedGamesPic={setSelectedGamesPic} />
 
-      </FormControl>
-      
+      </VStack>
+      </ChakraProvider>
     )
 }

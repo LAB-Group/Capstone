@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import apiClient from '../../services/apiClient';
-import { Container, VStack, Stack, Heading, Box } from '@chakra-ui/react';
+import { Text, Container, VStack, Stack, Heading, Box } from '@chakra-ui/react';
 import Posts from './Posts';
 import { COLORS } from "../colors"
 export default function PostsFeed({ eventId, posts }) {
@@ -11,10 +11,8 @@ export default function PostsFeed({ eventId, posts }) {
     <>
     <VStack>
     <Stack display={'flex'} justifyContent='flex-start'>
-      <Heading p={3}>Comments</Heading>
+      <Text position={"relative"} fontSize={"3xl"} fontWeight={300} textTransform={'uppercase'} mb={4}>Comments</Text>
     </Stack>
-  
-    {/* <Container centerContent minWidth="85vw"> */}
       <VStack>
         {posts?.map((post, index) => (
           <Posts key={index} post={post} eventId={eventId} />
@@ -25,7 +23,6 @@ export default function PostsFeed({ eventId, posts }) {
           </Box>
         ) : null} */}
       </VStack>
-    {/* </Container> */}
     </VStack>
     </>
   );
