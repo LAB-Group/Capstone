@@ -18,13 +18,12 @@ export default function Hero() {
         paddingBottom={"2rem"}
         borderBottomRadius={"15px"}
         style={{
-            "backgroundColor": "hsl(255, 50%, 21%)",
+            "backgroundColor": "hsl(255, 50%, 21%)"
         }}
         >
             {/* font-family: 'VT323', monospace; */}
-            <Heading textTransform={"uppercase"} fontFamily={"VT323, monospace"} fontSize={"6xl"} paddingTop={"4rem"} paddingBottom={"1rem"} fontWeight={700} color={COLORS.offWhite}>
-                Game on!
-            </Heading>
+            <Heading textTransform={"uppercase"} fontFamily={"VT323, monospace"} fontSize={"7xl"} paddingTop={"1rem"} paddingBottom={"1rem"} fontWeight={700} color={COLORS.offWhite}>
+                Game on!</Heading>
             <Box width={"70px"} height={"4px"} backgroundColor={COLORS.darkAmethyst} marginleft={"lg"} marginRight={"lg"}></Box>
             
             {/* font-family: 'Roboto', sans-serif */}

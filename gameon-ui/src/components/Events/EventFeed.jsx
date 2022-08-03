@@ -62,7 +62,7 @@ export default function EventFeed({ isFetching }){
                 <VStack>
                 <Box width={"100%"}>
                 
-                <Box marginTop={"0.5rem"}
+                <Box marginX={"1rem"} marginTop={"0.5rem"}
                 css={{
                     ".swiper-pagination-bullet-active": {
                         "backgroundColor": COLORS.ultraViolet
@@ -143,7 +143,7 @@ export default function EventFeed({ isFetching }){
                 </Box>
                 </Box> 
                 
-                <Box marginTop={"0.5rem"}
+                <Box marginX={"1rem"} marginTop={"2rem"}
                 css={{
                     ".swiper-pagination-bullet-active": {
                         "backgroundColor": COLORS.ultraViolet
@@ -215,7 +215,7 @@ export default function EventFeed({ isFetching }){
                 </Box>
                 </Box> 
                 
-                <Box marginTop={"0.5rem"}
+                <Box marginX={"1rem"} marginTop={"2rem"}
                 css={{
                     ".swiper-pagination-bullet-active": {
                         "backgroundColor": COLORS.ultraViolet
