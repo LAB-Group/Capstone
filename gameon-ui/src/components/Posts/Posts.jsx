@@ -77,7 +77,7 @@ export default function Posts({ post, eventId }) {
         
         m={8}
       >         
-        <Stack isInline justifyContent="space-between" mt={2} pl={5} pr={5}>
+        <Stack display={'block'} isInline justifyContent="space-between" mt={2} pl={5} pr={5}>
             <Box maxW="100%">      
                 
                   <Stack isInline display="flex" justifyContent='space-between 'mb={2}>
@@ -98,8 +98,8 @@ export default function Posts({ post, eventId }) {
                       </HStack>
                     </Stack>
                     <Stack>
-                        <Heading height="16px"  pb={10} width="100%">{post.postTitle}</Heading>
-                        <Divider w={['200px','350px','500px','650px','800px']}/>
+                        <Heading height="16px" fontSize={['20px','24px','26px','28px']} pb={10} width="100%">{post.postTitle}</Heading>
+                        <Divider w={['300px','400px','550px','725px','850px']}/>
                         <Text p={2} mt={2} minH="14px" width="80%" >{post.postContent}</Text>
                     </Stack>
                 </Box>
