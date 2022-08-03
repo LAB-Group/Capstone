@@ -68,7 +68,7 @@ export default function UsersProfilePage() {
 
         <Box style={{"backdropFilter": "blur(10px)", "background":"rgba(0, 0, 0, 0.05)"}} >
 
-            <Stack direction='column' spacing={7} align='stretch'>
+            <Stack direction='column' spacing={6}>
                 <UsersProfileDetails viewedUser={viewedUser} isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
                 
                 <Divider orientation='horizontal' />

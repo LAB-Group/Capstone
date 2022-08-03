@@ -72,7 +72,9 @@ export default function NavBar() {
                         "borderStyle": "solid",
                         "borderColor": COLORS.darkAmethyst}}>Events</Text></Link>
                     </ListItem>
-                    <ListItem float={"left"} display={"block"} hidden>
+
+                    {/* FIXME: Reroute Events when user is on event details */}
+                    {/* <ListItem float={"left"} display={"block"} hidden>
                 <Link smooth to="#events">
                     <Text color={COLORS.offWhite} fontWeight={700} 
                     style={{
@@ -82,7 +84,7 @@ export default function NavBar() {
                         "borderBottom": "4px",
                         "borderStyle": "solid",
                         "borderColor": COLORS.darkAmethyst}}>Events</Text></Link>
-                    </ListItem>
+                    </ListItem> */}
                
                 </List>
                     

@@ -1,5 +1,5 @@
 import * as React from "react"
-import {Box, Heading, SimpleGrid, Stack, StackDivider, Flex,  VStack, HStack, Image, Text} from "@chakra-ui/react"
+import {Box, Heading, SimpleGrid, Stack, StackDivider, Flex,  VStack, HStack, Image, Text, Highlight} from "@chakra-ui/react"
 import { COLORS } from "../colors"
 import pic from "../../media/Logo.png"
 // import { Link } from "react-router-dom"
@@ -19,7 +19,7 @@ export default function About(){
             // }}
         
         >
-            <Heading id="events" fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite} marginBottom={"1em"} textAlign={"center"} fontSize={["xl", "3xl", "4xl"]}>About</Heading>
+            <Heading fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite} marginBottom={"1em"} textAlign={"center"} fontSize={["xl", "3xl", "4xl"]}>About</Heading>
             <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10} background={"hsl(255, 50%, 21%)"} roundedTop={"25px"}>
                 <Stack spacing={4}>
                 {/* <Text
@@ -35,8 +35,11 @@ export default function About(){
                 </Text> */}
                 <Heading fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite}>GameOn</Heading>
                 <Text fontFamily={"mono, sans-serif"} color={COLORS.offWhite} fontSize={'lg'}>
+                    
+                    <Highlight query={"tempor"} styles={{backgroundColor:COLORS.darkAmethyst}}>
                     Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
                     nonumy eirmod tempor invidunt ut labore
+                    </Highlight>
                 </Text>
                 <Stack spacing={4}
                 divider={
