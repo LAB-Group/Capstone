@@ -81,7 +81,7 @@ export default function UsersProfilePage() {
                 
                 <Divider orientation='horizontal' />
                 {/* <Heading fontFamily={"Roboto, sans-serif"} marginLeft={10} mb={2} color={COLORS.offWhite}>Posts</Heading> */}
-                <Box height="700px" borderRadius='sm'>
+                <Box height="auto" borderRadius='sm'>
                 <Heading fontFamily={"Roboto, sans-serif"} marginLeft={6} mb={2} color={COLORS.offWhite}>Posts</Heading>
                     {
                         posts.length === 0 ? 

@@ -89,7 +89,7 @@ export default function UsersProfileDetails({ viewedUser, onOpen, onClose, isOpe
                   </HStack> 
                 </Stack>
                 <Stack display={"flex"} mt={0}>
-                  <Wrap display={'flex'} height={'70px'} overflowY={'auto'}
+                  <Wrap height={'70px'} overflowY={'auto'}
                       css={{
                         '&::-webkit-scrollbar': {width: '8px'},
                         '&::-webkit-scrollbar-track': {width: '10px'},
