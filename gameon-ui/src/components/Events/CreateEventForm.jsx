@@ -252,6 +252,7 @@ export default function CreateEventForm({ onClose }) {
           onChange={handleOnInputChange}
         >
           <option>Meet-up</option>
+          <option>Casuals</option>
           <option>Tournament</option>
           <option>Speedrunning</option>
         </Select>
