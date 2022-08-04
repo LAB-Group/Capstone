@@ -20,8 +20,8 @@ export default function UsersProfilePage() {
 
     const curDate = new Date()
     curDate.setHours(0,0,0,0)
-    let prevEvents = events?.filter(event => {return Date.parse(event.eventDate) < curDate.getTime()})
-    let futureEvents = events?.filter(event => {return Date.parse(event.eventDate) >= curDate.getTime()})
+    let prevEvents = events?.filter(event => {return Date.parse(event.eventStartDate) < curDate.getTime()})
+    let futureEvents = events?.filter(event => {return Date.parse(event.eventStartDate) >= curDate.getTime()})
 
     useEffect(() => {
         const fetchUser = async () => {

@@ -21,10 +21,14 @@ export default function EventDetails({event, games, eventId, posts}) {
     const { user } = useAuthContext()
     const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure()
     const { isOpen: isRegisterOpen, onOpen: onRegisterOpen, onClose: onRegisterClose } = useDisclosure()
-    let date = event.eventDate
-    let newDate = new Date(date)
-    let myDate = newDate.toDateString()
-    let time = newDate.toLocaleTimeString("en-US")
+    let startDate = event.eventStartDate
+    let newStartDate = new Date(startDate)
+    let myStartDate = newStartDate.toDateString()
+
+    let endDate = event.eventEndDate
+    let newEndDate = new Date(endDate)
+    let myEndDate = newEndDate.toDateString()
+
     const [isHovering, setIsHovering] = useState(false)
     const btnRef = useRef()
 
@@ -90,8 +94,7 @@ export default function EventDetails({event, games, eventId, posts}) {
                         fontWeight={300}
                         fontSize={"md"}
                     >
-                    {
-                        myDate
+                    {myStartDate <= myEndDate? myStartDate : myStartDate + " - " + myEndDate 
                     }</Text>
                     </HStack>
                     {/* Location */}

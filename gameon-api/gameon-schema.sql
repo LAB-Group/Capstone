@@ -16,7 +16,8 @@ CREATE TABLE users (
 CREATE TABLE events (
     id          SERIAL PRIMARY KEY,
     event_name  TEXT NOT NULL,
-    event_date  DATE NOT NULL DEFAULT NOW(),
+    event_start_date  DATE NOT NULL DEFAULT NOW(),
+    event_end_date  DATE NOT NULL DEFAULT NOW(),
     event_type  TEXT NOT NULL,
     location    TEXT NOT NULL,
     event_game  INTEGER[] NOT NULL,

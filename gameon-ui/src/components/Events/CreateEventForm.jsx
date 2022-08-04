@@ -18,7 +18,7 @@ import { ModalOverlay,
   VStack,
   useOutsideClick,
   Textarea,
-  Text, FormErrorMessage
+  Text, FormErrorMessage, HStack
 } from '@chakra-ui/react';
 import Search from '../Search/Search';
 import {COLORS} from "../colors"
@@ -71,10 +71,13 @@ export default function CreateEventForm({ onClose }) {
   const [isSubmit,setIsSubmit]=useState()
   const [selectedImage, setSelectedImage] = useState(null);
  
-  
+  const date = new Date()
+  let today = date.toISOString().split('T')[0]
+
   const [createEventForm, setCreateEventForm] = useState({
     eventName: '',
-    eventDate: '',
+    eventStartDate: '',
+    eventEndDate: '',
     eventType: '',
     eventLocation: '',
     eventGame: [...selectedGames],
@@ -95,7 +98,8 @@ export default function CreateEventForm({ onClose }) {
 
     const { data, error } = await apiClient.createEvent({
       eventName: createEventForm.eventName,
-      eventDate: createEventForm.eventDate,
+      eventStartDate: createEventForm.eventStartDate,
+      eventEndDate: createEventForm.eventEndDate,
       eventType: createEventForm.eventType,
       eventLocation: createEventForm.eventLocation,
       eventGame: selectedGames, //createEventForm.eventGame,
@@ -108,9 +112,9 @@ export default function CreateEventForm({ onClose }) {
     if (error) setErrors(e => ({ ...e, form: error }));
     setIsSubmit(true)
    
-     if(createEventForm.eventName.length>0&&createEventForm.eventDate.length>0&&createEventForm.eventType.length>0&&createEventForm.eventLocation.length>0&&createEventForm.eventDetails.length>0){
+     if(createEventForm.eventName.length>0&&createEventForm.eventStartDate.length>0&&createEventForm.eventEndDate.length>0&&createEventForm.eventType.length>0&&createEventForm.eventLocation.length>0&&createEventForm.eventDetails.length>0){
           onClose();
-          window.location.reload();
+          // window.location.reload();
      }    
   };
 
@@ -120,12 +124,13 @@ export default function CreateEventForm({ onClose }) {
   const [showPassword, setShowPassword] = useState(false)
   const handleClick = () => setShowPassword(!showPassword)
   
-  useOutsideClick({
-    ref: ref,
-    handler: () =>{ if(!createEventForm.eventDate.length>0){setShowTimeDate(false)}},
+  //How is below being used? Add Event End Date?
+  // useOutsideClick({
+  //   ref: ref,
+  //   handler: () =>{ if(!createEventForm.eventStartDate.length>0){setShowTimeDate(false)}},
     
     
-  })
+  // })
 
   // const handleClick = () => setShowPassword(!showPassword)
   //   add stream/video link so we can embed player?
@@ -183,31 +188,54 @@ export default function CreateEventForm({ onClose }) {
           defaultValue={createEventForm.eventName}
           onChange={handleOnInputChange}
         />
-        {!createEventForm.eventName.length>0&&isSubmit?<FormErrorMessage>Event Name is required.</FormErrorMessage>:null
-      }
-        {/* {isEventName?<FormErrorMessage>Event Name is required.</FormErrorMessage>:null} */}
+        {!createEventForm.eventName.length>0&&isSubmit?<FormErrorMessage>Event Name is required.</FormErrorMessage>:null}
       </FormControl>
 
-        <FormControl variant="floating" isInvalid={!createEventForm.eventDate.length>0&&isSubmit?true:false}>
-        {createEventForm.eventDate.length>0?
-        <FormLabel transform="scale(0.85) translateY(-21px)">Event Date</FormLabel>
+<HStack width={'100%'}>
+
+
+        {/* EVENT START DATE */}
+        <FormControl variant="floating" isInvalid={((!createEventForm.eventStartDate.length>0)||(today > createEventForm.eventStartDate))&&isSubmit?true:false}>
+        {createEventForm.eventStartDate.length>0?
+        <FormLabel transform="scale(0.85) translateY(-21px)">Start Date</FormLabel>
          : 
-       <FormLabel htmlFor="eventDate">Event Date</FormLabel>}
+       <FormLabel htmlFor="eventStartDate">Start Date</FormLabel>}
         
         <Input
-          id="eventDate"
-          name="eventDate"
+          id="eventStartDate"
+          name="eventStartDate"
           focusBorderColor={COLORS.ultraViolet} 
           onClick={() => setShowTimeDate(true)}
           ref={ref}
           type={showTimeDate?"date":"text"}
-          value={createEventForm.eventDate}
+          value={createEventForm.eventStartDate}
           onChange={handleOnInputChange}
         />
-        {!createEventForm.eventDate.length>0&&isSubmit?<FormErrorMessage>Event Date is required.</FormErrorMessage>:null
-        }
-        
+        {/* {!createEventForm.eventStartDate.length>0&&isSubmit?<FormErrorMessage>Start Date is required.</FormErrorMessage>:null} */}
+        {((!createEventForm.eventStartDate.length>0)||(today > createEventForm.eventStartDate))&&isSubmit?<FormErrorMessage>Start Date not valid</FormErrorMessage>:null}
         </FormControl>
+
+        {/* EVENT END DATE */}
+        <FormControl variant="floating" isInvalid={((!createEventForm.eventEndDate.length>0) || (createEventForm.eventEndDate < createEventForm.eventStartDate))&&isSubmit?true:false}>
+        {createEventForm.eventEndDate.length>0?
+        <FormLabel transform="scale(0.85) translateY(-21px)">End Date</FormLabel>
+         : 
+       <FormLabel htmlFor="eventEndDate">End Date</FormLabel>}
+        
+        <Input
+          id="eventEndDate"
+          name="eventEndDate"
+          focusBorderColor={COLORS.ultraViolet} 
+          onClick={() => setShowTimeDate(true)}
+          ref={ref}
+          type={showTimeDate?"date":"text"}
+          value={createEventForm.eventEndDate}
+          onChange={handleOnInputChange}
+        />
+        {((!createEventForm.eventEndDate.length>0) || (createEventForm.eventEndDate < createEventForm.eventStartDate))&&isSubmit?<FormErrorMessage>End Date not valid</FormErrorMessage>:null}
+        </FormControl>
+        </HStack>
+
         <FormControl variant="floating" isInvalid={!createEventForm.eventType.length>0&&isSubmit?true:false}>
         {createEventForm.eventType.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Event Type</FormLabel>

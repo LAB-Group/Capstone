@@ -4,8 +4,10 @@ import { COLORS } from "../colors"
 
 export default function EventCard({event}){
 
-    const timestamp = Date.parse(event.eventDate)
-    const date = new Date(timestamp).toLocaleDateString('en-US')
+    const start = Date.parse(event.eventStartDate)
+    const startDate = new Date(start).toLocaleDateString('en-US')
+    const end = Date.parse(event.eventEndDate)
+    const endDate = new Date(end).toLocaleDateString('en-US')
 
     return (
         //FIXME: Need to prevent card squishing
@@ -38,7 +40,7 @@ export default function EventCard({event}){
                         >{event.eventName}</Heading>
                         <VStack width={'130px'} paddingLeft={"2rem"}>
                             <Badge borderRadius='full' px='2' style={{"background":"rgba(160, 61, 154, .2)"}} color={COLORS.indigo}>{event.eventType}</Badge>
-                            <Badge borderRadius='full' px='2' style={{"background":"rgba(160, 61, 154, .2)"}} color={COLORS.indigo}>{date}</Badge>
+                            <Badge borderRadius='full' px='2' style={{"background":"rgba(160, 61, 154, .2)"}} color={COLORS.indigo}>{startDate + "-" + endDate}</Badge>
                             <Badge borderRadius='full' px='2' style={{"background":"rgba(160, 61, 154, .2)"}} color={COLORS.indigo}>{event.numRegistered} Attendees</Badge>
                         </VStack>   
                     </HStack>

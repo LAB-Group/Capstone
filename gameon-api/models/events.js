@@ -14,7 +14,8 @@ class Events {
             `
                 SELECT e.id,
                        e.event_name AS "eventName",
-                       e.event_date AS "eventDate",
+                       e.event_start_date AS "eventStartDate",
+                       e.event_end_date AS "eventEndDate",
                        e.event_type AS "eventType",
                        e.location AS "eventLocation",
                        e.event_game AS "eventGame",
@@ -41,7 +42,8 @@ class Events {
             `
                 SELECT e.id,
                        e.event_name AS "eventName",
-                       e.event_date AS "eventDate",
+                       e.event_start_date AS "eventStartDate",
+                       e.event_end_date AS "eventEndDate",
                        e.event_type AS "eventType",
                        e.location AS "eventLocation",
                        e.event_game AS "eventGame",
@@ -73,8 +75,7 @@ class Events {
 
     static async createNewEvent({event, user}) {
         // ensures all required fields are present
-        // NEED EVENT DATE
-         const requiredFields = ["eventName", "eventDate", "eventType", "eventLocation", "eventGame", "eventDetails", "eventImageUrl"]
+         const requiredFields = ["eventName", "eventStartDate", "eventEndDate", "eventType", "eventLocation", "eventGame", "eventDetails", "eventImageUrl"]
          requiredFields.forEach((field) => {
             if (!event.hasOwnProperty(field) || !event[field]) {
                 throw new BadRequestError(`Required field - ${field} - missing from request body.`)
@@ -83,11 +84,12 @@ class Events {
          // insert event into database
          const results = await db.query(
             `
-            INSERT INTO events (event_name, event_date, event_type, location, event_game, details, event_image_url, user_id)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, (SELECT id FROM users WHERE email = $8))
+            INSERT INTO events (event_name, event_start_date, event_end_date, event_type, location, event_game, details, event_image_url, user_id)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, (SELECT id FROM users WHERE email = $9))
             RETURNING id,
                       event_name AS "eventName",
-                      event_date AS "eventDate",
+                      event_start_date AS "eventStartDate",
+                      event_end_date AS "eventEndDate",
                       event_type AS "eventType",
                       location,
                       event_game AS "eventGame",
@@ -96,7 +98,7 @@ class Events {
                       created_at AS "createdAt",
                       updated_at AS "updatedAt"
             `,
-                [event.eventName, event.eventDate, event.eventType, event.eventLocation, event.eventGame, event.eventDetails, event.eventImageUrl, user.email]
+                [event.eventName, event.eventStartDate, event.eventEndDate, event.eventType, event.eventLocation, event.eventGame, event.eventDetails, event.eventImageUrl, user.email]
          )
          return results.rows[0]
     }
@@ -167,7 +169,8 @@ class Events {
                     r.registered_at,
                     e.id,
                     e.event_name AS "eventName",
-                    e.event_date AS "eventDate",
+                    e.event_start_date AS "eventStartDate",
+                    e.event_end_date AS "eventEndDate",
                     e.event_type AS "eventType",
                     e.location AS "eventLocation",
                     e.event_game AS "eventGame",
