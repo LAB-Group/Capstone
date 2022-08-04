@@ -4,6 +4,15 @@ import { COLORS } from "../colors"
 
 export default function EventCard({event}){
 
+    // FIXME redundant code, but boolean comparison was strange with localeDateString
+    let sDate = event.eventStartDate
+    let newStartDate = new Date(sDate)
+    let myStartDate = newStartDate.toDateString()
+
+    let eDate = event.eventEndDate
+    let newEndDate = new Date(eDate)
+    let myEndDate = newEndDate.toDateString()
+
     const start = Date.parse(event.eventStartDate)
     const startDate = new Date(start).toLocaleDateString('en-US')
     const end = Date.parse(event.eventEndDate)
@@ -40,7 +49,7 @@ export default function EventCard({event}){
                         >{event.eventName}</Heading>
                         <VStack width={'130px'} paddingLeft={"2rem"}>
                             <Badge borderRadius='full' px='2' style={{"background":"rgba(160, 61, 154, .2)"}} color={COLORS.indigo}>{event.eventType}</Badge>
-                            <Badge borderRadius='full' px='2' style={{"background":"rgba(160, 61, 154, .2)"}} color={COLORS.indigo}>{startDate + "-" + endDate}</Badge>
+                            <Badge borderRadius='full' px='2' style={{"background":"rgba(160, 61, 154, .2)"}} color={COLORS.indigo}>{myStartDate <= myEndDate? startDate : startDate + "-" + endDate}</Badge>
                             <Badge borderRadius='full' px='2' style={{"background":"rgba(160, 61, 154, .2)"}} color={COLORS.indigo}>{event.numRegistered} Attendees</Badge>
                         </VStack>   
                     </HStack>
