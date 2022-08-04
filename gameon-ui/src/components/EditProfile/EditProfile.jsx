@@ -8,6 +8,7 @@ import {
     ModalFooter, ModalBody, ModalCloseButton, Button, extendTheme,VStack, ChakraProvider
   } from '@chakra-ui/react'
 import Search from "../Search/Search"
+import { COLORS } from "../colors"
 
 const activeLabelStyles = {
   transform: "scale(0.85) translateY(-24px)"
@@ -98,8 +99,8 @@ export default function EditProfile({onClose}){
             </ModalBody>
   
             <ModalFooter>
-            <Button colorScheme='purple' variant='ghost' onClick={handleOnSubmit}>Submit</Button>
-              <Button colorScheme='purple' mr={3} onClick={onClose}>Cancel</Button>
+            <Button color={COLORS.ultraViolet} onClick={handleOnSubmit}>Submit</Button>
+            <Button backgroundColor={"hsla(271, 49%, 44%, 0.8)"} color={COLORS.offWhite} mr={3} onClick={onClose}>Cancel</Button>
               
             </ModalFooter>
           </ModalContent>
