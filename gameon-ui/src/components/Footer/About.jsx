@@ -33,12 +33,10 @@ export default function About(){
                     rounded={'md'}>
                     About us
                 </Text> */}
-                <Heading fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite}>GameOn</Heading>
-                <Text fontFamily={"mono, sans-serif"} color={COLORS.offWhite} fontSize={'lg'}>
-                    
-                    <Highlight query={"tempor"} styles={{backgroundColor:COLORS.darkAmethyst}}>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                    nonumy eirmod tempor invidunt ut labore
+                {/* <Heading fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite}>GameOn</Heading> */}
+                <Text fontFamily={"mono, sans-serif"} whiteSpace={"pre-wrap"} color={COLORS.offWhite} fontSize={'lg'}>
+                    <Highlight query={"GameOn!"} styles={{color:COLORS.darkAmethyst}}>
+                    GameOn! is a community hub for all gamers looking to attend meetups and events. Our mission is to have gamers of all ages and different backgrounds to attend tournaments and to meet people with similar interests. Gamers can not only attend tournaments and meetups, but event coordinators can create events.
                     </Highlight>
                 </Text>
                 <Stack spacing={4}

@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useNavigate} from "react-router-dom"
 import {HashLink as Link } from 'react-router-hash-link'
-import { Box, Text, Spacer, Button, ButtonGroup, Image, HStack, Flex, Modal,
+import { Box, Text, Spacer, Button, ButtonGroup, Image, Stack, HStack, Flex, Modal,
     useDisclosure, Icon, useMediaQuery, List, ListItem } from "@chakra-ui/react"
 import {GiHamburgerMenu} from "react-icons/gi"
 import logo from "../../media/Logo.png"
@@ -35,18 +35,18 @@ export default function NavBar() {
     return (
         // This makes the navbar scrollable
 
-        <Box  overflow={"hidden"} fontFamily={"Roboto, sans-serif"} zIndex={1} position="sticky" top={0} width="100%" height="50px" backgroundColor={COLORS.indigo} fontSize={{ "base":"lg","md":"lg", "lg":"xl"}}>
-            <Flex width={"100%"} alignItems="center" gap='5'>
+        <Box  overflow={"hidden"} fontFamily={"Roboto, sans-serif"} zIndex={1} position="sticky" top={0} width="100%" height="50px" backgroundColor={COLORS.indigo} fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} >
+            <Flex width={"100%"} alignItems="center" gap='1'>
                 {/* FIXME: Image revisit */}
                 <Box width={"100px"} display={"inline-flex"}>
                     <Link to="/">
-                        <Image width={"150px"} height={"38px"} margin={0} marginTop={2} float={"left"} objectFit={"cover"} src={logo}/>
+                        <Image width={"150px"} height={"40px"} margin={0} marginTop={2} float={"left"} objectFit={"cover"} src={logo}/>
                     </Link>
                 </Box>
-                <List>
-                    <ListItem marginRight={6} float={"left"} display={"block"}>
+                <Stack>
+                    <HStack justifyContent={"space-between"} gap={4}>
                 <Link smooth to="#about">
-                    <Text color={COLORS.offWhite} fontWeight={700} 
+                    <Text color={COLORS.offWhite} fontWeight={400} 
                     style={{
                         "transition": " borderBottom 0.8s, borderStyle 0.8s, borderColor 0.8s"}}
                     _hover={{ 
@@ -54,17 +54,15 @@ export default function NavBar() {
                         "borderStyle": "solid",
                         "borderColor": COLORS.darkAmethyst
                     }}>About</Text></Link>
-                    </ListItem>
-                    <ListItem float={"left"} display={"block"}>
                     <Link smooth to="#events">
-                    <Text color={COLORS.offWhite} fontWeight={700} 
+                    <Text color={COLORS.offWhite} fontWeight={400} 
                     style={{
                         "transition": "borderBottom 0.8s, borderStyle 0.8s, borderColor 0.8s"}}
                     _hover={{
                         "borderBottom": "3px",
                         "borderStyle": "solid",
                         "borderColor": COLORS.darkAmethyst}}>Events</Text></Link>
-                    </ListItem>
+                    </HStack>
 
                     {/* FIXME: Reroute Events when user is on event details */}
                     {/* <ListItem float={"left"} display={"block"} hidden>
@@ -79,7 +77,7 @@ export default function NavBar() {
                         "borderColor": COLORS.darkAmethyst}}>Events</Text></Link>
                     </ListItem> */}
                
-                </List>
+                </Stack>
                 
                     <Spacer/>
                 
@@ -97,8 +95,8 @@ export default function NavBar() {
 
 
                 {user?.email? 
-                    <ButtonGroup gap='2' marginRight={"1rem"}>
-                        <Button fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} backgroundColor={COLORS.ultraViolet} color={COLORS.offWhite} onClick={onCreateOpen}
+                    <ButtonGroup gap='2' marginRight={"1rem"} >
+                        <Button  fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} backgroundColor={COLORS.ultraViolet} color={COLORS.offWhite} onClick={onCreateOpen}
                         style={{"transition": "backgroundColor 0.5s, color 0.5s"}} _hover={{"backgroundColor": COLORS.offWhite, "color": COLORS.indigo}}>Create Event</Button>
                         {/* <Box border={"2px"} borderStyle={"solid"} borderRadius={"5px"} borderColor={COLORS.darkAmethyst} 
                             paddingStart={"1rem"} paddingEnd={"1rem"} paddingTop={"0.2rem"} paddingBottom={"0.2rem"}
@@ -116,7 +114,7 @@ export default function NavBar() {
                         
                         {/* FIXME: Log out transition * Needs a revisit on the transition*/}
                         
-                        <Button fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} backgroundColor={COLORS.indigo} color={COLORS.offWhite}
+                        <Button  fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} backgroundColor={COLORS.indigo} color={COLORS.offWhite}
                         border={"2px"} borderColor={COLORS.indigo} borderStyle={"solid"}
                         style={{"transition": "borderColor 0.8s"}} _hover={{"borderColor": COLORS.darkAmethyst}} onClick={handleLogout}>Logout</Button>
                         
@@ -124,7 +122,7 @@ export default function NavBar() {
                         {/* <ColorModeSwitcher justifySelf="flex-end" /> */}
                     </ButtonGroup>
                     :
-                    <ButtonGroup gap='2'>
+                    <ButtonGroup gap='2' >
                          <Button fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} backgroundColor={COLORS.ultraViolet} color={COLORS.offWhite} onClick={onLoginOpen}
                         style={{"transition": "backgroundColor 0.5s, color 0.5s"}} _hover={{"backgroundColor": COLORS.offWhite, "color": COLORS.indigo}}>Log in</Button>
                         {/* <Button colorScheme='purple' onClick={onLoginOpen}>Log in</Button> */}

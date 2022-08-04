@@ -7,7 +7,7 @@ import { COLORS } from "../colors"
 
 export default function Footer(){
     return (
-            <Box  fontFamily={"mono, sans-serif"}  backgroundColor={COLORS.indigo} color={COLORS.offWhite}>
+            <Box fontFamily={"mono, sans-serif"}  backgroundColor={COLORS.indigo} color={COLORS.offWhite}>
                 {/* <Heading>THIS IS THE FOOTER</Heading> */}
                 <Container margin={0} as={Stack} maxWidth={"100%"} paddingY={4} direction={{ base: 'column', md: 'row' }} spacing={4}
                     justify={{ base: "center", md: "space-between" }} align={{ base: 'center', md: 'center' }}>

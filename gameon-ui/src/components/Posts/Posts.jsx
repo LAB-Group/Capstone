@@ -95,9 +95,9 @@ export default function Posts({ post, eventId }) {
                             md: "end",
                           }}
                           mt={[-16]}>
-                          <Image  w={[10,20]} h={[10,20]} mt={8} borderRadius="50%" src={post.creatorImageUrl}/>
+                          <Image w={[10,20]} h={[10,20]} mt={8} borderRadius="50%" src={post.creatorImageUrl}/>
                         </Flex>
-                        <Link to={`/user/${post.creatorId}/profile`}  ><Text fontWeight={'bold'} >@{post.creatorUsername}</Text></ Link>
+                        <Link to={`/user/${post.creatorId}/profile`}><Text fontFamily={"mono, sans-serif"} fontWeight={'bold'} >@{post.creatorUsername}</Text></ Link>
                       </HStack>
                       <HStack>
                         <Badge variant='subtle' colorScheme='purple'>{postDate}</Badge>
@@ -105,9 +105,9 @@ export default function Posts({ post, eventId }) {
                       </HStack>
                     </Stack>
                     <Stack>
-                        <Heading height="16px" fontSize={['18px','20px','22px','24px']} pb={10} width="100%">{post.postTitle}</Heading>
+                        <Heading fontFamily={"Roboto, sans-serif"} height="16px" fontSize={['18px','20px','22px','24px']} pb={10} width="100%">{post.postTitle}</Heading>
                         <Divider w={['300px','400px','550px','725px','850px']}/>
-                        <Text whiteSpace= "pre-wrap" p={2} mt={2} minH="14px" width="80%" >{post.postContent}</Text>
+                        <Text fontFamily={"mono, sans-serif"} whiteSpace= "pre-wrap" p={2} mt={2} minH="14px" width="80%" >{post.postContent}</Text>
                     </Stack>
                 </Box>
               </Stack>
@@ -117,7 +117,7 @@ export default function Posts({ post, eventId }) {
           <PostReply key={index} postReply={postReply} eventId={eventId} />
         ))}
         <Box w={['150px','300px','450px','600px','750px']} mb={2} >
-              <Button variant='ghost' onClick={onOpen}>Reply</Button></Box>
+              <Button fontFamily={"mono, sans-serif"} variant='ghost' onClick={onOpen}>Reply</Button></Box>
         <Divider w={['150px','300px','450px','600px','750px']} />
         <VStack>    
         <Modal onClose={onClose} isOpen={isOpen} isCentered>
