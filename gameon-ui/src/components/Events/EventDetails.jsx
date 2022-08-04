@@ -41,16 +41,7 @@ export default function EventDetails({event, games, eventId, posts}) {
     };
 
     return(
-        <Box style={{"backdropFilter": "blur(6px)"}}>
-            {/* Need to resize image */}
-            {/* Image */}
-{/*             
-            <Box width={"100%"} height={"400px"} backgroundImage={event?.eventImageUrl}
-            backgroundPosition={"center"}
-            backgroundSize={"contain"}
-            backgroundRepeat={"no-repeat"}>
-            </Box> */}
-            
+        <Box style={{"backdropFilter": "blur(6px)"}}>        
             <Box width={"100%"} backgroundColor={COLORS.offWhite} px={5}>
 
             <SimpleGrid 
@@ -119,6 +110,39 @@ export default function EventDetails({event, games, eventId, posts}) {
             </SimpleGrid>
                 {/* Event */}
                 <Box position={"relative"} py={"25px"}>
+                    <Stack paddingTop={"1rem"}>
+
+                <Stack spacing={{ base: 4, sm: 6 }} direction={"column"}>
+                    <Box textAlign={"left"} mx={5}>
+                        <Text position={"relative"} fontSize={"3xl"} fontFamily={"Roboto, sans-serif"} fontWeight={300} textTransform={'uppercase'} mb={4}>Event Registration:</Text>             
+                    </Box>
+                </Stack>
+                <Stack spacing={{ base: 4, sm: 6 }} direction={"column"}>
+                
+                        <Box textAlign={"left"} mx={5}>         
+                            {
+                                user.email 
+                                    ?   
+                                        <>
+                                            <Text>You are already registered for this event. We'll see you there!</Text>
+                                            <Text>You are currently registered for:</Text>
+                                            <EventRegistration event={event} games={games}/> 
+                                        </>
+                                        
+                                    : 
+                                        <Text>
+                                            You must 
+                                                <Button onClick={onRegisterOpen} variant={"link"} mx={1}>Sign Up</Button>
+                                            or 
+                                                <Button onClick={onLoginOpen} variant={"link"} mx={1}>Login</Button> 
+                                            to register. 
+                                        </Text>
+                            }
+                        </Box>
+                        </Stack>
+                            <Modal isCentered isOpen={isLoginOpen} onClose={onLoginClose} finalFocusRef={btnRef}><LoginPage onClose={onLoginClose} isOpen={isLoginOpen} finalFocusRef={btnRef} /></Modal>
+                            <Modal isCentered isOpen={isRegisterOpen} onClose={onRegisterClose} finalFocusRef={btnRef}><RegisterPage onClose={onRegisterClose} /></Modal>
+                    </Stack>
                 <Stack spacing={{ base: 4, sm: 6 }} direction={"column"}>
                 <Box textAlign={"left"} mx={5}>
                         <Text position={"relative"} fontSize={"3xl"} fontFamily={"Roboto, sans-serif"} fontWeight={300} textTransform={'uppercase'} mb={4}>Details:</Text>
@@ -180,25 +204,6 @@ export default function EventDetails({event, games, eventId, posts}) {
                     ))}
                     </Flex>
                     </HStack>
-                </Stack>
-
-                <Stack paddingTop={"1rem"}>
-
-                <HStack position={"relative"} display={"flex"} justifyContent={"center"}>
-                    {
-                        user.email ? <EventRegistration event={event} games={games}/> 
-                        : 
-                        <Text>
-                            You must 
-                            <Button onClick={onRegisterOpen} variant={"link"} mx={1}>Sign Up</Button>
-                            or 
-                            <Button onClick={onLoginOpen} variant={"link"} mx={1}>Login</Button> 
-                            to register. 
-                        </Text>
-                    }
-                    <Modal isCentered isOpen={isLoginOpen} onClose={onLoginClose} finalFocusRef={btnRef}><LoginPage onClose={onLoginClose} isOpen={isLoginOpen} finalFocusRef={btnRef} /></Modal>
-                    <Modal isCentered isOpen={isRegisterOpen} onClose={onRegisterClose} finalFocusRef={btnRef}><RegisterPage onClose={onRegisterClose} /></Modal>
-                </HStack>
                 </Stack>
                 </Box>
                 <PostsFeed eventId={eventId} posts={posts} />

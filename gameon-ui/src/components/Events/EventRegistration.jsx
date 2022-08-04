@@ -3,10 +3,9 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import apiClient from '../../services/apiClient';
 import { useAuthContext } from '../../contexts/auth'
-import { Container, Button, FormLabel, Checkbox, Alert, AlertIcon, Heading, FormControl,
+import { Container, Button, FormLabel, Checkbox, Alert, AlertIcon, Text, FormControl,
   AlertDescription, CheckboxGroup, Box, Stack, Input, extendTheme, ChakraProvider, Grid
 } from '@chakra-ui/react';
-import { COLORS } from "../colors"
 
 export default function EventRegistration({ games }) {
   const { user } = useAuthContext()
@@ -82,27 +81,28 @@ export default function EventRegistration({ games }) {
   return (
     <ChakraProvider theme={theme}>
     {isRegistered ? 
-    <Container centerContent>
+    <Container>
+      <Container centerContent>
+        <Button 
+            margin={2} 
+            background={"hsl(271, 54%, 52%)"} 
+            borderColor={"hsl(271, 49%, 44%)"} 
+            color={"hsl(0,0%,100%)"} 
+            marginRight={3} 
+            _hover={{
+              "background":"hsl(271, 49%, 44%)", 
+              "borderColor":"hsl(271, 49%, 44%)", 
+              "color":"hsl(0,0%,70%)" 
+            }}
+            onClick={handleWithdraw}>Withdraw</Button>
+      </Container>
       
-      <Button 
-          margin={2} 
-          background={"hsl(271, 54%, 52%)"} 
-          borderColor={"hsl(271, 49%, 44%)"} 
-          color={"hsl(0,0%,100%)"} 
-          marginRight={3} 
-          _hover={{
-            "background":"hsl(271, 49%, 44%)", 
-            "borderColor":"hsl(271, 49%, 44%)", 
-            "color":"hsl(0,0%,70%)" 
-          }}
-          onClick={handleWithdraw}>Withdraw</Button>
 
     </Container>
     
     :
     <Container centerContent>
     <FormLabel htmlFor="eventGame">
-      <Heading color={COLORS.indigo}>Event Registration</Heading>
     </FormLabel>
     <Box>
         <Stack>
@@ -151,34 +151,6 @@ export default function EventRegistration({ games }) {
             "color":"hsl(0,10%,100%)" 
           }}
           onClick={handleOnSubmit}>Register</Button>
-        {/* {
-          isRegistered ? 
-          <Button 
-          margin={2} 
-          background={"hsl(271, 54%, 52%)"} 
-          borderColor={"hsl(271, 49%, 44%)"} 
-          color={"hsl(0,0%,100%)"} 
-          marginRight={3} 
-          _hover={{
-            "background":"hsl(271, 49%, 44%)", 
-            "borderColor":"hsl(271, 49%, 44%)", 
-            "color":"hsl(0,0%,70%)" 
-          }}
-          onClick={handleWithdraw}>Withdraw</Button>
-          : 
-          <Button 
-          margin={2} 
-          background={"hsl(271, 54%, 52%)"} 
-          borderColor={"hsl(271, 49%, 44%)"} 
-          color={"hsl(0,0%,100%)"} 
-          marginRight={3} 
-          _hover={{
-            "background":"hsl(271, 49%, 60%)", 
-            "borderColor":"hsl(271, 49%, 44%)", 
-            "color":"hsl(0,10%,100%)" 
-          }}
-          onClick={handleOnSubmit}>Register</Button>
-        }        */}
     </Box>
   </Container>
     }

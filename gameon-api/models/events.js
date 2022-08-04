@@ -204,9 +204,13 @@ class Events {
 
         const results = await db.query(
             `
-                SELECT user_id
-                FROM registered_events
-                WHERE event_id = $1
+                SELECT 
+                    r.user_id,
+                    u.username,
+                    u.image_url
+                FROM registered_events AS r
+                LEFT JOIN users AS u ON u.id = r.user_id
+                WHERE r.event_id = $1
             `,
             [eventId]
         )
