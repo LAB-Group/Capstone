@@ -59,7 +59,7 @@ export default function EventDetails({event, games, eventId, posts}) {
             pt={{base:10, md:14}}
             >
             
-            <Stack spacing={{base:6, md:10}}>
+            <Stack spacing={{base:6, md:10}} fontFamily={"mono, sans-serif"}>
                 <Flex paddingLeft={"1rem"} borderRadius={"15px"} background={"rgba(230, 230, 230, 0.9)"} minW={0} alignItems={"flex-start"} flexGrow={1} flexDirection={"row"}>
                     <Image
                     src={event?.eventImageUrl} 
@@ -121,14 +121,14 @@ export default function EventDetails({event, games, eventId, posts}) {
                 <Box position={"relative"} py={"25px"}>
                 <Stack spacing={{ base: 4, sm: 6 }} direction={"column"}>
                 <Box textAlign={"left"} mx={5}>
-                        <Text position={"relative"} fontSize={"3xl"} fontWeight={300} textTransform={'uppercase'} mb={4}>Details:</Text>
-                        <Text whiteSpace= "pre-wrap" fontSize={'md'} padding={"4px"}>{event.eventDetails}</Text>                    
+                        <Text position={"relative"} fontSize={"3xl"} fontFamily={"Roboto, sans-serif"} fontWeight={300} textTransform={'uppercase'} mb={4}>Details:</Text>
+                        <Text whiteSpace= "pre-wrap" fontSize={'md'} fontFamily={"mono, sans-serif"} padding={"4px"}>{event.eventDetails}</Text>                    
                 </Box>
                 </Stack>
 
                 </Box>
                 <Stack spacing={{ base: 4, sm: 6 }} direction={"column"}>
-                    <Text mx={5} position={"relative"} fontSize={"3xl"} fontWeight={300} textTransform={'uppercase'} mb={4}>Featured Games:</Text>
+                    <Text mx={5} position={"relative"} fontSize={"3xl"} fontFamily={"Roboto, sans-serif"} fontWeight={300} textTransform={'uppercase'} mb={4}>Featured Games:</Text>
                     <HStack justifyContent={"space-evenly"}>
                     {/* Game */}
                     <Flex justifyContent={"center"} flexDirection={"row"} flexWrap={"wrap"} gap={6}>
