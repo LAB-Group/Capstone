@@ -19,7 +19,7 @@ export default function PostsFeed({ eventId, posts }) {
          {posts?.map((post, index) => (
           <Posts key={index} post={post} eventId={eventId} />
         ))}
-        {posts?.length ? (
+        {!posts?.length ? (
           <Box>
             <Text fontFamily={"mono, sans-serif"}>No Posts available</Text>
           </Box>
