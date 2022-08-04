@@ -156,7 +156,7 @@ function SearchBar({
         ))}
       </Wrap>
 
-      <Box w={'100%'} maxW={'100%'}>
+      <Box w={'100%'} maxW={'100%'} fontFamily={"mono, sans-serif"} color={COLORS.indigo}>
         <FormControl variant="floating" mt={2}>
           {searchInput.length > 0 ? (
             <FormLabel transform="scale(0.85) translateY(-21px)">

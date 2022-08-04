@@ -99,8 +99,10 @@ export default function EditProfile({onClose}){
             </ModalBody>
   
             <ModalFooter>
-            <Button color={COLORS.ultraViolet} onClick={handleOnSubmit}>Submit</Button>
-            <Button backgroundColor={"hsla(271, 49%, 44%, 0.8)"} color={COLORS.offWhite} mr={3} onClick={onClose}>Cancel</Button>
+            <Button color={"hsl(271, 70%, 60%)"} onClick={handleOnSubmit}>Submit</Button>
+            <Button 
+            background={"hsl(271, 70%, 60%)"} 
+            color={"hsl(0, 0%, 100%)"}  mr={3} onClick={onClose}>Cancel</Button>
               
             </ModalFooter>
           </ModalContent>
@@ -119,7 +121,7 @@ function EditProfileForm({ user, profileForm, setProfileForm, setErrors, selecte
     // const isError = form === ''
     return (
       <ChakraProvider theme={theme}>
-        <VStack spacing={5}>
+        <VStack spacing={5} fontFamily={"mono, sans-serif"} color={COLORS.indigo}>
         <FormControl variant="floating">
         {profileForm.username.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Username</FormLabel>

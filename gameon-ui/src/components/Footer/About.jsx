@@ -1,7 +1,7 @@
 import * as React from "react"
 import {Box, Heading, SimpleGrid, Stack, StackDivider, Flex,  VStack, HStack, Image, Text, Highlight} from "@chakra-ui/react"
 import { COLORS } from "../colors"
-import pic from "../../media/Logo.png"
+import pic from "../../contexts/media/Logo.png"
 // import { Link } from "react-router-dom"
 
 export default function About(){

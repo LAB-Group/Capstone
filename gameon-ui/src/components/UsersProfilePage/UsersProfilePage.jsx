@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useState, useEffect } from "react"
 import { useParams } from 'react-router-dom'
-import { Box, Center, Text, Divider, Stack, Container, useDisclosure, Heading} from "@chakra-ui/react"
+import { Box, Center, Text, Divider, VStack, Stack, Container, useDisclosure, Heading} from "@chakra-ui/react"
 import UsersProfileDetails from "./UsersProfileDetails"
 import apiClient from "../../services/apiClient"
 import UsersUpcomingEvents from "./UsersUpcomingEvents"
@@ -68,8 +68,9 @@ export default function UsersProfilePage() {
     return (
 
         <Box style={{"backdropFilter": "blur(10px)", "background":"rgba(0, 0, 0, 0.05)"}} >
+            <Box justifyContent={"center"} paddingX={{base:0, lg: 100 }}>
 
-            <Stack direction='column' spacing={6}>
+            <Stack spacing={6}>
                 <UsersProfileDetails viewedUser={viewedUser} isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
                 
                 <Divider orientation='horizontal' />
@@ -77,17 +78,16 @@ export default function UsersProfilePage() {
 
                 <Divider orientation='horizontal' />
                     <UsersPreviousEvents prevEvents={prevEvents} />
-
                 
-                <Divider orientation='horizontal' />
+                {/* <Divider orientation='horizontal' /> */}
                 {/* <Heading fontFamily={"Roboto, sans-serif"} marginLeft={10} mb={2} color={COLORS.offWhite}>Posts</Heading> */}
                 <Box height="auto" borderRadius='sm'>
-                <Heading fontFamily={"Roboto, sans-serif"} marginLeft={6} mb={2} color={COLORS.offWhite}>Posts</Heading>
+                <Heading fontFamily={"Roboto, sans-serif"} marginLeft={4} mb={2} color={COLORS.offWhite}>Posts</Heading>
                     {
                         posts.length === 0 ? 
                         
                         <Box width={"100%"} height='100px'>
-                            <Text fontSize='3xl' color={COLORS.offWhite}>No Post Found</Text>
+                            <Text marginLeft={6} fontSize='2xl' color={COLORS.offWhite} fontFamily={"mono, sans-serif"}>No Post Found</Text>
                          </Box>
                         : 
                         <UsersPostsFeed posts={posts} />
@@ -95,6 +95,7 @@ export default function UsersProfilePage() {
                 </Box>
 
             </Stack>
+            </Box>
         </Box>
     )
 }

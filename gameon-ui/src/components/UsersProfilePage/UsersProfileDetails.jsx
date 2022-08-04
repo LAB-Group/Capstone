@@ -75,8 +75,12 @@ export default function UsersProfileDetails({ viewedUser, onOpen, onClose, isOpe
               justifyContent={"space-between"}    
               padding={3}
             >
+             
               <Image display={"block"} marginX={"auto"}
-                borderRadius="25px" objectFit="cover" width={{sm:"600px" ,md:"300px"}} height={{sm:"300px", md:"auto"}} src={viewedUser.imageUrl}
+                borderRadius="25px" objectFit="cover" 
+                 width={{sm:"600px" ,md:"300px"}} 
+                 height={{sm:"300px", md:"auto"}} 
+                 src={viewedUser.imageUrl}
                 alt={"profile pic"}/>
               <Stack flex={1} flexDirection="column" margin={30} padding={1} pt={2}>
                 <Heading color={COLORS.indigo} fontSize={'2xl'} fontFamily={"Roboto, sans-serif"}>@{viewedUser.username}</Heading>
@@ -88,6 +92,8 @@ export default function UsersProfileDetails({ viewedUser, onOpen, onClose, isOpe
                     <FontAwesomeIcon icon={faInstagram}/>
                   </HStack> 
                 </Stack>
+
+
                 <Stack display={"flex"} mt={0}>
                   <Wrap height={'70px'} overflowY={'auto'}
                       css={{
