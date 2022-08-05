@@ -18,6 +18,7 @@ import RegisterPage from "../RegisterPage/RegisterPage"
 import {COLORS} from "../colors"
 
 export default function EventDetails({event, games, eventId, posts}) {
+    
     const noImage = "https://image.shutterstock.com/shutterstock/photos/571752970/display_1500/stock-photo-no-game-sign-on-white-background-571752970.jpg"
     const { user } = useAuthContext()
     const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure()

@@ -5,7 +5,6 @@ const { BadRequestError, UnauthorizedError, NotFoundError } = require("../utils/
 class Games {
 
   static async addGamesToLocalDB(localDBForm) {
-
         const results = await db.query(
           `
            INSERT INTO igdb_local (game_id, game_name, game_summary, game_image_url)

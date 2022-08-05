@@ -11,6 +11,7 @@ class Events {
             each event will be displayed in a post
         */
         const results = await db.query(
+            
             `
                 SELECT e.id,
                        e.event_name AS "eventName",

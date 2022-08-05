@@ -21,6 +21,7 @@ export default function EventRegistration({ games, setErrors, setIsRegistered, s
     setItems()
 
     const getIsRegistered = async() => {
+      
       const { data, error } = await apiClient.isUserRegistered(eventId, user.id)
        if(data) {
         setErrors(null)
