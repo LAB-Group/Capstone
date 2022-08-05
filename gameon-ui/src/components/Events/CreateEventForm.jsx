@@ -114,7 +114,8 @@ export default function CreateEventForm({ onClose }) {
    
      if(createEventForm.eventName.length>0&&createEventForm.eventStartDate.length>0&&createEventForm.eventEndDate.length>0&&createEventForm.eventType.length>0&&createEventForm.eventLocation.length>0&&createEventForm.eventDetails.length>0){
           onClose();
-          window.location.reload();
+          // window.location.reload();
+          window.location = document.URL;
      }    
   };
 

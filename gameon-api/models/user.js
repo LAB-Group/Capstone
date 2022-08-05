@@ -48,9 +48,14 @@ class User {
       throw new BadRequestError("Invalid email.")
     }
 
-    const existingUser = await User.fetchUserByEmail(credentials.email)
-    if (existingUser) {
+    const existingEmail = await User.fetchUserByEmail(credentials.email)
+    if (existingEmail) {
       throw new BadRequestError(`A user already exists with email: ${credentials.email}`)
+    }
+
+    const existingUsername = await User.fetchUserByEmail(credentials.username)
+    if (existingUsername) {
+      throw new BadRequestError(`A user already exists with username: ${credentials.username}`)
     }
 
     const hashedPassword = await bcrypt.hash(credentials.password, BCRYPT_WORK_FACTOR)
@@ -75,6 +80,20 @@ class User {
     const query = `SELECT * FROM users WHERE email = $1`
 
     const result = await db.query(query, [email.toLowerCase()])
+
+    const user = result.rows[0]
+
+    return user
+  }
+
+  static async fetchUserByUsername(username) {
+    if (!username) {
+      throw new BadRequestError("No username provided")
+    }
+
+    const query = `SELECT * FROM users WHERE username = $1`
+
+    const result = await db.query(query, [username.toLowerCase()])
 
     const user = result.rows[0]
 
