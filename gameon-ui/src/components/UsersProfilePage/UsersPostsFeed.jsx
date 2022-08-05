@@ -16,7 +16,9 @@ export default function UsersPostsFeed({ posts }) {
           {/* <Text color={COLORS.offWhite}>I'm Here</Text> */}
           <VStack>
             {posts?.map((post, index) => (
-              <UsersPosts key={index} post={post} />
+              <Box mt={1} key={index}>
+                <UsersPosts key={post.id} post={post} />
+              </Box>
             ))}
           </VStack>
         </Box>
