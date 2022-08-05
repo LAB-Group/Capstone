@@ -101,8 +101,8 @@ export default function Posts({ post, eventId }) {
                         <Link to={`/user/${post.creatorId}/profile`}><Text fontFamily={"mono, sans-serif"} fontWeight={'bold'} >@{post.creatorUsername}</Text></ Link>
                       </HStack>
                       <HStack>
-                        <Badge borderRadius={"5px"} px='2' style={{"background":"rgba(113, 57, 190, .3)"}} color={"hsl(255, 25%, 40%)"}>{postDate}</Badge>
-                        <Badge borderRadius={"5px"} px='2' style={{"background":"rgba(113, 57, 190, .3)"}} color={"hsl(255, 25%, 40%)"}>{time}</Badge>
+                        <Badge borderRadius={"5px"} px='2' style={{"background":"rgba(113, 57, 190, .2)"}} color={"hsl(255, 25%, 50%)"}>{postDate}</Badge>
+                        <Badge borderRadius={"5px"} px='2' style={{"background":"rgba(113, 57, 190, .2)"}} color={"hsl(255, 25%, 50%)"}>{time}</Badge>
                       </HStack>
                     </Stack>
                     <Stack>

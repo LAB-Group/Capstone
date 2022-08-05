@@ -113,7 +113,7 @@ export default function UsersProfileDetails({ viewedUser, onOpen, onClose, isOpe
                 <Link to={`/user/${user.id}/profile/edit-profile`}>
                 {viewedUser.userId === user.id ? 
                 <Button width="25%" height='30px' 
-                mt={3} fontFamily={"Open Sans, sans-serif"} borderRadius={"8px"}
+                mt={{base:3, md:20}} ml={{base:0, md:"70%"}} fontFamily={"Open Sans, sans-serif"} borderRadius={"8px"}
                 backgroundColor={"hsl(271, 49%, 52%)"} color={COLORS.offWhite} 
                 style={{
                   "transition": "backgroundColor 1s, color 1s"

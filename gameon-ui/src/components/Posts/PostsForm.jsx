@@ -107,7 +107,6 @@ export default function PostsForm({event, eventId}) {
               pb={2}
               border='1px' 
               borderColor='gray.200'
-              
               w="75vw"
             >
       <VStack spacing={5} mx={5} >
@@ -119,7 +118,7 @@ export default function PostsForm({event, eventId}) {
           type="text"
           placeholder='Title'
           variant={'filled'}
-          focusBorderColor="purple.400"
+          focusBorderColor="rgba(113, 57, 166, 0.6)"
           name="postTitle"
           defaultValue={createPostForm.postTitle}
           onChange={handleOnInputChange}
@@ -135,14 +134,14 @@ export default function PostsForm({event, eventId}) {
           type="text"
           placeholder='Comment'
           variant={'filled'}
-          focusBorderColor="purple.400"
+          focusBorderColor="rgba(113, 57, 166, 0.6)"
           defaultValue={createPostForm.postContent}
           onChange={handleOnInputChange}
         />
         {!createPostForm.postContent.length>0&&isSubmit?<FormErrorMessage>Comment is required.</FormErrorMessage>:null}
       </FormControl>
       
-       <Button colorScheme="purple" mt={1} w="350px"  variant='ghost' onClick={handleOnSubmit}>
+       <Button color={COLORS.ultraViolet} mt={1} w="350px" variant='ghost' onClick={handleOnSubmit}>
         Post
       </Button>
       </VStack></Box></Container>
