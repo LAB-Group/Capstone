@@ -73,7 +73,8 @@ export default function PostsForm({event, eventId}) {
     setIsSubmit(true)
 
     if(createPostForm.postTitle.length>0&&createPostForm.postContent.length>0){
-      window.location.reload();
+      // window.location.reload();
+      window.location = document.URL;
     }
 
     

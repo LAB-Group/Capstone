@@ -78,7 +78,8 @@ export default function EditProfile({onClose}){
         
         setUser(data.user)
         onClose()
-        window.location.reload();
+        // window.location.reload();
+        window.location = document.URL;
       }
       setIsLoading(false)
     }

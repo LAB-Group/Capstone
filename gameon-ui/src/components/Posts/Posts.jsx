@@ -57,7 +57,8 @@ export default function Posts({ post, eventId }) {
     
     if(createReplyForm.replyContent.length>0){
       onClose()
-      window.location.reload();
+      // window.location.reload();
+      window.location = document.URL;
     }
     
   };

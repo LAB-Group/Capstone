@@ -11,7 +11,6 @@ import EventCard from "./EventCard"
 import { useAuthContext } from "../../contexts/auth"
 import { useEventContext } from "../../contexts/event"
 import { Pagination, Scrollbar } from "swiper"
-import SearchedEvents from "./SearchedEvents";
 import { COLORS } from "../colors";
 export default function EventFeed({ isFetching }){
     const { user } = useAuthContext()
@@ -43,18 +42,16 @@ export default function EventFeed({ isFetching }){
       let futureDate = date.toISOString().split('T')[0] //Date.now() + (6.048e+8 * 2) is 2 weeks from today
    
         return(
-            // Created margintop space out the EventFeed and Hero
-            // Might comeback and make this a paddingTop
+
             <Flex marginTop={"2rem"} flexDirection='column' justifyContent='center' alignItems='center' minWidth="95vw" position="relative">
-                {/* <Divider orientation='horizontal' backgroundColor={'purple.100'} marginTop={6} minWidth="95vw" marginBottom={6} /> */}
                 {/* font-family: 'Roboto', sans-serif for headings */}
 
 
-                {/* TEST */}
+                
+                {/* Logged in user's upcoming events within 2 weeks */}
+                {user?.email ? 
+                <>
                 <Heading id="events" fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite} marginBottom={"1em"} textAlign={"left"} fontSize={["xl", "3xl", "4xl"]}>Your Upcoming Events</Heading>
-                {/* <Text position={"relative"} fontSize={"3xl"} fontFamily={"Roboto, sans-serif"} fontWeight={300} textTransform={'uppercase'} mb={4}>Details:</Text> */}
-
-                {user ? 
                 <SimpleGrid minWidth="80%" maxW={'80%'} justifyContent={"center"} alignItems={"center"} minChildWidth={'350px'} gap='20px'>
                 <Box  marginX={"1rem"} marginTop={"0.5rem"}
                 css={{
@@ -80,21 +77,9 @@ export default function EventFeed({ isFetching }){
                         }
                     },
                 }}>
-                <Box className="swiperContainer" my={2} mb={8} position={'static'}>
+                <Box className="swiperContainer" my={2} mb={8} px={5} position={'static'}>
                     <Swiper
                                         breakpoints={{
-                                            // 640:{
-                                            //     width: 640,
-                                            //     slidesPerView:1,
-                                            //     slidesPerGroup:1,
-                                            //     spaceBetween:40
-                                            // },
-                                            // 768:{
-                                            //     width: 768,
-                                            //     slidesPerView:2,
-                                            //     slidesPerGroup:2,
-                                            //     spaceBetween:40
-                                            // },
                                             890:{
                                                 width: 890,
                                                 slidesPerView:3,
@@ -124,10 +109,9 @@ export default function EventFeed({ isFetching }){
                 </Box>
                 </Box>
                 </SimpleGrid>
+                </>
                 :null}
                 
-                
-                {/* TEST */}
 
                 <Heading id="events" fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite} marginBottom={"1em"} textAlign={"center"} fontSize={["xl", "3xl", "4xl"]}>Events</Heading>
                 
