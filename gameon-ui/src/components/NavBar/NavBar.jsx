@@ -36,9 +36,9 @@ export default function NavBar() {
         // This makes the navbar scrollable
 
         <Box  overflow={"hidden"} fontFamily={"Roboto, sans-serif"} zIndex={1} position="sticky" top={0} width="100%" height="50px" backgroundColor={COLORS.indigo} fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} >
-            <Flex width={"100%"} alignItems="center" gap='1'>
+            <Flex width={"90%"} alignItems="center" gap='1'>
                 {/* FIXME: Image revisit */}
-                <Box width={"100px"} display={"inline-flex"}>
+                <Box width={"100px"} ml={"11%"} display={"inline-flex"}>
                     <Link to="/">
                         <Image width={"150px"} height={"40px"} margin={0} marginTop={2} float={"left"} objectFit={"cover"} src={logo}/>
                     </Link>

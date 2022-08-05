@@ -41,8 +41,9 @@ export default function UsersPosts({ post, key }) {
                             base: "center",
                             md: "end",
                           }}
-                          mt={[-16]}>
-                          <Image  w={[10,20]} h={[10,20]} mt={8} borderRadius="50%" src={post.creatorImageUrl}/>
+                          mt={[0]}
+                          >
+                          <Image  w={[10,20]} h={[10,20]} mt={-8} borderRadius="50%" src={post.creatorImageUrl}/>
                         </Flex>
                         <Link to={`/user/${post.creatorId}/profile`}  ><Text fontWeight={'bold'} >@{post.creatorUsername}</Text></ Link>
                       </HStack>
