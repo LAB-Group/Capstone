@@ -6,7 +6,9 @@ import pic from "../../contexts/media/Logo.png"
 
 export default function About(){
     return (
-        <Box width={"100%"} pt={12}
+        <Box width={"100%"} pt={4}
+        background={"hsla(255, 50%, 21%, 0.5)"} 
+            roundedTop={"25px"}
             // css={{
             //     "position": "relative",
             //     "transform": "translateX(150px)",
@@ -19,8 +21,20 @@ export default function About(){
             // }}
         
         >
-            <Heading fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite} marginBottom={"1em"} textAlign={"center"} fontSize={["xl", "3xl", "4xl"]}>About</Heading>
-            <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10} background={"hsl(255, 50%, 21%)"} roundedTop={"25px"}>
+            {/* <Heading fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite} marginBottom={"1em"} textAlign={"center"} fontSize={["xl", "3xl", "4xl"]}>About</Heading> */}
+                
+                    <Heading margin={6} fontSize={"2xl"} fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite}>
+                        A gaming hub created for all gamers.
+                    </Heading>
+                
+            <SimpleGrid 
+            columns={{ base: 1, md: 2 }} 
+            spacing={10} 
+            // background={"hsla(255, 50%, 21%, 0.5)"} 
+            // roundedTop={"25px"}
+            >
+                
+                
                 <Stack spacing={4}>
                 {/* <Text
                     textTransform={'uppercase'}
@@ -33,11 +47,9 @@ export default function About(){
                     rounded={'md'}>
                     About us
                 </Text> */}
-                {/* <Heading fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite}>GameOn</Heading> */}
-                <Text fontFamily={"mono, sans-serif"} whiteSpace={"pre-wrap"} color={COLORS.offWhite} fontSize={'lg'}>
-                    <Highlight query={"GameOn!"} styles={{color:COLORS.darkAmethyst}}>
+
+                <Text paddingLeft={6} fontFamily={"mono, sans-serif"} whiteSpace={"pre-wrap"} color={COLORS.offWhite} fontSize={'lg'}>
                     GameOn! is a community hub for all gamers looking to attend meetups and events. Our mission is to have gamers of all ages and different backgrounds to attend tournaments and to meet people with similar interests. Gamers can not only attend tournaments and meetups, but event coordinators can create events.
-                    </Highlight>
                 </Text>
                 <Stack spacing={4}
                 divider={
