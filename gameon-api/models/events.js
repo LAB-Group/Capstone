@@ -10,8 +10,7 @@ class Events {
             from most recent to least recent
             each event will be displayed in a post
         */
-        const results = await db.query(
-            
+        const results = await db.query(          
             `
                 SELECT e.id,
                        e.event_name AS "eventName",

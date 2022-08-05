@@ -11,7 +11,6 @@ export default function EventRegistration({ games, setErrors, setIsRegistered, s
   const { user } = useAuthContext()
   const { eventId } = useParams()
   const [action, setAction] = useState()
-
   useEffect(() => {  
     const setItems = async() => {
       if(games) {

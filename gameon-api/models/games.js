@@ -3,7 +3,6 @@ const db = require("../db")
 const { BadRequestError, UnauthorizedError, NotFoundError } = require("../utils/errors");
 
 class Games {
-
   static async addGamesToLocalDB(localDBForm) {
         const results = await db.query(
           `
