@@ -107,6 +107,9 @@ class User {
         throw new BadRequestError(`Missing ${property} in request body.`)
       }
     })
+    if (!userUpdate.username.length) {
+      throw new BadRequestError(`Missing username in request body.`)
+    }
 
     const userResult = await db.query(
       `UPDATE users
