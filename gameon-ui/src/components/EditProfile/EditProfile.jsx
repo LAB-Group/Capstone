@@ -69,7 +69,7 @@ export default function EditProfile({onClose}){
       setErrors((error) => ({ ...error, form: null }))
   
       const {data, error} = await apiClient.editUserProfile({ username: profileForm.username.toLowerCase(), firstName: profileForm.firstName, lastName: profileForm.lastName,
-                                                             imageUrl: profileForm.imageUrl, email: user.email, gameList: selectedGames})
+                                                             imageUrl: profileForm.imageUrl, email: user.email, gameList: [...user.gameList, ...selectedGames]})
       for (let i=0;i<selectedGames.length;i++) {
         const { test } = await apiClient.addGamesToLocalDB({gameId:selectedGames[i],gameName:selectedGamesNames[i],gameSummary:selectedGamesSummary[i],gameImageUrl:selectedGamesPic[i]})
       }
@@ -87,7 +87,7 @@ export default function EditProfile({onClose}){
  return(
     <Container>
         <ModalOverlay width={'100%'} />
-          <ModalContent maxWidth={'50rem'}>
+          <ModalContent maxWidth={'80%'}>
             <ModalHeader>Edit Profile</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
@@ -162,8 +162,7 @@ function EditProfileForm({ user, profileForm, setProfileForm, setErrors, selecte
         {/* <FormLabel htmlFor='gameList'>Games Played</FormLabel> */}
         <Search selectedGames={selectedGames} setSelectedGames={setSelectedGames} selectedGamesNames={selectedGamesNames}
          setSelectedGamesNames={setSelectedGamesNames} selectedGamesSummary={selectedGamesSummary} setSelectedGamesSummary={setSelectedGamesSummary}
-         selectedGamesPic={selectedGamesPic}
-         setSelectedGamesPic={setSelectedGamesPic} />
+         selectedGamesPic={selectedGamesPic} setSelectedGamesPic={setSelectedGamesPic} userGameList={user.gameList} />
 
       </VStack>
       </ChakraProvider>
