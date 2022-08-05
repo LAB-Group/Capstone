@@ -68,7 +68,7 @@ export default function UsersProfilePage() {
     return (
 
         <Box style={{"backdropFilter": "blur(10px)", "background":"rgba(0, 0, 0, 0.05)"}} >
-            <Box justifyContent={"center"} paddingX={{base:0, lg: 100 }}>
+            <Box justifyContent={"center"} paddingX={{base:0, lg: "10%"}}>
 
             <Stack spacing={6}>
                 <UsersProfileDetails viewedUser={viewedUser} isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
