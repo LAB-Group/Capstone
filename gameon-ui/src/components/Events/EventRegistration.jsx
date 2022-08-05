@@ -14,7 +14,6 @@ export default function EventRegistration({ games, setErrors, setIsRegistered, s
 
   useEffect(() => {  
     const setItems = async() => {
-      console.log("games: ", games)
       if(games) {
         setCheckedItems(new Array(games.length).fill(false))
       }

@@ -61,7 +61,6 @@ export default function EventDetails({event, games, eventId, posts}) {
             setErrors(null)
             setIsRegistered(true)
             setGamesRegistered(data.isRegistered[0].eventGamesRegisteredFor)
-            console.log(data.isRegistered[0].eventGamesRegisteredFor)
            }
            if (error) {
             setErrors(error)
