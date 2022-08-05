@@ -1,6 +1,7 @@
 import * as React from "react"
+import apiClient from "../../services/apiClient"
 import { useState, useEffect } from "react"
-import {  Box, Text, SimpleGrid, Flex, Button, Center, Skeleton, VStack, Heading, useDisclosure, Input, HStack, Container, ButtonGroup } from "@chakra-ui/react"
+import {  Box, Text, Wrap, SimpleGrid, Flex, Button, Center, Skeleton, VStack, Heading, useDisclosure, Input, HStack, Container, ButtonGroup } from "@chakra-ui/react"
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css"
 import "swiper/css/pagination"
@@ -14,15 +15,10 @@ import SearchedEvents from "./SearchedEvents";
 import { COLORS } from "../colors";
 export default function EventFeed({ isFetching }){
     const { user } = useAuthContext()
-    const { events } = useEventContext()
+    const { events, userEvents } = useEventContext()
     const [loading, setLoading] = useState(true)
     const [currentEventType, setCurrentEventType] = useState("")
-    const { isOpen, onOpen, onClose } = useDisclosure()
-
-    let tournamentEvents = events?.filter(event => {return event.eventType === "Tournament"})
-    let speedEvents = events?.filter(event => {return event.eventType === "Speedrunning"})
-    let meetEvents = events?.filter(event => {return event.eventType === "Meet-up"})
-    let casualEvents = events?.filter(event => {return event.eventType === "Casuals"})    
+    const [error, setError] = useState(null)
 
     const [searchInput, setSearchInput] = useState("")
     let handleOnSearchChange = (event) => {
@@ -40,6 +36,11 @@ export default function EventFeed({ isFetching }){
       let handleEventType = (eventType) => {
         setCurrentEventType(eventType)
       }
+
+      let date = new Date()
+      let todaysDate = date.toISOString().split('T')[0]
+      date.setDate(date.getDate() * 4.5)
+      let futureDate = date.toISOString().split('T')[0] //Date.now() + (6.048e+8 * 2) is 2 weeks from today
    
         return(
             // Created margintop space out the EventFeed and Hero
@@ -47,287 +48,107 @@ export default function EventFeed({ isFetching }){
             <Flex marginTop={"2rem"} flexDirection='column' justifyContent='center' alignItems='center' minWidth="95vw" position="relative">
                 {/* <Divider orientation='horizontal' backgroundColor={'purple.100'} marginTop={6} minWidth="95vw" marginBottom={6} /> */}
                 {/* font-family: 'Roboto', sans-serif for headings */}
+
+
+                {/* TEST */}
+                <Heading id="events" fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite} marginBottom={"1em"} textAlign={"left"} fontSize={["xl", "3xl", "4xl"]}>Your Upcoming Events</Heading>
+                {/* <Text position={"relative"} fontSize={"3xl"} fontFamily={"Roboto, sans-serif"} fontWeight={300} textTransform={'uppercase'} mb={4}>Details:</Text> */}
+
+                {user ? 
+                <SimpleGrid minWidth="80%" maxW={'80%'} justifyContent={"center"} alignItems={"center"} minChildWidth={'350px'} gap='20px'>
+                <Box  marginX={"1rem"} marginTop={"0.5rem"}
+                css={{
+                    ".swiper-pagination-bullet-active": {
+                        "backgroundColor": COLORS.ultraViolet
+                      },
+                    ".swiperContainer":{
+                        "width":"100%"
+                    },
+                    "@media screen and (min-width: 640px)":{
+                        ".swiperContainer":{
+                            "width":"100%"
+                        }
+                    },
+                    "@media screen and (min-width: 768px)":{
+                        ".swiperContainer":{
+                            "width":"100%"
+                        }
+                    },
+                    "@media screen and (min-width: 890px)":{
+                        ".swiperContainer":{
+                            "width":"100%"
+                        }
+                    },
+                }}>
+                <Box className="swiperContainer" my={2} mb={8} position={'static'}>
+                    <Swiper
+                                        breakpoints={{
+                                            // 640:{
+                                            //     width: 640,
+                                            //     slidesPerView:1,
+                                            //     slidesPerGroup:1,
+                                            //     spaceBetween:40
+                                            // },
+                                            // 768:{
+                                            //     width: 768,
+                                            //     slidesPerView:2,
+                                            //     slidesPerGroup:2,
+                                            //     spaceBetween:40
+                                            // },
+                                            890:{
+                                                width: 890,
+                                                slidesPerView:3,
+                                                slidesPerGroup:3,
+                                                spaceBetween:200
+                                            },
+                    
+                                        }}
+                            scrollbar={{
+                                hide:true
+                            }}
+                            modules={[Pagination, Scrollbar]}
+                            pagination={{
+                                clickable: true,
+                            }}
+                        >
+                {userEvents?.map((event, index) => (
+                    (event.eventStartDate >= todaysDate && event.eventStartDate <= futureDate) ?
+                            <SwiperSlide key={index}>
+                                <EventCard event={event} key={index} />         
+                            </SwiperSlide>
+                        :
+                        null
+                ))}
+                </Swiper>
+                
+                </Box>
+                </Box>
+                </SimpleGrid>
+                :null}
+                
+                
+                {/* TEST */}
+
                 <Heading id="events" fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite} marginBottom={"1em"} textAlign={"center"} fontSize={["xl", "3xl", "4xl"]}>Events</Heading>
-                {/* <Button onClick={onOpen} 
-                fontFamily={"mono, sans-serif"}
-                fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} 
-                background={"rgba(0,0,0,0)"} 
-                color={COLORS.offWhite}
-                border={"2px"} borderColor={COLORS.ultraViolet} borderStyle={"solid"}
-                style={{"transition": "backgroundColor 0.5s, color 0.5s, borderColor 0.5s"}}
-                 _hover={{"backgroundColor":COLORS.offWhite,"color": COLORS.indigo, "borderColor": COLORS.offWhite}}>Search All Events</Button> */}
                 
                 {/* All Events Feed */}
                 <Container centerContent minWidth={"80%"}>
                 <HStack>
                     <ButtonGroup variant={'outline'} color={'white'}>
                         <Button borderColor={COLORS.ultraViolet} onClick={() => handleEventType("")}>All Events</Button>
-                        <Button borderColor={COLORS.ultraViolet} onClick={() => handleEventType("Tournament")}>Tournament</Button>
+                        <Button borderColor={COLORS.ultraViolet} onClick={() => handleEventType("Tournament")}>Tournaments</Button>
                         <Button borderColor={COLORS.ultraViolet} onClick={() => handleEventType("Casuals")}>Casuals</Button>
                         <Button borderColor={COLORS.ultraViolet} onClick={() => handleEventType("Speedrunning")}>Speedrunning</Button>
-                        <Button borderColor={COLORS.ultraViolet} onClick={() => handleEventType("Meet-up")}>Meet-up</Button>
+                        <Button borderColor={COLORS.ultraViolet} onClick={() => handleEventType("Meet-up")}>Meet-ups</Button>
                     </ButtonGroup>
                 </HStack>
-                <Input margin={'1rem'} defaultValue="" placeholder="search events..." onChange={handleOnSearchChange}></Input>
-                <SimpleGrid minWidth="50vw" justifyContent={"center"} alignItems={"center"} minChildWidth={'320px'} gap='20px' className="WRAP">
+                <Input margin={'1rem'} defaultValue="" focusBorderColor={COLORS.ultraViolet} color={'white'} placeholder="Search events..." onChange={handleOnSearchChange}></Input>
+                <SimpleGrid minWidth="80%" justifyContent={"center"} alignItems={"center"} minChildWidth={'320px'} gap='20px' className="WRAP">
                 {searchedEvents?.map((event, index) => (
                             <EventCard key={index} event={event}/>         
                 ))}
                 </SimpleGrid>
                 </Container>
-                {/* <Text onClick={onOpen} style={{
-                    "color":"hsl(0, 0%, 90%)",
-                    "backgroundColor":"none",
-                    "border":"2px",
-                    "borderColor":COLORS.ultraViolet,
-                    "borderStyle":"solid", 
-                    "borderRadius":"5px",
-                    "padding":"1em",
-                    "transition":"borderColor 0.8s, backgroundColor 0.8s"
-                    }} 
-                    _hover={{
-                        "cursor":"pointer",
-                        "borderColor":COLORS.darkAmethyst,
-                        "backgroundColor": COLORS.darkAmethyst, 
-                    }}>Search All Events</Text> */}
-
-                {isOpen? <SearchedEvents events={events} isOpen={isOpen} onOpen={onOpen} onClose={onClose} /> :<></>}
-                
-                
-                <SimpleGrid marginTop={"1rem"} minWidth="80vw" justifyContent={"center"} alignItems={"center"} minChildWidth={'320px'} rowGap='20px' className="WRAP">
-                <VStack>
-                <Box width={"100%"}>
-                
-                <Box marginX={"1rem"} marginTop={"0.5rem"}
-                css={{
-                    ".swiper-pagination-bullet-active": {
-                        "backgroundColor": COLORS.ultraViolet
-                      },
-                    ".swiperContainer":{
-                        "width":"100%"
-                    },
-                    "@media screen and (min-width: 640px)":{
-                        ".swiperContainer":{
-                            "width":"100%"
-                        }
-                    },
-                    "@media screen and (min-width: 768px)":{
-                        ".swiperContainer":{
-                            "width":"100%"
-                        }
-                    },
-                    "@media screen and (min-width: 890px)":{
-                        ".swiperContainer":{
-                            "width":"100%"
-                        }
-                    },
-                }}>
-                    <Heading fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite}>Tournaments</Heading>
-                
-                <Box 
-                className="swiperContainer" 
-                position={"static"} 
-                marginTop={"0.5rem"} 
-                style={{"background":"rgba(113, 57, 166, .6)"}} 
-                padding={"2em"} borderRadius={"20px"}
-                > 
-                {tournamentEvents?.length ? 
-                    <Swiper
-                    breakpoints={{
-                        640:{
-                            width: 640,
-                            slidesPerView:1,
-                            slidesPerGroup:1,
-                            spaceBetween:40
-                        },
-                        768:{
-                            width: 768,
-                            slidesPerView:2,
-                            slidesPerGroup:2,
-                            spaceBetween:40
-                        },
-                        // 890:{
-                        //     width: 890,
-                        //     slidesPerView:3,
-                        //     slidesPerGroup:3,
-                        //     spaceBetween:20
-                        // },
-
-                    }}
-                    // slidesPerView={4}
-                    // spaceBetween={20}
-                    // slidesPerGroup={4}
-                    scrollbar={{
-                      hide: true,
-                    }}
-                    pagination={{
-                        clickable:true
-                    }
-                    }
-                    modules={[Scrollbar, Pagination]}
-                    loop={false}
-                    loopFillGroupWithBlank={true}
-                    className="mySwiper"
-                  > 
-                        {tournamentEvents?.map((event, index) => (
-                        <SwiperSlide key={index}>
-                            <EventCard key={index} event={event}/>         
-                        </SwiperSlide>
-                            ))}
-                    </Swiper>
-                    :<Box><Text>No Events available</Text></Box>}
-                </Box>
-                </Box> 
-                
-                <Box marginX={"1rem"} marginTop={"2rem"}
-                css={{
-                    ".swiper-pagination-bullet-active": {
-                        "backgroundColor": COLORS.ultraViolet
-                      },
-                    ".swiperContainer":{
-                        "width":"100%"
-                    },
-                    "@media screen and (min-width: 640px)":{
-                        ".swiperContainer":{
-                            "width":"100%"
-                        }
-                    },
-                    "@media screen and (min-width: 768px)":{
-                        ".swiperContainer":{
-                            "width":"100%"
-                        }
-                    },
-                    "@media screen and (min-width: 890px)":{
-                        ".swiperContainer":{
-                            "width":"100%"
-                        }
-                    },
-                }}>
-                    <Heading fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite}>Speedrunning</Heading>
-                
-                <Box 
-                className="swiperContainer" 
-                position={"static"} 
-                marginTop={"0.5rem"} 
-                style={{"background":"rgba(113, 57, 166, .6)"}} 
-                padding={"2em"} borderRadius={"20px"}
-                > 
-                {speedEvents?.length ? 
-                    <Swiper
-                    breakpoints={{
-                        640:{
-                            width: 640,
-                            slidesPerView:1,
-                            slidesPerGroup:1,
-                            spaceBetween:40
-                        },
-                        768:{
-                            width: 768,
-                            slidesPerView:2,
-                            slidesPerGroup:2,
-                            spaceBetween:40
-                        },
-
-                    }}
-                    scrollbar={{
-                      hide: true,
-                    }}
-                    pagination={{
-                        clickable:true
-                    }
-                    }
-                    modules={[Scrollbar, Pagination]}
-                    loop={false}
-                    loopFillGroupWithBlank={true}
-                    className="mySwiper"
-                  > 
-                        {speedEvents?.map((event, index) => (
-                        <SwiperSlide key={index}>
-                            <EventCard key={index} event={event}/>         
-                        </SwiperSlide>
-                            ))}
-                    </Swiper>
-                    :<Box><Text>No Events available</Text></Box>}
-                </Box>
-                </Box> 
-                
-                <Box marginX={"1rem"} marginTop={"2rem"}
-                css={{
-                    ".swiper-pagination-bullet-active": {
-                        "backgroundColor": COLORS.ultraViolet
-                      },
-                    ".swiperContainer":{
-                        "width":"100%"
-                    },
-                    "@media screen and (min-width: 640px)":{
-                        ".swiperContainer":{
-                            "width":"100%"
-                        }
-                    },
-                    "@media screen and (min-width: 768px)":{
-                        ".swiperContainer":{
-                            "width":"100%"
-                        }
-                    },
-                    "@media screen and (min-width: 890px)":{
-                        ".swiperContainer":{
-                            "width":"100%"
-                        }
-                    },
-                }}>
-                    <Heading fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite}>Meet-Ups</Heading>
-                
-                <Box 
-                className="swiperContainer"  
-                marginTop={"0.5rem"} 
-                style={{"background":"rgba(113, 57, 166, .6)"}} 
-                padding={"2em"} borderRadius={"20px"}
-                > 
-                {meetEvents?.length ? 
-                    <Swiper
-                    breakpoints={{
-                        640:{
-                            width: 640,
-                            slidesPerView:1,
-                            slidesPerGroup:1,
-                            spaceBetween:40
-                        },
-                        768:{
-                            width: 768,
-                            slidesPerView:2,
-                            slidesPerGroup:2,
-                            spaceBetween:40
-                        },
-                    }}
-                    // slidesPerView={4}
-                    // spaceBetween={20}
-                    // slidesPerGroup={4}
-                    scrollbar={{
-                      hide: true,
-                    }}
-                    pagination={{
-                        clickable:true
-                    }
-                    }
-                    modules={[Scrollbar, Pagination]}
-                    loop={false}
-                    loopFillGroupWithBlank={true}
-                    className="mySwiper"
-                  > 
-                        {meetEvents?.map((event, index) => (
-                        <SwiperSlide key={index}>
-                            <EventCard key={index} event={event}/>         
-                        </SwiperSlide>
-                            ))}
-                    </Swiper>
-                    :<Box><Text>No Events available</Text></Box>}
-                </Box>
-                </Box> 
-
-
-                </Box>
-                </VStack>
-                </SimpleGrid>
                 
                 </Flex>
                 )

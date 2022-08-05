@@ -1,13 +1,16 @@
 import { createContext, useState, useContext, useEffect } from "react"
 import apiClient from "../services/apiClient"
+import { useAuthContext } from './auth'
 
 const EventContext = createContext(null)
 
 export const EventContextProvider = ({ children }) => {
     const [events, setEvents] = useState([])
+    const [userEvents, setUserEvents] = useState([])
     const [initialized, setInitialized] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
+    const { user } = useAuthContext()
 
     const eventValue = { 
       events, 
@@ -17,7 +20,8 @@ export const EventContextProvider = ({ children }) => {
       error, 
       setError, 
       isLoading, 
-      setIsLoading
+      setIsLoading,
+      userEvents
     }
 
     useEffect(() => {
@@ -31,6 +35,18 @@ export const EventContextProvider = ({ children }) => {
         }
           setIsLoading(false)
           fetchEvent()
+      },[])
+
+      useEffect(() => {
+        const fetchUsersEvent = async () => {
+          const { data, error } = await apiClient.fetchUsersEvents(1)
+          if(data) {
+
+            setUserEvents(data)
+          }
+          if (error) setError(error)
+        }
+          fetchUsersEvent()
       },[])
 
     return (
