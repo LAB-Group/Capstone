@@ -67,7 +67,6 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
-
 # Capstone Project
 
 ### Frontend
@@ -83,10 +82,10 @@ In general, the components directory should resemble:
     ├── Navbar (all routes)
     │   ├── Logo
     │   └── NavLinks
-    |   |   ├── LoginPage
-    |   |   │   └── LoginForm
-    |   |   |
-    |   |   └── RegistrationPage
+    |       ├── LoginPage
+    |       │   └── LoginForm
+    |       |
+    |       └── RegistrationPage
     |           └── RegistrationForm
     │
     ├── HomePage
