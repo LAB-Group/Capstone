@@ -143,7 +143,7 @@ export default function EventFeed({ isFetching }){
                     </ButtonGroup>
                 </HStack>
                 <Input margin={'1rem'} defaultValue="" focusBorderColor={COLORS.ultraViolet} color={'white'} placeholder="Search events..." onChange={handleOnSearchChange}></Input>
-                <SimpleGrid minWidth="80%" justifyContent={"center"} alignItems={"center"} minChildWidth={'320px'} gap='20px' className="WRAP">
+                <SimpleGrid minWidth="80%" justifyContent={"center"} alignItems={"center"} minChildWidth={'350px'} gap='20px' className="WRAP">
                 {searchedEvents?.map((event, index) => (
                             <EventCard key={index} event={event}/>         
                 ))}
