@@ -62,15 +62,18 @@ export default function EditProfile({onClose}){
       lastName: user.lastName,
       imageUrl: user.imageUrl,
       email: user.email,
-      gameList: user.gameList
+      gameList: user.gameList,
+      location: user.location
     })
 
     const handleOnSubmit = async () => {
       setIsLoading(true)
       setErrors((error) => ({ ...error, form: null }))
   
+      console.log("USER: ",profileForm)
+
       const {data, error} = await apiClient.editUserProfile({ username: profileForm.username.toLowerCase(), firstName: profileForm.firstName, lastName: profileForm.lastName,
-                                                             imageUrl: profileForm.imageUrl, email: user.email, gameList: [...user.gameList, ...selectedGames]})
+                                                             imageUrl: profileForm.imageUrl, email: user.email, gameList: [...user.gameList, ...selectedGames], location: user.location})
       for (let i=0;i<selectedGames.length;i++) {
         const { test } = await apiClient.addGamesToLocalDB({gameId:selectedGames[i],gameName:selectedGamesNames[i],gameSummary:selectedGamesSummary[i],gameImageUrl:selectedGamesPic[i]})
       }
@@ -162,6 +165,16 @@ function EditProfileForm({ user, profileForm, setProfileForm, isSubmit, errors, 
           defaultValue={user.lastName} focusBorderColor='purple.400' 
           onChange={handleOnInputChange}
         /></FormControl>
+
+        <FormControl variant="floating">
+        {profileForm.location?.length>0?
+        <FormLabel transform="scale(0.85) translateY(-21px)">Location</FormLabel>
+        :<FormLabel >Location</FormLabel>}
+        <Input id='location' name="location" type='text' maxLength={'20'}
+          defaultValue={profileForm.location} focusBorderColor='purple.400' 
+          onChange={handleOnInputChange}
+        />
+        </FormControl>
 
         <FormControl variant="floating">
         {profileForm.firstName.length>0?

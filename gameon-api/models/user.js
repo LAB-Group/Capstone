@@ -11,6 +11,7 @@ class User {
       username: user.username,
       firstName: user.first_name,
       lastName: user.last_name,
+      location: user.location,
       imageUrl: user.image_url,
       gameList: user.game_list,
       createdAt: user.created_at
@@ -101,7 +102,7 @@ class User {
   }
 
   static async editUser({ userUpdate }) {
-    const requiredFields = ["username", "firstName", "lastName", "imageUrl", "email", "gameList"]
+    const requiredFields = ["username", "firstName", "lastName", "imageUrl", "email", "gameList", "location"]
     requiredFields.forEach((property) => {
       if (!userUpdate.hasOwnProperty(property)) {
         throw new BadRequestError(`Missing ${property} in request body.`)
@@ -110,14 +111,14 @@ class User {
     if (!userUpdate.username.length) {
       throw new BadRequestError(`Missing username in request body.`)
     }
-
+    console.log("TESTING",userUpdate)
     const userResult = await db.query(
       `UPDATE users
-       SET username = $1, first_name = $2, last_name = $3, image_url = $4, game_list = $6
+       SET username = $1, first_name = $2, last_name = $3, image_url = $4, game_list = $6, location = $7
        WHERE email = $5
-       RETURNING username, first_name AS "firstName", last_name AS "lastName", image_url AS "imageUrl", email, game_list AS "gameList";
+       RETURNING username, first_name AS "firstName", last_name AS "lastName", image_url AS "imageUrl", email, game_list AS "gameList", location AS "location";
       `,
-      [userUpdate.username, userUpdate.firstName, userUpdate.lastName, userUpdate.imageUrl, userUpdate.email, userUpdate.gameList]
+      [userUpdate.username, userUpdate.firstName, userUpdate.lastName, userUpdate.imageUrl, userUpdate.email, userUpdate.gameList, userUpdate.location]
     )
     const editedUser = userResult.rows[0]
 
@@ -134,6 +135,10 @@ class User {
                 first_name AS "firstName",
                 last_name AS "lastName",
                 email,
+                location AS "location",
+                twitter,
+                instagram,
+                facebook,
                 image_url AS "imageUrl",
                 game_list AS "gameList",
                 created_at AS "createdAt"
