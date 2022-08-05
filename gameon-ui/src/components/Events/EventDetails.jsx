@@ -2,7 +2,7 @@ import * as React from "react"
 import EventRegistration from "../Events/EventRegistration"
 import PostsForm from "../Posts/PostsForm"
 import PostsFeed from "../Posts/PostsFeed"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useAuthContext } from '../../contexts/auth'
 import { 
     Box, Text, SimpleGrid, Flex, Button,
@@ -13,6 +13,7 @@ import { CalendarIcon } from "@chakra-ui/icons"
 import { HiLocationMarker } from "react-icons/hi"
 import { useRef } from "react"
 import LoginPage from "../LoginPage/LoginPage"
+import apiClient from '../../services/apiClient';
 import RegisterPage from "../RegisterPage/RegisterPage"
 import {COLORS} from "../colors"
 
@@ -29,7 +30,13 @@ export default function EventDetails({event, games, eventId, posts}) {
     let newEndDate = new Date(endDate)
     let myEndDate = newEndDate.toDateString()
 
-    const [isHovering, setIsHovering] = useState(false)
+  const [isHovering, setIsHovering] = useState(false)
+
+  const [checkedItems, setCheckedItems] = useState([])
+  const [errors, setErrors] = useState(null)
+  const [isRegistered, setIsRegistered] = useState(false)
+  const [gamesRegistered, setGamesRegistered] = useState()
+
     const btnRef = useRef()
 
     const handleMouseOver = () => {
@@ -39,6 +46,30 @@ export default function EventDetails({event, games, eventId, posts}) {
     const handleMouseOut = () => {
       setIsHovering(false);
     };
+
+    useEffect(() => {  
+        const setItems = async() => {
+          if(games) {
+            setCheckedItems(new Array(games.length).fill(false))
+          }
+        }
+        setItems()
+    
+        const getIsRegistered = async() => {
+          const { data, error } = await apiClient.isUserRegistered(eventId, user.id)
+           if(data) {
+            setErrors(null)
+            setIsRegistered(true)
+            setGamesRegistered(data.isRegistered[0].eventGamesRegisteredFor)
+            console.log(data.isRegistered[0].eventGamesRegisteredFor)
+           }
+           if (error) {
+            setErrors(error)
+            setIsRegistered(false)
+           }   
+        }
+        getIsRegistered()
+      }, [games, user.id, eventId]);
 
     return(
         <Box style={{"backdropFilter": "blur(6px)"}}>        
@@ -123,10 +154,36 @@ export default function EventDetails({event, games, eventId, posts}) {
                             {
                                 user.email 
                                     ?   
-                                        <>
-                                            <Text>You are already registered for this event. We'll see you there!</Text>
-                                            <Text>You are currently registered for:</Text>
-                                            <EventRegistration event={event} games={games}/> 
+                                        <>  
+                                            {isRegistered 
+                                                ?   <>
+                                                    <Text>You are already registered! We'll see you there!</Text>
+                                                    {
+                                                        gamesRegistered?.map((gameId) => {
+                                                            return (
+                                                                <Text>
+                                                                    {games?.map((game) => {
+                                                                        if(game.gameId === gameId) {
+                                                                            return game.gameName
+                                                                        }
+                                                                    })}
+                                                                </Text>
+                                                            )
+                                                        })
+                                                    }
+                                                    </>
+                                                : 
+                                                    null
+                                            }
+                                            <EventRegistration 
+                                                event={event} 
+                                                games={games}
+                                                setErrors={setErrors} 
+                                                setIsRegistered={setIsRegistered}
+                                                setCheckedItems={setCheckedItems} 
+                                                checkedItems={checkedItems}
+                                                isRegistered={isRegistered}
+                                                /> 
                                         </>
                                         
                                     : 

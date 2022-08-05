@@ -236,9 +236,9 @@ class Events {
             `
                 SELECT
                     id,
-                    event_game,
-                    user_id,
-                    event_id
+                    event_game AS "eventGamesRegisteredFor",
+                    user_id AS "userId",
+                    event_id AS "eventId"
                 FROM registered_events
                 WHERE user_id = $1
                 AND event_id = $2

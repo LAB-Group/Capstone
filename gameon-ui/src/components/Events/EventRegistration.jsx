@@ -3,20 +3,18 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import apiClient from '../../services/apiClient';
 import { useAuthContext } from '../../contexts/auth'
-import { Container, Button, FormLabel, Checkbox, Alert, AlertIcon, Text, FormControl,
+import { Container, Button, FormLabel, Checkbox, Alert, AlertIcon, FormControl,
   AlertDescription, CheckboxGroup, Box, Stack, Input, extendTheme, ChakraProvider, Grid
 } from '@chakra-ui/react';
 
-export default function EventRegistration({ games }) {
+export default function EventRegistration({ games, setErrors, setIsRegistered, setCheckedItems, checkedItems, isRegistered }) {
   const { user } = useAuthContext()
   const { eventId } = useParams()
-  const [checkedItems, setCheckedItems] = useState([])
-  const [errors, setErrors] = useState(null)
-  const [isRegistered, setIsRegistered] = useState(false)
   const [action, setAction] = useState()
 
   useEffect(() => {  
     const setItems = async() => {
+      console.log("games: ", games)
       if(games) {
         setCheckedItems(new Array(games.length).fill(false))
       }
@@ -35,7 +33,7 @@ export default function EventRegistration({ games }) {
        }   
     }
     getIsRegistered()    
-  }, [games, user.id, eventId]);
+  }, [games, user.id, eventId, setIsRegistered, setCheckedItems, setErrors]);
 
   function replaceAt(array, index, value) {
     const newArray = array.slice(0)
@@ -47,7 +45,7 @@ export default function EventRegistration({ games }) {
     let registeredArray = []
     for(let i = 0; i < gameArray.length; i++) {
       if(gameArray[i]) {
-        registeredArray.push(games[i].id)
+        registeredArray.push(games[i].gameId)
       }   
     }
     return registeredArray
@@ -62,6 +60,7 @@ export default function EventRegistration({ games }) {
     if(data) {
       setIsRegistered(true)
       setAction(true)
+      window.location = document.URL
     }
     if(error) setErrors((e) => ({ ...e, form: error}))
   }
