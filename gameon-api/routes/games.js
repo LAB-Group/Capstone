@@ -22,8 +22,8 @@ router.post("/", async (req, res, next) => {
         })
         .catch((err) => {
             console.error(err);
-        });
-});
+        })
+})
 
 router.post("/id", async (req, res, next) => {
     const gameId = req.body
@@ -60,18 +60,16 @@ router.get("/db/:gameId", async (req, res, next) => {
     } catch(err) {
         next(err)
     }
-
 })
 
 router.post("/db", async (req, res, next) => {
     try {
         const localDBForm = req.body
         const games = await Games.addGamesToLocalDB(localDBForm)
-        res.status(200).json(games)
+        res.status(201).json(games)
     } catch(err) {
         next(err)
     }
-
 })
 
 module.exports = router
