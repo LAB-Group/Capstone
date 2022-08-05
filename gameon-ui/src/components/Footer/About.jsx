@@ -8,10 +8,10 @@ export default function About(){
     return (
        <Box width={"100%"} height={"auto"} background={"hsla(255, 50%, 21%, 0.8)"} borderTopRadius={"20px"}>
         <Container centerContainer minWidth={"80%"}>
-        <Heading marginX={6} paddingY={2} color={COLORS.offWhite} fontFamily={"Roboto, sans-serif"}>A gaming hub created for all gamers.</Heading>
+        <Heading textAlign={"center"} marginLeft={2} paddingY={2} color={COLORS.offWhite} fontFamily={"Roboto, sans-serif"}>A gaming hub created for all gamers.</Heading>
         <Image float={"left"} width={"300px"} marginBottom={-6} src={pic}/>
         <Box marginX={"20px"}>
-        <Text paddingBottom={2} whiteSpace={"pre-line"} fontFamily={"Open Sans, sans-serif"} fontSize={"xl"} color={COLORS.offWhite}>
+        <Text marginLeft={3} paddingBottom={2} whiteSpace={"pre-line"} fontFamily={"Open Sans, sans-serif"} fontSize={"xl"} color={COLORS.offWhite}>
         GameOn! is a community hub for all gamers looking to attend events. 
         Our mission is to have gamers of all ages and different backgrounds to attend these events. 
         Not only do we want gamers, but also event coordinators. 
