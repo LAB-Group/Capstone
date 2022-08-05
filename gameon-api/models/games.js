@@ -1,11 +1,9 @@
 const axios = require("axios");
 const db = require("../db")
-const { BadRequestError, UnauthorizedError } = require("../utils/errors");
+const { BadRequestError, UnauthorizedError, NotFoundError } = require("../utils/errors");
 
 class Games {
-
   static async addGamesToLocalDB(localDBForm) {
-
         const results = await db.query(
           `
            INSERT INTO igdb_local (game_id, game_name, game_summary, game_image_url)
