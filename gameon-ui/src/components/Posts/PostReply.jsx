@@ -47,8 +47,8 @@ export default function PostReply({postReply}) {
                         <Link to={`/user/${postReply.creatorId}/profile`}  ><Text fontWeight={'bold'} >@{postReply.creatorUsername}</Text></ Link>
                       </HStack>
                       <HStack>
-                        <Badge variant='subtle'  colorScheme='purple'>{replyDate}</Badge>
-                        <Badge variant='subtle'  colorScheme='purple'>{time}</Badge>
+                        <Badge borderRadius={"5px"} px='2' style={{"background":"rgba(113, 57, 190, .2)"}} color={"hsl(255, 25%, 50%)"}>{replyDate}</Badge>
+                        <Badge borderRadius={"5px"} px='2' style={{"background":"rgba(113, 57, 190, .2)"}} color={"hsl(255, 25%, 50%)"}>{time}</Badge>
                       </HStack>
                     </Stack>
                   <Divider   w={['150px','300px','450px','600px','750px']}/>

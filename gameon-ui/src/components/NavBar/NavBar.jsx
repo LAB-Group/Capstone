@@ -4,7 +4,7 @@ import {HashLink as Link } from 'react-router-hash-link'
 import { Box, Text, Spacer, Button, ButtonGroup, Image, Stack, HStack, Flex, Modal,
     useDisclosure, Icon, useMediaQuery, List, ListItem } from "@chakra-ui/react"
 import {GiHamburgerMenu} from "react-icons/gi"
-import logo from "../../media/Logo.png"
+import logo from "../../contexts/media/Logo.png"
 import { ColorModeSwitcher } from "../../ColorModeSwitcher"
 import {COLORS} from "../colors"
 import LoginPage from "../LoginPage/LoginPage"
@@ -27,6 +27,14 @@ export default function NavBar() {
         setUser({})
         setError(null)
         navigate("/")
+        // window.location.reload();
+        window.location = document.URL;
+    }
+
+    const handleProfile = async () => {
+        navigate(`/user/${user.id}/profile`)
+        // window.location = document.URL;
+        window.location.reload();
     }
 
     // Using media query to make navbar responsive 
@@ -36,10 +44,10 @@ export default function NavBar() {
         // This makes the navbar scrollable
 
         <Box  overflow={"hidden"} fontFamily={"Roboto, sans-serif"} zIndex={1} position="sticky" top={0} width="100%" height="50px" backgroundColor={COLORS.indigo} fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} >
-            <Flex width={"100%"} alignItems="center" gap='1'>
+            <Flex width={"90%"} alignItems="center" gap='1'>
                 {/* FIXME: Image revisit */}
-                <Box width={"100px"} display={"inline-flex"}>
-                    <Link to="/">
+                <Box width={"100px"} ml={"11%"} display={"inline-flex"}>
+                    <Link to="/" >
                         <Image width={"150px"} height={"40px"} margin={0} marginTop={2} float={"left"} objectFit={"cover"} src={logo}/>
                     </Link>
                 </Box>
@@ -102,12 +110,12 @@ export default function NavBar() {
                             paddingStart={"1rem"} paddingEnd={"1rem"} paddingTop={"0.2rem"} paddingBottom={"0.2rem"}
 
                         style={{"transition": "backgroundColor 0.5s"}} _hover={{"backgroundColor": COLORS.offWhite}}> */}
-                        <Link to ={`/user/${user.id}/profile`}>
-                        <Button fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} backgroundColor={COLORS.indigo} color={COLORS.offWhite}
+                        {/* <Link to={`/user/${user.id}/profile`}> */}
+                        <Button onClick={handleProfile} fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} backgroundColor={COLORS.indigo} color={COLORS.offWhite}
                         border={"2px"} borderColor={COLORS.ultraViolet} borderStyle={"solid"}
                         style={{"transition": "backgroundColor 0.5s, color 0.5s, borderColor 0.5s"}} _hover={{"backgroundColor":COLORS.offWhite,"color": COLORS.indigo, "borderColor": COLORS.offWhite}}>Profile</Button>
-
-                        </Link>
+                        {/* </Link> */}
+                        
                         {/* </Box> */}
                         {/* <Link smooth to="#about"><Button variant="ghost" colorScheme='purple'>About</Button></Link>
                         <Link smooth to="#events"><Button variant="ghost" colorScheme='purple'>Events</Button></Link> */}

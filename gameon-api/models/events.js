@@ -164,6 +164,7 @@ class Events {
         if(!userExists) {
             throw new NotFoundError("User does not exist.")
         }
+        // FIXME NEED TO COUNT HOW MANY REGISTERED TO THE EVENT
         const results = await db.query(
             `
                 SELECT r.user_id, 
@@ -178,9 +179,13 @@ class Events {
                     e.details AS "eventDetails",
                     e.event_image_url AS "eventImageUrl",
                     e.created_at AS "eventCreatedAt",
-                    e.updated_at AS "eventUpdatedAt"
+                    e.updated_at AS "eventUpdatedAt",
+                    u.id AS "creatorID",
+                    u.username AS "creatorUsername",
+                    u.email AS "creatorEmail"
                 FROM registered_events AS r
                     LEFT JOIN events AS e ON e.id = r.event_id
+                    LEFT JOIN users as u ON u.id = e.user_id
                 WHERE r.user_id = (SELECT id FROM users WHERE id = $1)
             `,
             [userId]

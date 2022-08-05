@@ -25,7 +25,7 @@ export default function EventCard({event}){
         maxWidth={"400px"}
         margin={1}
         // minWidth={"50px"} 
-        // width={"100%"} 
+        width={"350px"} 
         height={"auto"} 
         alignItems={"center"} 
         borderWidth='1px' 

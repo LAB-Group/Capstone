@@ -263,8 +263,9 @@ export default function EventDetails({event, games, eventId, posts}) {
                     </HStack>
                 </Stack>
                 </Box>
+                <PostsForm user={user} event={event} eventId={eventId} />
                 <PostsFeed eventId={eventId} posts={posts} />
-            <PostsForm event={event} eventId={eventId} />
+            
         </Box>
     )
 }

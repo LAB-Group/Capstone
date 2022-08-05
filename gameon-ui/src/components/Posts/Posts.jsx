@@ -12,6 +12,7 @@ import {
   FormControl, FormErrorMessage
 } from '@chakra-ui/react';
 import PostReply from './PostReply';
+import { COLORS } from "../colors.js"
 
 // Located in EventPage file
 
@@ -56,7 +57,8 @@ export default function Posts({ post, eventId }) {
     
     if(createReplyForm.replyContent.length>0){
       onClose()
-      window.location.reload();
+      // window.location.reload();
+      window.location = document.URL;
     }
     
   };
@@ -73,7 +75,7 @@ export default function Posts({ post, eventId }) {
       <Box 
         borderWidth="1px" 
         shadow="md" 
-        bg={"hsl(0,0%,98%)"}
+        background={"hsl(0,0%,98%)"}
         position="relative"
         rounded="md"
         borderRadius="5px"
@@ -100,8 +102,8 @@ export default function Posts({ post, eventId }) {
                         <Link to={`/user/${post.creatorId}/profile`}><Text fontFamily={"mono, sans-serif"} fontWeight={'bold'} >@{post.creatorUsername}</Text></ Link>
                       </HStack>
                       <HStack>
-                        <Badge variant='subtle' colorScheme='purple'>{postDate}</Badge>
-                        <Badge variant='subtle'colorScheme='purple'>{time}</Badge>
+                        <Badge borderRadius={"5px"} px='2' style={{"background":"rgba(113, 57, 190, .2)"}} color={"hsl(255, 25%, 50%)"}>{postDate}</Badge>
+                        <Badge borderRadius={"5px"} px='2' style={{"background":"rgba(113, 57, 190, .2)"}} color={"hsl(255, 25%, 50%)"}>{time}</Badge>
                       </HStack>
                     </Stack>
                     <Stack>
@@ -117,7 +119,7 @@ export default function Posts({ post, eventId }) {
           <PostReply key={index} postReply={postReply} eventId={eventId} />
         ))}
         <Box w={['150px','300px','450px','600px','750px']} mb={2} >
-              <Button fontFamily={"mono, sans-serif"} variant='ghost' onClick={onOpen}>Reply</Button></Box>
+              <Button fontFamily={"mono, sans-serif"} color={COLORS.indigo} onClick={onOpen}>Reply</Button></Box>
         <Divider w={['150px','300px','450px','600px','750px']} />
         <VStack>    
         <Modal onClose={onClose} isOpen={isOpen} isCentered>

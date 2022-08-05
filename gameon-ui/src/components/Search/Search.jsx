@@ -18,7 +18,7 @@ import { useState, useEffect } from 'react';
 import apiClient from '../../services/apiClient';
 import { COLORS } from "../colors";
 
-export default function Search({ selectedGames, setSelectedGames, selectedGamesNames, setSelectedGamesNames, selectedGamesPic, setSelectedGamesPic, selectedGamesSummary, setSelectedGamesSummary }) {
+export default function Search({ selectedGames, setSelectedGames, selectedGamesNames, setSelectedGamesNames, selectedGamesPic, setSelectedGamesPic, selectedGamesSummary, setSelectedGamesSummary, userGameList }) {
   const [errors, setErrors] = useState({});
   const [searchInput, setSearchInput] = useState('');
   const [listGames, setListGames] = useState([]);
@@ -59,6 +59,7 @@ const clearSearch = async () => {
         setSelectedGamesSummary={setSelectedGamesSummary}
         selectedGamesPic={selectedGamesPic}
         setSelectedGamesPic={setSelectedGamesPic}
+        userGameList={userGameList}
       />
       <Container maxW={"100%"} maxH={'200px'} overflowY="auto" css={{
     '&::-webkit-scrollbar': {
@@ -107,7 +108,8 @@ function SearchBar({
   selectedGamesSummary,
   setSelectedGamesSummary,
   selectedGamesPic,
-  setSelectedGamesPic
+  setSelectedGamesPic,
+  userGameList
 }) {
   function removeGame(id) {
     const copyArr = [...selectedGames];
@@ -125,8 +127,6 @@ function SearchBar({
     setSelectedGamesPic([...copyPicArr]);
   }
 
-
-
   return (
     <VStack  w={'100%'} maxW={'100%'} spacing={2}>
       {/* Fixed it: The Tags were floating */}
@@ -141,7 +141,20 @@ function SearchBar({
       background: '#805AD5',
       borderRadius: '24px',
     },
-  }}>
+    }}>
+      {/* need to work on below for being able to remove games from users current list */}
+      {/* {userGameList?.map((id, index) => (
+        <Tag
+          size="md"
+          variant="subtle"
+          key={index}
+          borderRadius="full"
+          colorScheme="purple"
+        >
+          <TagLabel>{id}</TagLabel>
+          <TagCloseButton onClick={() => removeGame(id)} />
+        </Tag>
+      ))} */}
         {selectedGames?.map((id, index) => (
           <Tag
             size="md"
@@ -156,7 +169,7 @@ function SearchBar({
         ))}
       </Wrap>
 
-      <Box w={'100%'} maxW={'100%'}>
+      <Box w={'100%'} maxW={'100%'} fontFamily={"mono, sans-serif"} color={COLORS.indigo}>
         <FormControl variant="floating" mt={2}>
           {searchInput.length > 0 ? (
             <FormLabel transform="scale(0.85) translateY(-21px)">
@@ -185,8 +198,10 @@ function SearchBar({
               Search
             </Button>
             <Button 
-            background={"hsl(271, 70%, 70%)"} 
-            color={"hsl(0, 0%, 100%)"}
+            borderColor={COLORS.ultraViolet}
+            background={"white"} 
+            color={COLORS.ultraViolet}
+            variant={'outline'}
             _hover={{
               "background":COLORS.ultraViolet,
               "color": COLORS.offWhite
