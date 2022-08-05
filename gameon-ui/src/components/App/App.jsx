@@ -8,7 +8,7 @@ import NavBar from "../NavBar/NavBar"
 import UsersProfilePage from "../UsersProfilePage/UsersProfilePage"
 import EventPage from "../Events/EventPage";
 import Footer from "../Footer/Footer"
-import background from "../../media/evo2.jpg"
+import background from "../../contexts/media/evo2.jpg"
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import EventFeed from "../Events/EventFeed";

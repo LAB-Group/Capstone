@@ -1,7 +1,7 @@
 import * as React from "react"
 import apiClient from "../../services/apiClient"
 import { useState, useEffect } from "react"
-import {  Box, Text, Wrap, SimpleGrid, Flex, Button, Center, Skeleton, VStack, Heading, useDisclosure, Input, HStack, Container, ButtonGroup } from "@chakra-ui/react"
+import {  Box, Text, Wrap, SimpleGrid, Flex, Button, Center, Skeleton, VStack, Heading, useDisclosure, Input, HStack, Container, ButtonGroup, color } from "@chakra-ui/react"
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css"
 import "swiper/css/pagination"
@@ -134,12 +134,12 @@ export default function EventFeed({ isFetching }){
                 {/* All Events Feed */}
                 <Container centerContent minWidth={"80%"}>
                 <HStack>
-                    <ButtonGroup variant={'outline'} color={'white'}>
-                        <Button borderColor={COLORS.ultraViolet} onClick={() => handleEventType("")}>All Events</Button>
-                        <Button borderColor={COLORS.ultraViolet} onClick={() => handleEventType("Tournament")}>Tournaments</Button>
-                        <Button borderColor={COLORS.ultraViolet} onClick={() => handleEventType("Casuals")}>Casuals</Button>
-                        <Button borderColor={COLORS.ultraViolet} onClick={() => handleEventType("Speedrunning")}>Speedrunning</Button>
-                        <Button borderColor={COLORS.ultraViolet} onClick={() => handleEventType("Meet-up")}>Meet-ups</Button>
+                    <ButtonGroup variant={'outline'} color={'white'} >
+                        <Button _focus={{"backgroundColor": COLORS.darkAmethyst, "borderColor": COLORS.darkAmethyst}} _hover={{"backgroundColor": COLORS.darkAmethyst}} border={"2px"} borderColor={COLORS.ultraViolet} onClick={() => handleEventType("")}>All Events</Button>
+                        <Button _focus={{"backgroundColor": COLORS.darkAmethyst, "borderColor": COLORS.darkAmethyst}} _hover={{"backgroundColor": COLORS.darkAmethyst}} border={"2px"} borderColor={COLORS.ultraViolet} onClick={() => handleEventType("Tournament")}>Tournaments</Button>
+                        <Button _focus={{"backgroundColor": COLORS.darkAmethyst, "borderColor": COLORS.darkAmethyst}} _hover={{"backgroundColor": COLORS.darkAmethyst}} border={"2px"} borderColor={COLORS.ultraViolet} onClick={() => handleEventType("Casuals")}>Casuals</Button>
+                        <Button _focus={{"backgroundColor": COLORS.darkAmethyst, "borderColor": COLORS.darkAmethyst}} _hover={{"backgroundColor": COLORS.darkAmethyst}} border={"2px"} borderColor={COLORS.ultraViolet} onClick={() => handleEventType("Speedrunning")}>Speedrunning</Button>
+                        <Button _focus={{"backgroundColor": COLORS.darkAmethyst, "borderColor": COLORS.darkAmethyst}} _hover={{"backgroundColor": COLORS.darkAmethyst}} border={"2px"} borderColor={COLORS.ultraViolet} onClick={() => handleEventType("Meet-up")}>Meet-ups</Button>
                     </ButtonGroup>
                 </HStack>
                 <Input margin={'1rem'} defaultValue="" focusBorderColor={COLORS.ultraViolet} color={'white'} placeholder="Search events..." onChange={handleOnSearchChange}></Input>
