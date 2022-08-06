@@ -69,8 +69,6 @@ export default function EditProfile({onClose}){
     const handleOnSubmit = async () => {
       setIsLoading(true)
       setErrors((error) => ({ ...error, form: null }))
-  
-      console.log("USER: ",profileForm)
 
       const {data, error} = await apiClient.editUserProfile({ username: profileForm.username.toLowerCase(), firstName: profileForm.firstName, lastName: profileForm.lastName,
                                                              imageUrl: profileForm.imageUrl, email: user.email, gameList: [...user.gameList, ...selectedGames], location: user.location})

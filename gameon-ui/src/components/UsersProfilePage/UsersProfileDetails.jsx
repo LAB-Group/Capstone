@@ -6,6 +6,7 @@ import { Routes, Route, Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { HiLocationMarker } from "react-icons/hi"
 import axios from "axios";
+import apiClient from '../../services/apiClient';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -21,16 +22,16 @@ export default function UsersProfileDetails({ viewedUser, onOpen, onClose, isOpe
   const { user } = useAuthContext()
     const [games, setGames] = useState([])
     const [loading, setLoading] = useState(true)
-    let string = ""
-    if(viewedUser.gameList !== undefined) {
-        for(let i = 0; i < viewedUser.gameList?.length; i++) {
-            if(i === viewedUser.gameList.length - 1) {
-                string += viewedUser.gameList[i]
-                break
-            }
-            string += viewedUser.gameList[i] + ", "
-        }
-    }
+    // let string = ""
+    // if(viewedUser.gameList !== undefined) {
+    //     for(let i = 0; i < viewedUser.gameList?.length; i++) {
+    //         if(i === viewedUser.gameList.length - 1) {
+    //             string += viewedUser.gameList[i]
+    //             break
+    //         }
+    //         string += viewedUser.gameList[i] + ", "
+    //     }
+    // }
 
     useEffect(() => {
         setTimeout(() => {
@@ -38,18 +39,24 @@ export default function UsersProfileDetails({ viewedUser, onOpen, onClose, isOpe
           }, 100)
         const getGames = async () => {      
             try {
-              const response = await axios.post(`http://localhost:3001/games/id`, {
-                gameId: string
-              })
-              const gameData = response.data
+              // const response = await axios.post(`http://localhost:3001/games/id`, {
+              //   gameId: string
+              // })
 
-              setGames(gameData)
+              for (let i=0;i<viewedUser.gameList?.length;i++) {
+                const response = await apiClient.getGameInfoById(viewedUser.gameList[i])
+                setGames(curr => [...curr, response.data])
+              }
+
+              // const gameData = response.data
+
+              // setGames(gameData)
             } catch(error) {
               return(error)
             }
           }
           getGames()  
-    },[string])
+    },[])
 
     return (
         <Box width={"100%"} padding={6} >
@@ -106,11 +113,11 @@ export default function UsersProfileDetails({ viewedUser, onOpen, onClose, isOpe
                         '&::-webkit-scrollbar-track': {width: '10px'},
                         '&::-webkit-scrollbar-thumb': { background: "hsl(271, 43%, 56%)", borderRadius: '24px'}
                       }}>
-                    {games.game?.map((game, index) => (
+                    {games?.map((game, index) => (
                       <Tag key={index} 
                       rounded={"20px"}
                       backgroundColor={"hsla(271, 43%, 56%, 0.9)"}>
-                          <TagLabel fontFamily={"Open Sans, sans-serif"} color={"rgb(255,255,255)"} fontSize={"sm"}>{game.name}</TagLabel>
+                          <TagLabel fontFamily={"Open Sans, sans-serif"} color={"rgb(255,255,255)"} fontSize={"sm"}>{game.gameName}</TagLabel>
                       </Tag>
                     ))}
                   </Wrap>
