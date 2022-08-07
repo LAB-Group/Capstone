@@ -7,7 +7,7 @@ import pic from "../../contexts/media/Logo.png"
 export default function About(){
     return (
        <Box width={"100%"} height={"auto"} background={"hsla(255, 50%, 21%, 0.8)"} borderTopRadius={"20px"}>
-        <Container centerContainer minWidth={"80%"}>
+        <Container centerContent minWidth={"80%"}>
         <Heading textAlign={"center"} marginLeft={2} paddingY={2} color={COLORS.offWhite} fontFamily={"Roboto, sans-serif"}>A gaming hub created for all gamers.</Heading>
         <Image float={"left"} width={"300px"} marginBottom={-6} src={pic}/>
         <Box marginX={"20px"}>

@@ -70,6 +70,7 @@ export default function EditProfile({onClose}){
       setIsLoading(true)
       setErrors((error) => ({ ...error, form: null }))
 
+      // const gameList = [...user.gameList, ...selectedGames]
       const {data, error} = await apiClient.editUserProfile({ username: profileForm.username.toLowerCase(), firstName: profileForm.firstName, lastName: profileForm.lastName,
                                                              imageUrl: profileForm.imageUrl, email: user.email, gameList: [...user.gameList, ...selectedGames], location: user.location})
       for (let i=0;i<selectedGames.length;i++) {
