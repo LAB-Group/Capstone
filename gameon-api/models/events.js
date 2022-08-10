@@ -10,7 +10,7 @@ class Events {
             from most recent to least recent
             each event will be displayed in a post
         */
-        const results = await db.query(
+        const results = await db.query(          
             `
                 SELECT e.id,
                        e.event_name AS "eventName",
@@ -209,9 +209,13 @@ class Events {
 
         const results = await db.query(
             `
-                SELECT user_id
-                FROM registered_events
-                WHERE event_id = $1
+                SELECT 
+                    r.user_id,
+                    u.username,
+                    u.image_url
+                FROM registered_events AS r
+                LEFT JOIN users AS u ON u.id = r.user_id
+                WHERE r.event_id = $1
             `,
             [eventId]
         )
@@ -237,9 +241,9 @@ class Events {
             `
                 SELECT
                     id,
-                    event_game,
-                    user_id,
-                    event_id
+                    event_game AS "eventGamesRegisteredFor",
+                    user_id AS "userId",
+                    event_id AS "eventId"
                 FROM registered_events
                 WHERE user_id = $1
                 AND event_id = $2

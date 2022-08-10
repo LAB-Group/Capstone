@@ -126,7 +126,7 @@ export default function EventFeed({ isFetching }){
                         <Button _focus={{"backgroundColor": COLORS.darkAmethyst, "borderColor": COLORS.darkAmethyst}} _hover={{"backgroundColor": COLORS.darkAmethyst}} border={"2px"} borderColor={COLORS.ultraViolet} onClick={() => handleEventType("Meet-up")}>Meet-ups</Button>
                     </ButtonGroup>
                 </HStack>
-                <Input margin={'1rem'} defaultValue="" focusBorderColor={COLORS.ultraViolet} color={'white'} placeholder="Search events..." onChange={handleOnSearchChange}></Input>
+                <Input margin={'1rem'} marginBottom={8} defaultValue="" focusBorderColor={COLORS.ultraViolet} color={'white'} placeholder="Search events..." onChange={handleOnSearchChange}></Input>
                 <SimpleGrid minWidth="80%" justifyContent={"center"} alignItems={"center"} minChildWidth={'350px'} gap='20px' className="WRAP">
                 {searchedEvents?.map((event, index) => (
                             <EventCard key={index} event={event}/>         

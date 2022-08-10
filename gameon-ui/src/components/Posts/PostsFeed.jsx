@@ -12,7 +12,7 @@ export default function PostsFeed({ eventId, posts }) {
     <Box position={"relative"} py={"25px"}>
         <Stack spacing={{ base: 4, sm: 6 }} direction={"column"}>
         <Box textAlign={"left"} mx={5}>
-      <Text marginLeft={5} fontFamily={"Roboto, sans-serif"} alignItems={"left"} position={"relative"} fontSize={"3xl"} fontWeight={300} textTransform={'uppercase'} mb={4}>Comments:</Text>
+      {/* <Text marginLeft={5} fontFamily={"Roboto, sans-serif"} alignItems={"left"} position={"relative"} fontSize={"3xl"} fontWeight={300} textTransform={'uppercase'} mb={4}>Comments:</Text> */}
       </Box>
       </Stack>
       <VStack>

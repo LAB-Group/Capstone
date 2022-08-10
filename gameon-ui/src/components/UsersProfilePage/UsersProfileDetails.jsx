@@ -1,9 +1,10 @@
 import * as React from "react"
 import EditProfile from "../EditProfile/EditProfile"
 import { useAuthContext } from "../../contexts/auth"
-import { Box, SimpleGrid, Image, Center, Text, HStack, Stack, Heading, Button, Modal, Wrap, Tag, TagLabel} from "@chakra-ui/react"
+import { Box, SimpleGrid, Image, Center, Text, HStack, Stack, Heading, Button, Modal, Wrap, Tag, Icon, TagLabel} from "@chakra-ui/react"
 import { Routes, Route, Link } from "react-router-dom"
 import { useState, useEffect } from "react"
+import { HiLocationMarker } from "react-icons/hi"
 import axios from "axios";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -92,6 +93,10 @@ export default function UsersProfileDetails({ viewedUser, onOpen, onClose, isOpe
                     <FontAwesomeIcon icon={faInstagram}/>
                   </HStack> 
                 </Stack>
+                <HStack>
+                <Icon my={1} as={HiLocationMarker} color={COLORS.ultraViolet}/><Text fontFamily={"Open Sans, sans-serif"} fontWeight={600} color={"hsl(255, 12%, 50%)"} size="sm" >Bronx, NY</Text>
+                </HStack>
+                
 
 
                 <Stack display={"flex"} mt={0}>
