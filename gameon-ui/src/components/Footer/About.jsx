@@ -21,6 +21,7 @@ export default function About(){
          <Stack direction={{base: "column", lg: "row"}}>
         <Image width={"300px"} src={pic}/>
         <Text width={"75%"} margin={"auto"} paddingBottom={3} whiteSpace={"pre-line"} fontFamily={"Open Sans, sans-serif"} fontSize={"xl"} color={COLORS.offWhite}>
+
         GameOn! is a community hub for all gamers looking to attend events. 
         Our mission is to have gamers of all ages and different backgrounds to attend these events. 
         Not only do we want gamers, but also event coordinators. 

@@ -124,5 +124,10 @@ class ApiClient {
 
 }
 
+<<<<<<< HEAD
 // export default new ApiClient("http://localhost:3001")
 export default new ApiClient("https://gameon-labs.herokuapp.com")
+=======
+export default new ApiClient("http://localhost:3001")
+// export default new ApiClient("https://git.heroku.com/gameon-labs.git")
+>>>>>>> main-test
