@@ -19,8 +19,8 @@ export default function EventCard({event}){
     const endDate = new Date(end).toLocaleDateString('en-US')
 
     return (
-        //FIXME: Need to prevent card squishing
         <Box 
+        fontFamily={"Open Sans, sans-serif"}
         display={"block"} 
         maxWidth={"400px"}
         margin={1}
@@ -40,6 +40,7 @@ export default function EventCard({event}){
                 <Stack display="flex-start" alignItems="center">
                     <HStack spacing='56px'>
                         <Heading 
+                            fontFamily={"Roboto, sans-serif"}
                             whiteSpace={"pre-wrap"}
                             fontSize={"sm"}
                             paddingStart={"1em"} 
