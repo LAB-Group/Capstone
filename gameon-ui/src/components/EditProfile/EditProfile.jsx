@@ -3,7 +3,7 @@ import  { useAuthContext } from "../../contexts/auth"
 import {useState} from "react"
 import apiClient from "../../services/apiClient"
 import {
-    Container, FormControl, FormLabel, Input,
+    Container, FormControl, FormErrorMessage, FormLabel, Input,
     ModalOverlay, ModalContent, ModalHeader,
     ModalFooter, ModalBody, ModalCloseButton, Button, extendTheme,VStack, ChakraProvider
   } from '@chakra-ui/react'
@@ -51,6 +51,7 @@ export default function EditProfile({onClose}){
   const { user, setUser } = useAuthContext()
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
+  const [isSubmit,setIsSubmit]=useState()
   const [selectedGames, setSelectedGames] = useState([])
   const [selectedGamesNames, setSelectedGamesNames] = useState([])
   const [selectedGamesSummary, setSelectedGamesSummary] = useState([])
@@ -61,15 +62,17 @@ export default function EditProfile({onClose}){
       lastName: user.lastName,
       imageUrl: user.imageUrl,
       email: user.email,
-      gameList: user.gameList
+      gameList: user.gameList,
+      location: user.location
     })
 
     const handleOnSubmit = async () => {
       setIsLoading(true)
       setErrors((error) => ({ ...error, form: null }))
-  
+
+      // const gameList = [...user.gameList, ...selectedGames]
       const {data, error} = await apiClient.editUserProfile({ username: profileForm.username.toLowerCase(), firstName: profileForm.firstName, lastName: profileForm.lastName,
-                                                             imageUrl: profileForm.imageUrl, email: user.email, gameList: [...user.gameList, ...selectedGames]})
+                                                             imageUrl: profileForm.imageUrl, email: user.email, gameList: [...user.gameList, ...selectedGames], location: user.location})
       for (let i=0;i<selectedGames.length;i++) {
         const { test } = await apiClient.addGamesToLocalDB({gameId:selectedGames[i],gameName:selectedGamesNames[i],gameSummary:selectedGamesSummary[i],gameImageUrl:selectedGamesPic[i]})
       }
@@ -79,6 +82,7 @@ export default function EditProfile({onClose}){
         setUser(data.user)
         onClose()
         // window.location.reload();
+        setIsSubmit(true)
         window.location = document.URL;
       }
       setIsLoading(false)
@@ -91,7 +95,7 @@ export default function EditProfile({onClose}){
             <ModalHeader>Edit Profile</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <EditProfileForm user={user} profileForm={profileForm} setProfileForm={setProfileForm} setErrors={setErrors} selectedGames={selectedGames} setSelectedGames={setSelectedGames} selectedGamesNames={selectedGamesNames}
+              <EditProfileForm user={user} profileForm={profileForm} setProfileForm={setProfileForm} isSubmit={isSubmit} errors={errors} setErrors={setErrors} selectedGames={selectedGames} setSelectedGames={setSelectedGames} selectedGamesNames={selectedGamesNames}
         setSelectedGamesNames={setSelectedGamesNames}
         selectedGamesSummary={selectedGamesSummary}
         setSelectedGamesSummary={setSelectedGamesSummary}
@@ -100,10 +104,20 @@ export default function EditProfile({onClose}){
             </ModalBody>
   
             <ModalFooter>
-            <Button color={"hsl(271, 70%, 60%)"} onClick={handleOnSubmit}>Submit</Button>
-            <Button 
-            background={"hsl(271, 70%, 60%)"} 
-            color={"hsl(0, 0%, 100%)"}  mr={3} onClick={onClose}>Cancel</Button>
+            <Button mx={1} background={"hsl(271, 70%, 60%)"} 
+            color={"hsl(0, 0%, 100%)"} 
+            _hover={{
+              "background":COLORS.ultraViolet,
+              "color": COLORS.offWhite
+            }} onClick={handleOnSubmit}>Submit</Button>
+            <Button mx={1} borderColor={COLORS.ultraViolet}
+            background={"white"} 
+            color={COLORS.ultraViolet}
+            variant={'outline'}
+            _hover={{
+              "background":COLORS.ultraViolet,
+              "color": COLORS.offWhite
+            }} mr={3} onClick={onClose}>Cancel</Button>
               
             </ModalFooter>
           </ModalContent>
@@ -112,32 +126,33 @@ export default function EditProfile({onClose}){
    )
 }
 
-function EditProfileForm({ user, profileForm, setProfileForm, setErrors, selectedGames, setSelectedGames, selectedGamesNames, setSelectedGamesNames, selectedGamesSummary, setSelectedGamesSummary, selectedGamesPic, setSelectedGamesPic }) {
+function EditProfileForm({ user, profileForm, setProfileForm, isSubmit, errors, setErrors, selectedGames, setSelectedGames, selectedGamesNames, setSelectedGamesNames, selectedGamesSummary, setSelectedGamesSummary, selectedGamesPic, setSelectedGamesPic }) {
 
     const handleOnInputChange = (event) => {
 
         setProfileForm((form) => ({ ...form, [event.target.name]: event.target.value }))
       }
-  
     // const isError = form === ''
     return (
       <ChakraProvider theme={theme}>
         <VStack spacing={5} fontFamily={"mono, sans-serif"} color={COLORS.indigo}>
-        <FormControl variant="floating">
+        <FormControl variant="floating" isInvalid={(!profileForm.username.length>0)  || (errors.form) ?true:false}>
         {profileForm.username.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Username</FormLabel>
         :<FormLabel >Username</FormLabel>}
         <Input id='username' name="username" type='text' textTransform={'lowercase'} maxLength={'15'}
-          defaultValue={user.username.toLowerCase()}
+          defaultValue={user.username.toLowerCase()} focusBorderColor='purple.400' 
           onChange={handleOnInputChange}
         />
+        {/* {(errors.form)?<FormErrorMessage>Username already taken.</FormErrorMessage>:null} */}
+        {(!profileForm.username.length>0) || (errors.form)?<FormErrorMessage>{errors.form}</FormErrorMessage>:null}
         </FormControl>
         <FormControl variant="floating">
         {profileForm.firstName.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">First Name</FormLabel>
         :<FormLabel >First Name</FormLabel>}
         <Input id='firstName' name="firstName" type='text'
-          defaultValue={user.firstName}
+          defaultValue={user.firstName} focusBorderColor='purple.400' 
           onChange={handleOnInputChange}
         /></FormControl>
         <FormControl variant="floating">
@@ -146,16 +161,26 @@ function EditProfileForm({ user, profileForm, setProfileForm, setErrors, selecte
         :<FormLabel >Last Name</FormLabel>}
        
         <Input id='lastName' name="lastName" type='text'
-          defaultValue={user.lastName}
+          defaultValue={user.lastName} focusBorderColor='purple.400' 
           onChange={handleOnInputChange}
         /></FormControl>
+
+        <FormControl variant="floating">
+        {profileForm.location?.length>0?
+        <FormLabel transform="scale(0.85) translateY(-21px)">Location</FormLabel>
+        :<FormLabel >Location</FormLabel>}
+        <Input id='location' name="location" type='text' maxLength={'20'}
+          defaultValue={profileForm.location} focusBorderColor='purple.400' 
+          onChange={handleOnInputChange}
+        />
+        </FormControl>
 
         <FormControl variant="floating">
         {profileForm.firstName.length>0?
         <FormLabel transform="scale(0.85) translateY(-21px)">Image URL</FormLabel>
         :<FormLabel >Image URL</FormLabel>}
         <Input  id='imageUrl' name="imageUrl" type='text'
-          defaultValue={user.imageUrl}
+          defaultValue={user.imageUrl} focusBorderColor='purple.400' 
           onChange={handleOnInputChange}
         /></FormControl>
 

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import apiClient from '../../services/apiClient';
 import {
+  Text,
   Input,
   Textarea,
   Image,
@@ -53,7 +54,7 @@ export const theme = extendTheme({
   }
 });
 
-export default function PostsForm({event, eventId}) {
+export default function PostsForm({user, event, eventId}) {
   const [errors, setErrors] = useState({});
   const [isSubmit,setIsSubmit]=useState()
   const [createPostForm, setCreatePostForm] = useState({
@@ -88,10 +89,15 @@ export default function PostsForm({event, eventId}) {
   };
 
   return (
-    <ChakraProvider theme={theme}>
-      <Divider/>
     
+      <ChakraProvider theme={theme}>
+      <Divider mt={8}/>
+      {user?.email?
+      <Box textAlign={"left"} mx={5}>
+      <Text position={"relative"} ml={"2%"} fontSize={"3xl"} fontFamily={"Roboto, sans-serif"} fontWeight={300} textTransform={'uppercase'} my={4}>Comments:</Text>
+      
     <Container mt={3} centerContent minWidth="50vw" w="75px" pb={8}>
+      
       <Box
               key="1"
               borderWidth="1px"
@@ -145,12 +151,10 @@ export default function PostsForm({event, eventId}) {
        <Button color={COLORS.ultraViolet} mt={1} w="350px" variant='ghost' onClick={handleOnSubmit}>
         Post
       </Button>
-      </VStack></Box></Container>
-    
-    
-     
-   
+      </VStack></Box></Container></Box>
+    :null}
     </ChakraProvider>
+    
   );
 }
 

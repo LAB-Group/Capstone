@@ -198,8 +198,10 @@ function SearchBar({
               Search
             </Button>
             <Button 
-            background={"hsl(271, 70%, 70%)"} 
-            color={"hsl(0, 0%, 100%)"}
+            borderColor={COLORS.ultraViolet}
+            background={"white"} 
+            color={COLORS.ultraViolet}
+            variant={'outline'}
             _hover={{
               "background":COLORS.ultraViolet,
               "color": COLORS.offWhite
