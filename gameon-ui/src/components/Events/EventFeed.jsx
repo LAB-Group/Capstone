@@ -118,7 +118,7 @@ export default function EventFeed({ isFetching }){
                 {/* All Events Feed */}
                 <Container centerContent minWidth={"80%"}>
                 <HStack>
-                    <ButtonGroup variant={'outline'} color={'white'} >
+                    <ButtonGroup variant={'outline'} color={'white'} fontFamily={"Open Sans, sans-serif"} >
                         <Button _focus={{"backgroundColor": COLORS.darkAmethyst, "borderColor": COLORS.darkAmethyst}} _hover={{"backgroundColor": COLORS.darkAmethyst}} border={"2px"} borderColor={COLORS.ultraViolet} onClick={() => handleEventType("")}>All Events</Button>
                         <Button _focus={{"backgroundColor": COLORS.darkAmethyst, "borderColor": COLORS.darkAmethyst}} _hover={{"backgroundColor": COLORS.darkAmethyst}} border={"2px"} borderColor={COLORS.ultraViolet} onClick={() => handleEventType("Tournament")}>Tournaments</Button>
                         <Button _focus={{"backgroundColor": COLORS.darkAmethyst, "borderColor": COLORS.darkAmethyst}} _hover={{"backgroundColor": COLORS.darkAmethyst}} border={"2px"} borderColor={COLORS.ultraViolet} onClick={() => handleEventType("Casuals")}>Casuals</Button>
@@ -126,7 +126,7 @@ export default function EventFeed({ isFetching }){
                         <Button _focus={{"backgroundColor": COLORS.darkAmethyst, "borderColor": COLORS.darkAmethyst}} _hover={{"backgroundColor": COLORS.darkAmethyst}} border={"2px"} borderColor={COLORS.ultraViolet} onClick={() => handleEventType("Meet-up")}>Meet-ups</Button>
                     </ButtonGroup>
                 </HStack>
-                <Input margin={'1rem'} marginBottom={8} defaultValue="" focusBorderColor={COLORS.ultraViolet} color={'white'} placeholder="Search events..." onChange={handleOnSearchChange}></Input>
+                <Input fontFamily={"Open Sans, sans-serif"} margin={'1rem'} marginBottom={8} defaultValue="" focusBorderColor={COLORS.ultraViolet} color={'white'} placeholder="Search events..." onChange={handleOnSearchChange}></Input>
                 <SimpleGrid minWidth="80%" justifyContent={"center"} alignItems={"center"} minChildWidth={'350px'} gap='20px' className="WRAP">
                 {searchedEvents?.map((event, index) => (
                             <EventCard key={index} event={event}/>         

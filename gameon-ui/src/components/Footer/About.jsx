@@ -21,6 +21,7 @@ export default function About(){
         Whether playing with our younger siblings, or someone we just met at a convention. 
         We hope to encourage all gamers to have that same experience with our site.
         </Text>
+
         </Box>
         </Container>
        </Box>
