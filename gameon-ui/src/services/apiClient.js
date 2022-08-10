@@ -66,6 +66,10 @@ class ApiClient {
         return await this.request({ endpoint: `events`, method: `GET` })
     }
 
+    async fetchEventById(eventId) {
+        return await this.request({ endpoint: `events/${eventId}`, method: `GET` })
+    }
+
     async registerForEvent(registration) {
         return await this.request({ endpoint: `events/${registration.eventId}`, method: `POST`, data: registration })
     }
@@ -120,5 +124,6 @@ class ApiClient {
 
 }
 
-export default new ApiClient("http://localhost:3001")
-// export default new ApiClient("https://git.heroku.com/gameon-labs.git")
+// export default new ApiClient("http://localhost:3001")
+export default new ApiClient("https://gameon-labs.herokuapp.com")
+

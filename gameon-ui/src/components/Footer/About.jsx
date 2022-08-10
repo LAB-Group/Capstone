@@ -7,9 +7,11 @@ import pic from "../../contexts/media/Logo-fixed.png"
 export default function About(){
     return (
        <Box width={"100%"} height={"auto"} background={"hsla(255, 50%, 21%, 0.8)"} borderTopRadius={"20px"}>
+
         <Container centerContainer minWidth={"80%"}>
         <Heading textAlign={"center"} marginY={4} paddingY={2} color={COLORS.offWhite} fontFamily={"Roboto, sans-serif"}>A gaming hub created for all gamers.</Heading>
         <Image float={"left"} width={"200px"} marginRight={"16px"} src={pic}/>
+
         <Box marginX={"20px"}>
         <Text marginLeft={3} paddingBottom={2} whiteSpace={"pre-line"} fontFamily={"Open Sans, sans-serif"} fontSize={"xl"} color={COLORS.offWhite}>
         GameOn! is a community hub for all gamers looking to attend events. 
