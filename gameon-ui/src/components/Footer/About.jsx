@@ -6,6 +6,7 @@ import pic from "../../contexts/media/Logo.png"
 
 export default function About(){
     return (
+
        <Box 
             width={"100%"}
             height={"100%"}
@@ -17,6 +18,7 @@ export default function About(){
 
         <Container centerContainer minWidth={"80%"}>
         <Heading width={"100%"} paddingY={2} textAlign={"center"} color={COLORS.offWhite} fontFamily={"Roboto, sans-serif"}>A gaming hub created for all gamers.</Heading>
+
         <Box marginX={"20px"}>
          <Stack direction={{base: "column", lg: "row"}}>
         <Image width={"300px"} src={pic}/>

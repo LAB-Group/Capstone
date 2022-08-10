@@ -29,7 +29,20 @@ class Events {
                 FROM events AS e
                        LEFT JOIN users AS u ON u.id = e.user_id
                        LEFT JOIN registered_events as r ON r.event_id = e.id
-                GROUP BY r.event_id, e.id, u.id
+                GROUP BY    r.event_id, 
+                            e.id, 
+                            u.id,
+                            e.event_name,
+                            e.event_start_date,
+                            e.event_end_date,
+                            e.event_type,
+                            e.location,
+                            e.event_game,
+                            e.details,
+                            e.event_image_url,
+                            u.username,
+                            e.created_at,
+                            e.updated_at
                 ORDER BY e.created_at DESC
             `
         )
@@ -59,7 +72,21 @@ class Events {
                        LEFT JOIN users AS u ON u.id = e.user_id
                        LEFT JOIN registered_events as r ON r.event_id = e.id
                 WHERE e.id = $1
-                GROUP BY r.event_id, e.id, u.id
+                GROUP BY r.event_id,
+                         e.id,
+                         u.id,
+                         e.event_name,
+                            e.event_start_date,
+                            e.event_end_date,
+                            e.event_type,
+                            e.location,
+                            e.event_game,
+                            e.details,
+                            e.event_image_url,
+                            u.username,
+                            u.email,
+                            e.created_at,
+                            e.updated_at
             `,
                 [eventId]
         )
