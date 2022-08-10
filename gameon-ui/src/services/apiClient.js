@@ -12,38 +12,38 @@ class ApiClient {
         localStorage.setItem(this.tokenName, token)
     }
 
-    async request({ endpoint, method = `GET`, data={}}) {
+    async request({ endpoint, method = `GET`, data = {} }) {
         const url = `${this.remoteHostUrl}/${endpoint}`
 
         const headers = {
             "Content-Type": "application/json"
         }
 
-        if(this.token) {
+        if (this.token) {
             headers["Authorization"] = `Bearer ${this.token}`
         }
 
         try {
-            const res = await axios ({ url, method, data, headers })
-            return {data: res.data, error:null}
-        } catch(error) {
-            console.error({errorResponse: error.response})
+            const res = await axios({ url, method, data, headers })
+            return { data: res.data, error: null }
+        } catch (error) {
+            console.error({ errorResponse: error.response })
             const message = error?.response?.data?.error?.message
-            return { data: null,error: message || String(error)}
+            return { data: null, error: message || String(error) }
         }
     }
 
     async loginUser(credentials) {
-        return await this.request({ endpoint: `auth/login`, method: `POST`, data: credentials})
+        return await this.request({ endpoint: `auth/login`, method: `POST`, data: credentials })
     }
 
     async logoutUser() {
         this.setToken(null)
         localStorage.setItem(this.tokenName, "")
     }
-    
+
     async signupUser(credentials) {
-        return await this.request({ endpoint: `auth/register`, method: `POST`, data: credentials})
+        return await this.request({ endpoint: `auth/register`, method: `POST`, data: credentials })
     }
 
     async fetchUserFromToken() {
@@ -87,7 +87,7 @@ class ApiClient {
     }
 
     async getGameInfoById(gameId) {
-        return await this.request({ endpoint: `games/db/${gameId}`, method: `GET`})
+        return await this.request({ endpoint: `games/db/${gameId}`, method: `GET` })
     }
 
     async createNewPost(post) {
@@ -95,11 +95,11 @@ class ApiClient {
     }
 
     async listAllPostsByEventId(eventId) {
-        return await this.request({ endpoint: `events/${eventId}/posts`, method: `GET`})
+        return await this.request({ endpoint: `events/${eventId}/posts`, method: `GET` })
     }
 
     async listAllPostsByUserId(userId) {
-        return await this.request({ endpoint: `posts/user/${userId}`, method: `GET`})
+        return await this.request({ endpoint: `posts/user/${userId}`, method: `GET` })
     }
 
     async createPostReply(reply) {
@@ -107,7 +107,7 @@ class ApiClient {
     }
 
     async listAllRepliesByEventId(eventId, postId) {
-        return await this.request({ endpoint: `events/${eventId}/posts/${postId}/post_replies`, method: `GET`})
+        return await this.request({ endpoint: `events/${eventId}/posts/${postId}/post_replies`, method: `GET` })
     }
 
     async fetchUsersEvents(userId) {
@@ -115,19 +115,16 @@ class ApiClient {
     }
 
     async isUserRegistered(eventId, userId) {
-        return await this.request({ endpoint: `events/${eventId}/user/${userId}`, method: `GET`})
+        return await this.request({ endpoint: `events/${eventId}/user/${userId}`, method: `GET` })
     }
 
     async withdrawFromEvent(withdraw) {
-        return await this.request({ endpoint: `events/${withdraw.eventId}/withdraw`, method: `DELETE`})
+        return await this.request({ endpoint: `events/${withdraw.eventId}/withdraw`, method: `DELETE` })
     }
 
 }
 
-<<<<<<< HEAD
-// export default new ApiClient("http://localhost:3001")
-export default new ApiClient("https://gameon-labs.herokuapp.com")
-=======
+
 export default new ApiClient("http://localhost:3001")
 // export default new ApiClient("https://git.heroku.com/gameon-labs.git")
->>>>>>> main-test
+

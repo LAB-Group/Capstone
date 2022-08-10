@@ -87,7 +87,7 @@ export default function UsersProfilePage() {
                         posts.length === 0 ? 
                         
                         <Box width={"100%"} height='100px'>
-                            <Text marginLeft={6} fontSize='2xl' color={COLORS.offWhite} fontFamily={"mono, sans-serif"}>No Post Found</Text>
+                            <Text marginLeft={6} fontSize='lg' color={COLORS.offWhite} fontFamily={"mono, sans-serif"}>No Post Found</Text>
                          </Box>
                         : 
                         <UsersPostsFeed posts={posts} />
