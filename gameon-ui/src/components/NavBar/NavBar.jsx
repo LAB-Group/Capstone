@@ -3,7 +3,6 @@ import { useNavigate} from "react-router-dom"
 import {HashLink as Link } from 'react-router-hash-link'
 import { Box, Text, Spacer, Button, ButtonGroup, Image, Stack, HStack, Flex, Modal,
     useDisclosure } from "@chakra-ui/react"
-import {GiHamburgerMenu} from "react-icons/gi"
 import logo from "../../contexts/media/Logo-fixed.png"
 import { ColorModeSwitcher } from "../../ColorModeSwitcher"
 import {COLORS} from "../colors"
@@ -37,15 +36,9 @@ export default function NavBar() {
         window.location.reload();
     }
 
-    // Using media query to make navbar responsive 
-    // const [isLessthan780] = useMediaQuery('(max-width: 780px)')
-
     return (
-        // This makes the navbar scrollable
-
         <Box  overflow={"hidden"} fontFamily={"Roboto, sans-serif"} zIndex={1} position="sticky" top={0} width="100%" height="50px" backgroundColor={COLORS.indigo} fontSize={{ "base":"lg","md":"lg", "lg":"xl"}} >
             <Flex padding={"4px"} width={"90%"} alignItems="center" gap='1'>
-                {/* FIXME: Image revisit */}
                 <Box width={"100px"} ml={"11%"} display={"inline-flex"}>
                     <Link to="/" >
                         <Image width={"35px"} height={"40px"} margin={0} objectFit={"cover"} src={logo}/>

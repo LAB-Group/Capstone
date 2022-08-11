@@ -1,14 +1,13 @@
 import * as React from "react"
-import {Box, Heading, Container, Image, Text, Stack} from "@chakra-ui/react"
+import {Box, Heading, Container, Image, Text} from "@chakra-ui/react"
 import { COLORS } from "../colors"
 import pic from "../../contexts/media/Logo-fixed.png"
-// import { Link } from "react-router-dom"
 
 export default function About(){
     return (
         <Box width={"100%"} height={"auto"} background={"hsla(255, 50%, 21%, 0.8)"} paddingBottom={4} borderTopRadius={"20px"}>
 
-        <Container centerContainer minWidth={"80%"}>
+        <Container minWidth={"80%"}>
         <Heading letterSpacing={3} textTransform={"uppercase"} fontFamily={"VT323, monospace"} textAlign={"center"} marginY={4} paddingY={2} color={COLORS.offWhite}>A gaming hub created for all gamers.</Heading>
         <Image float={"left"} width={"200px"} marginRight={"16px"} marginTop={-12} objectFit={"cover"} src={pic}/>
         <Box marginX={"20px"} overflow={"hidden"}>

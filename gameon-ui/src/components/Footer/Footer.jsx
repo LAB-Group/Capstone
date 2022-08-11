@@ -2,7 +2,6 @@ import * as React from "react"
 import {HashLink as Link } from 'react-router-hash-link'
 import { Container, Box, Text, Stack } from "@chakra-ui/react"
 import { COLORS } from "../colors"
-// import ContactUs from "../Footer/ContactUs"
 
 export default function Footer(){
     return (
