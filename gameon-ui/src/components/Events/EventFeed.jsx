@@ -38,7 +38,9 @@ export default function EventFeed({ isFetching }){
 
       let date = new Date()
       let todaysDate = date.toISOString().split('T')[0]
-      date.setDate(date.getDate() * 4.5)
+    //   date.setDate(date.getDate() * 4.5)
+    date.setDate(date.getDate() * 6.5)
+
       let futureDate = date.toISOString().split('T')[0] //Date.now() + (6.048e+8 * 2) is 2 weeks from today
    
         return(
@@ -49,7 +51,7 @@ export default function EventFeed({ isFetching }){
 
                 
                 {/* Logged in user's upcoming events within 2 weeks */}
-                {user?.email ? 
+                {/* {user?.email ? 
                 <>
                 <Heading id="events" fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite} marginBottom={"1em"} textAlign={"left"} fontSize={["xl", "3xl", "4xl"]}>Your Upcoming Events</Heading>
                 <SimpleGrid minWidth="80%" maxW={'80%'} justifyContent={"center"} alignItems={"center"} minChildWidth={'350px'} gap='20px'>
@@ -110,7 +112,7 @@ export default function EventFeed({ isFetching }){
                 </Box>
                 </SimpleGrid>
                 </>
-                :null}
+                :null} */}
                 
 
                 <Heading id="events" fontFamily={"Roboto, sans-serif"} color={COLORS.offWhite} marginBottom={"1em"} textAlign={"center"} fontSize={["xl", "3xl", "4xl"]}>Events</Heading>

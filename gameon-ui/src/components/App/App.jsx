@@ -12,6 +12,7 @@ import background from "../../contexts/media/evo2.jpg"
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import EventFeed from "../Events/EventFeed";
+import Bracket from "../Bracket/Bracket";
 
 export default function AppContainer() {
     return (
@@ -45,6 +46,9 @@ function App(){
 
             {/* OtherUserProfilePage */}
             <Route path={"/user/:userId/profile/*"} element={<UsersProfilePage />} />
+
+            {/* OtherUserProfilePage */}
+            <Route path={"/bracket/*"} element={<Bracket />} />
 
         </Routes>
 

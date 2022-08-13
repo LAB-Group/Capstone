@@ -5,8 +5,6 @@ import { useParams } from "react-router-dom"
 import EventDetails from "./EventDetails"
 import axios from "axios";
 import apiClient from '../../services/apiClient';
-import PostsForm from "../Posts/PostsForm"
-import PostsFeed from "../Posts/PostsFeed"
 
 export default function EventPage(){
     const [loading, setLoading] = useState(true)
@@ -24,8 +22,8 @@ export default function EventPage(){
               setTimeout(() => {
                 setLoading(false)
               }, 100)
-              // const response = await axios.get(`http://localhost:3001/events/${eventId}`)
-              const response = await axios.get(`https://gameon-labs.herokuapp.com/events/${eventId}`)
+              const response = await axios.get(`http://localhost:3001/events/${eventId}`)
+              // const response = await axios.get(`https://gameon-labs.herokuapp.com/events/${eventId}`)
               // const response = await apiClient.fetchEventById(eventId)
               const eventData = response.data
               setEvent(eventData.event)
@@ -57,11 +55,6 @@ export default function EventPage(){
         <Box style={{"backdropFilter": "blur(10px)", "background":"rgba(0, 0, 0, 0.05)"}} >
           <Container centerContent minWidth={"80%"} bg={"white"}>
             <EventDetails event={event} games={games} eventId={eventId} posts={posts} />
-            {/* <Divider orientation='horizontal' /> */}
-            {/* Moved this to EventDetails file */}
-            {/* <EventRegistration event={event} /> */}
-            {/* <PostsFeed eventId={eventId} posts={posts} />
-            <PostsForm event={event} eventId={eventId} /> */}
             </Container>
         </Box>
     )

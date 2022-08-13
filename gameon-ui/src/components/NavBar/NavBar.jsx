@@ -2,7 +2,7 @@ import * as React from "react"
 import { useNavigate} from "react-router-dom"
 import {HashLink as Link } from 'react-router-hash-link'
 import { Box, Text, Spacer, Button, ButtonGroup, Image, Stack, HStack, Flex, Modal,
-    useDisclosure, Icon, useMediaQuery, List, ListItem } from "@chakra-ui/react"
+    useDisclosure } from "@chakra-ui/react"
 import {GiHamburgerMenu} from "react-icons/gi"
 import logo from "../../contexts/media/Logo-fixed.png"
 import { ColorModeSwitcher } from "../../ColorModeSwitcher"

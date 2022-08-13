@@ -72,7 +72,7 @@ export default function EditProfile({onClose}){
 
       // const gameList = [...user.gameList, ...selectedGames]
       const {data, error} = await apiClient.editUserProfile({ username: profileForm.username.toLowerCase(), firstName: profileForm.firstName, lastName: profileForm.lastName,
-                                                             imageUrl: profileForm.imageUrl, email: user.email, gameList: [...user.gameList, ...selectedGames], location: user.location})
+                                                             imageUrl: profileForm.imageUrl, email: user.email, gameList: [...user?.gameList, ...selectedGames], location: user.location})
       for (let i=0;i<selectedGames.length;i++) {
         const { test } = await apiClient.addGamesToLocalDB({gameId:selectedGames[i],gameName:selectedGamesNames[i],gameSummary:selectedGamesSummary[i],gameImageUrl:selectedGamesPic[i]})
       }
@@ -81,7 +81,6 @@ export default function EditProfile({onClose}){
         
         setUser(data.user)
         onClose()
-        // window.location.reload();
         setIsSubmit(true)
         window.location = document.URL;
       }

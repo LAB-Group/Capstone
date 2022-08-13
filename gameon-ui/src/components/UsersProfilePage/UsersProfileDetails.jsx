@@ -32,51 +32,27 @@ export default function UsersProfileDetails({ viewedUser, onOpen, onClose, isOpe
             string += viewedUser.gameList[i] + ", "
         }
     }
+
     useEffect(() => {
-      setTimeout(() => {
-          setLoading(false)
-        }, 100)
-      const getGames = async () => {      
-          try {
-            const response = await axios.post(`https://gameon-labs.herokuapp.com/games/id`, {
-            // const response = await axios.post(`http://localhost:3001/games/id`, {
-              gameId: string
-            })
+        setTimeout(() => {
+            setLoading(false)
+          }, 100)
+        const getGames = async () => {      
+            try {
+              // const response = await axios.post(`https://gameon-labs.herokuapp.com/games/id`, {
+              const response = await axios.post(`http://localhost:3001/games/id`, {
+                gameId: string
+              })
+              const gameData = response.data
 
-            const gameData = response.data
-            
-            setGames(gameData)
-            console.log(games)
-          } catch(error) {
-            return(error)
+              setGames(gameData)
+            } catch(error) {
+              return(error)
+            }
           }
-        }
-        getGames()  
-  },[])
+          getGames()  
+    },[string])
   
-
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         setLoading(false)
-    //       }, 100)
-    //     const getGames = async () => {      
-    //         try {
-    //           // const response = await axios.post(`http://localhost:3001/games/id`, {
-    //           //   gameId: string
-    //           // })
-    //           console.log("USER GAMES: ",viewedUser.gameList)
-    //           for (let i=0;i<viewedUser.gameList?.length;i++) {
-    //             const response = await apiClient.getGameInfoById(viewedUser.gameList[i])
-    //             setGames(curr => [...curr, response.data])
-    //             console.log("USER GAMES API: ",response.data)
-    //           }
-              
-    //         } catch(error) {
-    //           return(error)
-    //         }
-    //       }
-    //       getGames()  
-    // },[])
 
     return (
         <Box width={"100%"} padding={6} >
@@ -86,10 +62,7 @@ export default function UsersProfileDetails({ viewedUser, onOpen, onClose, isOpe
               } />
           </Routes>
           <SimpleGrid 
-          // columns={{ base: 1, md: 2 }} 
-          // spacing={10} 
-          // background={COLORS.offWhite} 
-          // roundedTop={"25px"}
+
           >
             <Stack  
               borderWidth="1px"

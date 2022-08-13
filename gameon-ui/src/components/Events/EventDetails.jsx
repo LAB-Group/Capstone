@@ -7,7 +7,7 @@ import { useAuthContext } from '../../contexts/auth'
 import { 
     Box, Text, SimpleGrid, Flex, Button,
     Image, VStack, Heading, Stack, Modal,
-    Icon, HStack, useColorModeValue, useDisclosure, Center 
+    Icon, HStack, useColorModeValue, useDisclosure, Center, Divider 
 } from "@chakra-ui/react"
 import { CalendarIcon } from "@chakra-ui/icons"
 import { HiLocationMarker } from "react-icons/hi"
@@ -157,6 +157,8 @@ export default function EventDetails({event, games, eventId, posts}) {
                                             {isRegistered 
                                                 ?   <>
                                                     <Text>You are already registered! We'll see you there!</Text>
+                                                    <br></br>
+                                                    <Text>Registered games:</Text>
                                                     {
                                                         gamesRegistered?.map((gameId) => {
                                                             return (
