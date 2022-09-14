@@ -23,3 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 
 gameon-ui\src\components\Events\testEventReg.jsx
+gameon-ui\src\components\Bracket
