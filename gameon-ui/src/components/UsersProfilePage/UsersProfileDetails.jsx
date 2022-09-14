@@ -39,8 +39,8 @@ export default function UsersProfileDetails({ viewedUser, onOpen, onClose, isOpe
           }, 100)
         const getGames = async () => {      
             try {
-              // const response = await axios.post(`https://gameon-labs.herokuapp.com/games/id`, {
-              const response = await axios.post(`http://localhost:3001/games/id`, {
+              const response = await axios.post(`https://ujrghthizhcxglkqtotu.supabase.co/games/id`, {
+              // const response = await axios.post(`http://localhost:3001/games/id`, {
                 gameId: string
               })
               const gameData = response.data

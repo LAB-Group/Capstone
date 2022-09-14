@@ -16,7 +16,7 @@ const app = express()
 //middleware
 
 const corsOptions = {
-   origin:'game-on-events.vercel.app', 
+   origin:'https://game-on-events.vercel.app', 
    credentials:true,            //access-control-allow-credentials:true
    optionSuccessStatus:200,
 }
@@ -31,11 +31,11 @@ app.options('*', cors())
 
 app.use(cors(corsOptions)) //enable cross origin sharing
 
-  app.get('/', cors(), function(req, res, next) {
+  app.get('/', function(req, res, next) {
     // Handle the get for this route
   });
   
-  app.post('/', cors(), function(req, res, next) {
+  app.post('/', function(req, res, next) {
    // Handle the post for this route
   });
 
