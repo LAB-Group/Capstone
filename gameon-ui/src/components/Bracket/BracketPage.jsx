@@ -1,9 +1,9 @@
-import * as React from "react"
-import Bracket from "./bracket"
+// import * as React from "react"
+// import Bracket from "./bracket"
 
-export default function BracketPage() {
+// export default function BracketPage() {
 
-    return(
-        <Bracket />
-    )
-}
+//     return(
+//         <Bracket />
+//     )
+// }
