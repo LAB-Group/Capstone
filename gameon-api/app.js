@@ -31,11 +31,11 @@ app.options('*', cors())
 
 app.use(cors(corsOptions)) //enable cross origin sharing
 
-  app.get('/', function(req, res, next) {
+  app.get('/', cors(), function(req, res, next) {
     // Handle the get for this route
   });
   
-  app.post('/', function(req, res, next) {
+  app.post('/', cors(), function(req, res, next) {
    // Handle the post for this route
   });
 
