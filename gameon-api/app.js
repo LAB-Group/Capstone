@@ -51,7 +51,7 @@ app.use(morgan("tiny"))
 app.use(security.extractUserFromJwt)
 
 app.use("/auth", authRoutes)
-app.use("/events", eventsRoutes)
+app.use("/events",cors(corsOptions), eventsRoutes)
 app.use("/games", gamesRoutes)
 app.use("/posts", postsRoutes)
 app.use("/user", userRoutes)
