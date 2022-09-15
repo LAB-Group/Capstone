@@ -16,7 +16,7 @@ const app = express()
 //middleware
 
 const corsOptions = {
-   origin:'https://game-on-events.vercel.app', 
+   origin:'*', 
    credentials:true,            //access-control-allow-credentials:true
    optionSuccessStatus:200,
 }
