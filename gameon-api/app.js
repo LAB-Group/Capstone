@@ -27,8 +27,6 @@ const corsOptions = {
 //     next();
 //   });
 
-app.options('*', cors())
-
 app.use(cors(corsOptions)) //enable cross origin sharing
 
   app.get('/', function(req, res, next) {
@@ -51,7 +49,7 @@ app.use(morgan("tiny"))
 app.use(security.extractUserFromJwt)
 
 app.use("/auth", authRoutes)
-app.use("/events",cors(corsOptions), eventsRoutes)
+app.use("/events", eventsRoutes)
 app.use("/games", gamesRoutes)
 app.use("/posts", postsRoutes)
 app.use("/user", userRoutes)
