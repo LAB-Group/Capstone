@@ -22,8 +22,8 @@ export default function EventPage(){
               setTimeout(() => {
                 setLoading(false)
               }, 100)
-              // const response = await axios.get(`http://localhost:3001/events/${eventId}`)
-              const response = await axios.get(`https://ujrghthizhcxglkqtotu.supabase.co/events/${eventId}`)
+              const response = await axios.get(`http://localhost:3001/events/${eventId}`)
+              // const response = await axios.get(`https://ujrghthizhcxglkqtotu.supabase.co/events/${eventId}`)
               // const response = await apiClient.fetchEventById(eventId)
               const eventData = response.data
               setEvent(eventData.event)
